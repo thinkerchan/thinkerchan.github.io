@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>Javascript小技巧总结 | ThinkerChan</title>
+  <meta name="description" content="以下是本人看书/写代码是学习的技巧,可能有点乱. 一.传参和原型链(function test(a){         alert(a);  })(&amp;quot;string&amp;quot;);  借助这个传参方式,我们可以这么玩: &amp;quot;&amp;quot;.constructor.constructor(&amp;quot;alert(&amp;apos;string&amp;apos;)&amp;quot;)(); 说不定可以用作">
+<meta name="keywords" content="JS-skill">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript小技巧总结">
+<meta property="og:url" content="http://thinkerchan.com/2015/06/13/js-skill/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="以下是本人看书/写代码是学习的技巧,可能有点乱. 一.传参和原型链(function test(a){         alert(a);  })(&amp;quot;string&amp;quot;);  借助这个传参方式,我们可以这么玩: &amp;quot;&amp;quot;.constructor.constructor(&amp;quot;alert(&amp;apos;string&amp;apos;)&amp;quot;)(); 说不定可以用作">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-01-07T02:05:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript小技巧总结">
+<meta name="twitter:description" content="以下是本人看书/写代码是学习的技巧,可能有点乱. 一.传参和原型链(function test(a){         alert(a);  })(&amp;quot;string&amp;quot;);  借助这个传参方式,我们可以这么玩: &amp;quot;&amp;quot;.constructor.constructor(&amp;quot;alert(&amp;apos;string&amp;apos;)&amp;quot;)(); 说不定可以用作">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">胖子</a>
+	</h1>
+	<p class="social-links">
+		<a href="/atom.xml"  target="_blank">RSS</a>
+		\
+		<a href="http://weibo.com/thinkerchank/" target="_blank">微博</a>
+		\
+		<a href="http://www.zhihu.com/people/chen-xin-kai-98" target="_blank">知乎</a>
+		\
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">Javascript小技巧总结</h1>
+					<div class="post-meta">
+						<span class="post-time">2015.06.13</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-传参和原型链"><span class="toc-number">1.</span> <span class="toc-text">一.传参和原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-执行环境"><span class="toc-number">2.</span> <span class="toc-text">二.执行环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-变量声明"><span class="toc-number">3.</span> <span class="toc-text">三.变量声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四-new四部曲-也有说是三部曲"><span class="toc-number">4.</span> <span class="toc-text">四.new四部曲(也有说是三部曲)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五-this"><span class="toc-number">5.</span> <span class="toc-text">五.this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六-修改原则"><span class="toc-number">6.</span> <span class="toc-text">六.修改原则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七-避免全局多次调用"><span class="toc-number">7.</span> <span class="toc-text">七.避免全局多次调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八-声明优化"><span class="toc-number">8.</span> <span class="toc-text">八.声明优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九-repaint-reflow"><span class="toc-number">9.</span> <span class="toc-text">九.repaint reflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十-注意HTMLCollection"><span class="toc-number">10.</span> <span class="toc-text">十.注意HTMLCollection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十一-相等和严格相等"><span class="toc-number">11.</span> <span class="toc-text">十一.相等和严格相等</span></a></li></ol>
+					</div>
+					<p>以下是本人看书/写代码是学习的技巧,可能有点乱.</p>
+<h2 id="一-传参和原型链"><a href="#一-传参和原型链" class="headerlink" title="一.传参和原型链"></a>一.传参和原型链</h2><pre><code>(function test(a){
+        alert(a);
+ })(&quot;string&quot;); 
+</code></pre><p>借助这个传参方式,我们可以这么玩:</p>
+<pre><code>&quot;&quot;.constructor.constructor(&quot;alert(&apos;string&apos;)&quot;)();
+</code></pre><p>说不定可以用作XSS攻击的手段哦.</p>
+<h2 id="二-执行环境"><a href="#二-执行环境" class="headerlink" title="二.执行环境"></a>二.执行环境</h2><p><b>执行环境(execution context)</b>的具体实现就是<b>变量对象</b>,也称作<b>上下文对象(variable object)</b>全局执行环境的变量对象就是window.(即window代表全局作用域)</p>
+<p>执行环境<b>栈</b>:(execution context stack), 每个要被执行的函数都会先把函数的  <b>执行环境  [压入]</b>   执行环境<b>栈</b> ,  函数开始执行 然后 函数在变量对象里创建作用域链对象，函数执行完毕后，这个函数的执行环境就会被执行环境栈弹出, 执行环境栈的控制权由内向外依次交付.<br>作用域链: 函数执行环境被压入到执行环境栈中, 函数就执行了, 函数执行的第一步是在变量对象里构造一个作用域链, 作用域链保证变执行环境里有权访问的变量和函数是有序的</p>
+<p>this指针构造是和作用域链同时发生的，也就是说在上文变量构建作用域链的同时还会构造一个this对象，this对象也是属于上下文变量，而this变量的值就是当前执行环境外部的上下文变量的一份拷贝.</p>
+<h2 id="三-变量声明"><a href="#三-变量声明" class="headerlink" title="三.变量声明"></a>三.变量声明</h2><pre><code>(function() {
+    var a = b = 5;
+})();
+console.log(b);    //5
+console.log(a);    //error
+</code></pre><p>把<code>console.log(a)</code>放在下面是因为这个一定会报错,因为变量a执行完就马上被销毁了.b为5很显然,因为这样成了全局变量,它实际上是:</p>
+<pre><code>b = 5;
+var a = b;
+</code></pre><p>应该避免这种<code>很容易让人误会</code>的变量声明方式,除非你必须这么做.</p>
+<h2 id="四-new四部曲-也有说是三部曲"><a href="#四-new四部曲-也有说是三部曲" class="headerlink" title="四.new四部曲(也有说是三部曲)"></a>四.new四部曲(也有说是三部曲)</h2><p>1.创建一个新对象；<br>2.将构造函数的作用域赋给新对象（因此this就指向了这个新对象）;<br>3.执行构造函数中的代码（为这个新对象添加属性）；<br>4.返回这个新建的对象;</p>
+<h2 id="五-this"><a href="#五-this" class="headerlink" title="五.this"></a>五.this</h2><pre><code>document.getElementById(&quot;btnTest&quot;).onclick = function(){
+     alert(this);    //DOM
+     sayHi();            //object Window
+     sayHi2(this)    //DOM
+  }
+ function sayHi(){
+    alert(this);
+  }
+ function sayHi2(context){
+    alert(context);
+ }
+</code></pre><h2 id="六-修改原则"><a href="#六-修改原则" class="headerlink" title="六.修改原则"></a>六.修改原则</h2><ul>
+<li>不要为实例或者原型添加属性</li>
+<li>不要为实例或者原型添加方法</li>
+<li>不要重定义已经存在的方法</li>
+</ul>
+<h2 id="七-避免全局多次调用"><a href="#七-避免全局多次调用" class="headerlink" title="七.避免全局多次调用"></a>七.避免全局多次调用</h2><ul>
+<li>除非必要,变量声明在局部.全局搜索会更慢</li>
+<li>多次访问的数据可以缓存起来</li>
+<li>不要使用with</li>
+</ul>
+<h2 id="八-声明优化"><a href="#八-声明优化" class="headerlink" title="八.声明优化"></a>八.声明优化</h2><ul>
+<li>对象字面量</li>
+<li>直接数组</li>
+<li>声明多个变量用逗号分开</li>
+</ul>
+<h2 id="九-repaint-reflow"><a href="#九-repaint-reflow" class="headerlink" title="九.repaint reflow"></a>九.repaint reflow</h2><pre><code>var list = document.getElementById(&quot;mylist&quot;),
+     fragment = docuemnt.createDocumentFragment(),
+     item,
+     i;
+    for(i=0;i&lt;10;i++){
+            item =document.createElement(&quot;li&quot;);
+            fragment.appendChild(item);
+            item.appendChild(document.creatTextNode(&quot;Item:&quot;+i));
+            list.appendChild(fragment);
+    }
+</code></pre><ul>
+<li>如需更新,尽量使用文档碎片更新(如以上例子)</li>
+<li>尽量最小化这两个的更新</li>
+<li>使用innerHTML来插入节点</li>
+</ul>
+<h2 id="十-注意HTMLCollection"><a href="#十-注意HTMLCollection" class="headerlink" title="十.注意HTMLCollection"></a>十.注意HTMLCollection</h2><p>HTMLCollection的访问会有巨大的开销.因为每一次访问都是最新获取的结果,可是通常会有这样的情况发生:(囧)</p>
+<pre><code>var imgs = document.getElementsByTagName(&apos;img&apos;);
+ for(var i = 0;i&lt;imgs.length;i++){
+    //.....
+ }
+</code></pre><p>这些都是值得注意的地方:</p>
+<ul>
+<li>对getElementsByTagName()的调用</li>
+<li>获取元素childNodes属性</li>
+<li>获取元素attributes属性</li>
+<li>访问特殊集合如:document.forms/document.images等</li>
+</ul>
+<h2 id="十一-相等和严格相等"><a href="#十一-相等和严格相等" class="headerlink" title="十一.相等和严格相等"></a>十一.相等和严格相等</h2><p>用严格相等,避免某些情况下相等符号带来的类型装换,不然会很蛋疼</p>
+
+				</div>
+				<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li><a class="icon icon-twitter" href="javascript:share.twitter();"><span>twitter</span></a></li>
+		<li><a class="icon icon-douban" href="javascript:share.douban();"><span>douban</span></a></li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				<div class="post-comments">
+	<div class="ds-thread" data-thread-key="" data-title="Javascript小技巧总结" data-url="http://thinkerchan.com/2015/06/13/js-skill/"></div>
+	<script type="text/javascript">
+  var duoshuoQuery = {short_name:"Thinkerchan"};
+	(function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+</div>
+			</div>		</div>
+		<div class="footer">
+	<p class="left">&copy; Thinker Chan , 什么都不会。</p>
+	<p class="right">Base on <a href="https://github.com/thinkerchan" target="_blank">Github</a> and <a href="http://hexo.io/" target="_blank">Hexo</a> , Theme By <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>

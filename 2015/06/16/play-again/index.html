@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>100.com的一个漏洞(中) | ThinkerChan</title>
+  <meta name="description" content="为啥这里的标题是[中]，因为我觉得之后还会有故事发生…. 一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 全蛋，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，真是枉费叔叔一片好心啊，摔. 这货没意识到…YY">
+<meta name="keywords" content="XSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="100.com的一个漏洞(中)">
+<meta property="og:url" content="http://thinkerchan.com/2015/06/16/play-again/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="为啥这里的标题是[中]，因为我觉得之后还会有故事发生…. 一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 全蛋，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，真是枉费叔叔一片好心啊，摔. 这货没意识到…YY">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://r.loli.io/QRreMv.gif">
+<meta property="og:image" content="http://r.loli.io/Mfi2In.jpg">
+<meta property="og:updated_time" content="2016-01-07T02:04:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="100.com的一个漏洞(中)">
+<meta name="twitter:description" content="为啥这里的标题是[中]，因为我觉得之后还会有故事发生…. 一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 全蛋，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，真是枉费叔叔一片好心啊，摔. 这货没意识到…YY">
+<meta name="twitter:image" content="http://r.loli.io/QRreMv.gif">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">胖子</a>
+	</h1>
+	<p class="social-links">
+		<a href="/atom.xml"  target="_blank">RSS</a>
+		\
+		<a href="http://weibo.com/thinkerchank/" target="_blank">微博</a>
+		\
+		<a href="http://www.zhihu.com/people/chen-xin-kai-98" target="_blank">知乎</a>
+		\
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">100.com的一个漏洞(中)</h1>
+					<div class="post-meta">
+						<span class="post-time">2015.06.16</span>
+						<div class="post-cats">
+							
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一"><span class="toc-number">1.</span> <span class="toc-text">一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二"><span class="toc-number">2.</span> <span class="toc-text">二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三"><span class="toc-number">3.</span> <span class="toc-text">三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四"><span class="toc-number">4.</span> <span class="toc-text">四</span></a></li></ol>
+					</div>
+					<p>为啥这里的标题是<b>[中]</b>，因为我觉得之后还会有故事发生….</p>
+<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>今天没活干，于是把<a href="http://pakchoi.me/" target="_blank" rel="noopener">裁员</a>在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去<a href="http://www.wooyun.org/" target="_blank" rel="noopener">乌云</a>骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜.</p>
+<p><a href="http://www.wilsonup.xyz/" target="_blank" rel="noopener">全蛋</a>，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，真是枉费叔叔一片好心啊，摔.</p>
+<p>这货没意识到…YY旗下的产品，用的都是同一个ID，只要拿到了这个ID和密码， 接下来就会有有趣的东西发生了…..</p>
+<p>没关系，这激起了叔的学习欲望，于是叔决定再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇<a href="http://thinkerchan.com/2015/05/31/loopholes/">100.com的一个漏洞(上)</a>，因为这个漏洞还没解决，所以各位看官，请手(si)下(yi)留(wan)情(shua)，友情提醒….出了事可不怪我……</p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p><img src="http://r.loli.io/QRreMv.gif" alt="兔子"></p>
+<p>回到正题:<br>这回干脆就获取了用户cookie， 话不多说，贴图:</p>
+<p><img src="http://r.loli.io/Mfi2In.jpg" alt="用户cookie"></p>
+<p>没错….这就是<a href="http://www.wilsonup.xyz/" target="_blank" rel="noopener">全蛋</a>YY账户的所有cookie….</p>
+<p>那么估计有人就问了:</p>
+<blockquote>
+<p>特么要是别人不点你的网页，那这还是没什么卵用啊.</p>
+</blockquote>
+<p>答:</p>
+<blockquote>
+<p>没错， 别人不点确实没啥卵用， 但是请别忽略了YY的用户数量是什么级别的…只要有人在它的论坛上发一个[能够产生足够大传播量的帖子]，并附上这个已被注入的链接提示用户点击…那也会是相当有趣的场面， 可能[技术至上]的程序员们对这些社工行为不屑，但是请别忘了<a href="https://en.wikipedia.org/wiki/Kevin_Mitnick" target="_blank" rel="noopener">Kevin David Mitnick</a> 那本非常著名的书，叫做 &lt;&lt;欺骗的艺术&gt;&gt;….</p>
+</blockquote>
+<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>获取到用户cookie的第一刻，自然觉得非常有趣，于是就想着怎么从返回的cookie里获取到用户id和密码，id自然好说，但是密码就不好搞了，因为一般公司都不会傻逼到不对密码加密就直接发送的， 而通常的加密方式是<a href="http://baike.baidu.com/link?url=b0y-m-fGVvPaymkXi1duQC6eO4RjrRXNG9piHrvvkAjYD5FYZH7ou48n-UtbYsQBOdshDipO1X6QQ6CiGUVSV_" target="_blank" rel="noopener">MD5加密</a>，至于它是怎样的加密方式，请自行点击<a href="UtbYsQBOdshDipO1X6QQ6CiGUVSV_">链接</a>，因为我也只是达到被普及这个概念的水平.</p>
+<p><b>不过: </b></p>
+<p>对密码使用MD5加密后， 通常是16或者32位的.</p>
+<p>比如拿最常见的<code>admin</code>做MD5加密: (注意下面的字符没有空格的，我加了空格是为了方便对比)</p>
+<ul>
+<li>16位加密: <code>7a57a5a7 43894a0e</code></li>
+<li>32位加密: <code>21232f29 7a57a5a7 43894a0e 4a801fc3</code></li>
+</ul>
+<p>然而全蛋的cookie里面的<code>password</code>字段却是40位，而且又只有字母和数字，前面提到了，MD5加密后是16或者32位，那么问题来了:</p>
+<ul>
+<li>40位明显不符合MD5加密后规则</li>
+<li>密文只有数字和字母</li>
+</ul>
+<p>所以我便尝试goole一下40位的MD5加密， 还真有结果， 我觉得又有戏了.也顺便涨了姿势:<br>于是我们对<code>admin</code>进行所谓 40位的加密， 根据网上的教程， 结果如下:</p>
+<ul>
+<li>40位加密: <code>7a57a5a7 43894a0e 4a801fc3  43894a0e 4a801fc3</code></li>
+</ul>
+<p>不知道各位看官对比上面16和32位的字符串，有没得出啥规律， 我就当你们得出了，所以我懒得写结论了.</p>
+<p><b>然而:</b></p>
+<p>当我激动的拿着全蛋的40位<code>password</code>字段准备去破解是….居然失败…. T_T， 即便后来裁员提示我用自己的密码做正向测试，还是没什么卵用…我就开始怀疑自己的人生…不对…是怀疑这个字段是干嘛的了…为了验证，我用自己的账户密码重新测试， 改了密码，删了浏览器缓存和cookie，发现无论密码改和不改，    <code>password</code>字段的值都不会发生改变.</p>
+<p>这就意味着，这个打着password名称的字段特么根本就不是用户密码…..摔</p>
+<pre><code>猜想: 这可能是记录状态的一个字段
+</code></pre><p>不过到这里， 已经超出我现在掌握的知识范围了. 所以现状就是，我大概是闯入你家大门，但是还没能力进主人的房间.</p>
+<p>这时候我们这样想: 虽然我进不了你房间， 可是我还是能够在你房间外面的其他地方耍耍的….对吧?</p>
+<p>于是就来到了下一节: CSRF </p>
+<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><p>待我补齐需要知识先…..别打我…- -||| </p>
+<p>敬请期待100.com的一个漏洞(下)</p>
+
+				</div>
+				<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li><a class="icon icon-twitter" href="javascript:share.twitter();"><span>twitter</span></a></li>
+		<li><a class="icon icon-douban" href="javascript:share.douban();"><span>douban</span></a></li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				<div class="post-comments">
+	<div class="ds-thread" data-thread-key="" data-title="100.com的一个漏洞(中)" data-url="http://thinkerchan.com/2015/06/16/play-again/"></div>
+	<script type="text/javascript">
+  var duoshuoQuery = {short_name:"Thinkerchan"};
+	(function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+</div>
+			</div>		</div>
+		<div class="footer">
+	<p class="left">&copy; Thinker Chan , 什么都不会。</p>
+	<p class="right">Base on <a href="https://github.com/thinkerchan" target="_blank">Github</a> and <a href="http://hexo.io/" target="_blank">Hexo</a> , Theme By <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>

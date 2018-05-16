@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>匿名函数, 闭包, eval劫持 | ThinkerChan</title>
+  <meta name="description" content="匿名函数普通写法//这里的匿名函数加了一个括号 其实最外面那个括号加不加都一样 var a =(function(arg){     //a() --&amp;gt; 执行了函数本身,于是console.log;     var a1 = 1;     console.log(&amp;quot;a外层函数执行&amp;quot;);     return function(){     //a()() --&amp;gt; 执">
+<meta name="keywords" content="eval">
+<meta property="og:type" content="article">
+<meta property="og:title" content="匿名函数, 闭包, eval劫持">
+<meta property="og:url" content="http://thinkerchan.com/2015/05/12/eval/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="匿名函数普通写法//这里的匿名函数加了一个括号 其实最外面那个括号加不加都一样 var a =(function(arg){     //a() --&amp;gt; 执行了函数本身,于是console.log;     var a1 = 1;     console.log(&amp;quot;a外层函数执行&amp;quot;);     return function(){     //a()() --&amp;gt; 执">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-01-07T02:07:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="匿名函数, 闭包, eval劫持">
+<meta name="twitter:description" content="匿名函数普通写法//这里的匿名函数加了一个括号 其实最外面那个括号加不加都一样 var a =(function(arg){     //a() --&amp;gt; 执行了函数本身,于是console.log;     var a1 = 1;     console.log(&amp;quot;a外层函数执行&amp;quot;);     return function(){     //a()() --&amp;gt; 执">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">胖子</a>
+	</h1>
+	<p class="social-links">
+		<a href="/atom.xml"  target="_blank">RSS</a>
+		\
+		<a href="http://weibo.com/thinkerchank/" target="_blank">微博</a>
+		\
+		<a href="http://www.zhihu.com/people/chen-xin-kai-98" target="_blank">知乎</a>
+		\
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">匿名函数, 闭包, eval劫持</h1>
+					<div class="post-meta">
+						<span class="post-time">2015.05.12</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数"><span class="toc-number">1.</span> <span class="toc-text">匿名函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#普通写法"><span class="toc-number">1.1.</span> <span class="toc-text">普通写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#立即执行的匿名函数"><span class="toc-number">1.2.</span> <span class="toc-text">立即执行的匿名函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传参"><span class="toc-number">1.3.</span> <span class="toc-text">传参</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#劫持eavl"><span class="toc-number">2.</span> <span class="toc-text">劫持eavl()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例验证"><span class="toc-number">2.1.</span> <span class="toc-text">实例验证</span></a></li></ol></li></ol>
+					</div>
+					<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><h3 id="普通写法"><a href="#普通写法" class="headerlink" title="普通写法"></a>普通写法</h3><pre><code>//这里的匿名函数加了一个括号 其实最外面那个括号加不加都一样
+var a =(function(arg){     //a() --&gt; 执行了函数本身,于是console.log;
+    var a1 = 1;
+    console.log(&quot;a外层函数执行&quot;);
+    return function(){     //a()() --&gt; 执行 &lt;到&gt; 内部的匿名函数 返回了a1
+    return a1;
+    }
+})
+</code></pre><h3 id="立即执行的匿名函数"><a href="#立即执行的匿名函数" class="headerlink" title="立即执行的匿名函数"></a>立即执行的匿名函数</h3><pre><code>//这里的匿名函数加了一个括号
+var b =(function(arg){
+    var a2 = 2;
+    console.log(&quot;b外层函数执行&quot;);
+    return function(){
+    //如果再在浏览器输入b(),是不会出现&quot;b外层函数执行&quot; ,因为函数本身就立即运行一遍就销毁了.
+    return a2;
+    }
+})()
+</code></pre><blockquote>
+<p>这里在尾部加了一个小括号,但是不传参,然后就立即执行了这个函数，然后就销毁了这个变量<code>b</code>,但是<code>b</code>内部保留着一个闭包,所以在浏览器输入<code>b</code>,还会出现被引用的匿名函数</p>
+</blockquote>
+<h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><pre><code>var c = (function(arg){
+    console.log(&quot;c外层函数执行&quot;);
+    console.log(arg);
+    return function(d){
+    return d;
+    }
+})(333)
+//这里我们给小括号添加了一个参数,然后立马就传递进这个参数 之后也立即销毁
+</code></pre><h2 id="劫持eavl"><a href="#劫持eavl" class="headerlink" title="劫持eavl()"></a>劫持eavl()</h2><pre><code>var eval=(function(e){      //这一刻, eval函数被重写
+    console.log(&apos;e的值是:&apos;+e);     //e的值是:function eval(){}
+    return function(data){
+        console.log(data);
+        e(data);
+    }
+})(eval);
+//并非把自己传递进去, 而是传进去原生的eval函数, 用window.eval可验证
+// var temp = eval;
+// console.log(&quot;eval的值:&quot;+eval); //function (data){console.log(data);e(data);}
+// eval(&quot;alert(1)&quot;);  //直接进入这个闭包,然后解析&quot;alert(1)&quot;;
+</code></pre><h3 id="实例验证"><a href="#实例验证" class="headerlink" title="实例验证"></a>实例验证</h3><pre><code>var a=&quot;global&quot;;
+function test(){
+    var a=&quot;local&quot;;
+    eval(&quot;alert(a)&quot;);
+}
+test();   // global
+</code></pre>
+				</div>
+				<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li><a class="icon icon-twitter" href="javascript:share.twitter();"><span>twitter</span></a></li>
+		<li><a class="icon icon-douban" href="javascript:share.douban();"><span>douban</span></a></li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				<div class="post-comments">
+	<div class="ds-thread" data-thread-key="" data-title="匿名函数, 闭包, eval劫持" data-url="http://thinkerchan.com/2015/05/12/eval/"></div>
+	<script type="text/javascript">
+  var duoshuoQuery = {short_name:"Thinkerchan"};
+	(function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+</div>
+			</div>		</div>
+		<div class="footer">
+	<p class="left">&copy; Thinker Chan , 什么都不会。</p>
+	<p class="right">Base on <a href="https://github.com/thinkerchan" target="_blank">Github</a> and <a href="http://hexo.io/" target="_blank">Hexo</a> , Theme By <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>

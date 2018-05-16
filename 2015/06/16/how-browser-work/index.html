@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>浏览器渲染原理 | ThinkerChan</title>
+  <meta name="description" content="本文转载自:阿树-前端工程师为什么需要明白浏览器渲染？ ##为什么要理解「浏览器渲染」像素完美（Pixel Perfection）、分辨率无关（Resolution Independent）和多平台体验一致性是设计师们的追求。 可访问性（Accessability）、加载性能和重构灵活性则是前端工程师们关心的主题。其中加载性能与浏览器的渲染机制深深挂钩，弄明白浏览器背后的渲染机制，才能在日常的前端">
+<meta name="keywords" content="browser">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器渲染原理">
+<meta property="og:url" content="http://thinkerchan.com/2015/06/16/how-browser-work/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="本文转载自:阿树-前端工程师为什么需要明白浏览器渲染？ ##为什么要理解「浏览器渲染」像素完美（Pixel Perfection）、分辨率无关（Resolution Independent）和多平台体验一致性是设计师们的追求。 可访问性（Accessability）、加载性能和重构灵活性则是前端工程师们关心的主题。其中加载性能与浏览器的渲染机制深深挂钩，弄明白浏览器背后的渲染机制，才能在日常的前端">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8133-7a8a0afcd59349d1.png?imageView2/2/w/1240/q/100">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8133-b4f8135590e46133.png?imageView2/2/w/1240/q/100">
+<meta property="og:updated_time" content="2016-01-07T02:06:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器渲染原理">
+<meta name="twitter:description" content="本文转载自:阿树-前端工程师为什么需要明白浏览器渲染？ ##为什么要理解「浏览器渲染」像素完美（Pixel Perfection）、分辨率无关（Resolution Independent）和多平台体验一致性是设计师们的追求。 可访问性（Accessability）、加载性能和重构灵活性则是前端工程师们关心的主题。其中加载性能与浏览器的渲染机制深深挂钩，弄明白浏览器背后的渲染机制，才能在日常的前端">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8133-7a8a0afcd59349d1.png?imageView2/2/w/1240/q/100">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">胖子</a>
+	</h1>
+	<p class="social-links">
+		<a href="/atom.xml"  target="_blank">RSS</a>
+		\
+		<a href="http://weibo.com/thinkerchank/" target="_blank">微博</a>
+		\
+		<a href="http://www.zhihu.com/people/chen-xin-kai-98" target="_blank">知乎</a>
+		\
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">浏览器渲染原理</h1>
+					<div class="post-meta">
+						<span class="post-time">2015.06.16</span>
+						<div class="post-cats">
+							
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#浏览器如何渲染页面"><span class="toc-number">1.</span> <span class="toc-text">浏览器如何渲染页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器解析"><span class="toc-number">1.1.</span> <span class="toc-text">浏览器解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器渲染"><span class="toc-number">1.2.</span> <span class="toc-text">浏览器渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repaint"><span class="toc-number">1.3.</span> <span class="toc-text">repaint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reflow"><span class="toc-number">1.4.</span> <span class="toc-text">reflow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意事项"><span class="toc-number">1.5.</span> <span class="toc-text">注意事项:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化渲染过程"><span class="toc-number">2.</span> <span class="toc-text">优化渲染过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他参考"><span class="toc-number">3.</span> <span class="toc-text">其他参考</span></a></li></ol>
+					</div>
+					<p>本文转载自:<a href="http://www.jianshu.com/p/e305ace24ddf" target="_blank" rel="noopener">阿树-前端工程师为什么需要明白浏览器渲染？</a></p>
+<p>##为什么要理解「浏览器渲染」<br>像素完美（Pixel Perfection）、分辨率无关（Resolution Independent）和多平台体验一致性是设计师们的追求。 可访问性（Accessability）、加载性能和重构灵活性则是前端工程师们关心的主题。其中加载性能与浏览器的渲染机制深深挂钩，弄明白浏览器背后的渲染机制，才能在日常的前端的开发中明白如何进行性能优化。</p>
+<h2 id="浏览器如何渲染页面"><a href="#浏览器如何渲染页面" class="headerlink" title="浏览器如何渲染页面"></a>浏览器如何渲染页面</h2><h3 id="浏览器解析"><a href="#浏览器解析" class="headerlink" title="浏览器解析"></a>浏览器解析</h3><p>1、浏览器通过请求的 URL 进行域名解析，向服务器发起请求，接收文件（HTML、CSS、JS、Images等等）。<br>2、HTML 文件加载后，开始构建 DOM Tree<br>3、CSS 样式文件加载后，开始解析和构建 CSS Rule Tree<br>4、Javascript 脚本文件加载后， 通过 DOM API 和 CSSOM API 来操作 DOM Tree 和 CSS Rule Tree</p>
+<h3 id="浏览器渲染"><a href="#浏览器渲染" class="headerlink" title="浏览器渲染"></a>浏览器渲染</h3><p>1、浏览器引擎通过 DOM Tree 和 CSS Rule Tree 构建 Rendering Tree<br>2、Rendering Tree 并不与 DOM Tree 对应，比如像 <code>&lt;head&gt;</code> 标签内容或带有 display: none; 的元素节点并不包括在 Rendering Tree 中 。<br>3、通过 CSS Rule Tree 匹配 DOM Tree 进行定位坐标和大小，是否换行，以及 position、overflow、z-index 等等属性，这个过程称为 Flow 或 Layout 。<br>4、最终通过调用Native GUI 的 API 绘制网页画面的过程称为 <code>Paint</code> 。</p>
+<p>参考图:<br><img src="http://upload-images.jianshu.io/upload_images/8133-7a8a0afcd59349d1.png?imageView2/2/w/1240/q/100" alt="浏览器渲染原理图"></p>
+<p>当用户在浏览网页时进行交互或通过 js 脚本改变页面结构时，以上的部分操作有可能重复运行，此过程称为 Repaint 或 Reflow。</p>
+<h3 id="repaint"><a href="#repaint" class="headerlink" title="repaint"></a>repaint</h3><p>当元素改变的时候，将不会影响元素在页面当中的位置（比如 background-color, border-color, visibility），浏览器仅仅会应用新的样式重绘此元素，此过程称为 Repaint。</p>
+<h3 id="reflow"><a href="#reflow" class="headerlink" title="reflow"></a>reflow</h3><p>当元素改变的时候，将会影响文档内容或结构，或元素位置，此过程称为 Reflow。（ HTML 使用的是 flow based layout ，也就是流式布局，所以，如果某元件的几何尺寸发生了变化，需要重新布局，也就叫 Reflow。）</p>
+<blockquote>
+<p>Reflow 的成本比 Repaint 的成本高得多的多。一个结点的 Reflow 很有可能导致子结点，甚至父点以及同级结点的 Reflow 。在一些高性能的电脑上也许还没什么，但是如果 Reflow 发生在手机上，那么这个过程是延慢加载和耗电的。—-浏览器的渲染原理简介</p>
+</blockquote>
+<pre><code>以下行为将有可能产生 Reflow
+</code></pre><ul>
+<li>增加、删除、或改变 DOM 节点</li>
+<li>增加、删除 ‘class’ 属性值</li>
+<li>元素尺寸改变</li>
+<li>文本内容改变</li>
+<li>浏览器窗口改变大小或拖动</li>
+<li>动画效果进行计算和改变 CSS 属性值</li>
+<li>伪类激活（:hover）</li>
+</ul>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项:"></a>注意事项:</h3><ul>
+<li>经常操作的DOM节点需要存起来</li>
+<li>单次改动DOM元素的情况尽可能少</li>
+<li>用增减class的方式来替代直接DOM操作</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/8133-b4f8135590e46133.png?imageView2/2/w/1240/q/100" alt="示意图"></p>
+<blockquote>
+<p>当然，我们的浏览器是聪明的，它不会像上面那样，你每改一次样式，它就 Reflow 或 Repaint 一次。一般来说，浏览器会把这样的操作积攒一批，然后做一次 Reflow ，这又叫异步 reflow 或增量异步 Reflow 。但是有些情况浏览器是不会这么做的，比如：Resize 窗口，改变了页面默认的字体，等。对于这些操作，浏览器会马上进行 Reflow 。—-浏览器的渲染原理简介</p>
+</blockquote>
+<h2 id="优化渲染过程"><a href="#优化渲染过程" class="headerlink" title="优化渲染过程"></a>优化渲染过程</h2><ul>
+<li>1、创建有效的 HTML 和 CSS ，不要忘记指定文档编码，比如<meta charset="utf-8">。</li>
+<li>2、CSS 样式应该包含在 <head>中， Javascript 脚本出现在 </head><body>末尾。</body></li>
+<li>3、减少 CSS 嵌套层级和选择适当的选择器，可参考 如何提升 CSS 选择器性能。</li>
+<li>4、不要通过 JS 逐条修改 DOM 的样式，提前定义好 CSS 的 Class 进行操作。</li>
+<li>5、尽量减少将 DOM 节点属性值放在循环当中，会导致大量读写此属性值。</li>
+<li>6、尽可能的为产生动画的 HTML 元素使用 fixed 或 absolute 的 position ，那么修改他们的 CSS 是不会 Reflow 的。</li>
+</ul>
+<h2 id="其他参考"><a href="#其他参考" class="headerlink" title="其他参考"></a>其他参考</h2><ul>
+<li><a href="http://taligarsiel.com/Projects/howbrowserswork1.htm" target="_blank" rel="noopener">http://taligarsiel.com/Projects/howbrowserswork1.htm</a></li>
+<li><a href="http://frontendbabel.info/articles/webpage-rendering-101/#how-browsers-optimize-rendering" target="_blank" rel="noopener">http://frontendbabel.info/articles/webpage-rendering-101/#how-browsers-optimize-rendering</a></li>
+<li><a href="http://coolshell.cn/articles/9666.html" target="_blank" rel="noopener">http://coolshell.cn/articles/9666.html</a>(墙裂推荐!)</li>
+</ul>
+
+				</div>
+				<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li><a class="icon icon-twitter" href="javascript:share.twitter();"><span>twitter</span></a></li>
+		<li><a class="icon icon-douban" href="javascript:share.douban();"><span>douban</span></a></li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				<div class="post-comments">
+	<div class="ds-thread" data-thread-key="" data-title="浏览器渲染原理" data-url="http://thinkerchan.com/2015/06/16/how-browser-work/"></div>
+	<script type="text/javascript">
+  var duoshuoQuery = {short_name:"Thinkerchan"};
+	(function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+</div>
+			</div>		</div>
+		<div class="footer">
+	<p class="left">&copy; Thinker Chan , 什么都不会。</p>
+	<p class="right">Base on <a href="https://github.com/thinkerchan" target="_blank">Github</a> and <a href="http://hexo.io/" target="_blank">Hexo</a> , Theme By <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>

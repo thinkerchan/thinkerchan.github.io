@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>in操作符 | ThinkerChan</title>
+  <meta name="description" content="数组里的invar a; a in [&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;]  false, 尽管数组里面有 a 这个属性, 但是检查的确实数组本身的[特性], 比如 ‘length’,’constructor’之类的属性  var arr = [&amp;apos;one&amp;apos;,&amp;apos;two&amp;apos;,&amp;apos;three&amp;apos;,&amp;ap">
+<meta name="keywords" content="in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="in操作符">
+<meta property="og:url" content="http://thinkerchan.com/2015/05/30/operator-in/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="数组里的invar a; a in [&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;]  false, 尽管数组里面有 a 这个属性, 但是检查的确实数组本身的[特性], 比如 ‘length’,’constructor’之类的属性  var arr = [&amp;apos;one&amp;apos;,&amp;apos;two&amp;apos;,&amp;apos;three&amp;apos;,&amp;ap">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-01-07T02:04:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="in操作符">
+<meta name="twitter:description" content="数组里的invar a; a in [&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;]  false, 尽管数组里面有 a 这个属性, 但是检查的确实数组本身的[特性], 比如 ‘length’,’constructor’之类的属性  var arr = [&amp;apos;one&amp;apos;,&amp;apos;two&amp;apos;,&amp;apos;three&amp;apos;,&amp;ap">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">胖子</a>
+	</h1>
+	<p class="social-links">
+		<a href="/atom.xml"  target="_blank">RSS</a>
+		\
+		<a href="http://weibo.com/thinkerchank/" target="_blank">微博</a>
+		\
+		<a href="http://www.zhihu.com/people/chen-xin-kai-98" target="_blank">知乎</a>
+		\
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">in操作符</h1>
+					<div class="post-meta">
+						<span class="post-time">2015.05.30</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Web安全/">Web安全</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组里的in"><span class="toc-number">1.</span> <span class="toc-text">数组里的in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象里的in"><span class="toc-number">2.</span> <span class="toc-text">对象里的in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有趣的东西"><span class="toc-number">3.</span> <span class="toc-text">有趣的东西</span></a></li></ol>
+					</div>
+					<h2 id="数组里的in"><a href="#数组里的in" class="headerlink" title="数组里的in"></a>数组里的in</h2><pre><code>var a;
+a in [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]
+</code></pre><blockquote>
+<p>false, 尽管数组里面有 a 这个属性, 但是检查的确实数组本身的[特性], 比如 ‘length’,’constructor’之类的属性</p>
+</blockquote>
+<pre><code>var arr = [&apos;one&apos;,&apos;two&apos;,&apos;three&apos;,&apos;four&apos;];
+arr.five = &apos;5&apos;;          //这里是按照 键值 的方式给数组自身添加属性
+arr.six = &apos;6&apos;;          //这里是按照 键值 的方式给数组自身添加属性
+// arr.push(&apos;test&apos;);     //给数组内部添加元素
+4 in arr;   //false 原来的素组不存在第5个元素
+0 in arr;   //true 存在第1个元素
+&apos;one&apos; in arr;   //false
+&apos;five&apos; in arr;  //true, 通过 键值 添加进去的属性
+&apos;length&apos; in arr;//true 这个是数组本身的特性
+</code></pre><h2 id="对象里的in"><a href="#对象里的in" class="headerlink" title="对象里的in"></a>对象里的in</h2><pre><code>var obj = {&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:3}
+&apos;a&apos; in obj ; //true,键值属性
+&apos;constructor&apos; in obj; //true,自身的特性(属性) 其实也是键值属性
+</code></pre><h2 id="有趣的东西"><a href="#有趣的东西" class="headerlink" title="有趣的东西"></a>有趣的东西</h2><pre><code>(alert(123))in(alert(321));
+</code></pre><blockquote>
+<p>经检测所有浏览器通杀….这就意味着浏览器会先解析(执行)完两边的alert，然后再抛出错误。这个特性可以让我们干点坏事。。。嘘！</p>
+</blockquote>
+<pre><code>(alert(123))in&quot;&quot;
+&quot;&quot;in(alert(321))
+</code></pre><blockquote>
+<p>我会告诉你这两个其实也可以吗</p>
+</blockquote>
+
+				</div>
+				<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li><a class="icon icon-twitter" href="javascript:share.twitter();"><span>twitter</span></a></li>
+		<li><a class="icon icon-douban" href="javascript:share.douban();"><span>douban</span></a></li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				<div class="post-comments">
+	<div class="ds-thread" data-thread-key="" data-title="in操作符" data-url="http://thinkerchan.com/2015/05/30/operator-in/"></div>
+	<script type="text/javascript">
+  var duoshuoQuery = {short_name:"Thinkerchan"};
+	(function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+</div>
+			</div>		</div>
+		<div class="footer">
+	<p class="left">&copy; Thinker Chan , 什么都不会。</p>
+	<p class="right">Base on <a href="https://github.com/thinkerchan" target="_blank">Github</a> and <a href="http://hexo.io/" target="_blank">Hexo</a> , Theme By <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>

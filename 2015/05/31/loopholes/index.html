@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>100.com的一个漏洞(上) | ThinkerChan</title>
+  <meta name="description" content="昨晚无聊，就打开欢聚时代的官网，然后一路溜到教育100这个旗下网站，顺带注册了一个账户，-_-# 身为一个无聊的业余码农，看到那么多input，就随便输了点东西进去。。。。然后就发现了个漏洞。。。。 上图：  然后就报告给了YY前端老大@maxlee….">
+<meta name="keywords" content="XSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="100.com的一个漏洞(上)">
+<meta property="og:url" content="http://thinkerchan.com/2015/05/31/loopholes/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="昨晚无聊，就打开欢聚时代的官网，然后一路溜到教育100这个旗下网站，顺带注册了一个账户，-_-# 身为一个无聊的业余码农，看到那么多input，就随便输了点东西进去。。。。然后就发现了个漏洞。。。。 上图：  然后就报告给了YY前端老大@maxlee….">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://r.loli.io/uuaEBz.jpg">
+<meta property="og:updated_time" content="2015-09-30T10:56:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="100.com的一个漏洞(上)">
+<meta name="twitter:description" content="昨晚无聊，就打开欢聚时代的官网，然后一路溜到教育100这个旗下网站，顺带注册了一个账户，-_-# 身为一个无聊的业余码农，看到那么多input，就随便输了点东西进去。。。。然后就发现了个漏洞。。。。 上图：  然后就报告给了YY前端老大@maxlee….">
+<meta name="twitter:image" content="http://r.loli.io/uuaEBz.jpg">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">胖子</a>
+	</h1>
+	<p class="social-links">
+		<a href="/atom.xml"  target="_blank">RSS</a>
+		\
+		<a href="http://weibo.com/thinkerchank/" target="_blank">微博</a>
+		\
+		<a href="http://www.zhihu.com/people/chen-xin-kai-98" target="_blank">知乎</a>
+		\
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">100.com的一个漏洞(上)</h1>
+					<div class="post-meta">
+						<span class="post-time">2015.05.31</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Web安全/">Web安全</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						
+					</div>
+					<p>昨晚无聊，就打开欢聚时代的<a href="http://huanju.cn/" target="_blank" rel="noopener">官网</a>，然后一路溜到<a href="http://www.100.com/" target="_blank" rel="noopener">教育100</a>这个旗下网站，顺带注册了一个账户，-_-# 身为一个无聊的业余码农，看到那么多<code>input</code>，就随便输了点东西进去。。。。然后就发现了个漏洞。。。。</p>
+<p>上图：</p>
+<p><img src="http://r.loli.io/uuaEBz.jpg" alt="100.com"></p>
+<p>然后就报告给了YY前端老大<a href="https://github.com/maxlee" target="_blank" rel="noopener">@maxlee</a>….</p>
+
+				</div>
+				<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li><a class="icon icon-twitter" href="javascript:share.twitter();"><span>twitter</span></a></li>
+		<li><a class="icon icon-douban" href="javascript:share.douban();"><span>douban</span></a></li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				<div class="post-comments">
+	<div class="ds-thread" data-thread-key="" data-title="100.com的一个漏洞(上)" data-url="http://thinkerchan.com/2015/05/31/loopholes/"></div>
+	<script type="text/javascript">
+  var duoshuoQuery = {short_name:"Thinkerchan"};
+	(function() {
+	  var ds = document.createElement('script');
+	  ds.type = 'text/javascript';ds.async = true;
+	  ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	  ds.charset = 'UTF-8';
+	  (document.getElementsByTagName('head')[0]
+	   || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+</div>
+			</div>		</div>
+		<div class="footer">
+	<p class="left">&copy; Thinker Chan , 什么都不会。</p>
+	<p class="right">Base on <a href="https://github.com/thinkerchan" target="_blank">Github</a> and <a href="http://hexo.io/" target="_blank">Hexo</a> , Theme By <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+
+</body>
+</html>
