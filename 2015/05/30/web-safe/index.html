@@ -102,6 +102,21 @@ if (request){
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"Access-Control-Allow-Origin: http://www.foo.com"</span>);</span><br><span class="line">header(<span class="string">"Access-Control-Allow-Credentials: true"</span>); <span class="comment">// 允许跨域证书发送</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>有 一 点 需 要 注 意 ， 如果 设 置 了 Access-Control-Allow-Credentials 为 true ，那么<code>Access-Control-Allow-Origin</code>就不能设置为*通配符，这也是浏览器为了安全进行的考虑。有了 CORS 机制，跨域就变得特别方便了，该功能要慎重使用，否则后果会很严重。</p>
 
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="160" height="160" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
 				</div>
 			</div>		</div>
 		<div class="footer">

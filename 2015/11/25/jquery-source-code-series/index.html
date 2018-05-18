@@ -194,6 +194,21 @@
 <h3 id="寄生式继承-类似于原型链继承"><a href="#寄生式继承-类似于原型链继承" class="headerlink" title="寄生式继承(类似于原型链继承)"></a>寄生式继承(类似于原型链继承)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">	F.prototype=o;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> F()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAnother</span>(<span class="params">original</span>)</span>&#123; </span><br><span class="line">	<span class="keyword">var</span> clone=object(original); <span class="comment">//通过调用函数创建一个新对象</span></span><br><span class="line">	clone.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	    alert(<span class="string">"hi"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> clone;</span><br></pre></td></tr></table></figure>
 <h3 id="寄生组合式继承"><a href="#寄生组合式继承" class="headerlink" title="寄生组合式继承"></a>寄生组合式继承</h3><p>略</p>
 
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="160" height="160" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
 				</div>
 			</div>		</div>
 		<div class="footer">
