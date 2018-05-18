@@ -36,18 +36,17 @@ var SimpleShare = function(e) {
     }, this.linkedin = function() {
         window.open(t(p));
     };
+    var _flag = true
     this.wechat = function(dom){
-      if (dom.id !='imgLoaded') {
-      console.log(dom.id)
-      // return;
+      if (dom.id !='imgLoaded' && _flag ) {
+        _flag = false;
         var img = new Image(),
             _src = qrcodeApi+window.location.href;
-
         img.src = _src;
         img.onload = function(){
-          console.log('loaded')
           dom.id = 'imgLoaded';
           wechatQrcodeImg.setAttribute('src',_src)
+          _flag = true;
         }
       }
       qrcodeBox.classList.add('on');
@@ -58,12 +57,18 @@ var SimpleShare = function(e) {
     }
 };
 
-define("simple-share.min", function() {
-
-}),
-
+define("simple-share.min", function() {});
 require([ "simple-share.min" ], function(e) {
     share = new SimpleShare();
 }),
 
 define("main", function() {});
+require(['main'],function(){
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?0e2e75fa8329a6860f4229333cc6bc9f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+})

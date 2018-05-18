@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="ThinkerChan">
 <meta property="og:description" content="『 按一个人能活900个月(75岁)计算, 到目前为止，你的人生走到第几格了? 』      var formatDate = function (date) {       var y = date.getFullYear();       var m = date.getMonth() + 1;       m = m &amp;lt; 10 ? &apos;0&apos; + m : m;       var d = da">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-18T11:40:58.000Z">
+<meta property="og:updated_time" content="2018-05-18T13:08:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="生命表">
 <meta name="twitter:description" content="『 按一个人能活900个月(75岁)计算, 到目前为止，你的人生走到第几格了? 』      var formatDate = function (date) {       var y = date.getFullYear();       var m = date.getMonth() + 1;       m = m &amp;lt; 10 ? &apos;0&apos; + m : m;       var d = da">
@@ -49,7 +49,7 @@
 	<div class="section">
 		<div class="header">
 	<h1 class="logo">
-		<a href="/">k哥</a>
+		<a href="/">ThinkerChan</a>
 	</h1>
 	<p class="social-links">
 		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
@@ -95,9 +95,12 @@
   var oFragmeng = document.createDocumentFragment();
   for (var i = 0; i < diff; i++) {
     var op = document.createElement("i");
-
     op.classList.add('pass');
-
+    if (i && i%12==0) {
+      console.log(i)
+      op.classList.add('year');
+      op.innerHTML = i/12;
+    }
     oFragmeng.appendChild(op);
   }
   for (var i = 0; i < (900-diff); i++) {
