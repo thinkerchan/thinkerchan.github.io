@@ -8,21 +8,20 @@
   <meta name="renderer" content="webkit">
   
   <title>100.com的一个漏洞(中) | ThinkerChan</title>
-  <meta name="description" content="为啥这里的标题是[中]，因为我觉得之后还会有故事发生…. 一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 全蛋，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，真是枉费叔叔一片好心啊，摔. 这货没意识到…YY">
+  <meta name="description" content="一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 阿全，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，尴尬. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个">
 <meta name="keywords" content="XSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="100.com的一个漏洞(中)">
 <meta property="og:url" content="http://thinkerchan.com/2015/06/16/play-again/index.html">
 <meta property="og:site_name" content="ThinkerChan">
-<meta property="og:description" content="为啥这里的标题是[中]，因为我觉得之后还会有故事发生…. 一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 全蛋，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，真是枉费叔叔一片好心啊，摔. 这货没意识到…YY">
+<meta property="og:description" content="一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 阿全，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，尴尬. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://r.loli.io/QRreMv.gif">
 <meta property="og:image" content="http://r.loli.io/Mfi2In.jpg">
-<meta property="og:updated_time" content="2016-01-07T02:04:22.000Z">
+<meta property="og:updated_time" content="2018-05-23T10:00:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="100.com的一个漏洞(中)">
-<meta name="twitter:description" content="为啥这里的标题是[中]，因为我觉得之后还会有故事发生…. 一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 全蛋，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，真是枉费叔叔一片好心啊，摔. 这货没意识到…YY">
-<meta name="twitter:image" content="http://r.loli.io/QRreMv.gif">
+<meta name="twitter:description" content="一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 阿全，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，尴尬. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个">
+<meta name="twitter:image" content="http://r.loli.io/Mfi2In.jpg">
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
   
@@ -76,15 +75,12 @@
 						<div class="toc-title">TOC</div>
 						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一"><span class="toc-number">1.</span> <span class="toc-text">一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二"><span class="toc-number">2.</span> <span class="toc-text">二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三"><span class="toc-number">3.</span> <span class="toc-text">三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四"><span class="toc-number">4.</span> <span class="toc-text">四</span></a></li></ol>
 					</div>
-					<p>为啥这里的标题是<b>[中]</b>，因为我觉得之后还会有故事发生….</p>
-<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>今天没活干，于是把<a href="http://pakchoi.me/" target="_blank" rel="noopener">裁员</a>在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去<a href="http://www.wooyun.org/" target="_blank" rel="noopener">乌云</a>骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜.</p>
-<p><a href="http://www.wilsonup.xyz/" target="_blank" rel="noopener">全蛋</a>，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，真是枉费叔叔一片好心啊，摔.</p>
-<p>这货没意识到…YY旗下的产品，用的都是同一个ID，只要拿到了这个ID和密码， 接下来就会有有趣的东西发生了…..</p>
-<p>没关系，这激起了叔的学习欲望，于是叔决定再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇<a href="http://thinkerchan.com/2015/05/31/loopholes/">100.com的一个漏洞(上)</a>，因为这个漏洞还没解决，所以各位看官，请手(si)下(yi)留(wan)情(shua)，友情提醒….出了事可不怪我……</p>
-<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p><img src="http://r.loli.io/QRreMv.gif" alt="兔子"></p>
-<p>回到正题:<br>这回干脆就获取了用户cookie， 话不多说，贴图:</p>
+					<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>今天没活干，于是把<a href="http://pakchoi.me/" target="_blank" rel="noopener">裁员</a>在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去<a href="http://www.wooyun.org/" target="_blank" rel="noopener">乌云</a>骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜.</p>
+<p><a href="http://www.wilsonup.xyz/" target="_blank" rel="noopener">阿全</a>，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，尴尬.</p>
+<p>没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇<a href="http://thinkerchan.com/2015/05/31/loopholes/">100.com的一个漏洞(上)</a>，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的</p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>回到正题:<br>这回干脆就获取了用户cookie， 话不多说，贴图:</p>
 <p><img src="http://r.loli.io/Mfi2In.jpg" alt="用户cookie"></p>
-<p>没错….这就是<a href="http://www.wilsonup.xyz/" target="_blank" rel="noopener">全蛋</a>YY账户的所有cookie….</p>
+<p>这就是<a href="http://www.wilsonup.xyz/" target="_blank" rel="noopener">阿全</a>YY账户的所有cookie….</p>
 <p>那么估计有人就问了:</p>
 <blockquote>
 <p>特么要是别人不点你的网页，那这还是没什么卵用啊.</p>
@@ -118,8 +114,7 @@
 </code></pre><p>不过到这里， 已经超出我现在掌握的知识范围了. 所以现状就是，我大概是闯入你家大门，但是还没能力进主人的房间.</p>
 <p>这时候我们这样想: 虽然我进不了你房间， 可是我还是能够在你房间外面的其他地方耍耍的….对吧?</p>
 <p>于是就来到了下一节: CSRF </p>
-<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><p>待我补齐需要知识先…..别打我…- -||| </p>
-<p>敬请期待100.com的一个漏洞(下)</p>
+<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><p>待续(如果有[下]的话)</p>
 
 					<div class="post-share">
 	<ul class="share-list">
