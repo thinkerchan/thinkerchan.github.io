@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>正则表达式笔记 | ThinkerChan</title>
+  <meta name="description" content="界定符1234// 界定符,不是正则的的部分// $reg = &apos;//&apos;;// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位 元字符1234// 原子的筛选方式:// 1) |,匹配两个或者多个分支选择// 2) [],匹配方括号中的任意一个原子(方括号内必须是原子)// 3) [^],匹配除方括号中原子之外的任意字符(这种情况下^必须在首) 常见原子集合1">
+<meta name="keywords" content="web前端,JavaScript,CSS,HTML,安全,乱七八糟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式笔记">
+<meta property="og:url" content="http://thinkerchan.com/2016/05/24/正则表达式笔记/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="界定符1234// 界定符,不是正则的的部分// $reg = &apos;//&apos;;// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位 元字符1234// 原子的筛选方式:// 1) |,匹配两个或者多个分支选择// 2) [],匹配方括号中的任意一个原子(方括号内必须是原子)// 3) [^],匹配除方括号中原子之外的任意字符(这种情况下^必须在首) 常见原子集合1">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-23T17:33:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式笔记">
+<meta name="twitter:description" content="界定符1234// 界定符,不是正则的的部分// $reg = &apos;//&apos;;// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位 元字符1234// 原子的筛选方式:// 1) |,匹配两个或者多个分支选择// 2) [],匹配方括号中的任意一个原子(方括号内必须是原子)// 3) [^],匹配除方括号中原子之外的任意字符(这种情况下^必须在首) 常见原子集合1">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">ThinkerChan</a>
+	</h1>
+	<p class="social-links">
+		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
+		/
+		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
+		/
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">正则表达式笔记</h1>
+					<div class="post-meta">
+						<span class="post-time">2016.05.24</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#界定符"><span class="toc-number">1.</span> <span class="toc-text">界定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符"><span class="toc-number">2.</span> <span class="toc-text">元字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见原子集合"><span class="toc-number">3.</span> <span class="toc-text">常见原子集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#量词"><span class="toc-number">4.</span> <span class="toc-text">量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#边界控制"><span class="toc-number">5.</span> <span class="toc-text">边界控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修正模式"><span class="toc-number">6.</span> <span class="toc-text">修正模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见正则"><span class="toc-number">7.</span> <span class="toc-text">常见正则</span></a></li></ol>
+					</div>
+					<h3 id="界定符"><a href="#界定符" class="headerlink" title="界定符"></a>界定符</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 界定符,不是正则的的部分</span></span><br><span class="line"><span class="comment">// $reg = '//';</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位</span></span><br></pre></td></tr></table></figure>
+<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 原子的筛选方式:</span><br><span class="line">// 1) |,匹配两个或者多个分支选择</span><br><span class="line">// 2) [],匹配方括号中的任意一个原子(方括号内必须是原子)</span><br><span class="line">// 3) [^],匹配除方括号中原子之外的任意字符(这种情况下^必须在首)</span><br></pre></td></tr></table></figure>
+<h3 id="常见原子集合"><a href="#常见原子集合" class="headerlink" title="常见原子集合"></a>常见原子集合</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// \. 除换行符之外的任意字符</span><br><span class="line">// \d [0-9]</span><br><span class="line">// \D [^0-9]</span><br><span class="line">// \s 不可见原子,即常见的空格,换行等 [\f\n\r\t\v]</span><br><span class="line">// \S 可见原子, [^\f\n\r\t\v]</span><br><span class="line">// \w [0-9a-zA-Z_]</span><br><span class="line">// \W [^0-9a-zA-Z_]</span><br></pre></td></tr></table></figure>
+<h3 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 量词(放在元字符背后)</span><br><span class="line">// &#123;n&#125;   恰好出现n次</span><br><span class="line">// &#123;n,&#125;  前面的原子至少出现n次</span><br><span class="line">// &#123;n,m&#125; 至少n次,至多m次</span><br><span class="line">// *     &#123;0,&#125; 可以理解成&#123;0,∞&#125;</span><br><span class="line">// +     &#123;0,&#125; 可以理解成&#123;1,∞&#125;</span><br><span class="line">// ?     &#123;0,&#125; 可以理解成&#123;0,1&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="边界控制"><a href="#边界控制" class="headerlink" title="边界控制"></a>边界控制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 边界控制</span><br><span class="line">// ^  开始</span><br><span class="line">// $  结束</span><br><span class="line"></span><br><span class="line">// () 模式单元 (D|d)uang</span><br></pre></td></tr></table></figure>
+<h3 id="修正模式"><a href="#修正模式" class="headerlink" title="修正模式"></a>修正模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 假如有一组电话号码: 020-3456789</span><br><span class="line">// 懒惰匹配(默认) : \d+\-\d+  =&gt; 020-3456789</span><br><span class="line">// 贪婪匹配 : \d?\-\d?  =&gt; 0-3  , 或者 &apos;/imooc.+123/U&apos; (仅限PHP)</span><br><span class="line">// 忽略大小写 &apos;/iMoOc.+123/i&apos;</span><br><span class="line">// 忽略空白符 &apos;/im o o c.+123/x&apos;</span><br><span class="line">// 匹配所有字符 &apos;/im o o c.+123/s&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="常见正则"><a href="#常见正则" class="headerlink" title="常见正则"></a>常见正则</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">邮箱: ^\w+(\.\w+)*@\w+(\.\w+)+$</span><br><span class="line">URL: (\w+:\/\/)?\w+(\.\w+)+[a-z]$</span><br><span class="line">常用URL: (https?:\/\/)?(\w+\.)+[a-zA-Z]+</span><br><span class="line"></span><br><span class="line">// more</span><br><span class="line">Email : /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]&#123;2,3&#125;)$/i</span><br><span class="line">Mobile : /^1[34758]\d&#123;9&#125;$/</span><br><span class="line">Url: /^(https?):\/\/[^\s&amp;&lt;&gt;#;,&quot;\&apos;\?]+(|#[^\s&lt;&gt;;&quot;\&apos;]*|\?[^\s&lt;&gt;;&quot;\&apos;]*)$/i,</span><br><span class="line">Company: /^[\u4e00-\u9fa5a-zA-Z0-9\-\·]+$/,</span><br><span class="line">OrganizationCode: /^[A-Za-z0-9]&#123;15&#125;$/,</span><br><span class="line">Name: /^[\u4e00-\u9fa5a-zA-Z]+$/,</span><br><span class="line">Position: /^[\u4e00-\u9fa5a-zA-Z\-]+$/</span><br></pre></td></tr></table></figure>
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="160" height="160" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				</div>
+			</div>		</div>
+		<div class="footer">
+  <p class="left">&copy; Thinker Chan</p>
+	<p class="right">Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a> , Theme by <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+</body>
+</html>
