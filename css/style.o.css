@@ -1,14 +1,5 @@
 @charset "UTF-8";
-/*!
-Theme Name: Jiangshui Simple
-Version: 1.0
-Author: Jiangshui
-Website: http://yujiangshui.com
-E-mail: yujiangshui@gmail.com
-*/
-/*
-  fix: thinkerchan;
- */
+
 @font-face {
   font-family: "iconfont";
   src: url("fonts/iconfont.eot");
@@ -16,12 +7,7 @@ E-mail: yujiangshui@gmail.com
   src: url("fonts/iconfont.eot?#iefix") format("embedded-opentype"), url("fonts/iconfont.woff") format("woff"), url("fonts/iconfont.ttf") format("truetype"), url("fonts/iconfont.svg#iconfont") format("svg");
   /* iOS 4.1- */
 }
-/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
-/**
- * 1. Set default font family to sans-serif.
- * 2. Prevent iOS text size adjust after orientation change, without disabling
- *    user zoom.
- */
+
 html {
   font-family: sans-serif;
   /* 1 */
@@ -38,14 +24,7 @@ body {
   margin: 0;
 }
 
-/* HTML5 display definitions
-   ========================================================================== */
-/**
- * Correct `block` display not defined for any HTML5 element in IE 8/9.
- * Correct `block` display not defined for `details` or `summary` in IE 10/11
- * and Firefox.
- * Correct `block` display not defined for `main` in IE 11.
- */
+
 article,
 aside,
 details,
@@ -420,27 +399,6 @@ ul {
   padding-left: 0;
 }
 
-/*!
-Project Name: jupe.css
-Version: 1.0
-Author: Jiangshui Yu
-Website: http://yujiangshui.com
-E-mail: yujiangshui@gmail.com
-*/
-/***********************************************************************************/
-/*                                      vars                                       */
-/***********************************************************************************/
-/*color*/
-/*sizes*/
-/*type*/
-/*fonts*/
-/* via https://github.com/zenozeng/fonts.css */
-/***********************************************************************************/
-/*                                      utils                                      */
-/***********************************************************************************/
-/***********************************************************************************/
-/*                                      main                                       */
-/***********************************************************************************/
 .jupe {
   font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
   color: #333333;
@@ -460,6 +418,7 @@ E-mail: yujiangshui@gmail.com
   /* list */
   /* HTML5 */
 }
+h1,h2,h3,h4,h5,h6{font-family: "SimHei";}
 .jupe a {
   text-decoration: none;
   color: #2980b9;
@@ -473,27 +432,22 @@ E-mail: yujiangshui@gmail.com
   margin: 1.2em 0 0.6em 0;
 }
 .jupe h2 {
-  font-weight: normal;
   font-size: 1.4em;
   margin: 1.2em 0 0.6em 0;
 }
 .jupe h3 {
-  font-weight: normal;
   font-size: 1.2em;
   margin: 1.2em 0 0.6em 0;
 }
 .jupe h4 {
-  font-weight: normal;
   font-size: 1.2em;
   margin: 1.2em 0 0.6em 0;
 }
 .jupe h5 {
-  font-weight: normal;
   font-size: 1.2em;
   margin: 1.2em 0 0.6em 0;
 }
 .jupe h6 {
-  font-weight: normal;
   font-size: 1.0em;
   margin: 1.2em 0 0.6em 0;
 }
