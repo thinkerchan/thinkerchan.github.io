@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>安卓微信视频播放全屏问题处理 | ThinkerChan</title>
+  <meta name="description" content="安卓全屏问题视频全屏的H5专题十分收到业界喜欢, 虽然iOS下全屏自动播放并没有太大问题, 然而在安卓手机上，video组件全屏的时候会在顶层，好像”漂浮”在整个浏览器上面, 体验起来非常差. 除此之外, 即便采用JS给video设定为容器的宽高这方案, 也会出现难看的播放器控件,这时候不得不人为给视频底部加空白,在通过JS计算适合的高度以挡掉丑陋的播放器控件, 实在苦恼. JSMpeg简介偶然发">
+<meta name="keywords" content="web前端,JavaScript,CSS,HTML,安全,乱七八糟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓微信视频播放全屏问题处理">
+<meta property="og:url" content="http://thinkerchan.com/2017/05/31/安卓微信视频播放全屏问题处理/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="安卓全屏问题视频全屏的H5专题十分收到业界喜欢, 虽然iOS下全屏自动播放并没有太大问题, 然而在安卓手机上，video组件全屏的时候会在顶层，好像”漂浮”在整个浏览器上面, 体验起来非常差. 除此之外, 即便采用JS给video设定为容器的宽高这方案, 也会出现难看的播放器控件,这时候不得不人为给视频底部加空白,在通过JS计算适合的高度以挡掉丑陋的播放器控件, 实在苦恼. JSMpeg简介偶然发">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://pan.baidu.com/share/qrcode/?w=200&h=200&url=http://www1.pcauto.com.cn/test/gz/testdog/20170001/index.html">
+<meta property="og:updated_time" content="2018-05-31T13:17:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安卓微信视频播放全屏问题处理">
+<meta name="twitter:description" content="安卓全屏问题视频全屏的H5专题十分收到业界喜欢, 虽然iOS下全屏自动播放并没有太大问题, 然而在安卓手机上，video组件全屏的时候会在顶层，好像”漂浮”在整个浏览器上面, 体验起来非常差. 除此之外, 即便采用JS给video设定为容器的宽高这方案, 也会出现难看的播放器控件,这时候不得不人为给视频底部加空白,在通过JS计算适合的高度以挡掉丑陋的播放器控件, 实在苦恼. JSMpeg简介偶然发">
+<meta name="twitter:image" content="https://pan.baidu.com/share/qrcode/?w=200&h=200&url=http://www1.pcauto.com.cn/test/gz/testdog/20170001/index.html">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">ThinkerChan</a>
+	</h1>
+	<p class="social-links">
+		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
+		/
+		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
+		/
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">安卓微信视频播放全屏问题处理</h1>
+					<div class="post-meta">
+						<span class="post-time">2017.05.31</span>
+						<div class="post-cats">
+							
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安卓全屏问题"><span class="toc-number">1.</span> <span class="toc-text">安卓全屏问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSMpeg简介"><span class="toc-number">2.</span> <span class="toc-text">JSMpeg简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DEMO"><span class="toc-number">3.</span> <span class="toc-text">DEMO</span></a></li></ol>
+					</div>
+					<h2 id="安卓全屏问题"><a href="#安卓全屏问题" class="headerlink" title="安卓全屏问题"></a>安卓全屏问题</h2><p>视频全屏的H5专题十分收到业界喜欢, 虽然iOS下全屏自动播放并没有太大问题, 然而在安卓手机上，video组件全屏的时候会在顶层，好像”漂浮”在整个浏览器上面, 体验起来非常差. 除此之外, 即便采用JS给video设定为容器的宽高这方案, 也会出现难看的播放器控件,这时候不得不人为给视频底部加空白,在通过JS计算适合的高度以挡掉丑陋的播放器控件, 实在苦恼.</p>
+<h2 id="JSMpeg简介"><a href="#JSMpeg简介" class="headerlink" title="JSMpeg简介"></a>JSMpeg简介</h2><p>偶然发现<a href="https://github.com/phoboslab/jsmpeg" target="_blank" rel="noopener">JSMpeg</a>这个项目,能解决安卓全屏video漂浮问题问题.</p>
+<p>它的原理就是JS解码视频, 用 WebGL &amp; Canvas2D渲染出来,于是达到避免Video控件在安卓微信浏览器下产生的问题, 不过有一个需要说明的地方就是, 你需要用将你的视频文件(通常是mp4)转换成ts格式的视频文件, 并且 ,在iOS下的微信浏览器下, 使用jsmpeg播放ts文件, 是没有声音的. (iOS我们直接使用video+mp4的方式,也用不到这个插件).</p>
+<p>你可以使用<a href="https://convertio.co/zh/mp4-ts/" target="_blank" rel="noopener">https://convertio.co/zh/mp4-ts/</a>在线转换, 不过更推荐使用<a href="http://ffmpeg.org/" target="_blank" rel="noopener">http://ffmpeg.org/</a>,至于怎么安装就不再赘述.</p>
+<p>生产ts视频文件命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    $ ffmpeg -i 你的源文件.mp4 -f mpegts -codec:v mpeg1video -codec:a mp2 -b 0 输出文件.ts</span><br></pre></td></tr></table></figure></p>
+<p>JSMpeg调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id = &quot;canvas&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	 var player = new JSMpeg.Player(&apos;video.ts&apos;, &#123;</span><br><span class="line">    	canvas: canvas, </span><br><span class="line">       loop: false,</span><br><span class="line">       autoplay:true</span><br><span class="line">    &#125;);  </span><br><span class="line"> &lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>当然你也直接在HTML中使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;jsmpeg&quot; </span><br><span class="line">	data-url=&quot;video.ts&quot; </span><br><span class="line">    data-loop=&quot;false&quot; </span><br><span class="line">    data-autoplay=&quot;true&quot;&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><p><a href="http://www1.pcauto.com.cn/test/gz/testdog/20170001/index.html" target="_blank" rel="noopener">点击这里体验Demo</a></p>
+<p>或者直接扫描</p>
+<p><img src="https://pan.baidu.com/share/qrcode/?w=200&amp;h=200&amp;url=http://www1.pcauto.com.cn/test/gz/testdog/20170001/index.html" alt="qrcode"></p>
+
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="160" height="160" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+				</div>
+			</div>		</div>
+		<div class="footer">
+  <p class="left">&copy; Thinker Chan ,
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">
+      本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+  </p>
+	<p class="right">Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a> , Theme by <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+</body>
+</html>
