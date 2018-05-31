@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="ThinkerChan">
 <meta property="og:description" content="数组里的invar a; a in [&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;]  false, 尽管数组里面有 a 这个属性, 但是检查的确实数组本身的[特性], 比如 ‘length’,’constructor’之类的属性  var arr = [&amp;apos;one&amp;apos;,&amp;apos;two&amp;apos;,&amp;apos;three&amp;apos;,&amp;ap">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2016-01-07T02:04:32.000Z">
+<meta property="og:updated_time" content="2018-05-31T14:03:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="in操作符">
 <meta name="twitter:description" content="数组里的invar a; a in [&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;]  false, 尽管数组里面有 a 这个属性, 但是检查的确实数组本身的[特性], 比如 ‘length’,’constructor’之类的属性  var arr = [&amp;apos;one&amp;apos;,&amp;apos;two&amp;apos;,&amp;apos;three&amp;apos;,&amp;ap">
@@ -71,7 +71,7 @@
 					</div>
 					<div class="post-toc">
 						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组里的in"><span class="toc-number">1.</span> <span class="toc-text">数组里的in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象里的in"><span class="toc-number">2.</span> <span class="toc-text">对象里的in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#有趣的东西"><span class="toc-number">3.</span> <span class="toc-text">有趣的东西</span></a></li></ol>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组里的in"><span class="toc-number">1.</span> <span class="toc-text">数组里的in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象里的in"><span class="toc-number">2.</span> <span class="toc-text">对象里的in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a></li></ol>
 					</div>
 					<h2 id="数组里的in"><a href="#数组里的in" class="headerlink" title="数组里的in"></a>数组里的in</h2><pre><code>var a;
 a in [&apos;a&apos;,&apos;b&apos;,&apos;c&apos;]
@@ -90,15 +90,11 @@ arr.six = &apos;6&apos;;          //这里是按照 键值 的方式给数组自
 </code></pre><h2 id="对象里的in"><a href="#对象里的in" class="headerlink" title="对象里的in"></a>对象里的in</h2><pre><code>var obj = {&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:3}
 &apos;a&apos; in obj ; //true,键值属性
 &apos;constructor&apos; in obj; //true,自身的特性(属性) 其实也是键值属性
-</code></pre><h2 id="有趣的东西"><a href="#有趣的东西" class="headerlink" title="有趣的东西"></a>有趣的东西</h2><pre><code>(alert(123))in(alert(321));
-</code></pre><blockquote>
-<p>经检测所有浏览器通杀….这就意味着浏览器会先解析(执行)完两边的alert，然后再抛出错误。这个特性可以让我们干点坏事。。。嘘！</p>
-</blockquote>
-<pre><code>(alert(123))in&quot;&quot;
+</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><pre><code>(alert(123))in(alert(321));
+(alert(123))in&quot;&quot;
 &quot;&quot;in(alert(321))
-</code></pre><blockquote>
-<p>我会告诉你这两个其实也可以吗</p>
-</blockquote>
+</code></pre><p> 像这样的语句,都能执行, 是因为浏览器会先执行了in左右两边的语句,再做出对比.</p>
+<p> 也许在一些XSS漏洞中,这种书写会有帮助.</p>
 
 					<div class="post-share">
 	<ul class="share-list">

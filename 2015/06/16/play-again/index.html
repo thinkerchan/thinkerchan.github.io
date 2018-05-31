@@ -8,19 +8,19 @@
   <meta name="renderer" content="webkit">
   
   <title>100.com的一个漏洞(中) | ThinkerChan</title>
-  <meta name="description" content="一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 阿全，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，尴尬. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个">
+  <meta name="description" content="一今天没活干，于是把朋友在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧，貌似他们没有很重视. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的 二回到正题:这回干脆就获取了用户cookie， 话不多说，贴图:  这就是某个YY用户账户的所有c">
 <meta name="keywords" content="XSS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="100.com的一个漏洞(中)">
 <meta property="og:url" content="http://thinkerchan.com/2015/06/16/play-again/index.html">
 <meta property="og:site_name" content="ThinkerChan">
-<meta property="og:description" content="一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 阿全，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，尴尬. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个">
+<meta property="og:description" content="一今天没活干，于是把朋友在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧，貌似他们没有很重视. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的 二回到正题:这回干脆就获取了用户cookie， 话不多说，贴图:  这就是某个YY用户账户的所有c">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://r.loli.io/Mfi2In.jpg">
-<meta property="og:updated_time" content="2018-05-23T10:00:41.000Z">
+<meta property="og:updated_time" content="2018-05-31T14:17:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="100.com的一个漏洞(中)">
-<meta name="twitter:description" content="一今天没活干，于是把裁员在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去乌云骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜. 阿全，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，尴尬. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个">
+<meta name="twitter:description" content="一今天没活干，于是把朋友在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧，貌似他们没有很重视. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的 二回到正题:这回干脆就获取了用户cookie， 话不多说，贴图:  这就是某个YY用户账户的所有c">
 <meta name="twitter:image" content="http://r.loli.io/Mfi2In.jpg">
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
@@ -75,12 +75,11 @@
 						<div class="toc-title">TOC</div>
 						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一"><span class="toc-number">1.</span> <span class="toc-text">一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二"><span class="toc-number">2.</span> <span class="toc-text">二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三"><span class="toc-number">3.</span> <span class="toc-text">三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四"><span class="toc-number">4.</span> <span class="toc-text">四</span></a></li></ol>
 					</div>
-					<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>今天没活干，于是把<a href="http://pakchoi.me/" target="_blank" rel="noopener">裁员</a>在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧， 那我就决定拿这个账号去<a href="http://www.wooyun.org/" target="_blank" rel="noopener">乌云</a>骗个乌云账号回来耍耍，毕竟里面的大神太多了，随时可以膜拜.</p>
-<p><a href="http://www.wilsonup.xyz/" target="_blank" rel="noopener">阿全</a>，就这网站所在厂的前端工程师，表示对我找到的漏洞表示不屑，说这不算漏洞，尴尬.</p>
+					<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>今天没活干，于是把朋友在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧，貌似他们没有很重视.</p>
 <p>没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇<a href="http://thinkerchan.com/2015/05/31/loopholes/">100.com的一个漏洞(上)</a>，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的</p>
 <h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>回到正题:<br>这回干脆就获取了用户cookie， 话不多说，贴图:</p>
 <p><img src="http://r.loli.io/Mfi2In.jpg" alt="用户cookie"></p>
-<p>这就是<a href="http://www.wilsonup.xyz/" target="_blank" rel="noopener">阿全</a>YY账户的所有cookie….</p>
+<p>这就是某个YY用户账户的所有cookie….</p>
 <p>那么估计有人就问了:</p>
 <blockquote>
 <p>特么要是别人不点你的网页，那这还是没什么卵用啊.</p>
@@ -97,7 +96,7 @@
 <li>16位加密: <code>7a57a5a7 43894a0e</code></li>
 <li>32位加密: <code>21232f29 7a57a5a7 43894a0e 4a801fc3</code></li>
 </ul>
-<p>然而全蛋的cookie里面的<code>password</code>字段却是40位，而且又只有字母和数字，前面提到了，MD5加密后是16或者32位，那么问题来了:</p>
+<p>然而我拿到cookie里面的<code>password</code>字段却是40位，而且又只有字母和数字，前面提到了，MD5加密后是16或者32位，那么问题来了:</p>
 <ul>
 <li>40位明显不符合MD5加密后规则</li>
 <li>密文只有数字和字母</li>
@@ -106,14 +105,12 @@
 <ul>
 <li>40位加密: <code>7a57a5a7 43894a0e 4a801fc3  43894a0e 4a801fc3</code></li>
 </ul>
-<p>不知道各位看官对比上面16和32位的字符串，有没得出啥规律， 我就当你们得出了，所以我懒得写结论了.</p>
 <p><b>然而:</b></p>
-<p>当我激动的拿着全蛋的40位<code>password</code>字段准备去破解是….居然失败…. T_T， 即便后来裁员提示我用自己的密码做正向测试，还是没什么卵用…我就开始怀疑自己的人生…不对…是怀疑这个字段是干嘛的了…为了验证，我用自己的账户密码重新测试， 改了密码，删了浏览器缓存和cookie，发现无论密码改和不改，    <code>password</code>字段的值都不会发生改变.</p>
-<p>这就意味着，这个打着password名称的字段特么根本就不是用户密码…..摔</p>
+<p>当我40位的<code>password</code>字段准备去破解时….失败了(这是必然的)， 即便后来裁员提示我用自己的密码做正向测试，还是没什么卵用…非常有可能加密不只局限于用了MD5而已</p>
+<p>这就意味着，password这个字段几乎无解</p>
 <pre><code>猜想: 这可能是记录状态的一个字段
 </code></pre><p>不过到这里， 已经超出我现在掌握的知识范围了. 所以现状就是，我大概是闯入你家大门，但是还没能力进主人的房间.</p>
 <p>这时候我们这样想: 虽然我进不了你房间， 可是我还是能够在你房间外面的其他地方耍耍的….对吧?</p>
-<p>于是就来到了下一节: CSRF </p>
 <h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><p>待续(如果有[下]的话)</p>
 
 					<div class="post-share">
