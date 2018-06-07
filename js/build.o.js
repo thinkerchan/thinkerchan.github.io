@@ -17,7 +17,9 @@ var SimpleShare = function(e) {
       h = "https://twitter.com/intent/tweet?text={title}&url={url}",
       p = "https://www.linkedin.com/shareArticle?title={title}&summary={content}&mini=true&url={url}&ro=true";
 
-    var qrcodeApi = 'https://pan.baidu.com/share/qrcode?w=160&h=160&url=';
+    // var qrcodeApi = 'https://pan.baidu.com/share/qrcode?w=160&h=160&url=';
+    // var qrcodeApi = 'http://qrcode.devincloud.cn/qrcode?w=160&text=';
+    var qrcodeApi = 'http://mobile.qq.com/qrcode?width=160&height=160&url=';
 
     this.qzone = function() {
         window.open(t(o));
