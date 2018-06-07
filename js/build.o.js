@@ -19,7 +19,8 @@ var SimpleShare = function(e) {
 
     // var qrcodeApi = 'https://pan.baidu.com/share/qrcode?w=160&h=160&url=';
     // var qrcodeApi = 'http://qrcode.devincloud.cn/qrcode?w=160&text=';
-    var qrcodeApi = 'http://mobile.qq.com/qrcode?width=160&height=160&url=';
+    // var qrcodeApi = 'http://mobile.qq.com/qrcode?width=160&height=160&url=';
+    var qrcodeApi = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=';
 
     this.qzone = function() {
         window.open(t(o));
