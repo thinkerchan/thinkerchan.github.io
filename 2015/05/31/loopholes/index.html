@@ -30,6 +30,8 @@
 
   <link rel="stylesheet" href="/css/style.css" >
   <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
   <script data-main="/js/build" src="/js/require.js"></script>
   <!--[if lt IE 7]>
   <style>
@@ -53,7 +55,7 @@
 	<h1 class="logo">
 		<a href="/">ThinkerChan</a>
 	</h1>
-	<p class="social-links">
+	<p class="social-links hide">
 		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
 		/
 		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
@@ -94,6 +96,23 @@
     </li>
 		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
 	</ul>
+</div>
+					<!-- 评论 -->
+					<div class="post-comments">
+	<div id="vcomments"></div>
+	<script>
+		if (document.getElementById('JnoCmt')==null) {
+			new Valine({
+			    el: '#vcomments',
+			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+			    notify:false,
+			    verify:false,
+			    avatar:'mm',
+			    placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+			})
+		}
+	</script>
 </div>
 				</div>
 			</div>		</div>
