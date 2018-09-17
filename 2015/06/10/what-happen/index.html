@@ -350,7 +350,7 @@ Host: google.com
 	</ul>
 </div>
 					<!-- 评论 -->
-					<div class="post-comments">
+					<div class="post-comments" id="Jcmt">
 	<h3 class="post-comments-tit">访客评论</h3>
 	<div id="vcomments"></div>
 	<script>
@@ -364,6 +364,8 @@ Host: google.com
 			    avatar:'mm',
 			    placeholder: '评论组件采用了Valine, 感谢您的留言, 请勿灌水和广告.'
 			})
+		}else{
+			Jcmt.style.display = 'none';
 		}
 	</script>
 </div>
