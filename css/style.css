@@ -238,3 +238,8 @@ body  .v .vlist .vcard .vhead .vsys{
 body .v .vlist .vcard .vh .vmeta .vat{
   color: #1abc9c;
 }
+body .post-comments-tit{
+  margin-top: 0px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
