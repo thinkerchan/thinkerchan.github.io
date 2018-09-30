@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>编写一个JS评论组件 | ThinkerChan</title>
+  <meta name="description" content="前言当初在太平洋网络搬砖的时候, 刚好负责评论系统这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中). 刚好前段时间做外包项目的时候用到LeanCloud这个还不错的产品(真没打广告),">
+<meta name="keywords" content="web前端,JavaScript,CSS,HTML,安全,乱七八糟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写一个JS评论组件">
+<meta property="og:url" content="http://thinkerchan.com/2018/09/30/编写一个JS评论组件/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="前言当初在太平洋网络搬砖的时候, 刚好负责评论系统这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中). 刚好前段时间做外包项目的时候用到LeanCloud这个还不错的产品(真没打广告),">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-30T01:21:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编写一个JS评论组件">
+<meta name="twitter:description" content="前言当初在太平洋网络搬砖的时候, 刚好负责评论系统这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中). 刚好前段时间做外包项目的时候用到LeanCloud这个还不错的产品(真没打广告),">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">ThinkerChan</a>
+	</h1>
+	<p class="social-links hide">
+		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
+		/
+		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
+		/
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">编写一个JS评论组件</h1>
+					<div class="post-meta">
+						<span class="post-time">2018.09.30</span>
+						<div class="post-cats">
+							
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#效果"><span class="toc-number">2.</span> <span class="toc-text">效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大概需求"><span class="toc-number">3.</span> <span class="toc-text">大概需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">4.</span> <span class="toc-text">其他</span></a></li></ol>
+					</div>
+					<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当初在太平洋网络搬砖的时候, 刚好负责<a href="http://js.3conline.com/cmt/pcauto/common/cmt.js" target="_blank" rel="noopener">评论系统</a>这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中).</p>
+<p>刚好前段时间做外包项目的时候用到<a href="https://leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a>这个还不错的产品(真没打广告), 继而发现了<a href="https://valine.js.org/" target="_blank" rel="noopener">Valine</a>这个评论组件, 原来多说关闭不久, 就有人开发了这套评论系统. 想起以前和别人交接工作的时候写了一份评论的原型代码, 于是我干脆也把它改造一下, 接入了LeanCloud. 算是一个入门级别的评论组件编写教程吧.</p>
+<p>另外说一句, Valine已经很完善了, 包括后面有人完善<a href="https://github.com/panjunwen/Valine-Admin" target="_blank" rel="noopener">Valine-admin</a>这样的辅助工具.说这些也并非不建议大家重复造轮子. 只不过提醒自己, 一个人可能走得快, 但是多个人, 可能走得更远.</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>因为算是一个简单的教程, 用ES6和css3开发, 只能用高级浏览器看.<br><a href="https://thinkerchan.github.io/cmt/" target="_blank" rel="noopener">https://thinkerchan.github.io/cmt/</a></p>
+<h2 id="大概需求"><a href="#大概需求" class="headerlink" title="大概需求"></a>大概需求</h2><p>因为只有LeanCloud,没有自己的后台, 所以有些功能没法做(其实也不是没法做, 只是效果不好)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@k 评论原型</span><br><span class="line"></span><br><span class="line">主要部分</span><br><span class="line">1.评论框复用 //√</span><br><span class="line">2.对用户输入进行转义 //√</span><br><span class="line">3.评论数据结构复用 //√</span><br><span class="line">4.异步加载样式表  // √</span><br><span class="line">5.Ajax  // 因为用了leancloud,所以直接用它的SDK</span><br><span class="line">6.留言排序可选 // × 直接从旧到新</span><br><span class="line">7. 基于localstorage存储网友的昵称/邮箱/网址</span><br><span class="line">8. md5拼接邮箱生成头像 //基于gavatar</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">TODO</span><br><span class="line">1. 留言点赞功能 //非限定次数(删除cookie依然可以点赞)</span><br><span class="line">2. 用户登录/注册  // 要做吗?</span><br><span class="line">3. 验证码  //需要后端配合</span><br><span class="line">5.表情处理(类似新浪微博处理方式比较合理) //✘</span><br><span class="line">6.楼层嵌套  //类似biliili</span><br><span class="line">7.分页</span><br><span class="line">8.楼层ID处理 // normal则不需要处理, 楼层嵌套则要过滤不含有targetFloor的cid</span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>把手头的活干完, 再继续完善Todo吧.</p>
+
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+					<!-- 评论 -->
+					<div class="post-comments" id="Jcmt">
+	<h3 class="post-comments-tit">访客评论</h3>
+	<div id="vcomments"></div>
+	<script>
+		if (document.getElementById('JnoCmt')==null) {
+			new Valine({
+			    el: '#vcomments',
+			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+			    notify:false,
+			    verify:false,
+			    avatar:'mm',
+			    placeholder: '评论组件采用了Valine, 感谢您的留言, 请勿灌水和广告.'
+			})
+		}else{
+			Jcmt.style.display = 'none';
+		}
+	</script>
+</div>
+				</div>
+			</div>		</div>
+		<div class="footer">
+  <p class="left">&copy; Thinker Chan ,
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">
+      本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+  </p>
+	<p class="right">Hosted by <a href="https://pages.coding.me">Coding Pages</a> , Theme by <a href="http://yujiangshui.com/" target="_blank">于江水</a> .</p>
+</div>
+	</div>
+</div>
+
+</body>
+</html>
