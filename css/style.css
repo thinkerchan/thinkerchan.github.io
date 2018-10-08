@@ -109,7 +109,7 @@ body{color:#333;font:normal 16px/1.4 '"Hiragino Sans GB","Helvetica Neue",Helvet
 a{color:#2094c4}
 a:hover{color:#3498db;text-decoration:none}
 .left{float:left}
-.right{float:right}
+.right{float:right;text-transform:uppercase;}
 .center{clear:both;display:block;margin-left:auto;margin-right:auto}
 img{max-width:100%;height:auto}
 .section-wrap{position:relative}
