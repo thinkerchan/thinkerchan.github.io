@@ -207,7 +207,7 @@ body .wechat-qrcode-img{margin:0;padding:10px;display:block;border:0}
 .wechat-qrcode:before{content:'加载中';position:absolute;width:42px;height:24px;top:50%;left:50%;margin-top:-12px;margin-left:-21px;font-size:14px;color:#000}
 #imgLoaded .wechat-qrcode:before{display:none}
 body .wechat-tri{margin:0;padding:0;position:absolute;border-bottom:solid 8px transparent;border-left:solid 8px transparent;border-right:solid 8px transparent;border-top:solid 8px transparent;border-top-color:#ddd;right:20px;position:absolute;bottom:-16px;z-index:2}
-body .gutter{display:none}
+/* body .gutter{display:none} */
 .life-table i{float:left;border:1px solid #ddd;width:3%;height:20px;background:#fff;margin:0;padding:0}
 .life-table .pass{background:#888}
 .life-table .pass.year{color:#fff;text-align:center;font-size:12px;font-style:normal}

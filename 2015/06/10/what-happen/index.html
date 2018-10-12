@@ -230,7 +230,7 @@ Target IP: interface.ip.goes.here
 </ul>
 </li>
 </ul>
-<p>UDP 数据包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">TLS 握手</span><br><span class="line">--------</span><br><span class="line">* 客户端发送一个 ``Client hello`` 消息到服务器端，消息中同时包含了它的TLS版本，可用的加密算法和压缩算法。</span><br><span class="line">* 服务器端向客户端返回一个 ``Server hello`` 消息，消息中包含了服务器端的TLS版本，服务器选择了哪个加密和压缩算法，以及服务器的公开证书，证书中包含了公钥。客户端会使用这个公钥加密接下来的握手过程，直到协商生成一个新的对称密钥</span><br><span class="line">* 客户端根据自己的信任CA列表，验证服务器端的证书是否有效。如果有效，客户端会生成一串伪随机数，使用服务器的公钥加密它。这串随机数会被用于生成新的对称密钥</span><br><span class="line">* 服务器端使用自己的私钥解密上面提到的随机数，然后使用这串随机数生成自己的对称主密钥</span><br><span class="line">* 客户端发送一个 ``Finished`` 消息给服务器端，使用对称密钥加密这次通讯的一个散列值</span><br><span class="line">* 服务器端生成自己的 hash 值，然后解密客户端发送来的信息，检查这两个值是否对应。如果对应，就向客户端发送一个 ``Finished`` 消息，也使用协商好的对称密钥加密</span><br><span class="line">* 从现在开始，接下来整个 TLS 会话都使用对称秘钥进行加密，传输应用层（HTTP）内容</span><br><span class="line"></span><br><span class="line">TCP 数据包</span><br><span class="line">~</span><br></pre></td></tr></table></figure></p>
+<p>UDP 数据包<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">TLS 握手</span><br><span class="line">--------</span><br><span class="line">* 客户端发送一个 ``Client hello`` 消息到服务器端，消息中同时包含了它的TLS版本，可用的加密算法和压缩算法。</span><br><span class="line">* 服务器端向客户端返回一个 ``Server hello`` 消息，消息中包含了服务器端的TLS版本，服务器选择了哪个加密和压缩算法，以及服务器的公开证书，证书中包含了公钥。客户端会使用这个公钥加密接下来的握手过程，直到协商生成一个新的对称密钥</span><br><span class="line">* 客户端根据自己的信任CA列表，验证服务器端的证书是否有效。如果有效，客户端会生成一串伪随机数，使用服务器的公钥加密它。这串随机数会被用于生成新的对称密钥</span><br><span class="line">* 服务器端使用自己的私钥解密上面提到的随机数，然后使用这串随机数生成自己的对称主密钥</span><br><span class="line">* 客户端发送一个 ``Finished`` 消息给服务器端，使用对称密钥加密这次通讯的一个散列值</span><br><span class="line">* 服务器端生成自己的 hash 值，然后解密客户端发送来的信息，检查这两个值是否对应。如果对应，就向客户端发送一个 ``Finished`` 消息，也使用协商好的对称密钥加密</span><br><span class="line">* 从现在开始，接下来整个 TLS 会话都使用对称秘钥进行加密，传输应用层（HTTP）内容</span><br><span class="line"></span><br><span class="line">TCP 数据包</span><br><span class="line">~</span><br></pre></td></tr></table></figure></p>
 <h2 id="HTTP-协议···"><a href="#HTTP-协议···" class="headerlink" title="HTTP 协议···"></a>HTTP 协议···</h2><p>如果浏览器是 Google 出品的，它不会使用 HTTP 协议来获取页面信息，而是会与服务器端发送请求，商讨使用 SPDY 协议。</p>
 <p>如果浏览器使用 HTTP 协议，它会向服务器发送这样的一个请求::</p>
 <pre><code>GET / HTTP/1.1
@@ -379,7 +379,6 @@ Host: google.com
     </span>
   </p>
 	<p class="right">Hosted by <a href="https://pages.coding.me">Coding Pages</a>
-  <!-- , Theme by <a href="http://yujiangshui.com/" target="_blank">Yu Jiangshui</a>, Modified by <a href="./" target="_blank">Thinker Chan</a>. -->
   </p>
 </div>
 	</div>

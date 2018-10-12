@@ -96,10 +96,10 @@ if (request){
      request.send(); // 发送请求
 }
 </code></pre><h2 id="目标域"><a href="#目标域" class="headerlink" title="目标域"></a>目标域</h2><p>这段代码放在目标域上 , 本域地址:  <a href="http://www.evil.com/steal.php" target="_blank" rel="noopener">http://www.evil.com/steal.php</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> header(<span class="string">"Access-Control-Allow-Origin: http://www.foo.com"</span>);</span><br><span class="line"> <span class="comment">// header里面存放请求域的地址 ， 如果是通配符 * ，代表可以被任意域请求资源。</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> header(<span class="string">"Access-Control-Allow-Origin: http://www.foo.com"</span>);</span><br><span class="line"> <span class="comment">// header里面存放请求域的地址 ， 如果是通配符 * ，代表可以被任意域请求资源。</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>即便是 Access-Control-Allow-Origin 不设置请求域的 地址 ，只要请求域向目标域中发送请求，那么目标域一样会接受发送过来的数据，只是浏览器会报错。如果目标域不设置 Access-Control-Allow-Origin: <code>http://www.foo.com</code>，那么隐私数据可以被偷到吗？答案是肯定的。虽然浏览器会报权限错误的问题，但实际上隐私数据已经被目标域的 steal.php 接收到了。</p>
 <p>默认情况下，这样的跨域无法带上目标域的会话（ Cookies 等），需要设置 xhr 实例的<br><code>withCredentials</code>属性为 true（ IE 还不支持），同时目标域的 steal.php 必须设置如下：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"Access-Control-Allow-Origin: http://www.foo.com"</span>);</span><br><span class="line">header(<span class="string">"Access-Control-Allow-Credentials: true"</span>); <span class="comment">// 允许跨域证书发送</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">"Access-Control-Allow-Origin: http://www.foo.com"</span>);</span><br><span class="line">header(<span class="string">"Access-Control-Allow-Credentials: true"</span>); <span class="comment">// 允许跨域证书发送</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>有 一 点 需 要 注 意 ， 如果 设 置 了 Access-Control-Allow-Credentials 为 true ，那么<code>Access-Control-Allow-Origin</code>就不能设置为*通配符，这也是浏览器为了安全进行的考虑。有了 CORS 机制，跨域就变得特别方便了，该功能要慎重使用，否则后果会很严重。</p>
 
 					<div class="post-share">
@@ -147,7 +147,6 @@ if (request){
     </span>
   </p>
 	<p class="right">Hosted by <a href="https://pages.coding.me">Coding Pages</a>
-  <!-- , Theme by <a href="http://yujiangshui.com/" target="_blank">Yu Jiangshui</a>, Modified by <a href="./" target="_blank">Thinker Chan</a>. -->
   </p>
 </div>
 	</div>
