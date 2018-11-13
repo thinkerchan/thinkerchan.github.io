@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>常用CURL命令 | ThinkerChan</title>
+  <meta name="description" content="常用curl命令读取网页 $ curl https://baidu.com  保存文件 $ curl https://baidu.com &amp;gt; baidu.html    或者  $ curl https://baidu.com -o baidu.html  代理模式 $ curl -x 123.45.67.89:1080  https://baidu.com &amp;gt; baidu.html">
+<meta name="keywords" content="web前端,JavaScript,CSS,HTML,安全,乱七八糟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用CURL命令">
+<meta property="og:url" content="http://thinkerchan.com/2018/11/13/curl/index.html">
+<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:description" content="常用curl命令读取网页 $ curl https://baidu.com  保存文件 $ curl https://baidu.com &amp;gt; baidu.html    或者  $ curl https://baidu.com -o baidu.html  代理模式 $ curl -x 123.45.67.89:1080  https://baidu.com &amp;gt; baidu.html">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-11-13T09:55:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用CURL命令">
+<meta name="twitter:description" content="常用curl命令读取网页 $ curl https://baidu.com  保存文件 $ curl https://baidu.com &amp;gt; baidu.html    或者  $ curl https://baidu.com -o baidu.html  代理模式 $ curl -x 123.45.67.89:1080  https://baidu.com &amp;gt; baidu.html">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body>
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">ThinkerChan</a>
+	</h1>
+	<p class="social-links hide">
+		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
+		/
+		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
+		/
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">常用CURL命令</h1>
+					<div class="post-meta">
+						<span class="post-time">2018.11.13</span>
+						<div class="post-cats">
+							
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用curl命令"><span class="toc-number">1.</span> <span class="toc-text">常用curl命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#读取网页"><span class="toc-number">1.1.</span> <span class="toc-text">读取网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存文件"><span class="toc-number">1.2.</span> <span class="toc-text">保存文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代理模式"><span class="toc-number">1.3.</span> <span class="toc-text">代理模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储cookie"><span class="toc-number">1.4.</span> <span class="toc-text">存储cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用cookie"><span class="toc-number">1.5.</span> <span class="toc-text">使用cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加UserAgent"><span class="toc-number">1.6.</span> <span class="toc-text">添加UserAgent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加referer"><span class="toc-number">1.7.</span> <span class="toc-text">添加referer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.8.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+					</div>
+					<h1 id="常用curl命令"><a href="#常用curl命令" class="headerlink" title="常用curl命令"></a>常用curl命令</h1><h2 id="读取网页"><a href="#读取网页" class="headerlink" title="读取网页"></a>读取网页</h2><blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a></p>
+</blockquote>
+<h2 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h2><blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> &gt; baidu.html</p>
+</blockquote>
+<p>  或者</p>
+<blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> -o baidu.html</p>
+</blockquote>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><blockquote>
+<p>$ curl -x 123.45.67.89:1080  <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> &gt; baidu.html</p>
+</blockquote>
+<h2 id="存储cookie"><a href="#存储cookie" class="headerlink" title="存储cookie"></a>存储cookie</h2><blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> &gt; baidu.html -D cookie.txt</p>
+</blockquote>
+<h2 id="使用cookie"><a href="#使用cookie" class="headerlink" title="使用cookie"></a>使用cookie</h2><blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> &gt; baidu.html -D cookie.txt -b readcookie.txt</p>
+</blockquote>
+<h2 id="添加UserAgent"><a href="#添加UserAgent" class="headerlink" title="添加UserAgent"></a>添加UserAgent</h2><blockquote>
+<p>$ curl -A “Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)”  <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a></p>
+</blockquote>
+<h2 id="添加referer"><a href="#添加referer" class="headerlink" title="添加referer"></a>添加referer</h2><blockquote>
+<p>$ curl -A “Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)” -e “index.baidu.com”  <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a></p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.jianshu.com/p/ba57fe1703da" target="_blank" rel="noopener">参考来源</a></p>
+
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+					<!-- 评论 -->
+					<div class="post-comments" id="Jcmt">
+	<h3 class="post-comments-tit">访客评论</h3>
+	<div id="vcomments"></div>
+	<script>
+		if (document.getElementById('JnoCmt')==null) {
+			new Valine({
+			    el: '#vcomments',
+			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+			    notify:false,
+			    verify:false,
+			    avatar:'mm',
+			    placeholder: '感谢您的留言, 请勿灌水和广告.'
+			})
+		}else{
+			Jcmt.style.display = 'none';
+		}
+	</script>
+</div>
+				</div>
+			</div>		</div>
+		<div class="footer">
+  <p class="left">&copy; Thinker Chan ,
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">
+      本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+  </p>
+	<p class="right">Hosted by <a href="https://pages.coding.me">Coding Pages</a>
+  </p>
+</div>
+	</div>
+</div>
+
+</body>
+</html>
