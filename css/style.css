@@ -1,9 +1,9 @@
 @charset "UTF-8";
 @font-face{font-family:"iconfont";src:url("fonts/iconfont.eot");src:url("fonts/iconfont.eot?#iefix") format("embedded-opentype"),url("fonts/iconfont.woff") format("woff"),url("fonts/iconfont.ttf") format("truetype"),url("fonts/iconfont.svg#iconfont") format("svg")}
 html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
-.hide{
-  display: none;
-}
+.hide{display:none;}
+.jupe .index-tips{margin-top:0;color:#666;font-weight:bold;border-bottom:1px solid #f1f1f1;padding-bottom:6px;margin-bottom:6px;}
+.post-list .post-item:last-child{border-bottom:none;}
 body{margin:0}
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}
 audio,canvas,progress,video{display:inline-block;vertical-align:baseline}
@@ -139,20 +139,15 @@ input{margin:0}
 .sidebar a{color:#333}
 .sidebar a:hover{color:black}
 .sd-item{margin-bottom:10px}
-.sd-category{
-  margin-bottom: 20px;
-}
-.sd-item.sd-category .category-list li:last-child a{
-  border-bottom: 1px solid #333;
-  padding-bottom: 5px;
-}
+.sd-category{margin-bottom:20px;}
+.sd-item.sd-category .category-list li:last-child a{border-bottom:1px solid #333;padding-bottom:5px;}
 .sd-category a{color:#999}
 .sd-category a:hover{color:#666}
 .sd-category a{font-size:.9em}
 .intro{line-height:1;margin-bottom:20px}
 .intro p{margin:0}
 .intro .intro-avatar img{width:60px;height:60px}
-.intro .intro-name{margin-top:10px;color: #999;}
+.intro .intro-name{margin-top:10px;color:#999;}
 .intro .intro-des{margin-top:5px;font-size:.9em;color:#999}
 .main-body{overflow:hidden}
 .main-body .post-list,.main-body .share-list{list-style-type:none;padding:0}
@@ -183,11 +178,7 @@ input{margin:0}
 .share-list:before{content:'share:';font-size:14px;line-height:40px;margin-left:10px;margin-right:10px;text-transform:uppercase;color:#999;float:left}
 .share-list li{float:left}
 .share-list a{text-decoration:none;cursor:pointer}
-.post-comments {
-  padding-top: 10px;
-  margin-top: 10px;
-  /* border-top: 1px solid #eee */
-}
+.post-comments{padding-top:10px;margin-top:10px;  /* border-top: 1px solid #eee */}
 .cats-info{margin-bottom:10px;color:#ccc}
 .cats-info strong{margin:0;font-weight:normal;color:#333}
 .footer{font-size:.8em;color:#999;margin-top:10px;margin-bottom:10px}
@@ -214,39 +205,19 @@ body .wechat-qrcode-img{margin:0;padding:10px;display:block;border:0}
 .wechat-qrcode:before{content:'加载中';position:absolute;width:42px;height:24px;top:50%;left:50%;margin-top:-12px;margin-left:-21px;font-size:14px;color:#000}
 #imgLoaded .wechat-qrcode:before{display:none}
 body .wechat-tri{margin:0;padding:0;position:absolute;border-bottom:solid 8px transparent;border-left:solid 8px transparent;border-right:solid 8px transparent;border-top:solid 8px transparent;border-top-color:#ddd;right:20px;position:absolute;bottom:-16px;z-index:2}
+
 /* body .gutter{display:none} */
 .life-table i{float:left;border:1px solid #ddd;width:3%;height:20px;background:#fff;margin:0;padding:0}
 .life-table .pass{background:#888}
 .life-table .pass.year{color:#fff;text-align:center;font-size:12px;font-style:normal}
 
 /* 评论样式重置 */
-body .v .vwrap{
-  border-color: #eee;
-  border-radius: 0;
-}
-body .v .vwrap .vheader .vinput{
-  border-bottom: 1px solid #eee;
-}
-body .v .vwrap .vedit .vctrl{
-  border-bottom: 1px solid #eee;
-}
-body .post-comments .vlist{
-  padding: 0 10px;
-}
-body .post-comments .info{
-  display: none;
-}
-.life-table{
-  overflow: hidden;
-}
-body  .v .vlist .vcard .vhead .vsys{
-  display: none;
-}
-body .v .vlist .vcard .vh .vmeta .vat{
-  color: #1abc9c;
-}
-body .post-comments-tit{
-  margin-top: 0px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
-}
+body .v .vwrap{border-color:#eee;border-radius:0;}
+body .v .vwrap .vheader .vinput{border-bottom:1px solid #eee;}
+body .v .vwrap .vedit .vctrl{border-bottom:1px solid #eee;}
+body .post-comments .vlist{padding:0 10px;}
+body .post-comments .info{display:none;}
+.life-table{overflow:hidden;}
+body  .v .vlist .vcard .vhead .vsys{display:none;}
+body .v .vlist .vcard .vh .vmeta .vat{color:#1abc9c;}
+body .post-comments-tit{margin-top:0px;padding-top:15px;border-top:1px solid #eee;}
