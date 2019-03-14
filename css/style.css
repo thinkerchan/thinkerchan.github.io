@@ -139,13 +139,20 @@ input{margin:0}
 .sidebar a{color:#333}
 .sidebar a:hover{color:black}
 .sd-item{margin-bottom:10px}
+.sd-category{
+  margin-bottom: 20px;
+}
+.sd-item.sd-category .category-list li:last-child a{
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
 .sd-category a{color:#999}
 .sd-category a:hover{color:#666}
 .sd-category a{font-size:.9em}
 .intro{line-height:1;margin-bottom:20px}
 .intro p{margin:0}
 .intro .intro-avatar img{width:60px;height:60px}
-.intro .intro-name{margin-top:10px}
+.intro .intro-name{margin-top:10px;color: #999;}
 .intro .intro-des{margin-top:5px;font-size:.9em;color:#999}
 .main-body{overflow:hidden}
 .main-body .post-list,.main-body .share-list{list-style-type:none;padding:0}

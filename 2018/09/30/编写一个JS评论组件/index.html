@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="ThinkerChan">
 <meta property="og:description" content="前言当初在太平洋网络搬砖的时候, 刚好负责评论系统这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中). 刚好前段时间做外包项目的时候用到LeanCloud这个还不错的产品(真没打广告),">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-30T01:21:29.000Z">
+<meta property="og:updated_time" content="2019-03-14T03:34:12.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编写一个JS评论组件">
 <meta name="twitter:description" content="前言当初在太平洋网络搬砖的时候, 刚好负责评论系统这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中). 刚好前段时间做外包项目的时候用到LeanCloud这个还不错的产品(真没打广告),">
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="/css/style.css" >
   <link rel="shortcut icon" href="/images/favicon.png"/>
   <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
   <script data-main="/js/build" src="/js/require.js"></script>
   <!--[if lt IE 7]>
   <style>
@@ -51,14 +51,14 @@
 	<div class="section">
 		<div class="header">
 	<h1 class="logo">
-		<a href="/">ThinkerChan</a>
+		<a href="/">测试狗</a>
 	</h1>
 	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
+		<!-- <a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a> -->
 		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
+		<!-- <a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a> -->
 		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+		<!-- <a href="https://github.com/thinkerchan" target="_blank">Github</a> -->
 	</p>
 </div>
 		<div class="main">
@@ -68,7 +68,7 @@
 					<div class="post-meta">
 						<span class="post-time">2018.09.30</span>
 						<div class="post-cats">
-							
+							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
 						</div>
 					</div>
 					<div class="post-toc">
@@ -102,6 +102,8 @@
 					<div class="post-comments" id="Jcmt">
 	<h3 class="post-comments-tit">访客评论</h3>
 	<div id="vcomments"></div>
+	<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
+  <!-- <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script> -->
 	<script>
 		if (document.getElementById('JnoCmt')==null) {
 			new Valine({
