@@ -23,7 +23,15 @@ sub{bottom:-0.25em}
 img{border:0}
 svg:not(:root){overflow:hidden}
 figure{margin:1em 40px}
-hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+hr {
+  /* -moz-box-sizing: content-box; */
+  /* box-sizing: content-box; */
+  /* height: 0 */
+  height: 1px;
+    margin: 1.5rem 0;
+    border: none;
+    border-top: 1px dashed #A5A5A5;
+}
 pre{overflow:auto}
 code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}
 button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}
@@ -86,10 +94,14 @@ h1,h2,h3,h4,h5,h6{font-family:"SimHei"}
 .jupe ins{text-decoration:none;border-bottom:1px solid #333}
 .jupe sub{vertical-align:baseline;font-size:.8em;position:relative;bottom:-.25em;margin:0 .4em 0 0}
 .jupe sup{vertical-align:baseline;font-size:.8em;position:relative;top:-.25em;margin:0 .4em 0 0}
-.jupe p img{vertical-align:middle;display:inline;border:0;margin:0}
+.jupe p img{vertical-align:middle;border:0;margin:0 auto;}
 .jupe img{display:block;border:1px solid #f9f9f9;max-width:100%;height:auto;margin:1em 0}
 .jupe table{border:1px solid #eee;border-collapse:collapse;text-align:center}
 .jupe caption{padding:.2em .6em;border:1px solid #eee}
+center{
+  font-size: 80%;
+  color: #666;
+}
 .jupe tr:nth-child(2n){background:#f9f9f9}
 .jupe th{border-bottom:1px solid #eee;padding:.2em .6em}
 .jupe td{border-bottom:1px solid #eee;padding:.2em .6em}
