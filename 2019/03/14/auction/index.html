@@ -7,19 +7,23 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
   <meta name="renderer" content="webkit">
   
-  <title>计算广告热身-竞拍模式 | ThinkerChan</title>
-  <meta name="description" content="定义 我们先看看维基百科的定义: 拍卖（Auction），是人类社会特殊的商品交易方式，近现代以来在世界各国广为发展。而拍卖活动是在一定经营理念的指导下进行的。拍卖，各国的法律解释有所不同，中华人民共和国拍卖法给出的定义为：拍卖是指以公开竞价的形式，将特定物品或者财产权利转让给最高应价者的买卖方式。但它不一定准确，还有一些不足，如密封式拍卖缺乏公开性；网上拍卖的公开性也与传统拍卖存在着差距。 而在">
+  <title>计算广告系列-竞拍模式 | ThinkerChan</title>
+  <meta name="description" content="开篇前言这是我写计算广告系列的第一篇, 以记录学习心得. 拍卖的定义  拍卖（Auction），是人类社会相对特殊的商品交易方式，通常是以公开竞价的形式，将特定物品或者财产权利转让给最高应价者的买卖方式。 而在经济学中，拍卖有着更深层次的意义，其理论基础来源于信息经济学和博弈论的核心思想，即认为拍卖本身是一个博弈的过程，因而可以通过现代经济学的方法对传统的拍卖方法的效率作出评估，同时也可以设计出新">
 <meta name="keywords" content="web前端,JavaScript,CSS,HTML,安全,乱七八糟">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算广告热身-竞拍模式">
+<meta property="og:title" content="计算广告系列-竞拍模式">
 <meta property="og:url" content="http://thinkerchan.com/2019/03/14/auction/index.html">
 <meta property="og:site_name" content="ThinkerChan">
-<meta property="og:description" content="定义 我们先看看维基百科的定义: 拍卖（Auction），是人类社会特殊的商品交易方式，近现代以来在世界各国广为发展。而拍卖活动是在一定经营理念的指导下进行的。拍卖，各国的法律解释有所不同，中华人民共和国拍卖法给出的定义为：拍卖是指以公开竞价的形式，将特定物品或者财产权利转让给最高应价者的买卖方式。但它不一定准确，还有一些不足，如密封式拍卖缺乏公开性；网上拍卖的公开性也与传统拍卖存在着差距。 而在">
+<meta property="og:description" content="开篇前言这是我写计算广告系列的第一篇, 以记录学习心得. 拍卖的定义  拍卖（Auction），是人类社会相对特殊的商品交易方式，通常是以公开竞价的形式，将特定物品或者财产权利转让给最高应价者的买卖方式。 而在经济学中，拍卖有着更深层次的意义，其理论基础来源于信息经济学和博弈论的核心思想，即认为拍卖本身是一个博弈的过程，因而可以通过现代经济学的方法对传统的拍卖方法的效率作出评估，同时也可以设计出新">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-15T06:24:56.611Z">
+<meta property="og:image" content="http://n.sinaimg.cn/tech/transform/w500h319/20180107/wfRN-fyqincv0056868.png">
+<meta property="og:image" content="https://file.digitaling.com/eImg/uimages/20160421/1461226687106269.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1g14lj960wnj307607674d.jpg">
+<meta property="og:updated_time" content="2019-03-16T06:29:04.591Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计算广告热身-竞拍模式">
-<meta name="twitter:description" content="定义 我们先看看维基百科的定义: 拍卖（Auction），是人类社会特殊的商品交易方式，近现代以来在世界各国广为发展。而拍卖活动是在一定经营理念的指导下进行的。拍卖，各国的法律解释有所不同，中华人民共和国拍卖法给出的定义为：拍卖是指以公开竞价的形式，将特定物品或者财产权利转让给最高应价者的买卖方式。但它不一定准确，还有一些不足，如密封式拍卖缺乏公开性；网上拍卖的公开性也与传统拍卖存在着差距。 而在">
+<meta name="twitter:title" content="计算广告系列-竞拍模式">
+<meta name="twitter:description" content="开篇前言这是我写计算广告系列的第一篇, 以记录学习心得. 拍卖的定义  拍卖（Auction），是人类社会相对特殊的商品交易方式，通常是以公开竞价的形式，将特定物品或者财产权利转让给最高应价者的买卖方式。 而在经济学中，拍卖有着更深层次的意义，其理论基础来源于信息经济学和博弈论的核心思想，即认为拍卖本身是一个博弈的过程，因而可以通过现代经济学的方法对传统的拍卖方法的效率作出评估，同时也可以设计出新">
+<meta name="twitter:image" content="http://n.sinaimg.cn/tech/transform/w500h319/20180107/wfRN-fyqincv0056868.png">
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
   
@@ -64,7 +68,7 @@
 		<div class="main">
 						<div class="jupe main-body">
 				<div class="post-content">
-					<h1 class="post-title">计算广告热身-竞拍模式</h1>
+					<h1 class="post-title">计算广告系列-竞拍模式</h1>
 					<div class="post-meta">
 						<span class="post-time">2019.03.14</span>
 						<div class="post-cats">
@@ -73,19 +77,36 @@
 					</div>
 					<div class="post-toc">
 						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见拍卖类型"><span class="toc-number">2.</span> <span class="toc-text">常见拍卖类型</span></a></li></ol>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开篇前言"><span class="toc-number">1.</span> <span class="toc-text">开篇前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拍卖的定义"><span class="toc-number">2.</span> <span class="toc-text">拍卖的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见拍卖类型"><span class="toc-number">3.</span> <span class="toc-text">常见拍卖类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#广告与竞标"><span class="toc-number">4.</span> <span class="toc-text">广告与竞标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#硬广"><span class="toc-number">5.</span> <span class="toc-text">硬广</span></a></li></ol>
 					</div>
-					<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
-<p>我们先看看维基百科的定义:</p>
-<p>拍卖（Auction），是人类社会特殊的商品交易方式，近现代以来在世界各国广为发展。而拍卖活动是在一定经营理念的指导下进行的。拍卖，各国的法律解释有所不同，中华人民共和国拍卖法给出的定义为：拍卖是指以公开竞价的形式，将特定物品或者财产权利转让给最高应价者的买卖方式。但它不一定准确，还有一些不足，如密封式拍卖缺乏公开性；网上拍卖的公开性也与传统拍卖存在着差距。</p>
-<p>而在经济学中，拍卖则有着更深层次的意义，其理论基础来源于信息经济学和博弈论的核心思想，即认为拍卖本身是一个博弈的过程，因而可以通过现代经济学的方法对传统的拍卖方法的效率作出评估，同时也可以设计出新的拍卖方法。</p>
+					<h2 id="开篇前言"><a href="#开篇前言" class="headerlink" title="开篇前言"></a>开篇前言</h2><p>这是我写计算广告系列的第一篇, 以记录学习心得.</p>
+<h2 id="拍卖的定义"><a href="#拍卖的定义" class="headerlink" title="拍卖的定义"></a>拍卖的定义</h2><blockquote>
+<p> 拍卖（Auction），是人类社会相对特殊的商品交易方式，通常是以公开竞价的形式，将特定物品或者财产权利转让给最高应价者的买卖方式。</p>
+<p>而在经济学中，拍卖有着更深层次的意义，其理论基础来源于信息经济学和博弈论的核心思想，即认为拍卖本身是一个博弈的过程，因而可以通过现代经济学的方法对传统的拍卖方法的效率作出评估，同时也可以设计出新的拍卖方法。</p>
 </blockquote>
 <h2 id="常见拍卖类型"><a href="#常见拍卖类型" class="headerlink" title="常见拍卖类型"></a>常见拍卖类型</h2><ul>
 <li>英国式拍卖法：最常见的拍卖方式，竞标者出价由下往上喊，喊价最高者得标，竞标者可多次重复提高出价。</li>
 <li>荷兰式拍卖法：创于荷兰的郁金香拍卖场而得名，卖方由高往低喊价，过程中如有人愿意购买，此价即为成交价。</li>
 <li>第一密封价格拍卖法：密封投标金额，投标者只能出价一次，开标时最高价者得标并依价付款。</li>
-<li>第二密封价格拍卖法：最高价者得标，但依次高价付款即可，此种拍卖方法在拍卖进行时通常不会透露最高价竞标者开的价钱；以避免有意人士的恶作剧或者是拍卖会上的报复行为（例如恶意缩小最高价与次高价的差距），不过竞标价者想出价几次都行，但此种拍卖法会有垄断商品（故意喊巨额的价钱，使其他竞标者无法得标）的行为发生，所以是最不常采用的。</li>
+<li>第二密封价格拍卖法：最高价者得标，但依次高价付款即可，此种拍卖方法在拍卖进行时通常不会透露最高价竞标者开的价钱；以避免有意人士的恶作剧或者是拍卖会上的报复行为（例如恶意缩小最高价与次高价的差距），不过竞标价者想出价几次都行，但此种拍卖法会有垄断商品（故意喊巨额的价钱，使其他竞标者无法得标）的行为发生。</li>
 </ul>
+<h2 id="广告与竞标"><a href="#广告与竞标" class="headerlink" title="广告与竞标"></a>广告与竞标</h2><p>既然你是本文的读者, 那我相信你肯定听说过央视广告竞标的事情, 从1994年开始, 央视开始竞标广告, 当年”孔府宴酒”以3079万拿下95年标王头衔, 此后的竞标不断刷新着普罗大众对”天价广告费”的认知.</p>
+<p><img src="http://n.sinaimg.cn/tech/transform/w500h319/20180107/wfRN-fyqincv0056868.png" alt="央视竞标"></p>
+<center>央视广告竞标</center>
+
+<p>当然还有一个年代比较近的例子-2016年papi酱视频广告竞拍出2200万元的高价, 标王为丽人丽妆.</p>
+<p><img src="https://file.digitaling.com/eImg/uimages/20160421/1461226687106269.jpg" alt="papi"></p>
+<center>papi酱广告拍卖</center>
+
+<p>为什么厂商愿意投入巨额广告费?</p>
+<blockquote>
+<p>简单粗暴的说, 就是这些平台(例如上两个例子)带货能力强, 能给厂商带来更高的利润.</p>
+</blockquote>
+<p>虽然广告对普通人的体验, 通常可以归结为”令人讨厌”, 比如你看电视的时候, 老是要暂停播广告, 比如你看网页的时候, 老是阻碍你点错. 你讨厌归讨厌, 但这不妨碍你对这些广告产生了印象(无论好坏). 更何况, 有些广告有不是这么糟糕, 以至于你会对某个品牌产生好感.</p>
+<p>表面上央视和papi酱都是拍卖广告, 但是实际上背后存在着传统电视广告和自媒体广告的巨大差异.</p>
+<p>至于广告是如何经过一系列发展, 而产生这些巨大差异, 后续还会在公众号陆续更新.</p>
+<h2 id="硬广"><a href="#硬广" class="headerlink" title="硬广"></a>硬广</h2><p>各位看官爸爸, 跪求关注我的公众号: 测试狗</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1g14lj960wnj307607674d.jpg" alt="测试狗二维码"></p>
 
 					<div class="post-share">
 	<ul class="share-list">
