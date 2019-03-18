@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
   <meta name="renderer" content="webkit">
   
-  <title>HTTP 404 | ThinkerChan</title>
+  <title>HTTP 404 | 测试狗</title>
   <meta name="description" content="折腾了一个晚上的github pages 一直是404 真是特么分分钟想哭，既然这样,那就来看看404到底是什么东西好了。 404 404 根据维基百科的定义，此信息代表客户端在浏览网页时，服务器无法正常提供信息，或是服务器无法回应且不知原因。直观体现在用户使用过程中就是在访问某个页面的时候却发现特么这页面不存在。。  日常404众所周知，这样的错误页面给用户体验肯定是不好的，所有的主机都提供客制">
 <meta name="keywords" content="404">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP 404">
 <meta property="og:url" content="http://thinkerchan.com/2015/06/14/404/index.html">
-<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:site_name" content="测试狗">
 <meta property="og:description" content="折腾了一个晚上的github pages 一直是404 真是特么分分钟想哭，既然这样,那就来看看404到底是什么东西好了。 404 404 根据维基百科的定义，此信息代表客户端在浏览网页时，服务器无法正常提供信息，或是服务器无法回应且不知原因。直观体现在用户使用过程中就是在访问某个页面的时候却发现特么这页面不存在。。  日常404众所周知，这样的错误页面给用户体验肯定是不好的，所有的主机都提供客制">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-03-14T04:04:25.692Z">
@@ -23,7 +23,7 @@
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
   
-  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
   
 
   <link rel="stylesheet" href="/css/style.css" >
@@ -45,7 +45,7 @@
   </style>
   <![endif]-->
 </head>
-<body>
+<body id="normal" >
 
 <div class="section-wrap section-main">
 	<div class="section">
@@ -106,10 +106,13 @@
 					<div class="post-comments" id="Jcmt">
 	<h3 class="post-comments-tit">访客评论</h3>
 	<div id="vcomments"></div>
-	<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-  <!-- <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script> -->
 	<script>
-		if (document.getElementById('JnoCmt')==null) {
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
 			new Valine({
 			    el: '#vcomments',
 			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
@@ -119,8 +122,6 @@
 			    avatar:'mm',
 			    placeholder: '感谢您的留言, 请勿灌水和广告.'
 			})
-		}else{
-			Jcmt.style.display = 'none';
 		}
 	</script>
 </div>

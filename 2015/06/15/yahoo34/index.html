@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
   <meta name="renderer" content="webkit">
   
-  <title>雅虎34条 | ThinkerChan</title>
+  <title>雅虎34条 | 测试狗</title>
   <meta name="description" content="参考1:官方传送门在此,请肆意点击.参考2:中文原文传送门在此,请肆意点击.参考3:中文原文传送门在此,请肆意点击. 1.尽量减少HTTP请求次数什么是HTTP请求?每一次网页内容的获取,就是HTTP请求的具体展现.不同浏览器的请求并发数是有限的,知乎已经有大神解释这个问题了,拿去.常见的优化有:  合并文件(典型案例:雪碧图) 图片Base64编码  2.减少DNS查找次数访问域名的时候,DNS">
-<meta name="keywords" content="web前端,JavaScript,CSS,HTML,安全,乱七八糟">
+<meta name="keywords" content="web前端,JavaScript,CSS,HTML,计算广告,产品经理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="雅虎34条">
 <meta property="og:url" content="http://thinkerchan.com/2015/06/15/yahoo34/index.html">
-<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:site_name" content="测试狗">
 <meta property="og:description" content="参考1:官方传送门在此,请肆意点击.参考2:中文原文传送门在此,请肆意点击.参考3:中文原文传送门在此,请肆意点击. 1.尽量减少HTTP请求次数什么是HTTP请求?每一次网页内容的获取,就是HTTP请求的具体展现.不同浏览器的请求并发数是有限的,知乎已经有大神解释这个问题了,拿去.常见的优化有:  合并文件(典型案例:雪碧图) 图片Base64编码  2.减少DNS查找次数访问域名的时候,DNS">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-03-14T04:01:17.699Z">
@@ -23,7 +23,7 @@
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
   
-  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
   
 
   <link rel="stylesheet" href="/css/style.css" >
@@ -45,7 +45,7 @@
   </style>
   <![endif]-->
 </head>
-<body>
+<body id="normal" >
 
 <div class="section-wrap section-main">
 	<div class="section">
@@ -227,10 +227,13 @@
 					<div class="post-comments" id="Jcmt">
 	<h3 class="post-comments-tit">访客评论</h3>
 	<div id="vcomments"></div>
-	<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-  <!-- <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script> -->
 	<script>
-		if (document.getElementById('JnoCmt')==null) {
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
 			new Valine({
 			    el: '#vcomments',
 			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
@@ -240,8 +243,6 @@
 			    avatar:'mm',
 			    placeholder: '感谢您的留言, 请勿灌水和广告.'
 			})
-		}else{
-			Jcmt.style.display = 'none';
 		}
 	</script>
 </div>

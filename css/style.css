@@ -233,3 +233,16 @@ body .post-comments .info{display:none;}
 body  .v .vlist .vcard .vhead .vsys{display:none;}
 body .v .vlist .vcard .vh .vmeta .vat{color:#1abc9c;}
 body .post-comments-tit{margin-top:0px;padding-top:15px;border-top:1px solid #eee;}
+
+/* 简历样式 */
+#resume .jupe h4{font-size:1em;}
+#resume h2{border-bottom:2px solid #5384EC}
+#resume .jupe pre{overflow:hidden;white-space:pre-wrap;}
+#resume .jupe code{margin:0;padding:0;}
+
+#resume .post-meta, #resume .header, #resume .footer{display: none;}
+#resume .main{
+  box-shadow: none;
+}
+
+

@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
   <meta name="renderer" content="webkit">
   
-  <title>如何提升 CSS 选择器性能 | ThinkerChan</title>
+  <title>如何提升 CSS 选择器性能 | 测试狗</title>
   <meta name="description" content="CSS样式解析是从右到左的为什么我们在写css样式的时候,几乎都是根据[从左到右]的思维来写的,于是我们就理所当然的认为,浏览器解析CSS的时候, 也是按照从左到右的顺序来的.然而并不是,至于为什么,那就得先了解一下浏览器的渲染原理.这里我在重新梳理一遍,以加深自己对浏览器渲染的认识. 解答这部分内容引自:  「 How browsers work」 顾轶灵-知乎回答   HTML 经过解析生成">
 <meta name="keywords" content="Css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何提升 CSS 选择器性能">
 <meta property="og:url" content="http://thinkerchan.com/2015/06/17/effective-css/index.html">
-<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:site_name" content="测试狗">
 <meta property="og:description" content="CSS样式解析是从右到左的为什么我们在写css样式的时候,几乎都是根据[从左到右]的思维来写的,于是我们就理所当然的认为,浏览器解析CSS的时候, 也是按照从左到右的顺序来的.然而并不是,至于为什么,那就得先了解一下浏览器的渲染原理.这里我在重新梳理一遍,以加深自己对浏览器渲染的认识. 解答这部分内容引自:  「 How browsers work」 顾轶灵-知乎回答   HTML 经过解析生成">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://r.loli.io/bQRzia.jpg">
@@ -25,7 +25,7 @@
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
   
-  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
   
 
   <link rel="stylesheet" href="/css/style.css" >
@@ -47,7 +47,7 @@
   </style>
   <![endif]-->
 </head>
-<body>
+<body id="normal" >
 
 <div class="section-wrap section-main">
 	<div class="section">
@@ -126,10 +126,13 @@
 					<div class="post-comments" id="Jcmt">
 	<h3 class="post-comments-tit">访客评论</h3>
 	<div id="vcomments"></div>
-	<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-  <!-- <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script> -->
 	<script>
-		if (document.getElementById('JnoCmt')==null) {
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
 			new Valine({
 			    el: '#vcomments',
 			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
@@ -139,8 +142,6 @@
 			    avatar:'mm',
 			    placeholder: '感谢您的留言, 请勿灌水和广告.'
 			})
-		}else{
-			Jcmt.style.display = 'none';
 		}
 	</script>
 </div>

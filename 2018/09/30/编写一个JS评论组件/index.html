@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
   <meta name="renderer" content="webkit">
   
-  <title>编写一个JS评论组件 | ThinkerChan</title>
+  <title>编写一个JS评论组件 | 测试狗</title>
   <meta name="description" content="前言当初在太平洋网络搬砖的时候, 刚好负责评论系统这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中). 刚好前段时间做外包项目的时候用到LeanCloud这个还不错的产品(真没打广告),">
-<meta name="keywords" content="web前端,JavaScript,CSS,HTML,安全,乱七八糟">
+<meta name="keywords" content="web前端,JavaScript,CSS,HTML,计算广告,产品经理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编写一个JS评论组件">
 <meta property="og:url" content="http://thinkerchan.com/2018/09/30/编写一个JS评论组件/index.html">
-<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:site_name" content="测试狗">
 <meta property="og:description" content="前言当初在太平洋网络搬砖的时候, 刚好负责评论系统这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中). 刚好前段时间做外包项目的时候用到LeanCloud这个还不错的产品(真没打广告),">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-03-14T03:34:12.599Z">
@@ -23,7 +23,7 @@
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
   
-  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
   
 
   <link rel="stylesheet" href="/css/style.css" >
@@ -45,7 +45,7 @@
   </style>
   <![endif]-->
 </head>
-<body>
+<body id="normal" >
 
 <div class="section-wrap section-main">
 	<div class="section">
@@ -102,10 +102,13 @@
 					<div class="post-comments" id="Jcmt">
 	<h3 class="post-comments-tit">访客评论</h3>
 	<div id="vcomments"></div>
-	<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-  <!-- <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script> -->
 	<script>
-		if (document.getElementById('JnoCmt')==null) {
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
 			new Valine({
 			    el: '#vcomments',
 			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
@@ -115,8 +118,6 @@
 			    avatar:'mm',
 			    placeholder: '感谢您的留言, 请勿灌水和广告.'
 			})
-		}else{
-			Jcmt.style.display = 'none';
 		}
 	</script>
 </div>

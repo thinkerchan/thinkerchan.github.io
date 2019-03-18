@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
   <meta name="renderer" content="webkit">
   
-  <title>jQuery源码学习--000热身活动 | ThinkerChan</title>
+  <title>jQuery源码学习--000热身活动 | 测试狗</title>
   <meta name="description" content="前言jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax的操作….  然而我所在的公司里面并不推崇使用jq,尽管他们有jq的替代品(称之为pj),然而我在开发过程中,发现pj并没有想象的方便,甚至某种情况下有些鸡肋,也考虑过将自己平常常用的函数或者组件封装成自己的库,奈何本人能力渣渣,遂开jq源码学习">
 <meta name="keywords" content="jq源码学习,jquery源码">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery源码学习--000热身活动">
 <meta property="og:url" content="http://thinkerchan.com/2015/11/25/jquery-source-code-series/index.html">
-<meta property="og:site_name" content="ThinkerChan">
+<meta property="og:site_name" content="测试狗">
 <meta property="og:description" content="前言jQuery凭借简洁的语法和跨平台的兼容性，极大地简化了JavaScript开发开发人员遍历HTML文档、操作DOM、处理事件、执行动画和开发Ajax的操作….  然而我所在的公司里面并不推崇使用jq,尽管他们有jq的替代品(称之为pj),然而我在开发过程中,发现pj并没有想象的方便,甚至某种情况下有些鸡肋,也考虑过将自己平常常用的函数或者组件封装成自己的库,奈何本人能力渣渣,遂开jq源码学习">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2016-01-07T14:50:32.000Z">
@@ -23,7 +23,7 @@
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
   
-  <link rel="alternate" href="/atom.xml" title="ThinkerChan" type="application/rss+xml">
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
   
 
   <link rel="stylesheet" href="/css/style.css" >
@@ -45,7 +45,7 @@
   </style>
   <![endif]-->
 </head>
-<body>
+<body id="normal" >
 
 <div class="section-wrap section-main">
 	<div class="section">
@@ -213,10 +213,13 @@
 					<div class="post-comments" id="Jcmt">
 	<h3 class="post-comments-tit">访客评论</h3>
 	<div id="vcomments"></div>
-	<!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
-  <!-- <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script> -->
 	<script>
-		if (document.getElementById('JnoCmt')==null) {
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
 			new Valine({
 			    el: '#vcomments',
 			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
@@ -226,8 +229,6 @@
 			    avatar:'mm',
 			    placeholder: '感谢您的留言, 请勿灌水和广告.'
 			})
-		}else{
-			Jcmt.style.display = 'none';
 		}
 	</script>
 </div>
