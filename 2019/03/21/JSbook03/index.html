@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="测试狗">
 <meta property="og:description" content="语法以下是js的语法要求  大小写敏感 标识符: 即我们说的变量名 开头必须是字幕/下划线/&amp;amp;的一种 不能把关键字/保留字/true,false,null作为标识符 注释:  单行注销: // 多行注销: /** here is your code **/   严格模式: Es5引入严格模式,在严格模式下，ECMAScript 3 中的一些不确定的行为将得到处理，而且对某些不安全的操作也会">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-20T00:48:47.767Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g19ll4f91yj3069069dfp.jpg">
+<meta property="og:updated_time" content="2019-03-20T17:57:43.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS红皮书读书笔记-03-基本概念">
 <meta name="twitter:description" content="语法以下是js的语法要求  大小写敏感 标识符: 即我们说的变量名 开头必须是字幕/下划线/&amp;amp;的一种 不能把关键字/保留字/true,false,null作为标识符 注释:  单行注销: // 多行注销: /** here is your code **/   严格模式: Es5引入严格模式,在严格模式下，ECMAScript 3 中的一些不确定的行为将得到处理，而且对某些不安全的操作也会">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g19ll4f91yj3069069dfp.jpg">
 <meta name="twitter:creator" content="@thinkerchan">
 <meta property="fb:admins" content="thinkerchan">
   
@@ -73,9 +75,9 @@
 					</div>
 					<div class="post-toc">
 						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键字和保留字"><span class="toc-number">2.</span> <span class="toc-text">关键字和保留字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">3.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">4.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof-操作符"><span class="toc-number">4.1.</span> <span class="toc-text">typeof 操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Undefined类型"><span class="toc-number">4.2.</span> <span class="toc-text">Undefined类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null类型"><span class="toc-number">4.3.</span> <span class="toc-text">Null类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boolean类型"><span class="toc-number">4.4.</span> <span class="toc-text">Boolean类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number类型"><span class="toc-number">4.5.</span> <span class="toc-text">Number类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String类型"><span class="toc-number">4.6.</span> <span class="toc-text">String类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object类型"><span class="toc-number">4.7.</span> <span class="toc-text">Object类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符"><span class="toc-number">5.</span> <span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一元操作符"><span class="toc-number">5.1.</span> <span class="toc-text">一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自增自减操作符"><span class="toc-number">5.1.1.</span> <span class="toc-text">自增自减操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加减操作符"><span class="toc-number">5.1.2.</span> <span class="toc-text">加减操作符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#位操作符"><span class="toc-number">5.2.</span> <span class="toc-text">位操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布尔操作符"><span class="toc-number">5.3.</span> <span class="toc-text">布尔操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#乘性操作符"><span class="toc-number">5.4.</span> <span class="toc-text">乘性操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加性操作符"><span class="toc-number">5.5.</span> <span class="toc-text">加性操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系操作符"><span class="toc-number">5.6.</span> <span class="toc-text">关系操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相等操作符"><span class="toc-number">5.7.</span> <span class="toc-text">相等操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#条件操作符"><span class="toc-number">5.8.</span> <span class="toc-text">条件操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#赋值操作符"><span class="toc-number">5.9.</span> <span class="toc-text">赋值操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逗号操作符"><span class="toc-number">5.10.</span> <span class="toc-text">逗号操作符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语句"><span class="toc-number">6.</span> <span class="toc-text">语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">7.</span> <span class="toc-text">函数</span></a></li></ol>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关键字和保留字"><span class="toc-number">1.</span> <span class="toc-text">关键字和保留字</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-number">2.</span> <span class="toc-text">变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">3.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof-操作符"><span class="toc-number">3.1.</span> <span class="toc-text">typeof 操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Undefined类型"><span class="toc-number">3.2.</span> <span class="toc-text">Undefined类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Null类型"><span class="toc-number">3.3.</span> <span class="toc-text">Null类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Boolean类型"><span class="toc-number">3.4.</span> <span class="toc-text">Boolean类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number类型"><span class="toc-number">3.5.</span> <span class="toc-text">Number类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String类型"><span class="toc-number">3.6.</span> <span class="toc-text">String类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Object类型"><span class="toc-number">3.7.</span> <span class="toc-text">Object类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符"><span class="toc-number">4.</span> <span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一元操作符"><span class="toc-number">4.1.</span> <span class="toc-text">一元操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自增自减操作符"><span class="toc-number">4.1.1.</span> <span class="toc-text">自增自减操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加减操作符"><span class="toc-number">4.1.2.</span> <span class="toc-text">加减操作符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#位操作符"><span class="toc-number">4.2.</span> <span class="toc-text">位操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布尔操作符"><span class="toc-number">4.3.</span> <span class="toc-text">布尔操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#乘性操作符"><span class="toc-number">4.4.</span> <span class="toc-text">乘性操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加性操作符"><span class="toc-number">4.5.</span> <span class="toc-text">加性操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系操作符"><span class="toc-number">4.6.</span> <span class="toc-text">关系操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相等操作符"><span class="toc-number">4.7.</span> <span class="toc-text">相等操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#条件操作符"><span class="toc-number">4.8.</span> <span class="toc-text">条件操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#赋值操作符"><span class="toc-number">4.9.</span> <span class="toc-text">赋值操作符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逗号操作符"><span class="toc-number">4.10.</span> <span class="toc-text">逗号操作符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语句"><span class="toc-number">5.</span> <span class="toc-text">语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if语句"><span class="toc-number">5.1.</span> <span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#do-while语句"><span class="toc-number">5.2.</span> <span class="toc-text">do-while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#while语句"><span class="toc-number">5.3.</span> <span class="toc-text">while语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for语句"><span class="toc-number">5.4.</span> <span class="toc-text">for语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in语句"><span class="toc-number">5.5.</span> <span class="toc-text">for-in语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#label语句"><span class="toc-number">5.6.</span> <span class="toc-text">label语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break和continue语句"><span class="toc-number">5.7.</span> <span class="toc-text">break和continue语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with语句"><span class="toc-number">5.8.</span> <span class="toc-text">with语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch语句"><span class="toc-number">5.9.</span> <span class="toc-text">switch语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-number">6.</span> <span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#理解参数"><span class="toc-number">6.1.</span> <span class="toc-text">理解参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#没有重载"><span class="toc-number">6.2.</span> <span class="toc-text">没有重载</span></a></li></ol></li></ol>
 					</div>
-					<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>以下是js的语法要求</p>
+					<p>语法<br>以下是js的语法要求</p>
 <ul>
 <li>大小写敏感</li>
 <li>标识符: 即我们说的变量名 开头必须是字幕/下划线/&amp;的一种</li>
@@ -93,8 +95,8 @@
 </ul>
 <h2 id="关键字和保留字"><a href="#关键字和保留字" class="headerlink" title="关键字和保留字"></a>关键字和保留字</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Reserved_words" target="_blank" rel="noopener">Reserved Words - JavaScript | MDN</a> 可以查看最新的关键字和保留字</p>
 <p>以上都是不能作为标识符的.</p>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>js声明变量的方式如下<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var message; // 松散型变量, 你可以赋任何值, 如果不显示赋值, 默认值为undefined</span><br></pre></td></tr></table></figure></p>
-<p>我们看一个例子:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var message = &apos;hi&apos;;</span><br><span class="line">message = 10;</span><br></pre></td></tr></table></figure></p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>js声明变量的方式如下<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> message; <span class="comment">// 松散型变量, 你可以赋任何值, 如果不显示赋值, 默认值为undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>我们看一个例子:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">'hi'</span>;</span><br><span class="line">message = <span class="number">10</span>;</span><br></pre></td></tr></table></figure></p>
 <p>虽然我们声明了一个名为message的变量, 但并不意味着它就是字符串类型.</p>
 <p>再看一个例子:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function test()&#123;</span><br><span class="line">	var message = &apos;hi&apos;;</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line">alert(message)	// Uncaught ReferenceError: message is not defined</span><br></pre></td></tr></table></figure></p>
 <p>上面的实例说明了用var定义的变量, 将会成为当前作用于的局部变量, 通常外部无法访问.</p>
@@ -228,15 +230,150 @@
 <h4 id="加减操作符"><a href="#加减操作符" class="headerlink" title="加减操作符"></a>加减操作符</h4><blockquote>
 <p>略</p>
 </blockquote>
-<h3 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符"></a>位操作符</h3><ul>
-<li>非(NOT): ~ ,</li>
+<h3 id="位操作符"><a href="#位操作符" class="headerlink" title="位操作符"></a>位操作符</h3><p>讲这个之前, 自行了解下一下二进制码, 反码, 补码的概念. 可以<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators" target="_blank" rel="noopener">点击此处</a>查看相关内容, 我这里只简单说说</p>
+<p>我们首先记住一个规定(反正是计算机科学家规定的):</p>
+<blockquote>
+<p>用32为的二进制数才存储数值 , 从右往左开始, 为第1位到第32位, 第32位是用来做<strong>符号位</strong>, <code>0</code>表示正数, <code>1</code>表示负数.</p>
+</blockquote>
+<p>正数以纯二进制格式存储.</p>
+<p>如18这个十进制数:<br>它的二进制数表示为: 10010 </p>
+<p>至于-18, 则用经过三个计算步骤用补码表示:</p>
+<ol>
+<li>计算该数绝对值的二进制码: <code>00000000 00000000 00000000 00010010</code></li>
+<li>求反: <code>11111111 11111111 11111111 11101101</code></li>
+<li>反码加1: <code>11111111 11111111 11111111 11101110</code></li>
+</ol>
+<p>所以 -18 的二进制表示是: <code>11111111 11111111 11111111 11101110</code></p>
+<p>你可能看到这里头都大了, 为啥看起来这么复杂,  那我们就来讨论一下这个问题, 这回我们不用32位的二进制数, 我们用8位二进制数来做demo:</p>
+<p>8位二进制数, 如果只用来表示正数 那么:</p>
+<ul>
+<li>最小值: 0000 0000</li>
+<li>最大值: 1111 1111<br>看着没毛病</li>
+</ul>
+<p>但是要表示正负数, 并且计算基只认识0和1, 那我们只好用第8位来做<strong>符号位</strong> :</p>
+<ul>
+<li>非负数数值范围: [0000 0000, 0111 1111], 也就是[0,127]</li>
+<li>负数范围: [1000 0000, 11111111], 也就是[0,-127]</li>
+</ul>
+<p>根据常识, 一个正数要加上另一个数字等于0 , 那么这个数字肯定是它的相反数<br>比如 1+(-1) = 0</p>
+<p>我们再回到八位二进制数:<br>1表示成: <code>0000 0001</code><br>-1表示成: <code>1000 0001</code>(我知道长这样它才是你心目中的<code>-1</code>)</p>
+<p>那么: 0000 0001 + 1000 0001 = 1000 0010</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g19ll4f91yj3069069dfp.jpg" alt="黑人问号"></p>
+<center>1000 0010等于0吗?</center>
+
+<p>显然1000 0010长得又不像你心目中的0(实际上也不是)</p>
+<p>我们假设: 0000 0001+ x = 0000 0000 (注意这里并不是1000 0000)<br>得到x = 1111 1111 也就是-1 </p>
+<blockquote>
+<p>此处参考了 <a href="https://blog.csdn.net/wenxinwukui234/article/details/42119265" target="_blank" rel="noopener">wenxinwukui234</a>的博客</p>
+</blockquote>
+<blockquote>
+<p>实际上 <code>0000 0001+ 1111 1111 = 1 0000 0000</code> 产生了溢出问题</p>
+</blockquote>
+<p>但是根据前面计算补码的规则:<br>绝对值: 0000 0001<br>求反: 1111 1110<br>加一: 1111 1111 (和我们之前计算的一致)</p>
+<ul>
+<li>非(NOT): ~ , 求反码</li>
 <li>与(AND): &amp; , 二进制同时有1才取1</li>
 <li>或(OR): | , 二进制有1取1</li>
 <li>按位异或(XOR): ^ , 二进制相同的数取0 , 不同则取1</li>
 <li>左移:&lt;&lt;</li>
 <li>右移:&gt;&gt;</li>
 </ul>
-<h3 id="布尔操作符"><a href="#布尔操作符" class="headerlink" title="布尔操作符"></a>布尔操作符</h3><h3 id="乘性操作符"><a href="#乘性操作符" class="headerlink" title="乘性操作符"></a>乘性操作符</h3><h3 id="加性操作符"><a href="#加性操作符" class="headerlink" title="加性操作符"></a>加性操作符</h3><h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><h3 id="相等操作符"><a href="#相等操作符" class="headerlink" title="相等操作符"></a>相等操作符</h3><h3 id="条件操作符"><a href="#条件操作符" class="headerlink" title="条件操作符"></a>条件操作符</h3><h3 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符"></a>赋值操作符</h3><h3 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h3><h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2>
+<h3 id="布尔操作符"><a href="#布尔操作符" class="headerlink" title="布尔操作符"></a>布尔操作符</h3><ul>
+<li>逻辑非(!)</li>
+<li>逻辑与(&amp;)</li>
+<li>逻辑或(||)</li>
+</ul>
+<h3 id="乘性操作符"><a href="#乘性操作符" class="headerlink" title="乘性操作符"></a>乘性操作符</h3><ul>
+<li>乘法(*)</li>
+<li>除法(/)</li>
+<li>求模(%)</li>
+</ul>
+<h3 id="加性操作符"><a href="#加性操作符" class="headerlink" title="加性操作符"></a>加性操作符</h3><ul>
+<li>加法(+): 数值 + 字符串 == 字符串</li>
+<li>减法(-):  数值 - 字符串 == 数值</li>
+</ul>
+<h3 id="关系操作符"><a href="#关系操作符" class="headerlink" title="关系操作符"></a>关系操作符</h3><p>字符串比较大小的时候, 是比较字符编码位置的大小 , 如果是对象比较, 会先调用valueOf方法, 如果没有valueOf方法, 就调用toString方法</p>
+<ul>
+<li>大于(&gt;)</li>
+<li>小于(&gt;)</li>
+</ul>
+<h3 id="相等操作符"><a href="#相等操作符" class="headerlink" title="相等操作符"></a>相等操作符</h3><p>以下的操作符会进行<strong>强制类型转换</strong>, 再比较相等性</p>
+<ul>
+<li>相等(==)</li>
+<li>不相等(!=)</li>
+</ul>
+<hr>
+<p>在转换不同的数据类型时，相等和不相等操作符遵循下列基本规则：</p>
+<ul>
+<li>如果有一个操作数是布尔值，则在比较相等性之前先将其转换为数值 false 转换为 0，而true 转换为 1；</li>
+<li>如果一个操作数是字符串，另一个操作数是数值，在比较相等性之前先将字符串转换为数值</li>
+<li>如果一个操作数是对象，另一个操作数不是，则调用对象的 valueOf()方法，用得到的基本类型值按照前面的规则进行比较</li>
+<li>null == undefined </li>
+<li>NaN != NaN</li>
+<li>对象和对象的相等检测, 会判断是不是指向同一个对象</li>
+</ul>
+<hr>
+<ul>
+<li>全等(===) : <strong>不会</strong>进行强制类型转换</li>
+</ul>
+<h3 id="条件操作符"><a href="#条件操作符" class="headerlink" title="条件操作符"></a>条件操作符</h3><p>也就是通常我们所说的三元操作符: var s = bool? true : false;</p>
+<h3 id="赋值操作符"><a href="#赋值操作符" class="headerlink" title="赋值操作符"></a>赋值操作符</h3><p>以下是常见的赋值操作符, 不过使用这些并不会带来性能上的提升, 取决于你的爱好</p>
+<ul>
+<li>+=</li>
+<li>-=</li>
+<li>*=</li>
+<li>/=</li>
+<li>%=</li>
+<li>&lt;&lt;=</li>
+<li><blockquote>
+<blockquote>
+<p>=</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h3 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h3><p>只需要记住</p>
+<ul>
+<li>var num1=1, num2=2, num3=3;  // 声明变量时候的简约方式</li>
+<li>var num = (5, 1, 4, 8, 0);   // num 的值为 0</li>
+</ul>
+<h2 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h2><h3 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h3><p>略</p>
+<h3 id="do-while语句"><a href="#do-while语句" class="headerlink" title="do-while语句"></a>do-while语句</h3><blockquote>
+<p>do-while循环至少会执行一次</p>
+</blockquote>
+<h3 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h3><p>略</p>
+<h3 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h3><p>略</p>
+<h3 id="for-in语句"><a href="#for-in语句" class="headerlink" title="for-in语句"></a>for-in语句</h3><blockquote>
+<p>for-in 语旬是一种精准的迭代语旬，可以用来枚举对象的属性。</p>
+</blockquote>
+<p>以下是 for-in 语旬的语法：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for (var propName in window) &#123; </span><br><span class="line">	console.log(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这个例子中，我们使用 for-in 循环来显示了 BOM 中 window 对象的所有属性。每次执行循环时，都会将 window 对象中存在的一个属性名赋值给变量 propName。这个过程会一直持续到对象中的所有属性都被枚举一遍为止。</p>
+<p>与 for 语旬类似，这里控制语旬中的 var 操作符也不是必需的。但是， 为了保证使用局部变量，我们推荐上面例子中的这种做法。</p>
+<p>ECMAScript 对象的属性没有顺序。因此，通过 for-in 循环输出的属性名的顺序是不可预测的。具体来讲，所有属性都会被返回一次，但返回的先后次序可能会因浏览器而异。但是，如果表示要迭代的对象的变量值为  null 或  undefined，for-in 语旬会抛出错误, ECMAScript 5 更正了这一行为；对这种情况不再抛出错误，而只是不执行循环体。</p>
+<h3 id="label语句"><a href="#label语句" class="headerlink" title="label语句"></a>label语句</h3><blockquote>
+<p>不建议使用</p>
+</blockquote>
+<h3 id="break和continue语句"><a href="#break和continue语句" class="headerlink" title="break和continue语句"></a>break和continue语句</h3><blockquote>
+<p>不建议使用</p>
+</blockquote>
+<h3 id="with语句"><a href="#with语句" class="headerlink" title="with语句"></a>with语句</h3><blockquote>
+<p>不建议使用, 会改变上下文环境, 而且有性能问题</p>
+</blockquote>
+<h3 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h3><blockquote>
+<p>如果你的if..else if..不合理, 那需要考虑用这个</p>
+</blockquote>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><blockquote>
+<p>函数对任何语言来说都是一个核心的概念。通过函数可以封装任意多条语旬，而且可以在任何地方、任何时候调用执行。ECMAScript 中的函数使用 function 关键字来声明，后跟一组参数以及函数体。</p>
+</blockquote>
+<p>以下是一个函数示例：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params">name, message</span>) </span>&#123; </span><br><span class="line">	alert(<span class="string">"Hello "</span> + name + <span class="string">","</span> + message);</span><br><span class="line">	<span class="comment">//return ; //不必指定是否有返回值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="理解参数"><a href="#理解参数" class="headerlink" title="理解参数"></a>理解参数</h3><blockquote>
+<p>你可以传无限个参数,  也不介意你的参数是什么类型, 因为函数内部有一个叫arguments的类数组对象( arguments  instanceof   Array == false)</p>
+</blockquote>
+<p>我们来看一个例子:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doAdd</span>(<span class="params">num1, num2</span>) </span>&#123; </span><br><span class="line">	<span class="built_in">arguments</span>[<span class="number">1</span>] = <span class="number">10</span>; </span><br><span class="line">	<span class="built_in">console</span>.log(<span class="built_in">arguments</span>[<span class="number">0</span>] + num2);</span><br><span class="line">&#125;</span><br><span class="line">doAdd(<span class="number">10</span>); <span class="comment">//NaN , 说明形参和arguments[n]都是独立的, 但是值会根据实参同步个数</span></span><br><span class="line">doAdd(<span class="number">10</span>,<span class="number">0</span>);	<span class="comment">// 20</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="没有重载"><a href="#没有重载" class="headerlink" title="没有重载"></a>没有重载</h3><blockquote>
+<p>ES没有重载, 但是可以通过判断参数的长度来模拟</p>
+</blockquote>
+
 					<div class="post-share">
 	<ul class="share-list">
 		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
