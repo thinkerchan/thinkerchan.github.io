@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>JS红皮书读书笔记-02-在HTML中使用JS | 测试狗</title>
+  <meta name="description" content="Script元素直接在HTML页面中使用script元素, 这是在NN2.0浏览器上的最先实现. HTML4.01规定script元素有下列几个属性  async: 可选, 表示立即下载脚本, 但是不应妨碍页面的其他操作, 比如下载其他资源或者等待其他脚本. 只对外部JS有效 charset: 可选, 指定字符集 defer: 可选, 只对外部脚本有效, 立即下载, 延迟执行. src: 可选 t">
+<meta name="keywords" content="web前端,JavaScript,CSS,HTML,计算广告,产品经理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS红皮书读书笔记-02-在HTML中使用JS">
+<meta property="og:url" content="http://thinkerchan.com/2019/01/20/JSbook02/index.html">
+<meta property="og:site_name" content="测试狗">
+<meta property="og:description" content="Script元素直接在HTML页面中使用script元素, 这是在NN2.0浏览器上的最先实现. HTML4.01规定script元素有下列几个属性  async: 可选, 表示立即下载脚本, 但是不应妨碍页面的其他操作, 比如下载其他资源或者等待其他脚本. 只对外部JS有效 charset: 可选, 指定字符集 defer: 可选, 只对外部脚本有效, 立即下载, 延迟执行. src: 可选 t">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g1845vrqcdj30wu0c6jrw.jpg">
+<meta property="og:updated_time" content="2019-03-19T07:26:23.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS红皮书读书笔记-02-在HTML中使用JS">
+<meta name="twitter:description" content="Script元素直接在HTML页面中使用script元素, 这是在NN2.0浏览器上的最先实现. HTML4.01规定script元素有下列几个属性  async: 可选, 表示立即下载脚本, 但是不应妨碍页面的其他操作, 比如下载其他资源或者等待其他脚本. 只对外部JS有效 charset: 可选, 指定字符集 defer: 可选, 只对外部脚本有效, 立即下载, 延迟执行. src: 可选 t">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1g1845vrqcdj30wu0c6jrw.jpg">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body id="normal" >
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">测试狗</a>
+	</h1>
+	<p class="social-links hide">
+		<!-- <a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a> -->
+		/
+		<!-- <a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a> -->
+		/
+		<!-- <a href="https://github.com/thinkerchan" target="_blank">Github</a> -->
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">JS红皮书读书笔记-02-在HTML中使用JS</h1>
+					<div class="post-meta">
+						<span class="post-time">2019.01.20</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Script元素"><span class="toc-number">1.</span> <span class="toc-text">Script元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#语法"><span class="toc-number">1.1.</span> <span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#直接代码块"><span class="toc-number">1.1.1.</span> <span class="toc-text">直接代码块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#外链"><span class="toc-number">1.1.2.</span> <span class="toc-text">外链</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优劣"><span class="toc-number">1.1.3.</span> <span class="toc-text">优劣</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#放置位置"><span class="toc-number">1.2.</span> <span class="toc-text">放置位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#延迟脚本"><span class="toc-number">1.3.</span> <span class="toc-text">延迟脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步脚本"><span class="toc-number">1.4.</span> <span class="toc-text">异步脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文档模式"><span class="toc-number">2.</span> <span class="toc-text">文档模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#noscript元素"><span class="toc-number">3.</span> <span class="toc-text">noscript元素</span></a></li></ol>
+					</div>
+					<h2 id="Script元素"><a href="#Script元素" class="headerlink" title="Script元素"></a>Script元素</h2><p>直接在HTML页面中使用script元素, 这是在NN2.0浏览器上的最先实现.</p>
+<p>HTML4.01规定script元素有下列几个属性</p>
+<ul>
+<li>async: 可选, 表示立即下载脚本, 但是不应妨碍页面的其他操作, 比如下载其他资源或者等待其他脚本. 只对外部JS有效</li>
+<li>charset: 可选, 指定字符集</li>
+<li>defer: 可选, 只对外部脚本有效, 立即下载, 延迟执行.</li>
+<li>src: 可选</li>
+<li>type: 可选, 可视为language属性的替代品, 默认值<code>text/javascript</code>, 实际上服务器传输的时候通常MIME类型为 <code>application/x-javascript</code>或者<code>application/javascript</code> (不信你用chrome控制台随便打开个网页看看)</li>
+</ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="直接代码块"><a href="#直接代码块" class="headerlink" title="直接代码块"></a>直接代码块</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">	function hi()&#123;</span></span><br><span class="line"><span class="undefined">		alert('Hi')</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>由于JS是阻塞的, 通常以上代码在解释器对内代码求值完之前, 页面其余内容都不会被浏览器显示或加载.</p>
+<h4 id="外链"><a href="#外链" class="headerlink" title="外链"></a>外链</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>既然一个script元素指定了src, 那就不能再在script元素内添加代码, 否则也会被忽略, 只要不存在<code>defer</code>和<code>async</code>熟悉, 浏览器都会按照从上到下的顺序执行script标签</p>
+<h4 id="优劣"><a href="#优劣" class="headerlink" title="优劣"></a>优劣</h4><p>通常外链JS会被强调它的优势:</p>
+<ul>
+<li>可维护性</li>
+<li>可缓存</li>
+</ul>
+<h3 id="放置位置"><a href="#放置位置" class="headerlink" title="放置位置"></a>放置位置</h3><p>通常放在<code>head</code>标签内, 或者靠近<code>body</code>结束标签前一行.</p>
+<h3 id="延迟脚本"><a href="#延迟脚本" class="headerlink" title="延迟脚本"></a>延迟脚本</h3><p>HTML 4.01 为<code>&lt;script&gt;</code>标签定义了 defer 属性。这个属性的用途是表明脚本在执行时不会影响页面的构造。也就是说，脚本会被延迟到整个页面都解析完毕后再运行。因此，在<code>&lt;script&gt;</code>元素中设置<br>defer 属性，相当于告诉浏览器立即下载，但延迟执行。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Example HTML Page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">defer</span>=<span class="string">"defer"</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">defer</span>=<span class="string">"defer"</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/lodash.js/4.17.12-pre/lodash.core.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 这里放内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这个例子中，虽然我们把<code>&lt;script&gt;</code>元素放在了文档的head元素中，但其中包含的脚本将延迟到浏览器遇到<code>&lt;/html&gt;</code>标签后再执行。HTML5 规范要求脚本按照它们出现的先后顺序执行，因此第一个延迟脚本会先于第二个延迟脚本执行，而这两个脚本会先于 DOMContentLoaded 事件执行。在现实当中，延迟脚本并不一定会按照顺序执行，也不一定会在 DOMContentLoaded 事件触发前执行，因此最好只包含一个延迟脚本。</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g1845vrqcdj30wu0c6jrw.jpg" alt="两个defer"></p>
+<center>两个defer</center>
+
+<h3 id="异步脚本"><a href="#异步脚本" class="headerlink" title="异步脚本"></a>异步脚本</h3><p>HTML5 为<code>&lt;script&gt;</code>元素定义了 async 属性。这个属性与 defer 属性类似，都用于改变处理脚本的行为。同样与 defer 类似，async 只适用于外部脚本文件，并告诉浏览器立即下载文件。但与 defer不同的是，标记为 async 的脚本并不保证按照指定它们的先后顺序执行。例如：<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Example HTML Page<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"example1.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"example2.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 这里放内容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在以上代码中，第二个脚本文件可能会在第一个脚本文件之前执行。因此，确保两者之间互不依赖非常重要。指定 async 属性的目的是不让页面等待两个脚本下载和执行，从而异步加载页面其他内容。为此，建议异步脚本不要在加载期间修改 DOM。异步脚本一定会在页面的 load 事件前执行，但可能会在 DOMContentLoaded 事件触发之前或之后执行。</p>
+<h2 id="文档模式"><a href="#文档模式" class="headerlink" title="文档模式"></a>文档模式</h2><p>请用HTML5的文档模式.</p>
+<h2 id="noscript元素"><a href="#noscript元素" class="headerlink" title="noscript元素"></a>noscript元素</h2><p>由于技术的更新迭代, 这个元素基本不再用到.</p>
+
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+					<!-- 评论 -->
+					<div class="post-comments" id="Jcmt">
+	<h3 class="post-comments-tit">访客评论</h3>
+	<div id="vcomments"></div>
+	<script>
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
+			new Valine({
+			    el: '#vcomments',
+			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+			    notify:false,
+			    verify:false,
+			    avatar:'mm',
+			    placeholder: '感谢您的留言, 请勿灌水和广告.'
+			})
+		}
+	</script>
+</div>
+				</div>
+			</div>		</div>
+		<div class="footer">
+  <p class="left">&copy; Thinker Chan ,
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">
+      本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+  </p>
+	<p class="right">Hosted by <a href="https://pages.coding.me">Coding Pages</a>
+  </p>
+</div>
+	</div>
+</div>
+
+</body>
+</html>

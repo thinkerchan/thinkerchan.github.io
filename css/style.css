@@ -54,14 +54,15 @@ td,th{padding:0}
 ul{list-style-type:none;margin:0;padding-left:0}
 .jupe{font-family:"Helvetica Neue",Helvetica,"Nimbus Sans L",Arial,"Liberation Sans","Hiragino Sans GB","Source Han Sans CN","Source Han Sans SC","Microsoft YaHei","Wenquanyi Micro Hei","WenQuanYi Zen Hei","ST Heiti",SimHei,"WenQuanYi Zen Hei Sharp",sans-serif;color:#333;font-size:16px;line-height:1.7}
 h1,h2,h3,h4,h5,h6{font-family:"SimHei"}
+h2,h3,h4,h5,h6{color: #159957;}
 .jupe a{text-decoration:none;color:#2980b9}
 .jupe a:hover{color:#3498db}
 .jupe h1{font-weight:bold;font-size:2em;margin:1.2em 0 .6em 0}
 .jupe h2{font-size:1.4em;margin:1.2em 0 .6em 0}
-.jupe h3{font-size:1.2em;margin:1.2em 0 .6em 0}
-.jupe h4{font-size:1.2em;margin:1.2em 0 .6em 0}
-.jupe h5{font-size:1.2em;margin:1.2em 0 .6em 0}
-.jupe h6{font-size:1.0em;margin:1.2em 0 .6em 0}
+.jupe h3{font-size:1.3em;margin:1.2em 0 .6em 0}
+.jupe h4{font-size:1.0em;margin:1.2em 0 .6em 0; color: #696;}
+.jupe h5{font-size:0.8em;margin:1.2em 0 .6em 0}
+.jupe h6{font-size:0.8em;margin:1.2em 0 .6em 0}
 .jupe p{margin:1.2em 0}
 .jupe tt{margin:0 .2em;padding:0 .2em}
 .jupe i{margin:0 .2em;padding:0 .2em}
