@@ -17,7 +17,7 @@
 <meta property="og:description" content="语法以下是js的语法要求  大小写敏感 标识符: 即我们说的变量名 开头必须是字幕/下划线/&amp;amp;的一种 不能把关键字/保留字/true,false,null作为标识符 注释:  单行注销: // 多行注销: /** here is your code **/   严格模式: Es5引入严格模式,在严格模式下，ECMAScript 3 中的一些不确定的行为将得到处理，而且对某些不安全的操作也会">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g19ll4f91yj3069069dfp.jpg">
-<meta property="og:updated_time" content="2019-03-20T17:57:43.782Z">
+<meta property="og:updated_time" content="2019-03-20T18:05:31.869Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS红皮书读书笔记-03-基本概念">
 <meta name="twitter:description" content="语法以下是js的语法要求  大小写敏感 标识符: 即我们说的变量名 开头必须是字幕/下划线/&amp;amp;的一种 不能把关键字/保留字/true,false,null作为标识符 注释:  单行注销: // 多行注销: /** here is your code **/   严格模式: Es5引入严格模式,在严格模式下，ECMAScript 3 中的一些不确定的行为将得到处理，而且对某些不安全的操作也会">
@@ -325,12 +325,7 @@
 <li>/=</li>
 <li>%=</li>
 <li>&lt;&lt;=</li>
-<li><blockquote>
-<blockquote>
-<p>=</p>
-</blockquote>
-</blockquote>
-</li>
+<li>>>=</li>
 </ul>
 <h3 id="逗号操作符"><a href="#逗号操作符" class="headerlink" title="逗号操作符"></a>逗号操作符</h3><p>只需要记住</p>
 <ul>
@@ -346,7 +341,7 @@
 <h3 id="for-in语句"><a href="#for-in语句" class="headerlink" title="for-in语句"></a>for-in语句</h3><blockquote>
 <p>for-in 语旬是一种精准的迭代语旬，可以用来枚举对象的属性。</p>
 </blockquote>
-<p>以下是 for-in 语旬的语法：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for (var propName in window) &#123; </span><br><span class="line">	console.log(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以下是 for-in 语旬的语法：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> propName <span class="keyword">in</span> <span class="built_in">window</span>) &#123; </span><br><span class="line">	<span class="built_in">console</span>.log(propName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>在这个例子中，我们使用 for-in 循环来显示了 BOM 中 window 对象的所有属性。每次执行循环时，都会将 window 对象中存在的一个属性名赋值给变量 propName。这个过程会一直持续到对象中的所有属性都被枚举一遍为止。</p>
 <p>与 for 语旬类似，这里控制语旬中的 var 操作符也不是必需的。但是， 为了保证使用局部变量，我们推荐上面例子中的这种做法。</p>
 <p>ECMAScript 对象的属性没有顺序。因此，通过 for-in 循环输出的属性名的顺序是不可预测的。具体来讲，所有属性都会被返回一次，但返回的先后次序可能会因浏览器而异。但是，如果表示要迭代的对象的变量值为  null 或  undefined，for-in 语旬会抛出错误, ECMAScript 5 更正了这一行为；对这种情况不再抛出错误，而只是不执行循环体。</p>
