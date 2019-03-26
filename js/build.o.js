@@ -67,11 +67,11 @@ require([ "simple-share.min" ], function(e) {
 
 define("main", function() {});
 require(['main'],function(){
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?0e2e75fa8329a6860f4229333cc6bc9f";
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(hm, s);
-  })();
+  // var _hmt = _hmt || [];
+  // (function() {
+  //   var hm = document.createElement("script");
+  //   hm.src = "https://hm.baidu.com/hm.js?0e2e75fa8329a6860f4229333cc6bc9f";
+  //   var s = document.getElementsByTagName("script")[0];
+  //   s.parentNode.insertBefore(hm, s);
+  // })();
 })
