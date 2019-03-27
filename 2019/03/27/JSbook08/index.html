@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>JS红皮书读书笔记-08-BOM | 测试狗</title>
+  <meta name="description" content="ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。 下面介绍主要的几个BOM对象. window对象BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色， 它既是通过 J">
+<meta name="keywords" content="测试狗,前端,计算广告,产品经理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS红皮书读书笔记-08-BOM">
+<meta property="og:url" content="https://thinkerchan.com/2019/03/27/JSbook08/index.html">
+<meta property="og:site_name" content="测试狗">
+<meta property="og:description" content="ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。 下面介绍主要的几个BOM对象. window对象BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色， 它既是通过 J">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-27T15:25:10.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS红皮书读书笔记-08-BOM">
+<meta name="twitter:description" content="ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。 下面介绍主要的几个BOM对象. window对象BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色， 它既是通过 J">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body id="normal" >
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">测试狗</a>
+	</h1>
+	<p class="social-links hide">
+		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
+		/
+		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
+		/
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">JS红皮书读书笔记-08-BOM</h1>
+					<div class="post-meta">
+						<span class="post-time">2019.03.27</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#window对象"><span class="toc-number">1.</span> <span class="toc-text">window对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局作用域"><span class="toc-number">1.1.</span> <span class="toc-text">全局作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口关系和框架"><span class="toc-number">1.2.</span> <span class="toc-text">窗口关系和框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口位置"><span class="toc-number">1.3.</span> <span class="toc-text">窗口位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口大小"><span class="toc-number">1.4.</span> <span class="toc-text">窗口大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航和打开窗口"><span class="toc-number">1.5.</span> <span class="toc-text">导航和打开窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setTimeout和setInterval"><span class="toc-number">1.6.</span> <span class="toc-text">setTimeout和setInterval</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统对话框"><span class="toc-number">1.7.</span> <span class="toc-text">系统对话框</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location对象"><span class="toc-number">2.</span> <span class="toc-text">location对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator对象"><span class="toc-number">3.</span> <span class="toc-text">navigator对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#screen对象"><span class="toc-number">4.</span> <span class="toc-text">screen对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history对象"><span class="toc-number">5.</span> <span class="toc-text">history对象</span></a></li></ol>
+					</div>
+					<p>ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。</p>
+<p>下面介绍主要的几个BOM对象.</p>
+<h2 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h2><p>BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色， 它既是通过 JavaScript 访问浏览器窗口的一个接口，又是 ECMAScript 规定的 Global 对象。这意味若在网页中定义的任何一个对象、变量和函数，都以 window 作为其 Global 对象，因此有权访问<br>parseInt()等方法</p>
+<h3 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3><p>也就是ES中的global角色, 在全局中定义的变量和方法(函数), 都会挂载在window对象上.<br>但是要注意一点:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">'black'</span>;</span><br><span class="line"><span class="keyword">delete</span> color; <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(color); <span class="comment">//black;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.color2 = <span class="string">'pink'</span>;</span><br><span class="line"><span class="keyword">delete</span> color2; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(color2); <span class="comment">// error</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="窗口关系和框架"><a href="#窗口关系和框架" class="headerlink" title="窗口关系和框架"></a>窗口关系和框架</h3><p>HTML5不在推荐使用frameset, frame元素. 此处略过</p>
+<h3 id="窗口位置"><a href="#窗口位置" class="headerlink" title="窗口位置"></a>窗口位置</h3><p>主要是 screenX, screenY, screenTop, screeLeft 几个属性</p>
+<h3 id="窗口大小"><a href="#窗口大小" class="headerlink" title="窗口大小"></a>窗口大小</h3><ul>
+<li>innerWidth</li>
+<li>innerHeight</li>
+<li>outerWidth</li>
+<li>outerHeight</li>
+</ul>
+<p>另外, document.documentElement(或者是document.body)的clientWidth和clientHeight也保存着窗口大小信息</p>
+<p>PS : moveTo, moveBy, resizeTo, resizeBy在现代浏览器中默认被禁用</p>
+<h3 id="导航和打开窗口"><a href="#导航和打开窗口" class="headerlink" title="导航和打开窗口"></a>导航和打开窗口</h3><p>基本语法<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 打开</span></span><br><span class="line"><span class="keyword">var</span> win = <span class="built_in">window</span>.open(url, target值, 新窗口特征字符串参数, bool)</span><br><span class="line"><span class="comment">// 关闭</span></span><br><span class="line">win.close();</span><br><span class="line"><span class="comment">//可以通过win是否存在来检测弹窗是否被屏蔽</span></span><br></pre></td></tr></table></figure></p>
+<p> target有三种值:</p>
+<ul>
+<li>_self</li>
+<li>_blank (默认)</li>
+<li>_top</li>
+<li>_parent</li>
+</ul>
+<p>新窗口特征字符串, 主要是以下参数:</p>
+<ul>
+<li>fullscreen: yes || no</li>
+<li>width: number &amp;&amp; number&gt;100</li>
+<li>height: number &amp;&amp; number&gt;100</li>
+<li>left: number &amp;&amp; number &gt;= 0</li>
+<li>top: number &amp;&amp; number &gt;= 0 </li>
+<li>location: yes || no</li>
+<li>menubar: yes || no</li>
+<li>resizable: yes || no</li>
+<li>scrollbars: yes || no</li>
+<li>status: yes || no</li>
+<li>toolbar: yes || no</li>
+</ul>
+<p>使用方式: “fullscreen=yes,width=200,height=300…”(不能有空格)</p>
+<h3 id="setTimeout和setInterval"><a href="#setTimeout和setInterval" class="headerlink" title="setTimeout和setInterval"></a>setTimeout和setInterval</h3><p>setTimeout是我们经常用到的定时器方法:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> st = setTimeout(<span class="string">'alert("hi"))'</span>,<span class="number">1000</span>);<span class="comment">// 这里只是一个示例, 尽量避免第一个参数传入字符串</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果上面的代码没有执行, 那么可以同下面的语句清除</span></span><br><span class="line">cleartTimeout(st)</span><br></pre></td></tr></table></figure></p>
+<p>由于传递字符串可能导致性能损失，因此不建议以字符串作为第一个参数, 直接传入函数为佳。</p>
+<p>第二个参数是一个表示等待多长时间的毫秒数，但经过该时间后指定的代码不一定会执行。</p>
+<p>JavaScript 是一个单线程序的解释器，因此一定时间内只能执行一段代码。为了控制要执行的代码，就有一个 JavaScript 任务队列。这些任务会按照将它们添加到队列的顺序执行。setTimeout()的第二个参数告诉 JavaScript 再过多长时间把当前任务添加到队列中。如果队列是空的，那么添加的代码会立即执行；如果队列不是空的，那么它就要等前面的代码执行完了以后再执行。</p>
+<hr>
+<p>setInterval:</p>
+<p>setInterval用法和setTimeout类似, 但是它更耗性能, 前面说了, 每一次执行, 不能保证在约定的时间立即执行. 所以用setInterval来实现定时执行并不是一个理想的选择, 我们通过setTimeout来模拟:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> max = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_setInterval</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _fn = <span class="built_in">arguments</span>.callee;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    num++;</span><br><span class="line">    <span class="built_in">console</span>.log(num);</span><br><span class="line">    <span class="keyword">if</span>(num&lt;max)&#123;</span><br><span class="line">      _fn()</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'循环结束'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,<span class="number">500</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="系统对话框"><a href="#系统对话框" class="headerlink" title="系统对话框"></a>系统对话框</h3><p>常见的方法如下:</p>
+<ul>
+<li>alert</li>
+<li>prompt</li>
+<li>confirm</li>
+</ul>
+<p>不过根据潮流发展, 现在的开发人员更倾向通过重写Div来模拟以上系统对话框.</p>
+<h2 id="location对象"><a href="#location对象" class="headerlink" title="location对象"></a>location对象</h2><p>多用于跳转, 和获取参数, 注意参数的编码解码问题, 不再讲解</p>
+<h2 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h2><p>通常我们使用这个对象用于跳转, 和识别UA, 不再讲解</p>
+<h2 id="screen对象"><a href="#screen对象" class="headerlink" title="screen对象"></a>screen对象</h2><p>使用频率最低的对象之一, 故不再讲解</p>
+<h2 id="history对象"><a href="#history对象" class="headerlink" title="history对象"></a>history对象</h2><p>history 对象保存若用户上网的历史记录，从窗口被打开的那一刻算起。因为 history 是 window对象的属性，因此每个浏览器窗口、每个标签页乃至每个框架，都有自已的 history 对象与特定的window 对象关联。出于安全方面的考虑，开发人员无法得知用户浏览过的 URL。</p>
+<p>以下是常用的几个方法和属性:</p>
+<ul>
+<li>go: 常见参数:-1,1(对应下面的back, forward)</li>
+<li>back: 后退(用于模拟浏览器的后退按钮)</li>
+<li>forward: 前进(用于模拟浏览器的前进按钮)</li>
+<li>length:记录访问页面的数量</li>
+</ul>
+<hr>
+<p>本章完</p>
+
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+					<!-- 评论 -->
+					<div class="post-comments" id="Jcmt">
+	<h3 class="post-comments-tit">访客评论</h3>
+	<div id="vcomments"></div>
+	<script>
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
+			new Valine({
+			    el: '#vcomments',
+			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+			    notify:false,
+			    verify:false,
+			    avatar:'mm',
+			    placeholder: '感谢您的留言, 请勿灌水和广告.'
+			})
+		}
+	</script>
+</div>
+				</div>
+			</div>		</div>
+		<div class="footer">
+  <p class="left">&copy; 测试狗 ,
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">
+      本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+  </p>
+	<p class="right">Base on Github & Hexo</p>
+</div>
+<div class="count" style="display: none;">
+  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+</div>
+	</div>
+</div>
+
+</body>
+</html>
