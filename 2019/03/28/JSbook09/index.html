@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>JS红皮书读书笔记-09-客户端检测 | 测试狗</title>
+  <meta name="description" content="存在客户端检测, 是因为浏览器大战, 各家浏览器一单不按照某个规范, 那么实现起某个功能就会有五花八门的差异. 比如说早期在ajax和事件绑定上, 都要另外兼容IE , 此章的笔记并不多. 主要告诉检测的几种思路: 能力检测比如对区分PC端和移动端要求不高, 可以如下:var isMobile = function () &amp;#123;  try &amp;#123;    return !!documen">
+<meta name="keywords" content="测试狗,前端,计算广告,产品经理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS红皮书读书笔记-09-客户端检测">
+<meta property="og:url" content="https://thinkerchan.com/2019/03/28/JSbook09/index.html">
+<meta property="og:site_name" content="测试狗">
+<meta property="og:description" content="存在客户端检测, 是因为浏览器大战, 各家浏览器一单不按照某个规范, 那么实现起某个功能就会有五花八门的差异. 比如说早期在ajax和事件绑定上, 都要另外兼容IE , 此章的笔记并不多. 主要告诉检测的几种思路: 能力检测比如对区分PC端和移动端要求不高, 可以如下:var isMobile = function () &amp;#123;  try &amp;#123;    return !!documen">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-27T17:43:16.409Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS红皮书读书笔记-09-客户端检测">
+<meta name="twitter:description" content="存在客户端检测, 是因为浏览器大战, 各家浏览器一单不按照某个规范, 那么实现起某个功能就会有五花八门的差异. 比如说早期在ajax和事件绑定上, 都要另外兼容IE , 此章的笔记并不多. 主要告诉检测的几种思路: 能力检测比如对区分PC端和移动端要求不高, 可以如下:var isMobile = function () &amp;#123;  try &amp;#123;    return !!documen">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body id="normal" >
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">测试狗</a>
+	</h1>
+	<p class="social-links hide">
+		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
+		/
+		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
+		/
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">JS红皮书读书笔记-09-客户端检测</h1>
+					<div class="post-meta">
+						<span class="post-time">2019.03.28</span>
+						<div class="post-cats">
+							
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#能力检测"><span class="toc-number">1.</span> <span class="toc-text">能力检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怪癖检测"><span class="toc-number">2.</span> <span class="toc-text">怪癖检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UA检测"><span class="toc-number">3.</span> <span class="toc-text">UA检测</span></a></li></ol>
+					</div>
+					<p>存在客户端检测, 是因为浏览器大战, 各家浏览器一单不按照某个规范, 那么实现起某个功能就会有五花八门的差异.</p>
+<p>比如说早期在ajax和事件绑定上, 都要另外兼容IE , 此章的笔记并不多.</p>
+<p>主要告诉检测的几种思路:</p>
+<h2 id="能力检测"><a href="#能力检测" class="headerlink" title="能力检测"></a>能力检测</h2><p>比如对区分PC端和移动端要求不高, 可以如下:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> isMobile = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> !!<span class="built_in">document</span>.createEvent(<span class="string">"TouchEvent"</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure></p>
+<h2 id="怪癖检测"><a href="#怪癖检测" class="headerlink" title="怪癖检测"></a>怪癖检测</h2><p>怪癖检测实际上就根据某版本的浏览器的bug来鉴定, 比如早期的safari浏览器</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isOldSafari</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> reg = <span class="regexp">/\d/</span>; </span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">typeof</span> reg == <span class="string">'function'</span>; <span class="comment">// 早期的safari会返回'function', 显然是bug</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="UA检测"><a href="#UA检测" class="headerlink" title="UA检测"></a>UA检测</h2><p>大部分情况下都是通过访问navigator的<code>userAgent</code>, <code>platform</code>等属性来判断是否属于某种设备. 当然, 对于后端接受来说, 这些字段都是可以伪造的, 不过在前端方面, 用于设备检查, 已经完全足够.</p>
+<hr>
+<p>本章完</p>
+
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+					<!-- 评论 -->
+					<div class="post-comments" id="Jcmt">
+	<h3 class="post-comments-tit">访客评论</h3>
+	<div id="vcomments"></div>
+	<script>
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
+			new Valine({
+			    el: '#vcomments',
+			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+			    notify:false,
+			    verify:false,
+			    avatar:'mm',
+			    placeholder: '感谢您的留言, 请勿灌水和广告.'
+			})
+		}
+	</script>
+</div>
+				</div>
+			</div>		</div>
+		<div class="footer">
+  <p class="left">&copy; 测试狗 ,
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">
+      本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+  </p>
+	<p class="right">Base on Github & Hexo</p>
+</div>
+<div class="count" style="display: none;">
+  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+</div>
+	</div>
+</div>
+
+</body>
+</html>

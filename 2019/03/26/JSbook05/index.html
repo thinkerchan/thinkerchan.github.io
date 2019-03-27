@@ -17,7 +17,7 @@
 <meta property="og:description" content="Object创建Object对象的方法:  new Object 对象字面量(不会调用Object构造函数)  其他知识点:  通常用点运算符访问对象的熟悉 如非必要, 避免[“prop”]访问对象熟悉 如果函数需要大量传参, 可以用对象作为参数  Array创建方式:  new Array, 也可以省略new关键字i var arr = new Array(10); arr.length==10">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g1g6ue87hcj312k09ejs9.jpg">
-<meta property="og:updated_time" content="2019-03-26T06:47:08.404Z">
+<meta property="og:updated_time" content="2019-03-27T16:03:32.469Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS红皮书读书笔记-05-引用类型">
 <meta name="twitter:description" content="Object创建Object对象的方法:  new Object 对象字面量(不会调用Object构造函数)  其他知识点:  通常用点运算符访问对象的熟悉 如非必要, 避免[“prop”]访问对象熟悉 如果函数需要大量传参, 可以用对象作为参数  Array创建方式:  new Array, 也可以省略new关键字i var arr = new Array(10); arr.length==10">
@@ -156,7 +156,7 @@
 <li>reduceRight</li>
 </ul>
 <p>解析: 略</p>
-<h2 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h2><p>略</p>
+<h2 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h2><p>只讲一个奇技淫巧, 求某个月有多少天:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> getDays = <span class="function"><span class="keyword">function</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>((<span class="keyword">new</span> <span class="built_in">Date</span>).getFullYear(),m,<span class="number">0</span>).getDate()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h2><p>请查看<a href="https://thinkerchan.com/2016/01/05/regex/">正则表达式教程</a></p>
 <h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><p>每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。</p>
 <p>三种使用方式:<br><strong>函数声明</strong>:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
