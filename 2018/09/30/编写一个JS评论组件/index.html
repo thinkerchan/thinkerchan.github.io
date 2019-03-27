@@ -12,7 +12,7 @@
 <meta name="keywords" content="测试狗,前端,计算广告,产品经理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编写一个JS评论组件">
-<meta property="og:url" content="https://thinkerchan.github.io/2018/09/30/编写一个JS评论组件/index.html">
+<meta property="og:url" content="http://thinkerchan.com/2018/09/30/编写一个JS评论组件/index.html">
 <meta property="og:site_name" content="测试狗">
 <meta property="og:description" content="前言当初在太平洋网络搬砖的时候, 刚好负责评论系统这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中). 刚好前段时间做外包项目的时候用到LeanCloud这个还不错的产品(真没打广告),">
 <meta property="og:locale" content="default">
@@ -78,7 +78,7 @@
 					<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>当初在太平洋网络搬砖的时候, 刚好负责<a href="http://js.3conline.com/cmt/pcauto/common/cmt.js" target="_blank" rel="noopener">评论系统</a>这一块的前端重构(说多都是泪), 刚好17年年中那会, 国家法律要求所有能够发表言论的地方, 都得接入实名制, 于是用了很久的”多说”,也不免中枪,挂了.本来想着自己要不用前后端都写了, 弄一套开源的评论系统好了,结果从离职后到现在种种忙活都没能完成(自我检讨中).</p>
 <p>刚好前段时间做外包项目的时候用到<a href="https://leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a>这个还不错的产品(真没打广告), 继而发现了<a href="https://valine.js.org/" target="_blank" rel="noopener">Valine</a>这个评论组件, 原来多说关闭不久, 就有人开发了这套评论系统. 想起以前和别人交接工作的时候写了一份评论的原型代码, 于是我干脆也把它改造一下, 接入了LeanCloud. 算是一个入门级别的评论组件编写教程吧.</p>
 <p>另外说一句, Valine已经很完善了, 包括后面有人完善<a href="https://github.com/panjunwen/Valine-Admin" target="_blank" rel="noopener">Valine-admin</a>这样的辅助工具.说这些也并非不建议大家重复造轮子. 只不过提醒自己, 一个人可能走得快, 但是多个人, 可能走得更远.</p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>因为算是一个简单的教程, 用ES6和css3开发, 只能用高级浏览器看.<br><a href="https://thinkerchan.github.io/cmt/">https://thinkerchan.github.io/cmt/</a></p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>因为算是一个简单的教程, 用ES6和css3开发, 只能用高级浏览器看.<br><a href="https://thinkerchan.github.io/cmt/" target="_blank" rel="noopener">https://thinkerchan.github.io/cmt/</a></p>
 <h2 id="大概需求"><a href="#大概需求" class="headerlink" title="大概需求"></a>大概需求</h2><p>因为只有LeanCloud,没有自己的后台, 所以有些功能没法做(其实也不是没法做, 只是效果不好)</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@k 评论原型</span><br><span class="line"></span><br><span class="line">主要部分</span><br><span class="line">1.评论框复用 //√</span><br><span class="line">2.对用户输入进行转义 //√</span><br><span class="line">3.评论数据结构复用 //√</span><br><span class="line">4.异步加载样式表  // √</span><br><span class="line">5.Ajax  // 因为用了leancloud,所以直接用它的SDK</span><br><span class="line">6.留言排序可选 // × 直接从旧到新</span><br><span class="line">7. 基于localstorage存储网友的昵称/邮箱/网址</span><br><span class="line">8. md5拼接邮箱生成头像 //基于gavatar</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">TODO</span><br><span class="line">1. 留言点赞功能 //非限定次数(删除cookie依然可以点赞)</span><br><span class="line">2. 用户登录/注册  // 要做吗?</span><br><span class="line">3. 验证码  //需要后端配合</span><br><span class="line">5.表情处理(类似新浪微博处理方式比较合理) //✘</span><br><span class="line">6.楼层嵌套  //类似biliili</span><br><span class="line">7.分页</span><br><span class="line">8.楼层ID处理 // normal则不需要处理, 楼层嵌套则要过滤不含有targetFloor的cid</span><br></pre></td></tr></table></figure>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>把手头的活干完, 再继续完善Todo吧.</p>
@@ -124,14 +124,13 @@
 				</div>
 			</div>		</div>
 		<div class="footer">
-  <p class="left">&copy; Thinker Chan ,
+  <p class="left">&copy; 测试狗 ,
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span id="busuanzi_container_site_pv">
       本站总访问量<span id="busuanzi_value_site_pv"></span>次
     </span>
   </p>
-	<p class="right">Hosted by <a href="https://pages.coding.me">Coding Pages</a>
-  </p>
+	<p class="right">Base on Github & Hexo</p>
 </div>
 <div class="count" style="display: none;">
   <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
