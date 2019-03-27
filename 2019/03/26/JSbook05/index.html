@@ -12,7 +12,7 @@
 <meta name="keywords" content="测试狗,前端,计算广告,产品经理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS红皮书读书笔记-05-引用类型">
-<meta property="og:url" content="http://thinkerchan.com/2019/03/26/JSbook05/index.html">
+<meta property="og:url" content="https://thinkerchan.github.io/2019/03/26/JSbook05/index.html">
 <meta property="og:site_name" content="测试狗">
 <meta property="og:description" content="Object创建Object对象的方法:  new Object 对象字面量(不会调用Object构造函数)  其他知识点:  通常用点运算符访问对象的熟悉 如非必要, 避免[“prop”]访问对象熟悉 如果函数需要大量传参, 可以用对象作为参数  Array创建方式:  new Array, 也可以省略new关键字i var arr = new Array(10); arr.length==10">
 <meta property="og:locale" content="default">
@@ -157,7 +157,7 @@
 </ul>
 <p>解析: 略</p>
 <h2 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h2><p>略</p>
-<h2 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h2><p>请查看<a href="https://thinkerchan.com/2016/01/05/regex/">正则表达式教程</a></p>
+<h2 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h2><p>请查看<a href="https://thinkerchan.com/2016/01/05/regex/" target="_blank" rel="noopener">正则表达式教程</a></p>
 <h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><p>每个函数都是 Function 类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。</p>
 <p>三种使用方式:<br><strong>函数声明</strong>:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num1, num2</span>) </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p> <strong>函数表达式</strong>:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span> (<span class="params">num1, num2</span>) </span>&#123; </span><br><span class="line">  <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;;	<span class="comment">//这个分号别漏了, 养成习惯</span></span><br></pre></td></tr></table></figure></p>
