@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
+  <meta name="renderer" content="webkit">
+  
+  <title>JS红皮书读书笔记-24-最佳实践 | 测试狗</title>
+  <meta name="description" content="可维护性可维护性并不是js专有, 其他语言也有这么个说法, 可维护性最大的价值是让别人更好的在你代码的基础上维护和增减功能 什么是可维护的代码通常写入注释是为了让其他人更好地看懂自己写了啥, 不过我相信一条原则, 写的好的代码, 本身就是注释, 可维护的代码有以下几个特征:   可理解: 容易被理解 直观:  直观可读 可适应: 代码以一种数据上的变化不需要完全重写原来的方法 可扩展: 在某种程度">
+<meta name="keywords" content="测试狗,前端,计算广告,产品经理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS红皮书读书笔记-24-最佳实践">
+<meta property="og:url" content="https://thinkerchan.com/2019/04/09/JSbook24/index.html">
+<meta property="og:site_name" content="测试狗">
+<meta property="og:description" content="可维护性可维护性并不是js专有, 其他语言也有这么个说法, 可维护性最大的价值是让别人更好的在你代码的基础上维护和增减功能 什么是可维护的代码通常写入注释是为了让其他人更好地看懂自己写了啥, 不过我相信一条原则, 写的好的代码, 本身就是注释, 可维护的代码有以下几个特征:   可理解: 容易被理解 直观:  直观可读 可适应: 代码以一种数据上的变化不需要完全重写原来的方法 可扩展: 在某种程度">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-09T08:10:04.787Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS红皮书读书笔记-24-最佳实践">
+<meta name="twitter:description" content="可维护性可维护性并不是js专有, 其他语言也有这么个说法, 可维护性最大的价值是让别人更好的在你代码的基础上维护和增减功能 什么是可维护的代码通常写入注释是为了让其他人更好地看懂自己写了啥, 不过我相信一条原则, 写的好的代码, 本身就是注释, 可维护的代码有以下几个特征:   可理解: 容易被理解 直观:  直观可读 可适应: 代码以一种数据上的变化不需要完全重写原来的方法 可扩展: 在某种程度">
+<meta name="twitter:creator" content="@thinkerchan">
+<meta property="fb:admins" content="thinkerchan">
+  
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  
+
+  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="shortcut icon" href="/images/favicon.png"/>
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+  <script data-main="/js/build" src="/js/require.js"></script>
+  <!--[if lt IE 7]>
+  <style>
+    .section{
+      width: 780px;
+    }
+    .post-content img{
+      width: 100%;
+    }
+    .jupe pre{
+      width: 100%;
+    }
+  </style>
+  <![endif]-->
+</head>
+<body id="normal" >
+
+<div class="section-wrap section-main">
+	<div class="section">
+		<div class="header">
+	<h1 class="logo">
+		<a href="/">测试狗</a>
+	</h1>
+	<p class="social-links hide">
+		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
+		/
+		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
+		/
+		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
+	</p>
+</div>
+		<div class="main">
+						<div class="jupe main-body">
+				<div class="post-content">
+					<h1 class="post-title">JS红皮书读书笔记-24-最佳实践</h1>
+					<div class="post-meta">
+						<span class="post-time">2019.04.09</span>
+						<div class="post-cats">
+							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
+						</div>
+					</div>
+					<div class="post-toc">
+						<div class="toc-title">TOC</div>
+						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#可维护性"><span class="toc-number">1.</span> <span class="toc-text">可维护性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是可维护的代码"><span class="toc-number">1.1.</span> <span class="toc-text">什么是可维护的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码约定"><span class="toc-number">1.2.</span> <span class="toc-text">代码约定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#松散耦合"><span class="toc-number">1.3.</span> <span class="toc-text">松散耦合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编程实践"><span class="toc-number">1.4.</span> <span class="toc-text">编程实践</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能"><span class="toc-number">2.</span> <span class="toc-text">性能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意作用域"><span class="toc-number">2.1.</span> <span class="toc-text">注意作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择正确方法"><span class="toc-number">2.2.</span> <span class="toc-text">选择正确方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最小化语句"><span class="toc-number">2.3.</span> <span class="toc-text">最小化语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化DOM交互"><span class="toc-number">2.4.</span> <span class="toc-text">优化DOM交互</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#部署"><span class="toc-number">3.</span> <span class="toc-text">部署</span></a></li></ol>
+					</div>
+					<h2 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h2><p>可维护性并不是js专有, 其他语言也有这么个说法, 可维护性最大的价值是让别人更好的在你代码的基础上维护和增减功能</p>
+<h3 id="什么是可维护的代码"><a href="#什么是可维护的代码" class="headerlink" title="什么是可维护的代码"></a>什么是可维护的代码</h3><p>通常写入注释是为了让其他人更好地看懂自己写了啥, 不过我相信一条原则, 写的好的代码, 本身就是注释, 可维护的代码有以下几个特征: </p>
+<ul>
+<li>可理解: 容易被理解</li>
+<li>直观:  直观可读</li>
+<li>可适应: 代码以一种数据上的变化不需要完全重写原来的方法</li>
+<li>可扩展: 在某种程度上考虑到将来要用到的功能</li>
+<li>可调试</li>
+</ul>
+<h3 id="代码约定"><a href="#代码约定" class="headerlink" title="代码约定"></a>代码约定</h3><p>团队开发中通常约定代码风格, 例如缩进, 换行, 变量/函数命名大小写等, 注意不要起令人困惑或者没有意义的变量名, 也无需担心变量名过长, 因为可压缩.</p>
+<h3 id="松散耦合"><a href="#松散耦合" class="headerlink" title="松散耦合"></a>松散耦合</h3><ol>
+<li>解耦HTML/JS: 尽可能避免在html元素中直接写js</li>
+<li>解耦Css/JS: 尽可能不要用js设置css</li>
+<li>解耦JS逻辑: 每一个函数尽可能实现单一的功能(按照最小化分离原则)</li>
+</ol>
+<h3 id="编程实践"><a href="#编程实践" class="headerlink" title="编程实践"></a>编程实践</h3><ol>
+<li>尊重对象所有权: <ul>
+<li>不要修改默认类型的属性和方法</li>
+<li>不要定义自己存在的方法</li>
+</ul>
+</li>
+<li>避免全局对象: 前面作用域链也讲过, 全局作用域中保存的变量是最后查找的</li>
+<li>尽量避免和null对比: 应该用更具体的类型或者实例进行对比</li>
+<li>使用常量: 在ES5中我们用大写标识符表示常量</li>
+</ol>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><h3 id="注意作用域"><a href="#注意作用域" class="headerlink" title="注意作用域"></a>注意作用域</h3><ol>
+<li>避免全局查找</li>
+<li>避免with语句: with设计的目的是为了简写某个对象, 方便开发者操作属性, 但是这非常容易造成作用域混乱</li>
+</ol>
+<h3 id="选择正确方法"><a href="#选择正确方法" class="headerlink" title="选择正确方法"></a>选择正确方法</h3><ol>
+<li><p>避免不必要的属性查找: 在计算机科学中，算法的复杂度是使用 O 符号来表示的。最简单、最快捷的算法是常数值即 O(1)。之后，算法变得越来越复杂并花更长时间执行。<br> 使用变量和数组要比访问对象上的属性更有效率，后者是一个 O(n)操作。对象上的任何属性查找都要比访问变量或者数组花费更长时间，因为必须在原型链中对拥有该名称的属性进行一次搜索。简而言之，属性查找越多，执行时间就越长。所以有必要, 就缓存某一个常用的值.</p>
+<p> 下面这个表展示算法复杂度种类:</p>
+<ul>
+<li>O(1) : 不管有多少值，执行的时间都是恒定的。一般表示简单值和存储在变量中的值</li>
+<li>O(log n): 总的执行时间和值的数量相关，但是要完成算法并不一定要获取每个值。例如：二分查找 </li>
+<li>O(n) : 总执行时间和值的数量直接相关, 例如: 遍历某个数据中的所有元素</li>
+<li>O(n^2) : 总执行时间和值的数量有关, 每个值至少获取n次, 例如:插入排序</li>
+</ul>
+</li>
+<li>优化循环</li>
+<li>展开循环</li>
+<li>避免双重解释</li>
+<li>其他注意事项<ul>
+<li>原生方法最快 </li>
+<li>switch比一系列的的if-else要快</li>
+<li>位运算符比较快</li>
+</ul>
+</li>
+</ol>
+<h3 id="最小化语句"><a href="#最小化语句" class="headerlink" title="最小化语句"></a>最小化语句</h3><ol>
+<li>多个变量声明: 可以使用一个var</li>
+<li>插入迭代值 (个人认为可读性会降低)</li>
+<li>使用数组和对象字面量: 简洁明了</li>
+</ol>
+<h3 id="优化DOM交互"><a href="#优化DOM交互" class="headerlink" title="优化DOM交互"></a>优化DOM交互</h3><ol>
+<li>最小化现场更新: 优先使用document.createFragment</li>
+<li>使用innerHTML创建元素更快</li>
+<li>事件代理: 使用事件代理可以减少事件绑定, 提高性能</li>
+<li>注意HTMLCollcetion: 循环的时候不要用它作为终止条件</li>
+</ol>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>书上使用的一些工具比较旧, 所以不打算在这里讲解, 之后另开一篇文章</p>
+<hr>
+<p>本章完</p>
+
+					<div class="post-share">
+	<ul class="share-list">
+		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
+		<li>
+      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
+        <div class="wechat-qrcode" id="qrcodeBox">
+          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
+          <em class="wechat-tri"></em>
+        </div>
+        <span>wechat</span>
+      </a>
+    </li>
+		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
+	</ul>
+</div>
+					<!-- 评论 -->
+					<div class="post-comments" id="Jcmt">
+	<h3 class="post-comments-tit">访客评论</h3>
+	<div id="vcomments"></div>
+	<script>
+
+		var checkEle =function(id){return !!document.getElementById(id)} ,
+			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
+		if (hideCmt) {
+			Jcmt.style.display = 'none';
+		}else{
+			new Valine({
+			    el: '#vcomments',
+			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+			    notify:false,
+			    verify:false,
+			    avatar:'mm',
+			    placeholder: '感谢您的留言, 请勿灌水和广告.'
+			})
+		}
+	</script>
+</div>
+				</div>
+			</div>		</div>
+		<div class="footer">
+  <p class="left">&copy; 测试狗 ,
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">
+      本站总访问量<span id="busuanzi_value_site_pv"></span>次
+    </span>
+  </p>
+	<p class="right">Base on Github & Hexo</p>
+</div>
+<div class="count" style="display: none;">
+  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+</div>
+	</div>
+</div>
+
+</body>
+</html>
