@@ -1,170 +1,191 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
-  <meta name="renderer" content="webkit">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
   
   <title>Overflow:hidden的bug是什么? | 测试狗</title>
-  <meta name="description" content="清除浮动的方式空元素撑开父层&amp;lt;div class=&amp;quot;wrap&amp;quot;&amp;gt;     &amp;lt;div class=&amp;quot;div1&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;     &amp;lt;div class=&amp;quot;div2&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;     &amp;lt;div style=&amp;quot;clear:both&amp;quot;&amp;gt;&amp;lt;/">
-<meta name="keywords" content="overflow">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Overflow:hidden的bug是什么?">
-<meta property="og:url" content="https://thinkerchan.com/2015/05/31/where-is-the-bug-of-Overflow-hidden/index.html">
-<meta property="og:site_name" content="测试狗">
-<meta property="og:description" content="清除浮动的方式空元素撑开父层&amp;lt;div class=&amp;quot;wrap&amp;quot;&amp;gt;     &amp;lt;div class=&amp;quot;div1&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;     &amp;lt;div class=&amp;quot;div2&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;     &amp;lt;div style=&amp;quot;clear:both&amp;quot;&amp;gt;&amp;lt;/">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-18T14:54:07.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Overflow:hidden的bug是什么?">
-<meta name="twitter:description" content="清除浮动的方式空元素撑开父层&amp;lt;div class=&amp;quot;wrap&amp;quot;&amp;gt;     &amp;lt;div class=&amp;quot;div1&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;     &amp;lt;div class=&amp;quot;div2&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;     &amp;lt;div style=&amp;quot;clear:both&amp;quot;&amp;gt;&amp;lt;/">
-<meta name="twitter:creator" content="@thinkerchan">
-<meta property="fb:admins" content="thinkerchan">
+  <meta name="author" content="测试狗">
   
-  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="Overflow:hidden的bug是什么?"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
   
 
-  <link rel="stylesheet" href="/css/style.css" >
-  <link rel="shortcut icon" href="/images/favicon.png"/>
-  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-  <script data-main="/js/build" src="/js/require.js"></script>
-  <!--[if lt IE 7]>
-  <style>
-    .section{
-      width: 780px;
-    }
-    .post-content img{
-      width: 100%;
-    }
-    .jupe pre{
-      width: 100%;
-    }
-  </style>
-  <![endif]-->
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
-<body id="normal" >
 
-<div class="section-wrap section-main">
-	<div class="section">
-		<div class="header">
-	<h1 class="logo">
-		<a href="/">测试狗</a>
-	</h1>
-	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
-		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
-		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
-	</p>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">表</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2015-05-31T04:21:41.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2015-05-31
+</time>
+
+
+
+
+
 </div>
-		<div class="main">
-						<div class="jupe main-body">
-				<div class="post-content">
-					<h1 class="post-title">Overflow:hidden的bug是什么?</h1>
-					<div class="post-meta">
-						<span class="post-time">2015.05.31</span>
-						<div class="post-cats">
-							<a class="post-cats-item-link" href="/categories/Css/">Css</a>
-						</div>
-					</div>
-					<div class="post-toc">
-						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动的方式"><span class="toc-number">1.</span> <span class="toc-text">清除浮动的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#空元素撑开父层"><span class="toc-number">1.1.</span> <span class="toc-text">空元素撑开父层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用br的clear属性"><span class="toc-number">1.2.</span> <span class="toc-text">利用br的clear属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父级overflow-auto"><span class="toc-number">1.3.</span> <span class="toc-text">父级overflow:auto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父级display-table"><span class="toc-number">1.4.</span> <span class="toc-text">父级display:table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用伪元素"><span class="toc-number">1.5.</span> <span class="toc-text">利用伪元素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#版本1"><span class="toc-number">1.5.1.</span> <span class="toc-text">版本1:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本2"><span class="toc-number">1.5.2.</span> <span class="toc-text">版本2:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#overflow-hidden"><span class="toc-number">1.6.</span> <span class="toc-text">overflow:hidden</span></a></li></ol></li></ol>
-					</div>
-					<h2 id="清除浮动的方式"><a href="#清除浮动的方式" class="headerlink" title="清除浮动的方式"></a>清除浮动的方式</h2><h3 id="空元素撑开父层"><a href="#空元素撑开父层" class="headerlink" title="空元素撑开父层"></a>空元素撑开父层</h3><pre><code>&lt;div class=&quot;wrap&quot;&gt;
-    &lt;div class=&quot;div1&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;div2&quot;&gt;&lt;/div&gt;
-    &lt;div style=&quot;clear:both&quot;&gt;&lt;/div&gt;
- &lt;div&gt;
-</code></pre><blockquote>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">Overflow:hidden的bug是什么?</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动的方式"><span class="toc-number">1.</span> <span class="toc-text">清除浮动的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#空元素撑开父层"><span class="toc-number">1.1.</span> <span class="toc-text">空元素撑开父层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用br的clear属性"><span class="toc-number">1.2.</span> <span class="toc-text">利用br的clear属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父级overflow-auto"><span class="toc-number">1.3.</span> <span class="toc-text">父级overflow:auto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#父级display-table"><span class="toc-number">1.4.</span> <span class="toc-text">父级display:table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用伪元素"><span class="toc-number">1.5.</span> <span class="toc-text">利用伪元素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#版本1"><span class="toc-number">1.5.1.</span> <span class="toc-text">版本1:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#版本2"><span class="toc-number">1.5.2.</span> <span class="toc-text">版本2:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#overflow-hidden"><span class="toc-number">1.6.</span> <span class="toc-text">overflow:hidden</span></a></li></ol></li></ol>
+    </div>
+    
+    <h2 id="清除浮动的方式"><a href="#清除浮动的方式" class="headerlink" title="清除浮动的方式"></a>清除浮动的方式</h2><h3 id="空元素撑开父层"><a href="#空元素撑开父层" class="headerlink" title="空元素撑开父层"></a>空元素撑开父层</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"clear:both"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>缺点:增加无意义的标签,对以后维护不利</p>
-</blockquote>
-<h3 id="利用br的clear属性"><a href="#利用br的clear属性" class="headerlink" title="利用br的clear属性"></a>利用br的clear属性</h3><pre><code>&lt;div class=&quot;wrap&quot;&gt;
-    &lt;div class=&quot;div1&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;div2&quot;&gt;&lt;/div&gt;
-    &lt;br clear=&quot;both&quot;&gt;
- &lt;div&gt;
-</code></pre><blockquote>
+<h3 id="利用br的clear属性"><a href="#利用br的clear属性" class="headerlink" title="利用br的clear属性"></a>利用br的clear属性</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span> <span class="attr">clear</span>=<span class="string">"both"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>缺点:结构和表现混合,和方法一类似</p>
-</blockquote>
-<h3 id="父级overflow-auto"><a href="#父级overflow-auto" class="headerlink" title="父级overflow:auto"></a>父级<code>overflow:auto</code></h3><pre><code>&lt;div class=&quot;wrap&quot;&gt;
-    &lt;div class=&quot;div1&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;div2&quot;&gt;&lt;/div&gt;
- &lt;div&gt;
-</code></pre><blockquote>
+<h3 id="父级overflow-auto"><a href="#父级overflow-auto" class="headerlink" title="父级overflow:auto"></a>父级<code>overflow:auto</code></h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>缺点:低版本IE会出现滚动条</p>
-</blockquote>
-<h3 id="父级display-table"><a href="#父级display-table" class="headerlink" title="父级display:table"></a>父级<code>display:table</code></h3><blockquote>
-<p>缺点:盒模型属性已经改变,会在低版本IE中造成一系列问题</p>
-</blockquote>
-<h3 id="利用伪元素"><a href="#利用伪元素" class="headerlink" title="利用伪元素"></a>利用伪元素</h3><h4 id="版本1"><a href="#版本1" class="headerlink" title="版本1:"></a>版本1:</h4><p>先定义两个class:</p>
-<pre><code>.clearfix:after {content:&quot;\20&quot;; display:block; height:0; clear: both;visibility: hidden; }
- .clearfix { *zoom:1; }
-</code></pre><p>这是目前最常见的清浮方式，IE6、7通过<code>zoom:1</code>触发hasLayout特性</p>
-<blockquote>
-<p>缺点:貌似又多了点代码，当然可以忽略不计（= =|||其实是我不知道缺点在哪而已）</p>
-</blockquote>
-<h4 id="版本2"><a href="#版本2" class="headerlink" title="版本2:"></a>版本2:</h4><pre><code>.floatfix:after{content: &quot;&quot;;display: table;clear:both;}
-</code></pre><h3 id="overflow-hidden"><a href="#overflow-hidden" class="headerlink" title="overflow:hidden"></a>overflow:hidden</h3><p>在厂里面常常有人用clearfix来清浮,但是我通常用的是OH来清浮,老大说这样又问题,困惑至今。<br>网上搜到一篇<code>overflow:hidden</code>相关的说明<a href="http://plod.popoever.com/archives/000309.html" target="_blank" rel="noopener">文档</a>，但是年代久远，其中的bug本人亲测没能还原出来，希望得到解答。</p>
+<h3 id="父级display-table"><a href="#父级display-table" class="headerlink" title="父级display:table"></a>父级<code>display:table</code></h3><p>缺点:盒模型属性已经改变,会在低版本IE中造成一系列问题</p>
+<h3 id="利用伪元素"><a href="#利用伪元素" class="headerlink" title="利用伪元素"></a>利用伪元素</h3><h4 id="版本1"><a href="#版本1" class="headerlink" title="版本1:"></a>版本1:</h4><p>先定义两个class:<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;<span class="attribute">content</span>:<span class="string">"\20"</span>; <span class="attribute">display</span>:block; <span class="attribute">height</span>:<span class="number">0</span>; <span class="attribute">clear</span>: both;<span class="attribute">visibility</span>: hidden; &#125;</span><br><span class="line">.clearfix &#123; *zoom:1; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这是目前最常见的清浮方式，IE6、7通过<code>zoom:1</code>触发hasLayout特性</p>
+<p>缺点:貌似又多了点代码，当然可以忽略不计</p>
+<h4 id="版本2"><a href="#版本2" class="headerlink" title="版本2:"></a>版本2:</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.floatfix</span><span class="selector-pseudo">:after</span>&#123;<span class="attribute">content</span>: <span class="string">""</span>;<span class="attribute">display</span>: table;<span class="attribute">clear</span>:both;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="overflow-hidden"><a href="#overflow-hidden" class="headerlink" title="overflow:hidden"></a>overflow:hidden</h3><p>在厂里面常常有人用clearfix来清浮,但是我通常用的是OH来清浮,老大说这样又问题,困惑至今。<br>网上搜到一篇<code>overflow:hidden</code>相关的说明<a href="http://plod.popoever.com/archives/000309.html" target="_blank" rel="noopener">文档</a>，但是年代久远，其中的bug本人亲测没能还原出来，希望得到解答。</p>
 
-					<div class="post-share">
-	<ul class="share-list">
-		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
-		<li>
-      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
-        <div class="wechat-qrcode" id="qrcodeBox">
-          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
-          <em class="wechat-tri"></em>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2015/06/11/Advanced-Techniques/" class="prev">上一篇：Javascript高级技巧(一)</a>
+    
+    
+    <a href="/2015/05/31/loopholes/" class="next">下一篇：100.com的一个漏洞(上)</a>
+    
+  </nav>
+
         </div>
-        <span>wechat</span>
-      </a>
-    </li>
-		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
-	</ul>
-</div>
-					<!-- 评论 -->
-					<div class="post-comments" id="Jcmt">
-	<h3 class="post-comments-tit">访客评论</h3>
-	<div id="vcomments"></div>
-	<script>
-
-		var checkEle =function(id){return !!document.getElementById(id)} ,
-			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
-		if (hideCmt) {
-			Jcmt.style.display = 'none';
-		}else{
-			new Valine({
-			    el: '#vcomments',
-			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
-			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
-			    notify:false,
-			    verify:false,
-			    avatar:'mm',
-			    placeholder: '感谢您的留言, 请勿灌水和广告.'
-			})
-		}
-	</script>
-</div>
-				</div>
-			</div>		</div>
-		<div class="footer">
-  <p class="left">&copy; 测试狗 ,
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    </span>
-  </p>
-	<p class="right">Base on Github & Hexo</p>
-</div>
-<div class="count" style="display: none;">
-  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
-</div>
-	</div>
-</div>
-
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+  <script>
+    new Valine({
+      el: '#Jcomment',
+      appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+      appKey: 'QoS0zL4Y2xTDviitGOPkvCGv' ,
+      notify: false,
+      verify: false,
+      avatar: 'mm',
+      pageSize: '10',
+      placeholder:'Valine+Leancloud提供评论'
+    })
+  </script>
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
 </body>
 </html>

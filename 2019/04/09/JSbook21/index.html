@@ -1,81 +1,132 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
-  <meta name="renderer" content="webkit">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
   
   <title>JS红皮书读书笔记-21-Ajax与Comet | 测试狗</title>
-  <meta name="description" content="Ajax，是对 Asynchronous JavaScript + XML 的简写。 Ajax 技术的核心是 XMLHttpRequest 对象（简称 XHR），这是由微软首先引入的一个特性，其他浏览器提供商后来都提供了相同的实现。在 XHR 出现之前，Ajax 式的通信必须借助一些 hack 手段来实现，大多数是使用隐藏的框架或内嵌框架。XHR 为向服务器发送请求和解析服务器响应提供了流畅的接口">
-<meta name="keywords" content="测试狗,前端,计算广告,产品经理">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JS红皮书读书笔记-21-Ajax与Comet">
-<meta property="og:url" content="https://thinkerchan.com/2019/04/09/JSbook21/index.html">
-<meta property="og:site_name" content="测试狗">
-<meta property="og:description" content="Ajax，是对 Asynchronous JavaScript + XML 的简写。 Ajax 技术的核心是 XMLHttpRequest 对象（简称 XHR），这是由微软首先引入的一个特性，其他浏览器提供商后来都提供了相同的实现。在 XHR 出现之前，Ajax 式的通信必须借助一些 hack 手段来实现，大多数是使用隐藏的框架或内嵌框架。XHR 为向服务器发送请求和解析服务器响应提供了流畅的接口">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-09T08:07:32.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS红皮书读书笔记-21-Ajax与Comet">
-<meta name="twitter:description" content="Ajax，是对 Asynchronous JavaScript + XML 的简写。 Ajax 技术的核心是 XMLHttpRequest 对象（简称 XHR），这是由微软首先引入的一个特性，其他浏览器提供商后来都提供了相同的实现。在 XHR 出现之前，Ajax 式的通信必须借助一些 hack 手段来实现，大多数是使用隐藏的框架或内嵌框架。XHR 为向服务器发送请求和解析服务器响应提供了流畅的接口">
-<meta name="twitter:creator" content="@thinkerchan">
-<meta property="fb:admins" content="thinkerchan">
+  <meta name="author" content="测试狗">
   
-  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-21-Ajax与Comet"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
   
 
-  <link rel="stylesheet" href="/css/style.css" >
-  <link rel="shortcut icon" href="/images/favicon.png"/>
-  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-  <script data-main="/js/build" src="/js/require.js"></script>
-  <!--[if lt IE 7]>
-  <style>
-    .section{
-      width: 780px;
-    }
-    .post-content img{
-      width: 100%;
-    }
-    .jupe pre{
-      width: 100%;
-    }
-  </style>
-  <![endif]-->
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
-<body id="normal" >
 
-<div class="section-wrap section-main">
-	<div class="section">
-		<div class="header">
-	<h1 class="logo">
-		<a href="/">测试狗</a>
-	</h1>
-	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
-		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
-		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
-	</p>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">表</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-04-09T08:07:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-04-09
+</time>
+
+
+
+
+
 </div>
-		<div class="main">
-						<div class="jupe main-body">
-				<div class="post-content">
-					<h1 class="post-title">JS红皮书读书笔记-21-Ajax与Comet</h1>
-					<div class="post-meta">
-						<span class="post-time">2019.04.09</span>
-						<div class="post-cats">
-							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
-						</div>
-					</div>
-					<div class="post-toc">
-						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest对象"><span class="toc-number">1.</span> <span class="toc-text">XMLHttpRequest对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XHR的用法"><span class="toc-number">1.1.</span> <span class="toc-text">XHR的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Http头部信息"><span class="toc-number">1.2.</span> <span class="toc-text">Http头部信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get请求"><span class="toc-number">1.3.</span> <span class="toc-text">Get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post请求"><span class="toc-number">1.4.</span> <span class="toc-text">Post请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest2级"><span class="toc-number">2.</span> <span class="toc-text">XMLHttpRequest2级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FormData"><span class="toc-number">2.1.</span> <span class="toc-text">FormData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#超时设定"><span class="toc-number">2.2.</span> <span class="toc-text">超时设定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#overrideMimeType方法"><span class="toc-number">2.3.</span> <span class="toc-text">overrideMimeType方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进度事件"><span class="toc-number">3.</span> <span class="toc-text">进度事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#load事件"><span class="toc-number">3.1.</span> <span class="toc-text">load事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#progress事件"><span class="toc-number">3.2.</span> <span class="toc-text">progress事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域资源共享CORS"><span class="toc-number">4.</span> <span class="toc-text">跨域资源共享CORS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE对CORS的实现"><span class="toc-number">4.1.</span> <span class="toc-text">IE对CORS的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他浏览器对CORS的实现"><span class="toc-number">4.2.</span> <span class="toc-text">其他浏览器对CORS的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Preflighted-Request"><span class="toc-number">4.3.</span> <span class="toc-text">Preflighted Request</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#带凭据的请求"><span class="toc-number">4.4.</span> <span class="toc-text">带凭据的请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨浏览器的CORS"><span class="toc-number">4.5.</span> <span class="toc-text">跨浏览器的CORS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他跨域技术"><span class="toc-number">5.</span> <span class="toc-text">其他跨域技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图像ping"><span class="toc-number">5.1.</span> <span class="toc-text">图像ping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP"><span class="toc-number">5.2.</span> <span class="toc-text">JSONP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comet"><span class="toc-number">5.3.</span> <span class="toc-text">Comet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器发送事件"><span class="toc-number">5.4.</span> <span class="toc-text">服务器发送事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebSockets"><span class="toc-number">5.5.</span> <span class="toc-text">WebSockets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSE-与WebSockets"><span class="toc-number">5.6.</span> <span class="toc-text">SSE 与WebSockets</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全"><span class="toc-number">6.</span> <span class="toc-text">安全</span></a></li></ol>
-					</div>
-					<p>Ajax，是对 Asynchronous JavaScript + XML 的简写。</p>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-21-Ajax与Comet</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest对象"><span class="toc-number">1.</span> <span class="toc-text">XMLHttpRequest对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XHR的用法"><span class="toc-number">1.1.</span> <span class="toc-text">XHR的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Http头部信息"><span class="toc-number">1.2.</span> <span class="toc-text">Http头部信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get请求"><span class="toc-number">1.3.</span> <span class="toc-text">Get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post请求"><span class="toc-number">1.4.</span> <span class="toc-text">Post请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest2级"><span class="toc-number">2.</span> <span class="toc-text">XMLHttpRequest2级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FormData"><span class="toc-number">2.1.</span> <span class="toc-text">FormData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#超时设定"><span class="toc-number">2.2.</span> <span class="toc-text">超时设定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#overrideMimeType方法"><span class="toc-number">2.3.</span> <span class="toc-text">overrideMimeType方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进度事件"><span class="toc-number">3.</span> <span class="toc-text">进度事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#load事件"><span class="toc-number">3.1.</span> <span class="toc-text">load事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#progress事件"><span class="toc-number">3.2.</span> <span class="toc-text">progress事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域资源共享CORS"><span class="toc-number">4.</span> <span class="toc-text">跨域资源共享CORS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE对CORS的实现"><span class="toc-number">4.1.</span> <span class="toc-text">IE对CORS的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他浏览器对CORS的实现"><span class="toc-number">4.2.</span> <span class="toc-text">其他浏览器对CORS的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Preflighted-Request"><span class="toc-number">4.3.</span> <span class="toc-text">Preflighted Request</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#带凭据的请求"><span class="toc-number">4.4.</span> <span class="toc-text">带凭据的请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨浏览器的CORS"><span class="toc-number">4.5.</span> <span class="toc-text">跨浏览器的CORS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他跨域技术"><span class="toc-number">5.</span> <span class="toc-text">其他跨域技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图像ping"><span class="toc-number">5.1.</span> <span class="toc-text">图像ping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP"><span class="toc-number">5.2.</span> <span class="toc-text">JSONP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comet"><span class="toc-number">5.3.</span> <span class="toc-text">Comet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器发送事件"><span class="toc-number">5.4.</span> <span class="toc-text">服务器发送事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebSockets"><span class="toc-number">5.5.</span> <span class="toc-text">WebSockets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSE-与WebSockets"><span class="toc-number">5.6.</span> <span class="toc-text">SSE 与WebSockets</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全"><span class="toc-number">6.</span> <span class="toc-text">安全</span></a></li></ol>
+    </div>
+    
+    <p>Ajax，是对 Asynchronous JavaScript + XML 的简写。</p>
 <p>Ajax 技术的核心是 XMLHttpRequest 对象（简称 XHR），这是由微软首先引入的一个特性，其他浏览器提供商后来都提供了相同的实现。在 XHR 出现之前，Ajax 式的通信必须借助一些 hack 手段来实现，大多数是使用隐藏的框架或内嵌框架。XHR 为向服务器发送请求和解析服务器响应提供了流畅的接口。能够以异步方式从服务器取得更多信息，意味若用户单击后，可以不必刷新页面也能取得新数据。也就是说，可以使用 XHR 对象取得新数据，然后再通过 DOM 将新数据插入到页面中。</p>
 <p>另外，虽然名字中包含 XML 的成分，但 Ajax 通信与数据格式无关；这种技术就是无须刷新页面即可从服务器取得数据，但不一定是 XML 数据。</p>
 <h2 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h2><p>IE5 是第一款引入 XHR 对象的浏览器。在 IE5 中，XHR 对象是通过 MSXML 库中的一个 ActiveX对象实现的。因此，在  IE 中可能会遇到三种不同版本的  XHR 对象，即  MSXML2.XMLHttp 、MSXML2.XMLHttp.3.0 和 MXSML2.XMLHttp.6.0。</p>
@@ -271,60 +322,53 @@
 <p>本文完, 以下有两篇文章可以查阅</p>
 <p> <a href="https://segmentfault.com/a/1190000011549088" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011549088</a><br> <a href="https://segmentfault.com/a/1190000000423616#articleHeader8" target="_blank" rel="noopener">https://segmentfault.com/a/1190000000423616#articleHeader8</a> </p>
 
-					<div class="post-share">
-	<ul class="share-list">
-		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
-		<li>
-      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
-        <div class="wechat-qrcode" id="qrcodeBox">
-          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
-          <em class="wechat-tri"></em>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/04/09/JSbook22/" class="prev">上一篇：JS红皮书读书笔记-22-高级技巧</a>
+    
+    
+    <a href="/2019/04/09/JSbook20/" class="next">下一篇：JS红皮书读书笔记-20-JSON</a>
+    
+  </nav>
+
         </div>
-        <span>wechat</span>
-      </a>
-    </li>
-		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
-	</ul>
-</div>
-					<!-- 评论 -->
-					<div class="post-comments" id="Jcmt">
-	<h3 class="post-comments-tit">访客评论</h3>
-	<div id="vcomments"></div>
-	<script>
-
-		var checkEle =function(id){return !!document.getElementById(id)} ,
-			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
-		if (hideCmt) {
-			Jcmt.style.display = 'none';
-		}else{
-			new Valine({
-			    el: '#vcomments',
-			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
-			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
-			    notify:false,
-			    verify:false,
-			    avatar:'mm',
-			    placeholder: '感谢您的留言, 请勿灌水和广告.'
-			})
-		}
-	</script>
-</div>
-				</div>
-			</div>		</div>
-		<div class="footer">
-  <p class="left">&copy; 测试狗 ,
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    </span>
-  </p>
-	<p class="right">Base on Github & Hexo</p>
-</div>
-<div class="count" style="display: none;">
-  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
-</div>
-	</div>
-</div>
-
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+  <script>
+    new Valine({
+      el: '#Jcomment',
+      appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+      appKey: 'QoS0zL4Y2xTDviitGOPkvCGv' ,
+      notify: false,
+      verify: false,
+      avatar: 'mm',
+      pageSize: '10',
+      placeholder:'Valine+Leancloud提供评论'
+    })
+  </script>
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
 </body>
 </html>

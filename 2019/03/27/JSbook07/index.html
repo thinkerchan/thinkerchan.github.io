@@ -1,81 +1,132 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
-  <meta name="renderer" content="webkit">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
   
   <title>JS红皮书读书笔记-07-函数表达式 | 测试狗</title>
-  <meta name="description" content="第五章讲了函数的使用方式, 要么函数声明, 要么函数表达式. 关于函数声明, 有一个重要的特征, 就是会函数声明提升:sayHi();	// 这样是可以的, 如果是函数表达式 就会报错function sayHi()&amp;#123; 	alert(&quot;Hi!&quot;);&amp;#125; 因为函数声明的这个特性, 千完不要在判断语句中使用函数声明:// 不要这么做!if(condition)&amp;#123;  func">
-<meta name="keywords" content="测试狗,前端,计算广告,产品经理">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JS红皮书读书笔记-07-函数表达式">
-<meta property="og:url" content="https://thinkerchan.com/2019/03/27/JSbook07/index.html">
-<meta property="og:site_name" content="测试狗">
-<meta property="og:description" content="第五章讲了函数的使用方式, 要么函数声明, 要么函数表达式. 关于函数声明, 有一个重要的特征, 就是会函数声明提升:sayHi();	// 这样是可以的, 如果是函数表达式 就会报错function sayHi()&amp;#123; 	alert(&quot;Hi!&quot;);&amp;#125; 因为函数声明的这个特性, 千完不要在判断语句中使用函数声明:// 不要这么做!if(condition)&amp;#123;  func">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-27T12:36:05.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS红皮书读书笔记-07-函数表达式">
-<meta name="twitter:description" content="第五章讲了函数的使用方式, 要么函数声明, 要么函数表达式. 关于函数声明, 有一个重要的特征, 就是会函数声明提升:sayHi();	// 这样是可以的, 如果是函数表达式 就会报错function sayHi()&amp;#123; 	alert(&quot;Hi!&quot;);&amp;#125; 因为函数声明的这个特性, 千完不要在判断语句中使用函数声明:// 不要这么做!if(condition)&amp;#123;  func">
-<meta name="twitter:creator" content="@thinkerchan">
-<meta property="fb:admins" content="thinkerchan">
+  <meta name="author" content="测试狗">
   
-  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-07-函数表达式"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
   
 
-  <link rel="stylesheet" href="/css/style.css" >
-  <link rel="shortcut icon" href="/images/favicon.png"/>
-  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-  <script data-main="/js/build" src="/js/require.js"></script>
-  <!--[if lt IE 7]>
-  <style>
-    .section{
-      width: 780px;
-    }
-    .post-content img{
-      width: 100%;
-    }
-    .jupe pre{
-      width: 100%;
-    }
-  </style>
-  <![endif]-->
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
-<body id="normal" >
 
-<div class="section-wrap section-main">
-	<div class="section">
-		<div class="header">
-	<h1 class="logo">
-		<a href="/">测试狗</a>
-	</h1>
-	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
-		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
-		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
-	</p>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">表</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-03-27T12:35:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-27
+</time>
+
+
+
+
+
 </div>
-		<div class="main">
-						<div class="jupe main-body">
-				<div class="post-content">
-					<h1 class="post-title">JS红皮书读书笔记-07-函数表达式</h1>
-					<div class="post-meta">
-						<span class="post-time">2019.03.27</span>
-						<div class="post-cats">
-							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
-						</div>
-					</div>
-					<div class="post-toc">
-						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-number">1.</span> <span class="toc-text">递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">2.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包与变量"><span class="toc-number">2.1.</span> <span class="toc-text">闭包与变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this对象"><span class="toc-number">2.2.</span> <span class="toc-text">this对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存泄露"><span class="toc-number">2.3.</span> <span class="toc-text">内存泄露</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模仿块级作用域"><span class="toc-number">3.</span> <span class="toc-text">模仿块级作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#私有变量"><span class="toc-number">4.</span> <span class="toc-text">私有变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态私有变量"><span class="toc-number">4.1.</span> <span class="toc-text">静态私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块模式"><span class="toc-number">4.2.</span> <span class="toc-text">模块模式</span></a></li></ol></li></ol>
-					</div>
-					<p>第五章讲了函数的使用方式, 要么函数声明, 要么函数表达式.</p>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-07-函数表达式</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#递归"><span class="toc-number">1.</span> <span class="toc-text">递归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">2.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包与变量"><span class="toc-number">2.1.</span> <span class="toc-text">闭包与变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this对象"><span class="toc-number">2.2.</span> <span class="toc-text">this对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存泄露"><span class="toc-number">2.3.</span> <span class="toc-text">内存泄露</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模仿块级作用域"><span class="toc-number">3.</span> <span class="toc-text">模仿块级作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#私有变量"><span class="toc-number">4.</span> <span class="toc-text">私有变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态私有变量"><span class="toc-number">4.1.</span> <span class="toc-text">静态私有变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模块模式"><span class="toc-number">4.2.</span> <span class="toc-text">模块模式</span></a></li></ol></li></ol>
+    </div>
+    
+    <p>第五章讲了函数的使用方式, 要么函数声明, 要么函数表达式.</p>
 <p>关于函数声明, 有一个重要的特征, 就是会<strong>函数声明提升</strong>:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">sayHi();	<span class="comment">// 这样是可以的, 如果是函数表达式 就会报错</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">	alert(<span class="string">"Hi!"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>因为函数声明的这个特性, 千完不要在判断语句中使用<strong>函数声明</strong>:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 不要这么做!</span></span><br><span class="line"><span class="keyword">if</span>(condition)&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    alert(<span class="string">"Hi!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    alert(<span class="string">"Yo!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>我们看三个示例.<br>示例1:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (num &lt;= <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">   <span class="keyword">return</span> num * factorial(num<span class="number">-1</span>);	 <span class="comment">// 耦合问题</span></span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -104,60 +155,53 @@
 <p>后面会另外写一篇文章讲设计模式</p>
 <p>本章完</p>
 
-					<div class="post-share">
-	<ul class="share-list">
-		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
-		<li>
-      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
-        <div class="wechat-qrcode" id="qrcodeBox">
-          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
-          <em class="wechat-tri"></em>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/03/27/JSbook08/" class="prev">上一篇：JS红皮书读书笔记-08-BOM</a>
+    
+    
+    <a href="/2019/03/26/JSbook06/" class="next">下一篇：JS红皮书读书笔记-06-面向对象</a>
+    
+  </nav>
+
         </div>
-        <span>wechat</span>
-      </a>
-    </li>
-		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
-	</ul>
-</div>
-					<!-- 评论 -->
-					<div class="post-comments" id="Jcmt">
-	<h3 class="post-comments-tit">访客评论</h3>
-	<div id="vcomments"></div>
-	<script>
-
-		var checkEle =function(id){return !!document.getElementById(id)} ,
-			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
-		if (hideCmt) {
-			Jcmt.style.display = 'none';
-		}else{
-			new Valine({
-			    el: '#vcomments',
-			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
-			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
-			    notify:false,
-			    verify:false,
-			    avatar:'mm',
-			    placeholder: '感谢您的留言, 请勿灌水和广告.'
-			})
-		}
-	</script>
-</div>
-				</div>
-			</div>		</div>
-		<div class="footer">
-  <p class="left">&copy; 测试狗 ,
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    </span>
-  </p>
-	<p class="right">Base on Github & Hexo</p>
-</div>
-<div class="count" style="display: none;">
-  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
-</div>
-	</div>
-</div>
-
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+  <script>
+    new Valine({
+      el: '#Jcomment',
+      appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+      appKey: 'QoS0zL4Y2xTDviitGOPkvCGv' ,
+      notify: false,
+      verify: false,
+      avatar: 'mm',
+      pageSize: '10',
+      placeholder:'Valine+Leancloud提供评论'
+    })
+  </script>
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
 </body>
 </html>

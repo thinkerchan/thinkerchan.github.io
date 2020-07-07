@@ -1,142 +1,150 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
-  <meta name="renderer" content="webkit">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
   
   <title>Javscript事件模型 | 测试狗</title>
-  <meta name="description" content="三种模型一.HTMl事件类型常见如 onclick=&amp;quot;fn()&amp;quot; 形式,耦合度高,不利于维护 二.DOM0级常见标准dom的写法,兼容性最好. window.onload=function(){     var input=document.getElementsByTagName(&amp;apos;input&amp;apos;)[0];     input.onclick=test; }">
-<meta name="keywords" content="事件">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Javscript事件模型">
-<meta property="og:url" content="https://thinkerchan.com/2014/11/25/js-event/index.html">
-<meta property="og:site_name" content="测试狗">
-<meta property="og:description" content="三种模型一.HTMl事件类型常见如 onclick=&amp;quot;fn()&amp;quot; 形式,耦合度高,不利于维护 二.DOM0级常见标准dom的写法,兼容性最好. window.onload=function(){     var input=document.getElementsByTagName(&amp;apos;input&amp;apos;)[0];     input.onclick=test; }">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-14T03:35:13.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javscript事件模型">
-<meta name="twitter:description" content="三种模型一.HTMl事件类型常见如 onclick=&amp;quot;fn()&amp;quot; 形式,耦合度高,不利于维护 二.DOM0级常见标准dom的写法,兼容性最好. window.onload=function(){     var input=document.getElementsByTagName(&amp;apos;input&amp;apos;)[0];     input.onclick=test; }">
-<meta name="twitter:creator" content="@thinkerchan">
-<meta property="fb:admins" content="thinkerchan">
+  <meta name="author" content="测试狗">
   
-  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="Javscript事件模型"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
   
 
-  <link rel="stylesheet" href="/css/style.css" >
-  <link rel="shortcut icon" href="/images/favicon.png"/>
-  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-  <script data-main="/js/build" src="/js/require.js"></script>
-  <!--[if lt IE 7]>
-  <style>
-    .section{
-      width: 780px;
-    }
-    .post-content img{
-      width: 100%;
-    }
-    .jupe pre{
-      width: 100%;
-    }
-  </style>
-  <![endif]-->
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
-<body id="normal" >
 
-<div class="section-wrap section-main">
-	<div class="section">
-		<div class="header">
-	<h1 class="logo">
-		<a href="/">测试狗</a>
-	</h1>
-	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
-		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
-		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
-	</p>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">表</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2014-11-25T11:33:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2014-11-25
+</time>
+
+
+
+
+
 </div>
-		<div class="main">
-						<div class="jupe main-body">
-				<div class="post-content">
-					<h1 class="post-title">Javscript事件模型</h1>
-					<div class="post-meta">
-						<span class="post-time">2014.11.25</span>
-						<div class="post-cats">
-							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
-						</div>
-					</div>
-					<div class="post-toc">
-						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#三种模型"><span class="toc-number">1.</span> <span class="toc-text">三种模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-HTMl事件类型"><span class="toc-number">1.1.</span> <span class="toc-text">一.HTMl事件类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-DOM0级"><span class="toc-number">1.2.</span> <span class="toc-text">二.DOM0级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-DOM2模型"><span class="toc-number">1.3.</span> <span class="toc-text">三.DOM2模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准模型"><span class="toc-number">1.3.1.</span> <span class="toc-text">标准模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IE模型"><span class="toc-number">1.3.2.</span> <span class="toc-text">IE模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再说冒泡和捕获"><span class="toc-number">2.</span> <span class="toc-text">再说冒泡和捕获</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡"><span class="toc-number">2.1.</span> <span class="toc-text">冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#捕获"><span class="toc-number">2.2.</span> <span class="toc-text">捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2事件流"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2事件流</span></a></li></ol></li></ol>
-					</div>
-					<h2 id="三种模型"><a href="#三种模型" class="headerlink" title="三种模型"></a>三种模型</h2><h3 id="一-HTMl事件类型"><a href="#一-HTMl事件类型" class="headerlink" title="一.HTMl事件类型"></a>一.HTMl事件类型</h3><p>常见如 <code>onclick=&quot;fn()&quot;</code> 形式,耦合度高,不利于维护</p>
-<h3 id="二-DOM0级"><a href="#二-DOM0级" class="headerlink" title="二.DOM0级"></a>二.DOM0级</h3><p><b>常见标准dom的写法,兼容性最好.</b></p>
-<pre><code>window.onload=function(){
-    var input=document.getElementsByTagName(&apos;input&apos;)[0];
-    input.onclick=test;
-}
-function test(){ 
-    //...
-};
-</code></pre><p><b>但是:DOM0没法为一个元素原生(可能这个词用得不对)添加一次以上的事件,否则后面的事件就会把前面的覆盖掉.</b></p>
-<pre><code>btnDOM.onclick = function(){
-    alert(&quot;click me!&quot;);           
-}
-btnDOM.onclick = function(){
-         alert(&quot;click me1111!&quot;);           
-} //后面的事件会覆盖前面的事件.
-</code></pre><p><b>可是:如果硬要在DOM0下为一个元素绑定多个事件,那么还是可以实现的,只不过有点不合理而已.</b></p>
-<p><b>例子:</b></p>
-<pre><code>var btn = document.getElementById(&apos;btn&apos;);
-    btn.onclick=function(){
-        alert(1);
-    }
-    var fn = btn.onclick;
-    btn.onclick=function(){
-        if(fn){
-            fn();
-        }
-        alert(2);
-    }
-</code></pre><h3 id="三-DOM2模型"><a href="#三-DOM2模型" class="headerlink" title="三.DOM2模型"></a>三.DOM2模型</h3><h4 id="标准模型"><a href="#标准模型" class="headerlink" title="标准模型"></a>标准模型</h4><ul>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">Javscript事件模型</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#三种模型"><span class="toc-number">1.</span> <span class="toc-text">三种模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-HTMl事件类型"><span class="toc-number">1.1.</span> <span class="toc-text">一.HTMl事件类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-DOM0级"><span class="toc-number">1.2.</span> <span class="toc-text">二.DOM0级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-DOM2模型"><span class="toc-number">1.3.</span> <span class="toc-text">三.DOM2模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#标准模型"><span class="toc-number">1.3.1.</span> <span class="toc-text">标准模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IE模型"><span class="toc-number">1.3.2.</span> <span class="toc-text">IE模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再说冒泡和捕获"><span class="toc-number">2.</span> <span class="toc-text">再说冒泡和捕获</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#冒泡"><span class="toc-number">2.1.</span> <span class="toc-text">冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#捕获"><span class="toc-number">2.2.</span> <span class="toc-text">捕获</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM2事件流"><span class="toc-number">2.3.</span> <span class="toc-text">DOM2事件流</span></a></li></ol></li></ol>
+    </div>
+    
+    <h2 id="三种模型"><a href="#三种模型" class="headerlink" title="三种模型"></a>三种模型</h2><h3 id="一-HTMl事件类型"><a href="#一-HTMl事件类型" class="headerlink" title="一.HTMl事件类型"></a>一.HTMl事件类型</h3><p>常见如 <code>onclick=fn</code> 形式,耦合度高,不利于维护</p>
+<h3 id="二-DOM0级"><a href="#二-DOM0级" class="headerlink" title="二.DOM0级"></a>二.DOM0级</h3><p>常见标准dom的写法,兼容性最好<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> input=<span class="built_in">document</span>.getElementsByTagName(<span class="string">'input'</span>)[<span class="number">0</span>];</span><br><span class="line">    input.onclick=test;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是DOM0没法为一个元素原生(可能这个词用得不对)添加一次以上的事件,否则后面的事件就会把前面的覆盖掉<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">btnDOM.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">"click me!"</span>);           </span><br><span class="line">&#125;</span><br><span class="line">btnDOM.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         alert(<span class="string">"click me1111!"</span>);           </span><br><span class="line">&#125; <span class="comment">//后面的事件会覆盖前面的事件.</span></span><br></pre></td></tr></table></figure></p>
+<p>可是:如果硬要在DOM0下为一个元素绑定多个事件,那么还是可以实现的,只不过有点不合理而已</p>
+<p>例子:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>);</span><br><span class="line">btn.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> fn = btn.onclick;</span><br><span class="line">btn.onclick=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(fn)&#123;</span><br><span class="line">        fn();</span><br><span class="line">    &#125;</span><br><span class="line">    alert(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="三-DOM2模型"><a href="#三-DOM2模型" class="headerlink" title="三.DOM2模型"></a>三.DOM2模型</h3><h4 id="标准模型"><a href="#标准模型" class="headerlink" title="标准模型"></a>标准模型</h4><ul>
 <li><b>事件添加:</b>addEventListener(type,fn,bool)</li>
 <li><b>事件移除:</b>removeEventListener(type,fn,bool)</li>
 </ul>
 <p>DOM2事件处理里添加事件使用的是<code>addEventListener</code>，它接收三个参数比IE事件处理多一个，前两个的意思和ie事件处理方法的两个参数一样，唯一的区别就是第一个参数里要去掉on这个前缀，第三个参数是个布尔值，如果它的取值是true，那么事件就按照捕获方式处理，取值为false，事件就是按照冒泡处理，有第三个参数我们可以理解为什么DOM2事件处理里要把事件元素跑个两遍，目的就是为了兼容两种事件模型，不过这里要请注意下，不管我们选择是捕获还是冒泡，两遍遍历是永远进行，如果我们选择一种事件处理方式，那么另外一个事件处理流程里就不会促发任何事件处理函数，这和汽车挂空挡空转的道理一样。通过DOM2事件方法的设计，我们知道DOM2事件在运行时候只能执行两种事件处理方式中的一种，不可能两个事件流体系同时促发，所以虽然元素遍历两遍，但是事件函数绝不可能被促发两遍，注意我这里指不促发两遍是指一个事件函数，其实我们可以模拟两个事件流模型同时执行的情况，例如下面代码：</p>
-<pre><code>btnDOM.addEventListener(&quot;click&quot;,ftn,true);  //捕获
- btnDOM.addEventListener(&quot;click&quot;,ftn,false);    //冒泡
-</code></pre><p>但这种写法是多事件处理，相当于我们点击两次按钮。</p>
-<p>DOM2也提供了删除事件的函数，这个函数就是<code>removeEventListener</code>，写法如下：</p>
-<p>btnDOM.removeEventListener(“click”,ftn,false);<br>使用和IE事件的一样即参数要和定义事件的参数一致，不过removeEventListener使用时候，第三个参数不传，<b>默认是删除冒泡事件</b>，因为第三个参数不传默认都是false，例如：</p>
-<p>btnDOM.addEventListener(“click”,ftn,true);<br>btnDOM.removeEventListener(“click”,ftn);    //没有传第三个参数,默认删除冒泡事件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">btnDOM.addEventListener(<span class="string">"click"</span>,ftn,<span class="literal">true</span>);  <span class="comment">//捕获</span></span><br><span class="line">btnDOM.addEventListener(<span class="string">"click"</span>,ftn,<span class="literal">false</span>);    <span class="comment">//冒泡</span></span><br></pre></td></tr></table></figure>
+<p>但这种写法是多事件处理，相当于我们点击两次按钮。</p>
+<p>DOM2也提供了删除事件的函数，这个函数就是<code>removeEventListener</code>，写法如下：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">btnDOM.removeEventListener(<span class="string">"click"</span>,ftn,<span class="literal">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p>使用和IE事件的一样即参数要和定义事件的参数一致，不过removeEventListener使用时候，第三个参数不传，<b>默认是删除冒泡事件</b>，因为第三个参数不传默认都是false，例如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">btnDOM.addEventListener(<span class="string">"click"</span>,ftn,<span class="literal">true</span>);</span><br><span class="line">btnDOM.removeEventListener(<span class="string">"click"</span>,ftn);    <span class="comment">//没有传第三个参数,默认删除冒泡事件</span></span><br></pre></td></tr></table></figure>
 <p>运行之，发现事件没有被删除成功, 所以要养成事件添加和删除参数一致的习惯.</p>
-<h4 id="IE模型"><a href="#IE模型" class="headerlink" title="IE模型"></a>IE模型</h4><p>支持这个模型的还有opera浏览器<br><code>attachEvent(type,fn)</code></p>
-<pre><code>btnDOM.attachEvent(&quot;onclick&quot;,function(){
-         alert(&quot;Click Me!&quot;);
-
-});
-
-btnDOM.attachEvent(&quot;onclick&quot;,function(){
-         alert(&quot;Click Me,too!&quot;);    //注意! 后面绑定的事件先触发!逆序触发!
-}); 
-</code></pre><p><code>detachEvent(type,fn)</code></p>
-<pre><code>btnDOM.detachEvent(&quot;onclick&quot;,function(){
-         alert(&quot;Click Me,too!&quot;);
-});
-</code></pre><p>运行之，两个弹窗匿名函数都没有被删除，这是怎么回事？原因是在javascript的匿名函数里，两个匿名函数哪怕代码完全一样，javascript都会在内部使用不同变量存储，结果就是我们看到的现象无法删除点击事件的，因此我们的代码要这么写：</p>
-<pre><code>var ftn = function(){
-    alert(&quot;Click Me,too!&quot;);
-};
-
-btnDOM.attachEvent(&quot;onclick&quot;,ftn);
-btnDOM.detachEvent(&quot;onclick&quot;,ftn);
-</code></pre><p>这样添加的方法和删除的方法就是指向了同一个对象，所以事件删除成功了。这里的场景告诉我们写事件要有个良好的习惯即操作函数要独立定义，不要用匿名函数用成了习惯。</p>
+<h4 id="IE模型"><a href="#IE模型" class="headerlink" title="IE模型"></a>IE模型</h4><p>支持这个模型的还有opera浏览器<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">btnDOM.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	alert(<span class="string">"Click Me!"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">btnDOM.attachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   alert(<span class="string">"Click Me,too!"</span>);    <span class="comment">//注意! 后面绑定的事件先触发!逆序触发!</span></span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">btnDOM.detachEvent(<span class="string">"onclick"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   alert(<span class="string">"Click Me,too!"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>运行之，两个弹窗匿名函数都没有被删除，这是怎么回事？原因是在javascript的匿名函数里，两个匿名函数哪怕代码完全一样，javascript都会在内部使用不同变量存储，结果就是我们看到的现象无法删除点击事件的，因此我们的代码要这么写：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ftn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">"Click Me,too!"</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">btnDOM.attachEvent(<span class="string">"onclick"</span>,ftn);</span><br><span class="line">btnDOM.detachEvent(<span class="string">"onclick"</span>,ftn);</span><br></pre></td></tr></table></figure></p>
+<p>这样添加的方法和删除的方法就是指向了同一个对象，所以事件删除成功了。这里的场景告诉我们写事件要有个良好的习惯即操作函数要独立定义，不要用匿名函数用成了习惯。</p>
 <h2 id="再说冒泡和捕获"><a href="#再说冒泡和捕获" class="headerlink" title="再说冒泡和捕获"></a>再说冒泡和捕获</h2><p>冒泡和捕获其实就是<b>事件流</b>处理方式,事件流又是什么呢?事件流就是从页面接受事件的顺序,好比你在一张纸上画了很多个同心圆.如果你把手指放在圆心上，那么你的手指指向的不是一个圆，而是纸上的所有圆。那么究竟是先指到最外面的大圆呢还是最里面的小圆呢,这里肯定会有不同意见,但是可以肯定的是, 所有的圆我们都指到了.<br>这里的意见不一致,就是<b>事件流</b>处理方式不同.以下是IE和Netscape提出的方式.</p>
 <h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><p>冒泡是由IE提出,从深层元素上升到最上层元素.</p>
 <h3 id="捕获"><a href="#捕获" class="headerlink" title="捕获"></a>捕获</h3><p>捕获是由网景提出,从外层元素追踪到到最里层元素. 但是对IE兼容性差.</p>
@@ -146,87 +154,53 @@ btnDOM.detachEvent(&quot;onclick&quot;,ftn);
 <li>目标阶段</li>
 <li>冒泡阶段</li>
 </ul>
-<p>由于兼容的问题,我们都采取冒泡阶段来绑定事件.<br>以下是一个常用的事件侦听组件:</p>
-<pre><code>var EventUtil = {
-    addHandler: function(element, type, handler){
-        if (element.addEventListener){
-            // DOM2
-            element.addEventListener(type, handler, false); //默认冒泡
-        } else if (element.attachEvent){
-            //IE,opera
-            element.attachEvent(&quot;on&quot; + type, handler);
-        } else {
-            //DOM0, 注意只对最后一次绑定的事件有效.
-            element[&quot;on&quot; + type] = handler;
-        }
-    },
-    removeHandler: function(element, type, handler){
-        if (element.removeEventListener){
-            element.removeEventListener(type, handler, false);
-        } else if (element.detachEvent){
-            element.detachEvent(&quot;on&quot; + type, handler);
-        } else {
-            element[&quot;on&quot; + type] = null;
-        }
-    }
-};
+<p>由于兼容的问题,我们都采取冒泡阶段来绑定事件.<br>以下是一个常用的事件侦听组件:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> EventUtil = &#123;</span><br><span class="line">    addHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (element.addEventListener)&#123;</span><br><span class="line">            <span class="comment">// DOM2</span></span><br><span class="line">            element.addEventListener(type, handler, <span class="literal">false</span>); <span class="comment">//默认冒泡</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent)&#123;</span><br><span class="line">            <span class="comment">//IE,opera</span></span><br><span class="line">            element.attachEvent(<span class="string">"on"</span> + type, handler);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">//DOM0, 注意只对最后一次绑定的事件有效.</span></span><br><span class="line">            element[<span class="string">"on"</span> + type] = handler;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    removeHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (element.removeEventListener)&#123;</span><br><span class="line">            element.removeEventListener(type, handler, <span class="literal">false</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.detachEvent)&#123;</span><br><span class="line">            element.detachEvent(<span class="string">"on"</span> + type, handler);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            element[<span class="string">"on"</span> + type] = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">EventUtil.addHandler(<span class="string">"div"</span>,<span class="string">"click"</span>,fn);  <span class="comment">//执行</span></span><br></pre></td></tr></table></figure></p>
 
-EventUtil.addHandler(&quot;div&quot;,&quot;click&quot;,fn);  //执行
-</code></pre>
-					<div class="post-share">
-	<ul class="share-list">
-		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
-		<li>
-      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
-        <div class="wechat-qrcode" id="qrcodeBox">
-          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
-          <em class="wechat-tri"></em>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2015/02/05/chapter-7/" class="prev">上一篇：红皮书第七章学习心得</a>
+    
+    
+  </nav>
+
         </div>
-        <span>wechat</span>
-      </a>
-    </li>
-		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
-	</ul>
-</div>
-					<!-- 评论 -->
-					<div class="post-comments" id="Jcmt">
-	<h3 class="post-comments-tit">访客评论</h3>
-	<div id="vcomments"></div>
-	<script>
-
-		var checkEle =function(id){return !!document.getElementById(id)} ,
-			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
-		if (hideCmt) {
-			Jcmt.style.display = 'none';
-		}else{
-			new Valine({
-			    el: '#vcomments',
-			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
-			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
-			    notify:false,
-			    verify:false,
-			    avatar:'mm',
-			    placeholder: '感谢您的留言, 请勿灌水和广告.'
-			})
-		}
-	</script>
-</div>
-				</div>
-			</div>		</div>
-		<div class="footer">
-  <p class="left">&copy; 测试狗 ,
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    </span>
-  </p>
-	<p class="right">Base on Github & Hexo</p>
-</div>
-<div class="count" style="display: none;">
-  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
-</div>
-	</div>
-</div>
-
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+  <script>
+    new Valine({
+      el: '#Jcomment',
+      appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+      appKey: 'QoS0zL4Y2xTDviitGOPkvCGv' ,
+      notify: false,
+      verify: false,
+      avatar: 'mm',
+      pageSize: '10',
+      placeholder:'Valine+Leancloud提供评论'
+    })
+  </script>
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
 </body>
 </html>

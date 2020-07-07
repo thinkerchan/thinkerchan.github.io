@@ -1,81 +1,132 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
-  <meta name="renderer" content="webkit">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
   
   <title>JS红皮书读书笔记-08-BOM | 测试狗</title>
-  <meta name="description" content="ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。 下面介绍主要的几个BOM对象. window对象BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色， 它既是通过 J">
-<meta name="keywords" content="测试狗,前端,计算广告,产品经理">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JS红皮书读书笔记-08-BOM">
-<meta property="og:url" content="https://thinkerchan.com/2019/03/27/JSbook08/index.html">
-<meta property="og:site_name" content="测试狗">
-<meta property="og:description" content="ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。 下面介绍主要的几个BOM对象. window对象BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色， 它既是通过 J">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-27T15:25:10.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS红皮书读书笔记-08-BOM">
-<meta name="twitter:description" content="ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。 下面介绍主要的几个BOM对象. window对象BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色， 它既是通过 J">
-<meta name="twitter:creator" content="@thinkerchan">
-<meta property="fb:admins" content="thinkerchan">
+  <meta name="author" content="测试狗">
   
-  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-08-BOM"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
   
 
-  <link rel="stylesheet" href="/css/style.css" >
-  <link rel="shortcut icon" href="/images/favicon.png"/>
-  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-  <script data-main="/js/build" src="/js/require.js"></script>
-  <!--[if lt IE 7]>
-  <style>
-    .section{
-      width: 780px;
-    }
-    .post-content img{
-      width: 100%;
-    }
-    .jupe pre{
-      width: 100%;
-    }
-  </style>
-  <![endif]-->
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
-<body id="normal" >
 
-<div class="section-wrap section-main">
-	<div class="section">
-		<div class="header">
-	<h1 class="logo">
-		<a href="/">测试狗</a>
-	</h1>
-	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
-		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
-		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
-	</p>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">表</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-03-27T15:24:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-27
+</time>
+
+
+
+
+
 </div>
-		<div class="main">
-						<div class="jupe main-body">
-				<div class="post-content">
-					<h1 class="post-title">JS红皮书读书笔记-08-BOM</h1>
-					<div class="post-meta">
-						<span class="post-time">2019.03.27</span>
-						<div class="post-cats">
-							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
-						</div>
-					</div>
-					<div class="post-toc">
-						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#window对象"><span class="toc-number">1.</span> <span class="toc-text">window对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局作用域"><span class="toc-number">1.1.</span> <span class="toc-text">全局作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口关系和框架"><span class="toc-number">1.2.</span> <span class="toc-text">窗口关系和框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口位置"><span class="toc-number">1.3.</span> <span class="toc-text">窗口位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口大小"><span class="toc-number">1.4.</span> <span class="toc-text">窗口大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航和打开窗口"><span class="toc-number">1.5.</span> <span class="toc-text">导航和打开窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setTimeout和setInterval"><span class="toc-number">1.6.</span> <span class="toc-text">setTimeout和setInterval</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统对话框"><span class="toc-number">1.7.</span> <span class="toc-text">系统对话框</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location对象"><span class="toc-number">2.</span> <span class="toc-text">location对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator对象"><span class="toc-number">3.</span> <span class="toc-text">navigator对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#screen对象"><span class="toc-number">4.</span> <span class="toc-text">screen对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history对象"><span class="toc-number">5.</span> <span class="toc-text">history对象</span></a></li></ol>
-					</div>
-					<p>ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。</p>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-08-BOM</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#window对象"><span class="toc-number">1.</span> <span class="toc-text">window对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局作用域"><span class="toc-number">1.1.</span> <span class="toc-text">全局作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口关系和框架"><span class="toc-number">1.2.</span> <span class="toc-text">窗口关系和框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口位置"><span class="toc-number">1.3.</span> <span class="toc-text">窗口位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#窗口大小"><span class="toc-number">1.4.</span> <span class="toc-text">窗口大小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导航和打开窗口"><span class="toc-number">1.5.</span> <span class="toc-text">导航和打开窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setTimeout和setInterval"><span class="toc-number">1.6.</span> <span class="toc-text">setTimeout和setInterval</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统对话框"><span class="toc-number">1.7.</span> <span class="toc-text">系统对话框</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location对象"><span class="toc-number">2.</span> <span class="toc-text">location对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator对象"><span class="toc-number">3.</span> <span class="toc-text">navigator对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#screen对象"><span class="toc-number">4.</span> <span class="toc-text">screen对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history对象"><span class="toc-number">5.</span> <span class="toc-text">history对象</span></a></li></ol>
+    </div>
+    
+    <p>ECMAScript 是 JavaScript 的核心，但如果要在 Web 中使用 JavaScript，那么 BOM（浏览器对象模型）则无疑才是真正的核心。BOM 提供了很多对象，用于访问浏览器的功能，这些功能与任何网页内容无关。</p>
 <p>下面介绍主要的几个BOM对象.</p>
 <h2 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h2><p>BOM 的核心对象是 window，它表示浏览器的一个实例。在浏览器中，window 对象有双重角色， 它既是通过 JavaScript 访问浏览器窗口的一个接口，又是 ECMAScript 规定的 Global 对象。这意味若在网页中定义的任何一个对象、变量和函数，都以 window 作为其 Global 对象，因此有权访问<br>parseInt()等方法</p>
 <h3 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h3><p>也就是ES中的global角色, 在全局中定义的变量和方法(函数), 都会挂载在window对象上.<br>但是要注意一点:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">'black'</span>;</span><br><span class="line"><span class="keyword">delete</span> color; <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(color); <span class="comment">//black;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.color2 = <span class="string">'pink'</span>;</span><br><span class="line"><span class="keyword">delete</span> color2; <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(color2); <span class="comment">// error</span></span><br></pre></td></tr></table></figure></p>
@@ -141,60 +192,53 @@
 <hr>
 <p>本章完</p>
 
-					<div class="post-share">
-	<ul class="share-list">
-		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
-		<li>
-      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
-        <div class="wechat-qrcode" id="qrcodeBox">
-          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
-          <em class="wechat-tri"></em>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/03/28/JSbook09/" class="prev">上一篇：JS红皮书读书笔记-09-客户端检测</a>
+    
+    
+    <a href="/2019/03/27/JSbook07/" class="next">下一篇：JS红皮书读书笔记-07-函数表达式</a>
+    
+  </nav>
+
         </div>
-        <span>wechat</span>
-      </a>
-    </li>
-		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
-	</ul>
-</div>
-					<!-- 评论 -->
-					<div class="post-comments" id="Jcmt">
-	<h3 class="post-comments-tit">访客评论</h3>
-	<div id="vcomments"></div>
-	<script>
-
-		var checkEle =function(id){return !!document.getElementById(id)} ,
-			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
-		if (hideCmt) {
-			Jcmt.style.display = 'none';
-		}else{
-			new Valine({
-			    el: '#vcomments',
-			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
-			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
-			    notify:false,
-			    verify:false,
-			    avatar:'mm',
-			    placeholder: '感谢您的留言, 请勿灌水和广告.'
-			})
-		}
-	</script>
-</div>
-				</div>
-			</div>		</div>
-		<div class="footer">
-  <p class="left">&copy; 测试狗 ,
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    </span>
-  </p>
-	<p class="right">Base on Github & Hexo</p>
-</div>
-<div class="count" style="display: none;">
-  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
-</div>
-	</div>
-</div>
-
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+  <script>
+    new Valine({
+      el: '#Jcomment',
+      appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+      appKey: 'QoS0zL4Y2xTDviitGOPkvCGv' ,
+      notify: false,
+      verify: false,
+      avatar: 'mm',
+      pageSize: '10',
+      placeholder:'Valine+Leancloud提供评论'
+    })
+  </script>
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
 </body>
 </html>

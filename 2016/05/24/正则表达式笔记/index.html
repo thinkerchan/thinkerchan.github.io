@@ -1,141 +1,185 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
-  <meta name="renderer" content="webkit">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
   
-  <title>正则表达式笔记 | 测试狗</title>
-  <meta name="description" content="界定符// 界定符,不是正则的的部分// $reg = &apos;//&apos;;// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位 元字符// 原子的筛选方式:// 1) |,匹配两个或者多个分支选择// 2) [],匹配方括号中的任意一个原子(方括号内必须是原子)// 3) [^],匹配除方括号中原子之外的任意字符(这种情况下^必须在首) 常见原子集合// \. 除换行">
-<meta name="keywords" content="测试狗,前端,计算广告,产品经理">
-<meta property="og:type" content="article">
-<meta property="og:title" content="正则表达式笔记">
-<meta property="og:url" content="https://thinkerchan.com/2016/05/24/正则表达式笔记/index.html">
-<meta property="og:site_name" content="测试狗">
-<meta property="og:description" content="界定符// 界定符,不是正则的的部分// $reg = &apos;//&apos;;// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位 元字符// 原子的筛选方式:// 1) |,匹配两个或者多个分支选择// 2) [],匹配方括号中的任意一个原子(方括号内必须是原子)// 3) [^],匹配除方括号中原子之外的任意字符(这种情况下^必须在首) 常见原子集合// \. 除换行">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-23T17:33:44.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正则表达式笔记">
-<meta name="twitter:description" content="界定符// 界定符,不是正则的的部分// $reg = &apos;//&apos;;// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位 元字符// 原子的筛选方式:// 1) |,匹配两个或者多个分支选择// 2) [],匹配方括号中的任意一个原子(方括号内必须是原子)// 3) [^],匹配除方括号中原子之外的任意字符(这种情况下^必须在首) 常见原子集合// \. 除换行">
-<meta name="twitter:creator" content="@thinkerchan">
-<meta property="fb:admins" content="thinkerchan">
+  <title>正则表达式php版本 | 测试狗</title>
+  <meta name="author" content="测试狗">
   
-  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="正则表达式php版本"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
   
 
-  <link rel="stylesheet" href="/css/style.css" >
-  <link rel="shortcut icon" href="/images/favicon.png"/>
-  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-  <script data-main="/js/build" src="/js/require.js"></script>
-  <!--[if lt IE 7]>
-  <style>
-    .section{
-      width: 780px;
-    }
-    .post-content img{
-      width: 100%;
-    }
-    .jupe pre{
-      width: 100%;
-    }
-  </style>
-  <![endif]-->
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
-<body id="normal" >
 
-<div class="section-wrap section-main">
-	<div class="section">
-		<div class="header">
-	<h1 class="logo">
-		<a href="/">测试狗</a>
-	</h1>
-	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
-		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
-		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
-	</p>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">表</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2016-05-23T17:20:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2016-05-24
+</time>
+
+
+
+
+
 </div>
-		<div class="main">
-						<div class="jupe main-body">
-				<div class="post-content">
-					<h1 class="post-title">正则表达式笔记</h1>
-					<div class="post-meta">
-						<span class="post-time">2016.05.24</span>
-						<div class="post-cats">
-							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
-						</div>
-					</div>
-					<div class="post-toc">
-						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#界定符"><span class="toc-number">1.</span> <span class="toc-text">界定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符"><span class="toc-number">2.</span> <span class="toc-text">元字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见原子集合"><span class="toc-number">3.</span> <span class="toc-text">常见原子集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#量词"><span class="toc-number">4.</span> <span class="toc-text">量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#边界控制"><span class="toc-number">5.</span> <span class="toc-text">边界控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修正模式"><span class="toc-number">6.</span> <span class="toc-text">修正模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见正则"><span class="toc-number">7.</span> <span class="toc-text">常见正则</span></a></li></ol>
-					</div>
-					<h3 id="界定符"><a href="#界定符" class="headerlink" title="界定符"></a>界定符</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 界定符,不是正则的的部分</span></span><br><span class="line"><span class="comment">// $reg = '//';</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">正则表达式php版本</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#界定符"><span class="toc-number">1.</span> <span class="toc-text">界定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符"><span class="toc-number">2.</span> <span class="toc-text">元字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见原子集合"><span class="toc-number">3.</span> <span class="toc-text">常见原子集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#量词"><span class="toc-number">4.</span> <span class="toc-text">量词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#边界控制"><span class="toc-number">5.</span> <span class="toc-text">边界控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修正模式"><span class="toc-number">6.</span> <span class="toc-text">修正模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见正则"><span class="toc-number">7.</span> <span class="toc-text">常见正则</span></a></li></ol>
+    </div>
+    
+    <h3 id="界定符"><a href="#界定符" class="headerlink" title="界定符"></a>界定符</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 界定符,不是正则的的部分</span></span><br><span class="line"><span class="comment">// $reg = '//';</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 原子,可见原子,不可见原子(空格,换行(\n),tab(\t)等). 最小的匹配单位</span></span><br></pre></td></tr></table></figure>
 <h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 原子的筛选方式:</span><br><span class="line">// 1) |,匹配两个或者多个分支选择</span><br><span class="line">// 2) [],匹配方括号中的任意一个原子(方括号内必须是原子)</span><br><span class="line">// 3) [^],匹配除方括号中原子之外的任意字符(这种情况下^必须在首)</span><br></pre></td></tr></table></figure>
 <h3 id="常见原子集合"><a href="#常见原子集合" class="headerlink" title="常见原子集合"></a>常见原子集合</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// \. 除换行符之外的任意字符</span><br><span class="line">// \d [0-9]</span><br><span class="line">// \D [^0-9]</span><br><span class="line">// \s 不可见原子,即常见的空格,换行等 [\f\n\r\t\v]</span><br><span class="line">// \S 可见原子, [^\f\n\r\t\v]</span><br><span class="line">// \w [0-9a-zA-Z_]</span><br><span class="line">// \W [^0-9a-zA-Z_]</span><br></pre></td></tr></table></figure>
 <h3 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 量词(放在元字符背后)</span><br><span class="line">// &#123;n&#125;   恰好出现n次</span><br><span class="line">// &#123;n,&#125;  前面的原子至少出现n次</span><br><span class="line">// &#123;n,m&#125; 至少n次,至多m次</span><br><span class="line">// *     &#123;0,&#125; 可以理解成&#123;0,∞&#125;</span><br><span class="line">// +     &#123;0,&#125; 可以理解成&#123;1,∞&#125;</span><br><span class="line">// ?     &#123;0,&#125; 可以理解成&#123;0,1&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="边界控制"><a href="#边界控制" class="headerlink" title="边界控制"></a>边界控制</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 边界控制</span><br><span class="line">// ^  开始</span><br><span class="line">// $  结束</span><br><span class="line"></span><br><span class="line">// () 模式单元 (D|d)uang</span><br></pre></td></tr></table></figure>
 <h3 id="修正模式"><a href="#修正模式" class="headerlink" title="修正模式"></a>修正模式</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// 假如有一组电话号码: 020-3456789</span><br><span class="line">// 懒惰匹配(默认) : \d+\-\d+  =&gt; 020-3456789</span><br><span class="line">// 贪婪匹配 : \d?\-\d?  =&gt; 0-3  , 或者 &apos;/imooc.+123/U&apos; (仅限PHP)</span><br><span class="line">// 忽略大小写 &apos;/iMoOc.+123/i&apos;</span><br><span class="line">// 忽略空白符 &apos;/im o o c.+123/x&apos;</span><br><span class="line">// 匹配所有字符 &apos;/im o o c.+123/s&apos;</span><br></pre></td></tr></table></figure>
 <h3 id="常见正则"><a href="#常见正则" class="headerlink" title="常见正则"></a>常见正则</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">邮箱: ^\w+(\.\w+)*@\w+(\.\w+)+$</span><br><span class="line">URL: (\w+:\/\/)?\w+(\.\w+)+[a-z]$</span><br><span class="line">常用URL: (https?:\/\/)?(\w+\.)+[a-zA-Z]+</span><br><span class="line"></span><br><span class="line">// more</span><br><span class="line">Email : /^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]&#123;2,3&#125;)$/i</span><br><span class="line">Mobile : /^1[34758]\d&#123;9&#125;$/</span><br><span class="line">Url: /^(https?):\/\/[^\s&amp;&lt;&gt;#;,&quot;\&apos;\?]+(|#[^\s&lt;&gt;;&quot;\&apos;]*|\?[^\s&lt;&gt;;&quot;\&apos;]*)$/i,</span><br><span class="line">Company: /^[\u4e00-\u9fa5a-zA-Z0-9\-\·]+$/,</span><br><span class="line">OrganizationCode: /^[A-Za-z0-9]&#123;15&#125;$/,</span><br><span class="line">Name: /^[\u4e00-\u9fa5a-zA-Z]+$/,</span><br><span class="line">Position: /^[\u4e00-\u9fa5a-zA-Z\-]+$/</span><br></pre></td></tr></table></figure>
-					<div class="post-share">
-	<ul class="share-list">
-		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
-		<li>
-      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
-        <div class="wechat-qrcode" id="qrcodeBox">
-          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
-          <em class="wechat-tri"></em>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2016/06/01/正则表达式JS版本/" class="prev">上一篇：正则表达式js版本</a>
+    
+    
+    <a href="/2016/01/11/download-chrome-crx/" class="next">下一篇：墙内Chrome插件下载方法</a>
+    
+  </nav>
+
         </div>
-        <span>wechat</span>
-      </a>
-    </li>
-		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
-	</ul>
-</div>
-					<!-- 评论 -->
-					<div class="post-comments" id="Jcmt">
-	<h3 class="post-comments-tit">访客评论</h3>
-	<div id="vcomments"></div>
-	<script>
-
-		var checkEle =function(id){return !!document.getElementById(id)} ,
-			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
-		if (hideCmt) {
-			Jcmt.style.display = 'none';
-		}else{
-			new Valine({
-			    el: '#vcomments',
-			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
-			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
-			    notify:false,
-			    verify:false,
-			    avatar:'mm',
-			    placeholder: '感谢您的留言, 请勿灌水和广告.'
-			})
-		}
-	</script>
-</div>
-				</div>
-			</div>		</div>
-		<div class="footer">
-  <p class="left">&copy; 测试狗 ,
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    </span>
-  </p>
-	<p class="right">Base on Github & Hexo</p>
-</div>
-<div class="count" style="display: none;">
-  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
-</div>
-	</div>
-</div>
-
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+  <script>
+    new Valine({
+      el: '#Jcomment',
+      appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+      appKey: 'QoS0zL4Y2xTDviitGOPkvCGv' ,
+      notify: false,
+      verify: false,
+      avatar: 'mm',
+      pageSize: '10',
+      placeholder:'Valine+Leancloud提供评论'
+    })
+  </script>
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
 </body>
 </html>

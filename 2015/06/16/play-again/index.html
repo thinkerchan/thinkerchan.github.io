@@ -1,174 +1,198 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
-  <meta name="renderer" content="webkit">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
   
   <title>100.com的一个漏洞(中) | 测试狗</title>
-  <meta name="description" content="一今天没活干，于是把朋友在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧，貌似他们没有很重视. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的 二回到正题:这回干脆就获取了用户cookie， 话不多说，贴图:  这就是某个YY用户账户的所有c">
-<meta name="keywords" content="XSS">
-<meta property="og:type" content="article">
-<meta property="og:title" content="100.com的一个漏洞(中)">
-<meta property="og:url" content="https://thinkerchan.com/2015/06/16/play-again/index.html">
-<meta property="og:site_name" content="测试狗">
-<meta property="og:description" content="一今天没活干，于是把朋友在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧，貌似他们没有很重视. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的 二回到正题:这回干脆就获取了用户cookie， 话不多说，贴图:  这就是某个YY用户账户的所有c">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="http://r.loli.io/Mfi2In.jpg">
-<meta property="og:updated_time" content="2018-05-31T14:17:10.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="100.com的一个漏洞(中)">
-<meta name="twitter:description" content="一今天没活干，于是把朋友在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧，貌似他们没有很重视. 没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇100.com的一个漏洞(上)，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的 二回到正题:这回干脆就获取了用户cookie， 话不多说，贴图:  这就是某个YY用户账户的所有c">
-<meta name="twitter:image" content="http://r.loli.io/Mfi2In.jpg">
-<meta name="twitter:creator" content="@thinkerchan">
-<meta property="fb:admins" content="thinkerchan">
+  <meta name="author" content="测试狗">
   
-  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="100.com的一个漏洞(中)"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
   
 
-  <link rel="stylesheet" href="/css/style.css" >
-  <link rel="shortcut icon" href="/images/favicon.png"/>
-  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-  <script data-main="/js/build" src="/js/require.js"></script>
-  <!--[if lt IE 7]>
-  <style>
-    .section{
-      width: 780px;
-    }
-    .post-content img{
-      width: 100%;
-    }
-    .jupe pre{
-      width: 100%;
-    }
-  </style>
-  <![endif]-->
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
-<body id="normal" >
 
-<div class="section-wrap section-main">
-	<div class="section">
-		<div class="header">
-	<h1 class="logo">
-		<a href="/">测试狗</a>
-	</h1>
-	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
-		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
-		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
-	</p>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">表</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2015-06-16T09:37:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2015-06-16
+</time>
+
+
+
+
+
 </div>
-		<div class="main">
-						<div class="jupe main-body">
-				<div class="post-content">
-					<h1 class="post-title">100.com的一个漏洞(中)</h1>
-					<div class="post-meta">
-						<span class="post-time">2015.06.16</span>
-						<div class="post-cats">
-							
-						</div>
-					</div>
-					<div class="post-toc">
-						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一"><span class="toc-number">1.</span> <span class="toc-text">一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二"><span class="toc-number">2.</span> <span class="toc-text">二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三"><span class="toc-number">3.</span> <span class="toc-text">三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四"><span class="toc-number">4.</span> <span class="toc-text">四</span></a></li></ol>
-					</div>
-					<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>今天没活干，于是把朋友在YY面试的几个问题给过了，然后又鬼使神差地看了XSS，上次[100.com的漏洞]貌似还没解决， 好吧，貌似他们没有很重视.</p>
-<p>没关系，我再玩一下这个漏洞.漏洞注入方式可以参考我的上一篇<a href="http://thinkerchan.com/2015/05/31/loopholes/">100.com的一个漏洞(上)</a>，因为这个漏洞还没解决，所以各位看官，手下留情… 不然你懂的</p>
-<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>回到正题:<br>这回干脆就获取了用户cookie， 话不多说，贴图:</p>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">100.com的一个漏洞(中)</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一"><span class="toc-number">1.</span> <span class="toc-text">一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二"><span class="toc-number">2.</span> <span class="toc-text">二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三"><span class="toc-number">3.</span> <span class="toc-text">三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四"><span class="toc-number">4.</span> <span class="toc-text">四</span></a></li></ol>
+    </div>
+    
+    <h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><p>上次[100.com的漏洞]貌似还没解决.，我决定再研究下。</p>
+<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><p>这回干脆就获取了用户cookie</p>
 <p><img src="http://r.loli.io/Mfi2In.jpg" alt="用户cookie"></p>
-<p>这就是某个YY用户账户的所有cookie….</p>
-<p>那么估计有人就问了:</p>
+<p>这就是某个YY用户账户的所有cookie</p>
+<p>问：</p>
 <blockquote>
-<p>特么要是别人不点你的网页，那这还是没什么卵用啊.</p>
+<p>如果别人不点击这个页面，那也没用啊</p>
 </blockquote>
 <p>答:</p>
 <blockquote>
-<p>没错， 别人不点确实没啥卵用， 但是请别忽略了YY的用户数量是什么级别的…只要有人在它的论坛上发一个[能够产生足够大传播量的帖子]，并附上这个已被注入的链接提示用户点击…那也会是相当有趣的场面， 可能[技术至上]的程序员们对这些社工行为不屑，但是请别忘了<a href="https://en.wikipedia.org/wiki/Kevin_Mitnick" target="_blank" rel="noopener">Kevin David Mitnick</a> 那本非常著名的书，叫做 &lt;&lt;欺骗的艺术&gt;&gt;….</p>
+<p>没错， 别人不点确实不能拿到他的cookie， 但是YY的用户数量非常大，只要有人在它的论坛上发一个[能够产生足够大传播量的帖子]，并附上这个已被注入的链接提示用户点击，那也会波及相当数量的受害者。技术和社工行为不能相互分开。</p>
 </blockquote>
-<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>获取到用户cookie的第一刻，自然觉得非常有趣，于是就想着怎么从返回的cookie里获取到用户id和密码，id自然好说，但是密码就不好搞了，因为一般公司都不会傻逼到不对密码加密就直接发送的， 而通常的加密方式是<a href="http://baike.baidu.com/link?url=b0y-m-fGVvPaymkXi1duQC6eO4RjrRXNG9piHrvvkAjYD5FYZH7ou48n-UtbYsQBOdshDipO1X6QQ6CiGUVSV_" target="_blank" rel="noopener">MD5加密</a>，至于它是怎样的加密方式，请自行点击<a href="UtbYsQBOdshDipO1X6QQ6CiGUVSV_">链接</a>，因为我也只是达到被普及这个概念的水平.</p>
-<p><b>不过: </b></p>
-<p>对密码使用MD5加密后， 通常是16或者32位的.</p>
-<p>比如拿最常见的<code>admin</code>做MD5加密: (注意下面的字符没有空格的，我加了空格是为了方便对比)</p>
-<ul>
-<li>16位加密: <code>7a57a5a7 43894a0e</code></li>
-<li>32位加密: <code>21232f29 7a57a5a7 43894a0e 4a801fc3</code></li>
-</ul>
-<p>然而我拿到cookie里面的<code>password</code>字段却是40位，而且又只有字母和数字，前面提到了，MD5加密后是16或者32位，那么问题来了:</p>
-<ul>
-<li>40位明显不符合MD5加密后规则</li>
-<li>密文只有数字和字母</li>
-</ul>
-<p>所以我便尝试goole一下40位的MD5加密， 还真有结果， 我觉得又有戏了.也顺便涨了姿势:<br>于是我们对<code>admin</code>进行所谓 40位的加密， 根据网上的教程， 结果如下:</p>
-<ul>
-<li>40位加密: <code>7a57a5a7 43894a0e 4a801fc3  43894a0e 4a801fc3</code></li>
-</ul>
-<p><b>然而:</b></p>
-<p>当我40位的<code>password</code>字段准备去破解时….失败了(这是必然的)， 即便后来裁员提示我用自己的密码做正向测试，还是没什么卵用…非常有可能加密不只局限于用了MD5而已</p>
-<p>这就意味着，password这个字段几乎无解</p>
-<pre><code>猜想: 这可能是记录状态的一个字段
-</code></pre><p>不过到这里， 已经超出我现在掌握的知识范围了. 所以现状就是，我大概是闯入你家大门，但是还没能力进主人的房间.</p>
-<p>这时候我们这样想: 虽然我进不了你房间， 可是我还是能够在你房间外面的其他地方耍耍的….对吧?</p>
-<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><p>待续(如果有[下]的话)</p>
+<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><p>获取到用户cookie的第一刻，自然想着怎么从返回的cookie里获取到用户id和密码，id自然好说，但是密码通常不好处理，通常会对这个密码进行加密，所以cookie里面的密码也是加密过的。而通常的加密方式是MD5或者SHAx或者双重或者多重调。</p>
+<p>如：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MD5(sha1(password))</span><br><span class="line">MD5(MD5(sha1(password)))</span><br><span class="line">sha1(MD5(password))</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>我用自己YY账户登录拿到cookie之后，看了看对应密码加密之后，尝试上面几种加密组合，和官方得到的不一致。当然也没那么容易能够试验出，除非是他们的后端程序员才能知道加密组合，很有可能，密码在加密的时候，可能还加入了字符串前缀后缀等。</p>
+<p>不过，即便我知道了加密方式也没什么卵用。只要不是admin这种简单的密码，MD5暴力破解都是很困难的事情，何况通常不只是md5一层加密。</p>
+<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><p>反正拿到用户明文密码是不可能的，反正cookie已经拿到，我们就能做一些坏事。好比你拿到了XXX前面签名盖章的支票，你已经不用在乎他签名时候的姿势或者那个章放在那里，这个支票你自然能拿去花了。。。</p>
+<p>接下来的自然是伪造请求了。比如说，可以拿这个cookie，到YY论坛发一个贴求包养。。。</p>
+<p>待续</p>
 
-					<div class="post-share">
-	<ul class="share-list">
-		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
-		<li>
-      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
-        <div class="wechat-qrcode" id="qrcodeBox">
-          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
-          <em class="wechat-tri"></em>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2015/06/17/effective-css/" class="prev">上一篇：如何提升 CSS 选择器性能</a>
+    
+    
+    <a href="/2015/06/16/how-browser-work/" class="next">下一篇：浏览器渲染原理</a>
+    
+  </nav>
+
         </div>
-        <span>wechat</span>
-      </a>
-    </li>
-		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
-	</ul>
-</div>
-					<!-- 评论 -->
-					<div class="post-comments" id="Jcmt">
-	<h3 class="post-comments-tit">访客评论</h3>
-	<div id="vcomments"></div>
-	<script>
-
-		var checkEle =function(id){return !!document.getElementById(id)} ,
-			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
-		if (hideCmt) {
-			Jcmt.style.display = 'none';
-		}else{
-			new Valine({
-			    el: '#vcomments',
-			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
-			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
-			    notify:false,
-			    verify:false,
-			    avatar:'mm',
-			    placeholder: '感谢您的留言, 请勿灌水和广告.'
-			})
-		}
-	</script>
-</div>
-				</div>
-			</div>		</div>
-		<div class="footer">
-  <p class="left">&copy; 测试狗 ,
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    </span>
-  </p>
-	<p class="right">Base on Github & Hexo</p>
-</div>
-<div class="count" style="display: none;">
-  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
-</div>
-	</div>
-</div>
-
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+  <script>
+    new Valine({
+      el: '#Jcomment',
+      appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+      appKey: 'QoS0zL4Y2xTDviitGOPkvCGv' ,
+      notify: false,
+      verify: false,
+      avatar: 'mm',
+      pageSize: '10',
+      placeholder:'Valine+Leancloud提供评论'
+    })
+  </script>
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
 </body>
 </html>

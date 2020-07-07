@@ -1,81 +1,132 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="google-site-verification" content="eGNFdt2ztR4hEzEBjDkGQUWo0r_iPHpw1hoLqy-UUb0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1" />
-  <meta name="renderer" content="webkit">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
   
   <title>JS红皮书读书笔记-25-新兴的API | 测试狗</title>
-  <meta name="description" content="requestAnimationFrame早期动画循环JS的动画很长时间以来都是使用计时器setInterval来达成的。就像这样：(function()&amp;#123;    function updateAnimations()&amp;#123;        doAnimation1();        doAnimation2();    &amp;#125;    setInterval(updateAn">
-<meta name="keywords" content="测试狗,前端,计算广告,产品经理">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JS红皮书读书笔记-25-新兴的API">
-<meta property="og:url" content="https://thinkerchan.com/2019/04/09/JSbook25/index.html">
-<meta property="og:site_name" content="测试狗">
-<meta property="og:description" content="requestAnimationFrame早期动画循环JS的动画很长时间以来都是使用计时器setInterval来达成的。就像这样：(function()&amp;#123;    function updateAnimations()&amp;#123;        doAnimation1();        doAnimation2();    &amp;#125;    setInterval(updateAn">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-09T08:17:24.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JS红皮书读书笔记-25-新兴的API">
-<meta name="twitter:description" content="requestAnimationFrame早期动画循环JS的动画很长时间以来都是使用计时器setInterval来达成的。就像这样：(function()&amp;#123;    function updateAnimations()&amp;#123;        doAnimation1();        doAnimation2();    &amp;#125;    setInterval(updateAn">
-<meta name="twitter:creator" content="@thinkerchan">
-<meta property="fb:admins" content="thinkerchan">
+  <meta name="author" content="测试狗">
   
-  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/rss+xml">
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-25-新兴的API"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
   
 
-  <link rel="stylesheet" href="/css/style.css" >
-  <link rel="shortcut icon" href="/images/favicon.png"/>
-  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src='https://unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
-  <script data-main="/js/build" src="/js/require.js"></script>
-  <!--[if lt IE 7]>
-  <style>
-    .section{
-      width: 780px;
-    }
-    .post-content img{
-      width: 100%;
-    }
-    .jupe pre{
-      width: 100%;
-    }
-  </style>
-  <![endif]-->
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
-<body id="normal" >
 
-<div class="section-wrap section-main">
-	<div class="section">
-		<div class="header">
-	<h1 class="logo">
-		<a href="/">测试狗</a>
-	</h1>
-	<p class="social-links hide">
-		<a href="http://weibo.com/thinkerchank/" target="_blank">Weibo</a>
-		/
-		<a href="https://www.zhihu.com/people/fattychan/activities" target="_blank">Zhihu</a>
-		/
-		<a href="https://github.com/thinkerchan" target="_blank">Github</a>
-	</p>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">表</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-04-09T08:10:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-04-09
+</time>
+
+
+
+
+
 </div>
-		<div class="main">
-						<div class="jupe main-body">
-				<div class="post-content">
-					<h1 class="post-title">JS红皮书读书笔记-25-新兴的API</h1>
-					<div class="post-meta">
-						<span class="post-time">2019.04.09</span>
-						<div class="post-cats">
-							<a class="post-cats-item-link" href="/categories/Javascript/">Javascript</a>
-						</div>
-					</div>
-					<div class="post-toc">
-						<div class="toc-title">TOC</div>
-						<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#requestAnimationFrame"><span class="toc-number">1.</span> <span class="toc-text">requestAnimationFrame</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#早期动画循环"><span class="toc-number">1.1.</span> <span class="toc-text">早期动画循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环间隔的问题"><span class="toc-number">1.2.</span> <span class="toc-text">循环间隔的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Page-Visibility-API"><span class="toc-number">2.</span> <span class="toc-text">Page Visibility API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Geolocation-API"><span class="toc-number">3.</span> <span class="toc-text">Geolocation API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#File-API"><span class="toc-number">4.</span> <span class="toc-text">File API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileReader类型"><span class="toc-number">4.1.</span> <span class="toc-text">FileReader类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取部分内容"><span class="toc-number">4.2.</span> <span class="toc-text">读取部分内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象URL"><span class="toc-number">4.3.</span> <span class="toc-text">对象URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取拖放的文件"><span class="toc-number">4.4.</span> <span class="toc-text">读取拖放的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用XHR上传文件"><span class="toc-number">4.5.</span> <span class="toc-text">使用XHR上传文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web计时"><span class="toc-number">5.</span> <span class="toc-text">Web计时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebWorkers"><span class="toc-number">6.</span> <span class="toc-text">WebWorkers</span></a></li></ol>
-					</div>
-					<h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="早期动画循环"><a href="#早期动画循环" class="headerlink" title="早期动画循环"></a>早期动画循环</h3><p>JS的动画很长时间以来都是使用计时器setInterval来达成的。就像这样：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">updateAnimations</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        doAnimation1();</span><br><span class="line">        doAnimation2();</span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(updateAnimations, <span class="number">100</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-25-新兴的API</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#requestAnimationFrame"><span class="toc-number">1.</span> <span class="toc-text">requestAnimationFrame</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#早期动画循环"><span class="toc-number">1.1.</span> <span class="toc-text">早期动画循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环间隔的问题"><span class="toc-number">1.2.</span> <span class="toc-text">循环间隔的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Page-Visibility-API"><span class="toc-number">2.</span> <span class="toc-text">Page Visibility API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Geolocation-API"><span class="toc-number">3.</span> <span class="toc-text">Geolocation API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#File-API"><span class="toc-number">4.</span> <span class="toc-text">File API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileReader类型"><span class="toc-number">4.1.</span> <span class="toc-text">FileReader类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取部分内容"><span class="toc-number">4.2.</span> <span class="toc-text">读取部分内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象URL"><span class="toc-number">4.3.</span> <span class="toc-text">对象URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取拖放的文件"><span class="toc-number">4.4.</span> <span class="toc-text">读取拖放的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用XHR上传文件"><span class="toc-number">4.5.</span> <span class="toc-text">使用XHR上传文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web计时"><span class="toc-number">5.</span> <span class="toc-text">Web计时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebWorkers"><span class="toc-number">6.</span> <span class="toc-text">WebWorkers</span></a></li></ol>
+    </div>
+    
+    <h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="早期动画循环"><a href="#早期动画循环" class="headerlink" title="早期动画循环"></a>早期动画循环</h3><p>JS的动画很长时间以来都是使用计时器setInterval来达成的。就像这样：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">updateAnimations</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        doAnimation1();</span><br><span class="line">        doAnimation2();</span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(updateAnimations, <span class="number">100</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
 <h3 id="循环间隔的问题"><a href="#循环间隔的问题" class="headerlink" title="循环间隔的问题"></a>循环间隔的问题</h3><p>但是这样使用是有问题的，最大的问题就是时间间隔的问题。不能太长，否则看起来就会卡卡的，也不能太短，更新速度超过了屏幕的刷新速度会造成丢帧。</p>
 <p>而且浏览器的计时器其实精度是有限的，精度最高的chrome为4ms。且在页面没有显示在屏幕上的时候，大多数浏览器会对计时器的运行频率做出限制。<br>这样的动画绘制机制就造成了绘制下一帧动画的时机我们并不能准确掌握。最好的结果应该是正好在屏幕刷新的那一刻绘制下一帧，也就是动画绘制的速度与电脑屏幕刷新速度一致。</p>
 <p>于是Mozilla就带头提出了requestAnimationFrame这个API, 如今这个API已经被标准化:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateProgress</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">"status"</span>);</span><br><span class="line">    div.style.width = (<span class="built_in">parseInt</span>(div.style.width, <span class="number">10</span>) + <span class="number">5</span>) + <span class="string">"%"</span>;</span><br><span class="line">    <span class="keyword">if</span> (div.style.width != <span class="string">"100%"</span>)&#123;</span><br><span class="line">        requestAnimationFrame(updateProgress);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">requestAnimationFrame(updateProgress);</span><br></pre></td></tr></table></figure></p>
@@ -127,60 +178,53 @@
 <hr>
 <p>本章完</p>
 
-					<div class="post-share">
-	<ul class="share-list">
-		<li><a class="icon icon-weibo" href="javascript:share.weibo();"><span>weibo</span></a></li>
-		<li>
-      <a class="icon icon-wechat" onmouseenter="share.wechat(this)"  onmouseleave="share.wechatHide()">
-        <div class="wechat-qrcode" id="qrcodeBox">
-          <img width="140" height="140" class="wechat-qrcode-img" id="wechatQrcodeImg">
-          <em class="wechat-tri"></em>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/04/12/indexeddb-quick/" class="prev">上一篇：【快速教程】Web离线存储之indexedDB</a>
+    
+    
+    <a href="/2019/04/09/JSbook24/" class="next">下一篇：JS红皮书读书笔记-24-最佳实践</a>
+    
+  </nav>
+
         </div>
-        <span>wechat</span>
-      </a>
-    </li>
-		<li><a class="icon icon-qzone" href="javascript:share.qzone();"><span>qzone</span></a></li>
-	</ul>
-</div>
-					<!-- 评论 -->
-					<div class="post-comments" id="Jcmt">
-	<h3 class="post-comments-tit">访客评论</h3>
-	<div id="vcomments"></div>
-	<script>
-
-		var checkEle =function(id){return !!document.getElementById(id)} ,
-			hideCmt = checkEle('JnoCmt')||checkEle('resume') ;
-		if (hideCmt) {
-			Jcmt.style.display = 'none';
-		}else{
-			new Valine({
-			    el: '#vcomments',
-			    appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
-			    appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
-			    notify:false,
-			    verify:false,
-			    avatar:'mm',
-			    placeholder: '感谢您的留言, 请勿灌水和广告.'
-			})
-		}
-	</script>
-</div>
-				</div>
-			</div>		</div>
-		<div class="footer">
-  <p class="left">&copy; 测试狗 ,
-    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span id="busuanzi_container_site_pv">
-      本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    </span>
-  </p>
-	<p class="right">Base on Github & Hexo</p>
-</div>
-<div class="count" style="display: none;">
-  <script type="text/javascript" src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
-</div>
-	</div>
-</div>
-
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src='https://unpkg.com/valine@1.4.14/dist/Valine.min.js'></script>
+  <script>
+    new Valine({
+      el: '#Jcomment',
+      appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+      appKey: 'QoS0zL4Y2xTDviitGOPkvCGv' ,
+      notify: false,
+      verify: false,
+      avatar: 'mm',
+      pageSize: '10',
+      placeholder:'Valine+Leancloud提供评论'
+    })
+  </script>
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
 </body>
 </html>
