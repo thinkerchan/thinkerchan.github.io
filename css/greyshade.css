@@ -109,7 +109,7 @@ a {
   font-size: 16px;
   line-height: 1.8;
   word-wrap: break-word;
-  font-family: "Arial,'Hiragino Sans GB',冬青黑,'Microsoft YaHei',微软雅黑,SimSun,宋体,Helvetica,Tahoma,'Arial sans-serif'";
+  font-family: Arial, 'Hiragino Sans GB', 'Microsoft YaHei', SimSun, Helvetica, Tahoma, 'Arial sans-serif';
   -webkit-font-smoothing: antialiased;
   font-weight: 10;
 }
@@ -134,11 +134,18 @@ a {
   line-height: 1.2em;
 }
 .container .mid-col .mid-col-container #content article .meta {
-  position: relative;
-  top: 0px;
+  position: static;
   color: #555;
   text-align: right;
   width: auto;
+}
+.container .mid-col .mid-col-container #content article .meta.meta-art {
+  position: absolute;
+  right: 0;
+  top: 0px;
+  font-size: 14px;
+  line-height: inherit;
+  margin-top: 0;
 }
 .container .mid-col .mid-col-container #content article .meta .date::before {
   color: #555;
@@ -164,6 +171,9 @@ a {
 }
 .container .mid-col .mid-col-container #content article .meta-index-post-entry .date {
   margin-right: 0;
+}
+.container .mid-col .mid-col-container #content article h1.title {
+  position: relative;
 }
 .container .mid-col .mid-col-container #content article h1.title a {
   color: #333;
