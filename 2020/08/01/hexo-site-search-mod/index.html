@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>【快速教程】Hexo站内搜索的实现 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="【快速教程】Hexo站内搜索的实现"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2020-08-01T04:09:17.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2020-08-01
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">【快速教程】Hexo站内搜索的实现</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.</span> <span class="toc-text">源码</span></a></li></ol>
+    </div>
+    
+    <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>本主题站内搜索的实现, 可从标题和内容中搜索单个或多个词条，详情看源码。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">page.title</span>  %&gt;</span> <span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"entry-content wrapper"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"search"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"请输入关键字"</span> <span class="attr">id</span>=<span class="string">"Jinput"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"info"</span>&gt;</span></span><br><span class="line">      本次搜索结果共<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"Jcount"</span>&gt;</span>0<span class="tag">&lt;/<span class="name">span</span>&gt;</span>条</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"JresList"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">    <span class="attr">let</span> <span class="attr">posts</span> = <span class="string">site.posts.data</span></span></span><br><span class="line"><span class="tag">    <span class="attr">let</span> <span class="attr">searchData</span> = <span class="string">[]</span></span></span><br><span class="line"><span class="tag">    <span class="attr">posts.forEach</span>(<span class="attr">item</span> =&gt;</span> &#123;</span><br><span class="line">      searchData.push(&#123;</span><br><span class="line">        title: trim(item.title),</span><br><span class="line">        content: trim(strip_html(item.content)).replace(/&amp;#123;/g,'&#123;').replace(/&amp;#125;/g,'&#125;'),</span><br><span class="line">        url:'/'+item.path,</span><br><span class="line">        link: item.link,</span><br><span class="line">        plink: item.permalink</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">    let _searchData = JSON.stringify(searchData)</span><br><span class="line">  %&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> searchData = <span class="xml"><span class="tag">&lt;<span class="name">%-</span> <span class="attr">_searchData</span> %&gt;</span></span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> searchMod = &#123;</span></span><br><span class="line"><span class="javascript">          searchTitle: <span class="literal">true</span>, <span class="comment">//  是否在标题中搜索</span></span></span><br><span class="line"><span class="javascript">          searchContent: <span class="number">1</span>, <span class="comment">// 是否在内容中搜索</span></span></span><br><span class="line"><span class="javascript">          contentPieces: <span class="number">2</span>, <span class="comment">// 内容切割块数</span></span></span><br><span class="line"><span class="javascript">          excludes: [<span class="string">'&#123;&#123;'</span>, <span class="string">'&#125;&#125;'</span>, <span class="string">'&#123;'</span>, <span class="string">'&#125;'</span>, <span class="string">'.'</span>, <span class="string">'/'</span>, <span class="string">'\\'</span>, <span class="string">'。'</span>], <span class="comment">// 粗略过滤部分字符串</span></span></span><br><span class="line"><span class="javascript">          contentDecoration: <span class="number">50</span>, <span class="comment">// 内容命中关键字增加前后50个字</span></span></span><br><span class="line"><span class="javascript">          roughFetch: <span class="literal">false</span>, <span class="comment">// 是否粗略提取, 仅对文本内容有效</span></span></span><br><span class="line"><span class="undefined">          trimStr(str) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> str.trim().toLowerCase()</span></span><br><span class="line"><span class="undefined">          &#125;,</span></span><br><span class="line"><span class="undefined">          init(input) &#123;</span></span><br><span class="line"><span class="javascript">            input.addEventListener(<span class="string">'input'</span>, (e) =&gt; &#123;</span></span><br><span class="line"><span class="javascript">              <span class="keyword">let</span> searchText = <span class="keyword">this</span>.trimStr(input.value)</span></span><br><span class="line"><span class="javascript">              <span class="keyword">this</span>.fetchTxtFromDB(searchText, searchData)</span></span><br><span class="line"><span class="undefined">            &#125;);</span></span><br><span class="line"><span class="undefined">          &#125;,</span></span><br><span class="line"><span class="undefined">          fetchTxtFromDB(searchText, DB) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> resultArr = []</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (searchText) &#123;</span></span><br><span class="line"><span class="javascript">              <span class="keyword">let</span> searchTextArr = searchText.split(<span class="regexp">/[\s\-]+/</span>); <span class="comment">// 非首尾空格分割词条</span></span></span><br><span class="line"><span class="javascript">              searchTextArr = searchTextArr.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> !<span class="keyword">this</span>.excludes.includes(item);</span></span><br><span class="line"><span class="undefined">              &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">              <span class="keyword">if</span> (searchTextArr.length &gt; <span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="javascript">                searchTextArr.push(searchText); <span class="comment">// 保留原始词条做完全匹配</span></span></span><br><span class="line"><span class="undefined">              &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">              resultArr = DB.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> articleTitle = <span class="keyword">this</span>.trimStr(item.title);</span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> titleHitArr = []</span></span><br><span class="line"><span class="undefined">                item.tmpTitleArr = []</span></span><br><span class="line"><span class="javascript">                item._title = <span class="string">''</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> articleContent = <span class="keyword">this</span>.trimStr(item.content);</span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> contentHitArr = []</span></span><br><span class="line"><span class="undefined">                item.tmpContentArr = []</span></span><br><span class="line"><span class="javascript">                item.indexArr = []  <span class="comment">// 词条在内容中第一次出现的位置</span></span></span><br><span class="line"><span class="javascript">                item._content = <span class="string">''</span> <span class="comment">// 存储已经高亮关键字的原文</span></span></span><br><span class="line"><span class="javascript">                item._contentSliceArr = [] <span class="comment">// 存储截取后的原文碎片</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                searchTextArr.map(<span class="function">(<span class="params">one, index</span>) =&gt;</span> &#123; <span class="comment">// 求出searchTextArr有多少个命中的词条</span></span></span><br><span class="line"><span class="javascript">                  <span class="keyword">if</span> (<span class="keyword">this</span>.searchTitle) &#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> b = articleTitle.indexOf(one) &gt; <span class="number">-1</span>;</span></span><br><span class="line"><span class="undefined">                    b &amp;&amp; titleHitArr.push(one)</span></span><br><span class="line"><span class="undefined">                  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                  <span class="keyword">if</span> (<span class="keyword">this</span>.searchContent) &#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> b2 = articleContent.indexOf(one) &gt; <span class="number">-1</span></span></span><br><span class="line"><span class="undefined">                    b2 &amp;&amp; contentHitArr.push(one)</span></span><br><span class="line"><span class="undefined">                  &#125;</span></span><br><span class="line"><span class="undefined">                &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (<span class="keyword">this</span>.searchTitle &amp;&amp; titleHitArr.length) &#123;</span></span><br><span class="line"><span class="javascript">                  titleHitArr.map(<span class="function">(<span class="params">one, index</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> keyWordHtml = <span class="keyword">this</span>.keyWordTpl().replace(<span class="regexp">/&#123;&#123;searchText&#125;&#125;/</span>, one),</span></span><br><span class="line"><span class="javascript">                      titleArrWithoutKeyWord = (!index ? articleTitle : item.tmpTitleArr[index - <span class="number">1</span>]).split(one), <span class="comment">// 用数组切割的方式把所有文本内包含的关键词替换出来, 下一次的分割依赖上一次分割结果</span></span></span><br><span class="line"><span class="undefined">                      highlightTxt = titleArrWithoutKeyWord.join(keyWordHtml);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                    item.tmpTitleArr.push(highlightTxt); <span class="comment">// 记录前一次的结果,用于下一次计算</span></span></span><br><span class="line"><span class="javascript">                    item._title = highlightTxt; <span class="comment">// 最后一次为最终结果</span></span></span><br><span class="line"><span class="undefined">                  &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                  <span class="keyword">delete</span> item.tmpTitleArr</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span> (<span class="keyword">this</span>.searchContent &amp;&amp; contentHitArr.length) &#123;</span></span><br><span class="line"><span class="javascript">                  contentHitArr.map(<span class="function">(<span class="params">one, index</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (<span class="keyword">this</span>.roughFetch) &#123; <span class="comment">// 先高亮后截取(可能造成高亮标签切割问题)</span></span></span><br><span class="line"><span class="javascript">                      <span class="keyword">let</span> keyWordHtml = <span class="keyword">this</span>.keyWordTpl().replace(<span class="regexp">/&#123;&#123;searchText&#125;&#125;/</span>, one),</span></span><br><span class="line"><span class="undefined">                        contentArrWithoutKeyWord = (!index ? articleContent : item.tmpContentArr[index - 1]).split(one),</span></span><br><span class="line"><span class="undefined">                        highlightTxt = contentArrWithoutKeyWord.join(keyWordHtml);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">                      item.tmpContentArr.push(highlightTxt);</span></span><br><span class="line"><span class="undefined">                      item._content = highlightTxt;</span></span><br><span class="line"><span class="javascript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="undefined">                      item.indexArr.push(&#123;</span></span><br><span class="line"><span class="javascript">                        start: articleContent.indexOf(one), <span class="comment">// 记录词条第一次出现的位置，和词条的长度</span></span></span><br><span class="line"><span class="undefined">                        length: one.length,</span></span><br><span class="line"><span class="undefined">                        str: one,</span></span><br><span class="line"><span class="undefined">                      &#125;)</span></span><br><span class="line"><span class="undefined">                    &#125;</span></span><br><span class="line"><span class="undefined">                  &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                  item.indexArr.map(<span class="function">(<span class="params">one, index</span>) =&gt;</span> &#123; <span class="comment">// 有可能把&lt;b&gt;标签给切割了,造成样式异常, 需要另外处理</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> keyWordEndPosition = one.start + one.length <span class="comment">// 词条的结束位置,用于计算截取长度</span></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> content = <span class="keyword">this</span>.roughFetch ? item._content : item.content;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">let</span> contentLen = content.length;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span> (one.start &gt; <span class="keyword">this</span>.contentDecoration) &#123;</span></span><br><span class="line"><span class="javascript">                      <span class="keyword">let</span> highLightEndPosition = keyWordEndPosition + <span class="keyword">this</span>.contentDecoration</span></span><br><span class="line"><span class="undefined">                      highLightEndPosition = highLightEndPosition &gt; contentLen ? contentLen : highLightEndPosition</span></span><br><span class="line"><span class="javascript">                      item._contentSliceArr.push(<span class="string">'...'</span>+content.slice(one.start - <span class="keyword">this</span>.contentDecoration, highLightEndPosition) + <span class="string">'...'</span>)</span></span><br><span class="line"><span class="javascript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">                      <span class="keyword">let</span> highLightEndPosition = keyWordEndPosition + <span class="keyword">this</span>.contentDecoration * <span class="number">2</span></span></span><br><span class="line"><span class="undefined">                      highLightEndPosition = highLightEndPosition &gt; contentLen ? contentLen : highLightEndPosition</span></span><br><span class="line"><span class="javascript">                      item._contentSliceArr.push(<span class="string">'...'</span>+content.slice(<span class="number">0</span>, highLightEndPosition) + <span class="string">'...'</span>)</span></span><br><span class="line"><span class="undefined">                    &#125;</span></span><br><span class="line"><span class="undefined">                  &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                  <span class="keyword">if</span> (!<span class="keyword">this</span>.roughFetch) &#123;</span></span><br><span class="line"><span class="javascript">                    contentHitArr.map(<span class="function">(<span class="params">one, index</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">                      <span class="keyword">let</span> keyWordHtml = <span class="keyword">this</span>.keyWordTpl().replace(<span class="regexp">/&#123;&#123;searchText&#125;&#125;/</span>, one),</span></span><br><span class="line"><span class="xml">                        contentArrWithoutKeyWord = (!index ? item._contentSliceArr.join('<span class="tag">&lt;<span class="name">i</span> <span class="attr">style</span>=<span class="string">"display:block;padding-top:10px"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span>') : item.tmpContentArr[index - 1]).split(one),</span></span><br><span class="line"><span class="undefined">                        highlightTxt = contentArrWithoutKeyWord.join(keyWordHtml);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">                      item.tmpContentArr.push(highlightTxt);</span></span><br><span class="line"><span class="undefined">                      item._content = highlightTxt</span></span><br><span class="line"><span class="undefined">                    &#125;)</span></span><br><span class="line"><span class="undefined">                  &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                  <span class="keyword">delete</span> item.tmpContentArr</span></span><br><span class="line"><span class="javascript">                  <span class="keyword">delete</span> item._contentSliceArr</span></span><br><span class="line"><span class="javascript">                  <span class="keyword">delete</span> item.indexArr</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> (<span class="keyword">this</span>.searchTitle &amp;&amp; titleHitArr.length) || (<span class="keyword">this</span>.searchContent &amp;&amp; contentHitArr.length)</span></span><br><span class="line"><span class="undefined">              &#125;)</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.resultArr = resultArr;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">this</span>.render(JresList, Jcount, resultArr)</span></span><br><span class="line"><span class="undefined">          &#125;,</span></span><br><span class="line"><span class="undefined">          render(ele, countEle, resultArr) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> htmlArr = resultArr.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">              <span class="keyword">return</span> <span class="keyword">this</span>.itemTpl()</span></span><br><span class="line"><span class="javascript">                .replace(<span class="regexp">/&#123;&#123;url&#125;&#125;/g</span>, item.url)</span></span><br><span class="line"><span class="javascript">                .replace(<span class="regexp">/&#123;&#123;title&#125;&#125;/g</span>, item._title || item.title)</span></span><br><span class="line"><span class="javascript">                .replace(<span class="regexp">/&#123;&#123;content&#125;&#125;/g</span>, item._content)</span></span><br><span class="line"><span class="undefined">            &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            ele.innerHTML = htmlArr.join(<span class="string">''</span>)</span></span><br><span class="line"><span class="undefined">            countEle.innerHTML = htmlArr.length</span></span><br><span class="line"><span class="undefined">          &#125;,</span></span><br><span class="line"><span class="undefined">          itemTpl() &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="string">`</span></span></span><br><span class="line"><span class="javascript">            &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">"item"</span>&gt;</span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">href</span>=<span class="string">"&#123;&#123;url&#125;&#125;"</span>&gt;</span></span></span><br><span class="line"><span class="javascript">              &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"search-result-title"</span>&gt;&#123;&#123;title&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span></span><br><span class="line"><span class="javascript">              &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"search-result search-result-link"</span>&gt;&#123;&#123;content&#125;&#125;&lt;<span class="regexp">/p&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="undefined">          `;</span></span><br><span class="line"><span class="undefined">          &#125;,</span></span><br><span class="line"><span class="undefined">          keyWordTpl() &#123;</span></span><br><span class="line"><span class="xml">            return `<span class="tag">&lt;<span class="name">b</span> <span class="attr">class</span>=<span class="string">"search-keyword"</span>&gt;</span>&#123;&#123;searchText&#125;&#125;<span class="tag">&lt;/<span class="name">b</span>&gt;</span>`</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">      searchMod.init(Jinput)</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    
+    <a href="/2020/07/04/wangxiaobo/" class="next">下一篇：我整理了一份王小波全集</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2020 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      }
+    }
+
+    mod.load('lib-av', 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.0.1/dist/av-min.js', () => {
+      mod.load('lib-cmt', 'https://unpkg.com/valine@1.4.14/dist/Valine.min.js',()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>
