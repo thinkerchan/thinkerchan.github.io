@@ -223,6 +223,7 @@ a {
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
+  box-shadow: 0 0 10px 0px #666;
 }
 .container .left-col #header .author-name {
   text-align: center;
