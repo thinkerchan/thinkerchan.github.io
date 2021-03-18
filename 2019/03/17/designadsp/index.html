@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>计算广告系列-设计一个简单的DSP | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="计算广告系列-设计一个简单的DSP"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlly1giq5k8ty3tj306y0zkdix.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-03-17T00:22:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-17
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">计算广告系列-设计一个简单的DSP</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DSP"><span class="toc-number">1.</span> <span class="toc-text">DSP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是DSP？"><span class="toc-number">1.1.</span> <span class="toc-text">什么是DSP？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DSP怎么赚钱？"><span class="toc-number">1.2.</span> <span class="toc-text">DSP怎么赚钱？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DSP的核心竞争力-主要功能是什么？"><span class="toc-number">2.</span> <span class="toc-text">DSP的核心竞争力/主要功能是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建DSP投放平台"><span class="toc-number">3.</span> <span class="toc-text">搭建DSP投放平台</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#产品结构框架"><span class="toc-number">4.</span> <span class="toc-text">产品结构框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">5.</span> <span class="toc-text">注意事项</span></a></li></ol>
+    </div>
+    
+    <blockquote>
+<p>本文是从产品的角度来探讨如何搭建一个DSP投放平台，介绍DSP投放的内部模块都有哪些。但本文不涉及RTB（Real Time Bidding）、eCPM预估等技术层面的介绍。</p>
+</blockquote>
+<h2 id="DSP"><a href="#DSP" class="headerlink" title="DSP"></a>DSP</h2><h3 id="什么是DSP？"><a href="#什么是DSP？" class="headerlink" title="什么是DSP？"></a>什么是DSP？</h3><blockquote>
+<p>DSP就是需求方平台（Demand Side Platform），本质是把广告主的广告通过媒体投放到受众（消费者）的面前。DSP平台对接了主流的ADX，并且把广告位的具体的概念，改变成了受众的人群。也就是说，DSP提供的不是广告位，是目标受众。DSP平台提供多样的人群标签（例如性别、年龄、地理位置、手机类型、兴趣爱好等），使得广告主能够以人群的维度，去投放广告。本质而言，DSP是为广告主服务的。</p>
+</blockquote>
+<h3 id="DSP怎么赚钱？"><a href="#DSP怎么赚钱？" class="headerlink" title="DSP怎么赚钱？"></a>DSP怎么赚钱？</h3><blockquote>
+<p>如图所示，每个DSP需要去对接多个ADX（广告交易平台），把多个ADX中的库存对接起来。</p>
+</blockquote>
+<p><img src="//upload-images.jianshu.io/upload_images/1423409-4645a24101e53c8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/554/format/webp" alt="DSP"></p>
+<center>完整的计算广告链</center>
+
+
+<p>对于DSP而言，他们需要的是一个利差。假设广告主愿意为每个点击支付一个价格，那么如果DSP能够通过利差带来更多的收益，DSP就能有收入，从而发展起来。可以简单的理解为，DSP就是一个流量贩子，但不是DSP先买流量，而是广告主先需要给定一个价格，DSP再拿着这个价格去市场上看，有没有符合这个价格且还有利差的流量。如果广告主出12元，DSP能在市场上找到10元就能满足广告主需求的流量，那么对于DSP而言，剩下的2元就是他的收入。DSP一般赚取10%-20%左右的利差（数据来源于艾瑞咨询的《2016年中国移动营销行业研究报告》）</p>
+<h2 id="DSP的核心竞争力-主要功能是什么？"><a href="#DSP的核心竞争力-主要功能是什么？" class="headerlink" title="DSP的核心竞争力/主要功能是什么？"></a>DSP的核心竞争力/主要功能是什么？</h2><p>一个产品要有竞争力，一定是满足了用户的需求，这个原则是不会变的，那么对于DSP而言，核心的竞争力就是：精准营销的能力。只有掌握了足够多的数据的DSP，才能真正做到人群的细分，达到按照人群来投放的目的。通过定向技术，可以定位到非常精确的人群，比如游戏的广告主通过DSP平台进行投放的时候，就可以选择，上海，18-24岁，对游戏感兴趣的人这种人群。</p>
+<h2 id="搭建DSP投放平台"><a href="#搭建DSP投放平台" class="headerlink" title="搭建DSP投放平台"></a>搭建DSP投放平台</h2><p>一个DSP投放平台的工作原理如下：<br>1）广告主创建投放计划、投放单元，设置投放条件，上传创意（一个计划对应多个单元，一个单元对应多个创意）；<br>2）ADX发现有用户符合广告主符合DSP的投放条件且有广告位时，向DSP发送请求，询问DSP的出价；<br>3）DSP根据eCPM的预估出价，想ADX报出自己所处的价位；<br>4）ADX对比多个DSP的报价，把广告位留给出价最高的DSP，并调用该DSP的广告创意进行展示；</p>
+<p>DSP投放平台的主要使用者为需求方，也就是我们理解的广告主或者广告代理商。对于整理的产品逻辑而言，是很简单的。注册→登录→设置投放计划（本次广告投放总计划，比如新上一款商品要推广）→设置投放单元（本次投放的类型，推广方式等）→设置投放条件（选择需要投放的人群）→设置投放创意（选择不同的图片，文字创意）→系统按照投放的设置的各种条件进行广告竞价投放→查看投放效果→优化投放创意→继续投放。</p>
+<p>那么基于这个产品逻辑，其实可以把整个产品的用户任务勾画出来。</p>
+<p><img src="//upload-images.jianshu.io/upload_images/1423409-6ae5ef6d794cab01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="用户需求"></p>
+<h2 id="产品结构框架"><a href="#产品结构框架" class="headerlink" title="产品结构框架"></a>产品结构框架</h2><p><img src="//upload-images.jianshu.io/upload_images/1423409-4136976cf9b838cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/714/format/webp" alt="DSP平台"></p>
+<center>DSP功能</center>
+
+
+<ul>
+<li>注册模块：有注册和登录两个功能，一般使用DSP都需要以企业的方式去申请，而且一般不开放注册。</li>
+<li>工作台模块：用于企业方便的查看自己的广告投放的效果。投放管理模块：用户可以管理投放计划、投放单元、创意。</li>
+<li>统计报表：用户可以根据不同的时间条件，查看投放计划、投放单元、创意的数据信息。</li>
+<li>其他：包括素材管理，定向包管理，预算提醒的工具。</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>因为本文是从产品设计的角度去看DSP投放平台的设计，所以不涉及DSP的自动投放的技术模块，eCPM的预估价格模块等，对于搭建DSP平台的产品人员而言，需要了解DSP的投放原理，但是具体的技术实现，则需要交给专业的技术人员了。</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/03/21/JSbook03/" class="prev">上一篇：JS红皮书读书笔记-03-基本概念</a>
+    
+    
+    <a href="/2019/03/15/basicofad/" class="next">下一篇：计算广告系列-广告相关的基本概念</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2021 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      }
+    }
+
+    mod.load('lib-av', 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.0.1/dist/av-min.js', () => {
+      mod.load('lib-cmt', 'https://unpkg.com/valine@1.4.14/dist/Valine.min.js',()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

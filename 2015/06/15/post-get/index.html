@@ -1,0 +1,339 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>再看GET和POST | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="老陈">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="再看GET和POST"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlly1giq5k8ty3tj306y0zkdix.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">老陈</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2015-06-15T07:26:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2015-06-15
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">再看GET和POST</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GET请求"><span class="toc-number">1.</span> <span class="toc-text">GET请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POST请求"><span class="toc-number">2.</span> <span class="toc-text">POST请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我们所理解的区别"><span class="toc-number">3.</span> <span class="toc-text">我们所理解的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#涨姿势"><span class="toc-number">4.</span> <span class="toc-text">涨姿势</span></a></li></ol>
+    </div>
+    
+    <h2 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h2><p>据JS高级程序设计:</p>
+<blockquote>
+<p>GET 是最常见的请求类型，最常用于向服务器查询某些信息。必要时，可以将查询字符串参数追加<br>到 URL 的末尾，以便将信息发送给服务器。对 XHR 而言，位于传入 open()方法的 URL 末尾的查询字<br>符串必须经过正确的编码才行。</p>
+</blockquote>
+<ul>
+<li>GET 请求可被缓存</li>
+<li>GET 请求保留在浏览器历史记录中</li>
+<li>GET 请求可被收藏为书签</li>
+<li>GET 请求不应在处理敏感数据时使用</li>
+<li>GET 请求有长度限制</li>
+<li>GET 请求只应当用于取回数据</li>
+</ul>
+<h2 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h2><blockquote>
+<p>通常用于向服务器发送应该被保存的数据。 POST 请求应该<br>把数据作为请求的主体提交，而 GET 请求传统上不是这样。 POST 请求的主体可以包含非常多的数据，<br>而且格式不限。</p>
+</blockquote>
+<ul>
+<li>POST 请求不会被缓存</li>
+<li>POST 请求不会保留在浏览器历史记录中</li>
+<li>POST 不能被收藏为书签</li>
+<li>POST 请求对数据长度没有要求</li>
+</ul>
+<h2 id="我们所理解的区别"><a href="#我们所理解的区别" class="headerlink" title="我们所理解的区别"></a>我们所理解的区别</h2><p>表格来源:<a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp" target="_blank" rel="noopener">W3school</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">对比</th>
+<th style="text-align:center">Get</th>
+<th style="text-align:center">Post</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">后退按钮/刷新</td>
+<td style="text-align:center">无害</td>
+<td style="text-align:center">重新提交数据</td>
+</tr>
+<tr>
+<td style="text-align:center">书签</td>
+<td style="text-align:center">可收藏</td>
+<td style="text-align:center">不可收藏</td>
+</tr>
+<tr>
+<td style="text-align:center">缓存</td>
+<td style="text-align:center">可缓存</td>
+<td style="text-align:center">不可缓存</td>
+</tr>
+<tr>
+<td style="text-align:center">后端获取</td>
+<td style="text-align:center">Request.QueryString获取</td>
+<td style="text-align:center">Request.Form获取</td>
+</tr>
+<tr>
+<td style="text-align:center">编码类型</td>
+<td style="text-align:center">application/x-www-form-urlencoded</td>
+<td style="text-align:center">application/x-www-form-urlencoded 或 multipart/form-data。为二进制数据使用多重编码。</td>
+</tr>
+<tr>
+<td style="text-align:center">数据长度限制</td>
+<td style="text-align:center">“通常2048个字符”<b style="color:red;">有误</b></td>
+<td style="text-align:center">无限制</td>
+</tr>
+<tr>
+<td style="text-align:center">数据类型</td>
+<td style="text-align:center">ASCII字符</td>
+<td style="text-align:center">无限制</td>
+</tr>
+<tr>
+<td style="text-align:center">安全性</td>
+<td style="text-align:center">不安全</td>
+<td style="text-align:center">比Get安全</td>
+</tr>
+<tr>
+<td style="text-align:center">传送差异</td>
+<td style="text-align:center">method=’get’, action属性无效</td>
+<td style="text-align:center">action=”test.asp?a=a”和action=”test.asp”是不一样的</td>
+</tr>
+<tr>
+<td style="text-align:center">数据存放</td>
+<td style="text-align:center">URL</td>
+<td style="text-align:center">HTTP主体</td>
+</tr>
+<tr>
+<td style="text-align:center">可见性</td>
+<td style="text-align:center">可见</td>
+<td style="text-align:center">不可见</td>
+</tr>
+</tbody>
+</table>
+<h2 id="涨姿势"><a href="#涨姿势" class="headerlink" title="涨姿势"></a>涨姿势</h2><p><a href="http://aijuans.iteye.com/blog/1562027" target="_blank" rel="noopener">这篇文章</a>可能有助你理解</p>
+<p>GET和POST与数据如何传递没有关系</p>
+<p>GET和POST是由HTTP协议定义的。在HTTP协议中，Method和Data（URL， Body， Header）是正交的两个概念，也就是说，使用哪个Method与应用层的数据如何传输是没有相互关系的。</p>
+<blockquote>
+<p>HTTP没有要求，如果Method是POST数据就要放在BODY中。也没有要求，如果Method是GET，数据（参数）就一定要放在URL中而不能放在BODY中。</p>
+</blockquote>
+<p>那么，网上流传甚广的这个说法是从何而来的呢？我在HTML标准中，找到了相似的描述。这和网上流传的说法一致。但是这只是HTML标准对HTTP协议的用法的约定。怎么能当成GET和POST的区别呢？</p>
+<p>而且，现代的Web Server都是支持GET中包含BODY这样的请求。虽然这种请求不可能从浏览器发出，但是现在的Web Server又不是只给浏览器用，已经完全地超出了HTML服务器的范畴了。</p>
+<blockquote>
+<p>HTTP协议对GET和POST都没有对长度的限制</p>
+</blockquote>
+<p>HTTP协议明确地指出了，HTTP头和Body都没有长度的要求。而对于URL长度上的限制，有两方面的原因造成：</p>
+<ol>
+<li><p>浏览器。据说早期的浏览器会对URL长度做限制。据说IE对URL长度会限制在2048个字符内（流传很广，而且无数同事都表示认同）。但我自己试了一下，我构造了90K的URL通过IE9访问live.com，是正常的。网上的东西，哪怕是Wikipedia上的，也不能信。</p>
+</li>
+<li><p>服务器。URL长了，对服务器处理也是一种负担。原本一个会话就没有多少数据，现在如果有人恶意地构造几个几M大小的URL，并不停地访问你的服务器。服务器的最大并发数显然会下降。另一种攻击方式是，把告诉服务器Content-Length是一个很大的数，然后只给服务器发一点儿数据，嘿嘿，服务器你就傻等着去吧。哪怕你有超时设置，这种故意的次次访问超时也能让服务器吃不了兜着走。有鉴于此，多数服务器出于安全啦、稳定啦方面的考虑，会给URL长度加限制。但是这个限制是针对所有HTTP请求的，与GET、POST没有关系。</p>
+</li>
+</ol>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2015/06/15/yahoo34/" class="prev">上一篇：雅虎34条</a>
+    
+    
+    <a href="/2015/06/14/404/" class="next">下一篇：HTTP 404</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2021 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      }
+    }
+
+    mod.load('lib-av', 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.0.1/dist/av-min.js', () => {
+      mod.load('lib-cmt', 'https://unpkg.com/valine@1.4.14/dist/Valine.min.js',()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>
