@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>正则表达式快速入门 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="🐶">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="正则表达式快速入门"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlly1giq5k8ty3tj306y0zkdix.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">🐶</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2016-01-05T06:44:37.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2016-01-05
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">正则表达式快速入门</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#元字符"><span class="toc-number">1.</span> <span class="toc-text">元字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例子"><span class="toc-number">2.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符转意"><span class="toc-number">3.</span> <span class="toc-text">字符转意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重复"><span class="toc-number">4.</span> <span class="toc-text">重复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符类"><span class="toc-number">5.</span> <span class="toc-text">字符类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分枝条件"><span class="toc-number">6.</span> <span class="toc-text">分枝条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分组"><span class="toc-number">7.</span> <span class="toc-text">分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反义"><span class="toc-number">8.</span> <span class="toc-text">反义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后向引用"><span class="toc-number">9.</span> <span class="toc-text">后向引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#零宽断言"><span class="toc-number">10.</span> <span class="toc-text">零宽断言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#负向零宽断言"><span class="toc-number">11.</span> <span class="toc-text">负向零宽断言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">12.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪与懒惰"><span class="toc-number">13.</span> <span class="toc-text">贪婪与懒惰</span></a></li></ol>
+    </div>
+    
+    <h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><p>元字符是功能性的匹配符号, 如:<br><code>\b</code> 单词的开头或结尾，也就是单词的分界处<br><code>*</code> 匹配任意数量的字符<br><code>.</code> 匹配除了换行之外的所有字符<br><code>\d</code> 匹配0到9单个数字<br><code>\s</code> 匹配任意的空白符，包括空格，制表符(Tab)，换行符，中文全角空格等<br><code>\w</code>匹配 字母 或 数字 或 下划线 或 汉字 等<br><code>^</code> 匹配字符串的开始<br><code>$</code> 匹配字符串的结束</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><code>\ba\w*\b</code> 匹配以字母a开头的单词——先是某个单词开始处(\b)，然后是字母a,然后是任意数量的字母或数字(\w<em>)，最后是单词结束处(\b)<br><code>0\d\d-\d\d\d\d\d\d\d\d</code>匹配这样的字符串：以0开头，然后是两个数字，然后是一个连字号“-”，最后是8个数字, 简写成<code>0\d{2}-\d{8}</code> , <code>{}</code>是限定符<br><code>^\d{5,12}$</code> QQ号必须为5位到12位数字 {5,12}表示次数不能少于5次，不能多于12次<br><code>\d+</code>匹配1个或更多连续的数字。这里的<code>+</code>是和`</em><code>类似的元字符，不同的是</code>*<code>匹配重复任意次(可能是0次)，而</code>+<code>则匹配重复1次或更多次</code>\b\w{6}\b` 匹配刚好6个字符的单词。</p>
+<h2 id="字符转意"><a href="#字符转意" class="headerlink" title="字符转意"></a>字符转意</h2><p>查找元字符本身的话，比如你查找<code>.</code>,或者<code>*</code>,就出现了问题：你没办法指定它们，因为它们会被解释成别的意思。这时你就得使用<code>\</code>来取消这些字符的特殊意义。因此，你应该使用<code>\.</code>和<code>\*</code>。当然，要查找<code>\</code>本身，你也得用<code>\\</code></p>
+<h2 id="重复"><a href="#重复" class="headerlink" title="重复"></a>重复</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">重复零次或更多次</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">重复一次或更多次</td>
+</tr>
+<tr>
+<td style="text-align:center">?</td>
+<td style="text-align:center">重复零次或一次</td>
+</tr>
+<tr>
+<td style="text-align:center">{n}</td>
+<td style="text-align:center">重复n次</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,}</td>
+<td style="text-align:center">重复n次或更多次</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,m}</td>
+<td style="text-align:center">重复n到m次</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h2><p><code>[ ]</code> 集合查找 ,比如 <code>[abcde]</code> 表示匹配里面包含的字符 , 常见的<code>[0-9]</code>和<code>\d</code>等价, 即匹配一位数字, <code>[a-z0-9A-Z_]</code>也完全等同于<code>\w</code>（如果只考虑英文的话）<br><code>\(?0\d{2}[) -]?\d{8}</code>首先是一个转义字符<code>\(</code>,它能出现0次或1次<code>?</code>,然后是一个0，后面跟着2个数字<code>\d{2}</code>，然后是<code>)</code>或<code>-</code>或<code>空格</code>中的一个，它出现0次或1次<code>?</code>，最后是8个数字<code>\d{8}</code></p>
+<h2 id="分枝条件"><a href="#分枝条件" class="headerlink" title="分枝条件"></a>分枝条件</h2><p>上面那个表达式也能匹配010)12345678或(022-87654321这样的“不正确”的格式。<br>正则表达式里的<strong>分枝条件</strong>指的是有几种规则，如果满足其中任意一种规则都应该当成匹配，具体方法是用<code>|</code>把不同的规则分隔开。<br><code>0\d{2}-\d{8}|0\d{3}-\d{7}</code>表示0开头接两位数字,<code>-</code>后面连着8位数的电话号码,比如020-12345678 或者 0开头接三位数字,<code>-</code>后面连着7位数的电话号码,比如0751-1234567<br>使用分枝条件时，要注意各个条件的顺序。原因是匹配分枝条件时，将会从左到右地测试每个条件，如果满足了某个分枝的话，就不会去再管其它的条件了。</p>
+<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><p>如果想要重复多个字符又,你可以用<strong>小括号</strong>来指定<strong>子表达式</strong>(也叫做分组)<br><code>(\d{1,3}\.){3}\d{1,3}</code>是一个简单的IP地址匹配表达式。要理解这个表达式，请按下列顺序分析它：<code>\d{1,3}</code>匹配1到3位的数字，<code>(\d{1,3}\.){3}</code>匹配三位数字加上一个英文句号(这个整体也就是这个分组)重复3次，最后再加上一个一到三位的数字<code>(\d{1,3})</code>。<br>正则表达式中并不提供关于数学的任何功能，所以只能使用冗长的分组，选择，字符类来描述一个正确的IP地址：<code>((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)</code></p>
+<h2 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h2><p>有时需要查找不属于某个能简单定义的字符类的字符。比如想查找除了数字以外，其它任意字符都行的情况，这时需要用到反义：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\W</td>
+<td style="text-align:center">匹配任意不是字母，数字，下划线，汉字的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td style="text-align:center">匹配任意不是空白符的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\D</td>
+<td style="text-align:center">匹配任意非数字的字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\B</td>
+<td style="text-align:center">匹配不是单词开头或结束的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">[ ^x ]</td>
+<td style="text-align:center">匹配除了x以外的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">[ ^aeiou ]</td>
+<td style="text-align:center">匹配除了aeiou这几个字母以外的任意字符</td>
+</tr>
+</tbody>
+</table>
+<p>例子：<br><code>\S+</code>匹配不包含空白符的字符串。<br><code>&lt;a[^&gt;]+&gt;</code>匹配用尖括号括起来的以a开头的字符串</p>
+<h2 id="后向引用"><a href="#后向引用" class="headerlink" title="后向引用"></a>后向引用</h2><p>待学习</p>
+<h2 id="零宽断言"><a href="#零宽断言" class="headerlink" title="零宽断言"></a>零宽断言</h2><p>待学习</p>
+<h2 id="负向零宽断言"><a href="#负向零宽断言" class="headerlink" title="负向零宽断言"></a>负向零宽断言</h2><p>待学习</p>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>待学习</p>
+<h2 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h2><p>当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例：<code>a.*b</code>，它将会匹配最长的以<code>a</code>开始，以<code>b</code>结束的字符串。如果用它来搜索<code>aabab</code>的话，它会匹配整个字符串<code>aabab</code>。这被称为贪婪匹配。<br>有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号<code>?</code>。这样<code>.*?</code>就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。<br><code>a.*?b</code>匹配最短的，以<code>a</code>开始，以<code>b</code>结束的字符串。如果把它应用于<code>aabab</code>的话，它会匹配<code>aab</code>（第一到第三个字符）和<code>ab</code>（第四到第五个字符）<br>为什么第一个匹配是<code>aab</code>（第一到第三个字符）而不是<code>ab</code>（第二到第三个字符）？简单地说，因为正则表达式有另一条规则，比懒惰／贪婪规则的优先级更高：<strong>最先开始的匹配拥有最高的优先权</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*?</td>
+<td style="text-align:center">重复任意次，但尽可能少重复</td>
+</tr>
+<tr>
+<td style="text-align:center">+?</td>
+<td style="text-align:center">重复1次或更多次，但尽可能少重复</td>
+</tr>
+<tr>
+<td style="text-align:center">??</td>
+<td style="text-align:center">重复0次或1次，但尽可能少重复</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,m}?</td>
+<td style="text-align:center">重复n到m次，但尽可能少重复</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,}?</td>
+<td style="text-align:center">重复n次以上，但尽可能少重复</td>
+</tr>
+</tbody>
+</table>
+<p>参考: <a href="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">http://deerchao.net/tutorials/regex/regex.htm</a></p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2016/01/11/download-chrome-crx/" class="prev">上一篇：墙内Chrome插件下载方法</a>
+    
+    
+    <a href="/2015/12/25/sublime-skill/" class="next">下一篇：前端开发工具</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2021 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      }
+    }
+
+    mod.load('lib-av', 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.0.1/dist/av-min.js', () => {
+      mod.load('lib-cmt', 'https://unpkg.com/valine@1.4.14/dist/Valine.min.js',()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

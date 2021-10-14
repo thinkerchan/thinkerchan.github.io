@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>Javascript高级技巧(一) | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="🐶">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="Javascript高级技巧(一)"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlly1giq5k8ty3tj306y0zkdix.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">🐶</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2015-06-11T10:04:45.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2015-06-11
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">Javascript高级技巧(一)</h1>
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域安全的构造函数"><span class="toc-number">1.</span> <span class="toc-text">作用域安全的构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数加载优化技巧"><span class="toc-number">2.</span> <span class="toc-text">函数加载优化技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-惰性载入-1"><span class="toc-number">2.1.</span> <span class="toc-text">解决方案:惰性载入(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案-惰性载入-2"><span class="toc-number">2.2.</span> <span class="toc-text">解决方案:惰性载入(2)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数绑定"><span class="toc-number">3.</span> <span class="toc-text">函数绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见问题"><span class="toc-number">3.1.</span> <span class="toc-text">常见问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改进"><span class="toc-number">3.2.</span> <span class="toc-text">改进:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数curry化"><span class="toc-number">4.</span> <span class="toc-text">函数curry化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#防篡改对象"><span class="toc-number">5.</span> <span class="toc-text">防篡改对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不可扩展对象-（第一个级别的保护）"><span class="toc-number">5.1.</span> <span class="toc-text">不可扩展对象:（第一个级别的保护）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#密封的对象（第二个级别的保护）"><span class="toc-number">5.2.</span> <span class="toc-text">密封的对象（第二个级别的保护）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#冻结的对象（第三个级别的保护）"><span class="toc-number">5.3.</span> <span class="toc-text">冻结的对象（第三个级别的保护）</span></a></li></ol></li></ol>
+    </div>
+    
+    <h2 id="作用域安全的构造函数"><a href="#作用域安全的构造函数" class="headerlink" title="作用域安全的构造函数"></a>作用域安全的构造函数</h2><p>这是常见的构造函数:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">	<span class="keyword">this</span>.job = job;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(<span class="string">"Nicholas"</span>, <span class="number">29</span>, <span class="string">"Software Engineer"</span>);     <span class="comment">// new</span></span><br></pre></td></tr></table></figure></p>
+<p>假设:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person1 = Person(<span class="string">"test"</span>,<span class="number">22</span>,<span class="string">"FE"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>那么 这个新对象的属性将会被绑定在window对象上面, 如果当前环境存在 window.name的操作 那么可能就会造成错误.</p>
+<p>解决方法:(域安全的构造函数)</p>
+<p>先判断this是否为该构造函数的实例<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span> <span class="keyword">instanceof</span> Person)&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">		<span class="keyword">this</span>.job = job;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Person(name, age, job);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person1 = Person(<span class="string">"Nicholas"</span>, <span class="number">29</span>, <span class="string">"Software Engineer"</span>);</span><br><span class="line">alert(<span class="built_in">window</span>.name); <span class="comment">//""</span></span><br><span class="line">alert(person1.name); <span class="comment">//"Nicholas"</span></span><br><span class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">"Shelby"</span>, <span class="number">34</span>, <span class="string">"Ergonomist"</span>);</span><br><span class="line">alert(person2.name); <span class="comment">//"Shelby"</span></span><br></pre></td></tr></table></figure></p>
+<p>缺点:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Polygon</span>(<span class="params">sides</span>)</span>&#123;</span><br><span class="line">               <span class="keyword">if</span> (<span class="keyword">this</span> <span class="keyword">instanceof</span> Polygon) &#123;</span><br><span class="line">                    <span class="keyword">this</span>.sides = sides;</span><br><span class="line">                    <span class="keyword">this</span>.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                         <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                    &#125;;</span><br><span class="line">               &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> Polygon(sides);</span><br><span class="line">               &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="function"><span class="keyword">function</span> <span class="title">Rectangle</span>(<span class="params">width, height</span>)</span>&#123;</span><br><span class="line">               Polygon.call(<span class="keyword">this</span>, <span class="number">2</span>);                    <span class="comment">// 因为这个this, 不属于Polygon的this</span></span><br><span class="line">               <span class="keyword">this</span>.width = width;</span><br><span class="line">               <span class="keyword">this</span>.height = height;</span><br><span class="line">               <span class="keyword">this</span>.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">this</span>.width * <span class="keyword">this</span>.height;</span><br><span class="line">               &#125;;</span><br><span class="line">          &#125;</span><br><span class="line">          <span class="keyword">var</span> rect = <span class="keyword">new</span> Rectangle(<span class="number">5</span>, <span class="number">10</span>);</span><br><span class="line">          alert(rect.sides); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>改正方法: 利用原型链<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Polygon</span>(<span class="params">sides</span>)</span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (<span class="keyword">this</span> <span class="keyword">instanceof</span> Polygon) &#123;</span><br><span class="line">              <span class="keyword">this</span>.sides = sides;</span><br><span class="line">              <span class="keyword">this</span>.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">              &#125;;</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="keyword">return</span> <span class="keyword">new</span> Polygon(sides);</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Rectangle</span>(<span class="params">width, height</span>)</span>&#123;</span><br><span class="line">         Polygon.call(<span class="keyword">this</span>, <span class="number">2</span>);          <span class="comment">//构造函数本身扩展到这里</span></span><br><span class="line">         <span class="keyword">this</span>.width = width;</span><br><span class="line">         <span class="keyword">this</span>.height = height;</span><br><span class="line">         <span class="keyword">this</span>.getArea = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">              <span class="keyword">return</span> <span class="keyword">this</span>.width * <span class="keyword">this</span>.height;</span><br><span class="line">         &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    Rectangle.prototype = <span class="keyword">new</span> Polygon();</span><br><span class="line">    <span class="keyword">var</span> rect = <span class="keyword">new</span> Rectangle(<span class="number">5</span>, <span class="number">10</span>);</span><br><span class="line">    alert(rect.sides); <span class="comment">//2</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="函数加载优化技巧"><a href="#函数加载优化技巧" class="headerlink" title="函数加载优化技巧"></a>函数加载优化技巧</h2><p>普通情况下调用函数:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">     &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> ActiveXObject != <span class="string">"undefined"</span>) &#123;</span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">arguments</span>.callee.activeXString != <span class="string">"string"</span>) &#123;</span><br><span class="line">         <span class="keyword">var</span> versions = [<span class="string">"MSXML2.XMLHttp.6.0"</span>, <span class="string">"MSXML2.XMLHttp.3.0"</span>, <span class="string">"MSXML2.XMLHttp"</span>], i, len;</span><br><span class="line">         <span class="keyword">for</span> (i = <span class="number">0</span>, len = versions.length; i &lt; len; i++) &#123;</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">             <span class="keyword">new</span> ActiveXObject(versions[i]);</span><br><span class="line">             <span class="built_in">arguments</span>.callee.activeXString = versions[i];</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">           &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">             <span class="comment">//跳过</span></span><br><span class="line">           &#125;</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="built_in">arguments</span>.callee.activeXString);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"No XHR object available."</span>);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>缺点:每一次判断和循环造成性能上的损失</p>
+<h3 id="解决方案-惰性载入-1"><a href="#解决方案-惰性载入-1" class="headerlink" title="解决方案:惰性载入(1)"></a>解决方案:惰性载入(1)</h3><p>执行代码的时候损失性能<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>)&#123;</span><br><span class="line">      createXHR = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">      &#125;;</span><br><span class="line"> &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> ActiveXObject != <span class="string">"undefined"</span>)&#123;</span><br><span class="line">     createXHR = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">arguments</span>.callee.activeXString != <span class="string">"string"</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> versions = [</span><br><span class="line">          <span class="string">"MSXML2.XMLHttp.6.0"</span>, </span><br><span class="line">          <span class="string">"MSXML2.XMLHttp.3.0"</span>,</span><br><span class="line">          <span class="string">"MSXML2.XMLHttp"</span></span><br><span class="line">        ], i, len;</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">0</span>,len=versions.length; i &lt; len; i++)&#123;</span><br><span class="line">           <span class="keyword">try</span> &#123;</span><br><span class="line">              <span class="keyword">new</span> ActiveXObject(versions[i]);</span><br><span class="line">              <span class="built_in">arguments</span>.callee.activeXString = versions[i];</span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">           &#125; <span class="keyword">catch</span> (ex)&#123;</span><br><span class="line">            <span class="comment">//skip</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="built_in">arguments</span>.callee.activeXString);</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      createXHR = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"No XHR object available."</span>);</span><br><span class="line">      &#125;;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> createXHR();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="解决方案-惰性载入-2"><a href="#解决方案-惰性载入-2" class="headerlink" title="解决方案:惰性载入(2)"></a>解决方案:惰性载入(2)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> createXHR = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> XMLHttpRequest != <span class="string">"undefined"</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> ActiveXObject != <span class="string">"undefined"</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">arguments</span>.callee.activeXString != <span class="string">"string"</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> versions = [<span class="string">"MSXML2.XMLHttp.6.0"</span>, <span class="string">"MSXML2.XMLHttp.3.0"</span>,</span><br><span class="line">        <span class="string">"MSXML2.XMLHttp"</span>],</span><br><span class="line">        i, len;</span><br><span class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>, len = versions.length; i &lt; len; i++) &#123;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">new</span> ActiveXObject(versions[i]);</span><br><span class="line">            <span class="built_in">arguments</span>.callee.activeXString = versions[i];</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">            <span class="comment">//skip</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="built_in">arguments</span>.callee.activeXString);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"No XHR object available."</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h2 id="函数绑定"><a href="#函数绑定" class="headerlink" title="函数绑定"></a>函数绑定</h2><h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = &#123;</span><br><span class="line">     message: <span class="string">"Event handled"</span>,</span><br><span class="line">     handleClick: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">          alert(<span class="keyword">this</span>.message);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"my-btn"</span>);</span><br><span class="line">EventUtil.addHandler(btn, <span class="string">"click"</span>, handler.handleClick);          <span class="comment">// undefined, 出现了作用域问题</span></span><br></pre></td></tr></table></figure>
+<h3 id="改进"><a href="#改进" class="headerlink" title="改进:"></a>改进:</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">var</span> handler = &#123;</span><br><span class="line">     message: <span class="string">"Event handled"</span>,</span><br><span class="line">     handleClick: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">          alert(<span class="keyword">this</span>.message);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"my-btn"</span>);</span><br><span class="line">EventUtil.addHandler(btn, <span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;               <span class="comment">// 使用了闭包  但是尽量少用闭包</span></span><br><span class="line">     handler.handleClick(event);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这个解决方案在 onclick 事件处理程序内使用了一个闭包直接调用 handler.handleClick()。</p>
+<p>当然，这是特定于这段代码的解决方案。创建多个闭包可能会令代码变得难于理解和调试。因此，很多JavaScript 库实现了一个可以将函数绑定到指定环境的函数。这个函数一般都叫 bind()。一个简单的 bind()函数接受一个函数和一个环境，并返回一个在给定环境中调用给定函数的函数，并且将所有参数原封不动传递过去。</p>
+<p>语法如下：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">fn, context</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">          <span class="keyword">return</span> fn.apply(context, <span class="built_in">arguments</span>);</span><br><span class="line">     &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个函数似乎简单，但其功能是非常强大的。在 bind()中创建了一个闭包，闭包使用 apply()调用传入的函数，并给 apply()传递 context 对象和参数。注意这里使用的 arguments 对象是内部函数的，而非 bind()的。当调用返回的函数时，它会在给定环境中执行被传入的函数并给出所有参数。</p>
+<p>bind()函数按如下方式使用：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = &#123;</span><br><span class="line">  message: <span class="string">"Event handled"</span>,</span><br><span class="line">  handleClick: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"my-btn"</span>);</span><br><span class="line">EventUtil.addHandler(btn, <span class="string">"click"</span>, bind(handler.handleClick, handler));</span><br></pre></td></tr></table></figure></p>
+<p>ECMAS5: 存在bind方法, 但IE9及以上支持<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = &#123;</span><br><span class="line">    message: <span class="string">"Event handled"</span>,</span><br><span class="line">    handleClick: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.message + <span class="string">":"</span> + event.type);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"my-btn"</span>);</span><br><span class="line">EventUtil.addHandler(btn, <span class="string">"click"</span>, handler.handleClick.bind(handler));</span><br></pre></td></tr></table></figure></p>
+<h2 id="函数curry化"><a href="#函数curry化" class="headerlink" title="函数curry化"></a>函数curry化</h2><p>函数柯里化（function currying） ，它用于创建已经设置好了一个或多个参数的函数。函数柯里化的基本方法和 函数绑定 是一样的：使用一个闭包返回一个函数。两者的区别在于，当函数被调用时，返回的函数还需要设置一些传入的参数。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">num1, num2</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curriedAdd</span>(<span class="params">num2</span>)</span>&#123;          <span class="comment">// 比如说说实现 计算 和 打印 功能的分开</span></span><br><span class="line">     <span class="keyword">return</span> add(<span class="number">5</span>, num2);</span><br><span class="line">&#125;</span><br><span class="line">alert(add(<span class="number">2</span>, <span class="number">3</span>));                     <span class="comment">//5</span></span><br><span class="line">alert(curriedAdd(<span class="number">3</span>));             <span class="comment">//8</span></span><br></pre></td></tr></table></figure></p>
+<p>柯里化函数通常由以下步骤动态创建：调用另一个函数并为它传入要柯里化的函数和必要参数。下面是创建柯里化函数的通用方式。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> innerArgs = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">        <span class="keyword">var</span> finalArgs = args.concat(innerArgs);</span><br><span class="line">        <span class="keyword">return</span> fn.apply(<span class="literal">null</span>, finalArgs);</span><br><span class="line">   &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="防篡改对象"><a href="#防篡改对象" class="headerlink" title="防篡改对象"></a>防篡改对象</h2><blockquote>
+<p>不过请注意：一旦把对象定义为防篡改，就无法撤销了</p>
+</blockquote>
+<h3 id="不可扩展对象-（第一个级别的保护）"><a href="#不可扩展对象-（第一个级别的保护）" class="headerlink" title="不可扩展对象:（第一个级别的保护）"></a>不可扩展对象:（第一个级别的保护）</h3><p>默认情况下，所有对象都是可以扩展的。也就是说，任何时候都可以向对象中添加属性和方法。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">"Nicholas"</span> &#125;;</span><br><span class="line">person.age = <span class="number">29</span>;</span><br></pre></td></tr></table></figure></p>
+<p>即使第一行代码已经完整定义 person 对象，但第二行代码仍然能给它添加属性。现在，使用Object.preventExtensions()方法可以改变这个行为，让你不能再给对象添加属性和方法。</p>
+<p>例如：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">"Nicholas"</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(person);</span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line">alert(person.age); <span class="comment">// undefined，非严格模式下静默失败，严格模式下抛出错误</span></span><br></pre></td></tr></table></figure></p>
+<p>虽然不能给对象添加新成员，但已有的成员则丝毫不受影响。你仍然还可以修改和删除已有的成员。另外，使用 Object.istExtensible()方法还可以确定对象是否可以扩展。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">"Nicholas"</span> &#125;;</span><br><span class="line">alert(<span class="built_in">Object</span>.isExtensible(person)); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">Object</span>.preventExtensions(person);</span><br><span class="line">alert(<span class="built_in">Object</span>.isExtensible(person)); <span class="comment">//false</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="密封的对象（第二个级别的保护）"><a href="#密封的对象（第二个级别的保护）" class="headerlink" title="密封的对象（第二个级别的保护）"></a>密封的对象（第二个级别的保护）</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">"Nicholas"</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.seal(person);</span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line">alert(person.age); <span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">delete</span> person.name;     <span class="comment">// 无效 , 严格模式下抛出错误</span></span><br><span class="line">alert(person.name); <span class="comment">//"Nicholas"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">"Nicholas"</span> &#125;;</span><br><span class="line">alert(<span class="built_in">Object</span>.isExtensible(person)); <span class="comment">//true</span></span><br><span class="line">alert(<span class="built_in">Object</span>.isSealed(person)); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">Object</span>.seal(person);</span><br><span class="line">alert(<span class="built_in">Object</span>.isExtensible(person)); <span class="comment">//false</span></span><br><span class="line">alert(<span class="built_in">Object</span>.isSealed(person)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h3 id="冻结的对象（第三个级别的保护）"><a href="#冻结的对象（第三个级别的保护）" class="headerlink" title="冻结的对象（第三个级别的保护）"></a>冻结的对象（第三个级别的保护）</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">"Nicholas"</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.freeze(person);</span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line">alert(person.age); <span class="comment">//undefined</span></span><br><span class="line"><span class="keyword">delete</span> person.name;</span><br><span class="line">alert(person.name); <span class="comment">//"Nicholas"</span></span><br><span class="line">person.name = <span class="string">"Greg"</span>;</span><br><span class="line">alert(person.name); <span class="comment">//"Nicholas"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = &#123; <span class="attr">name</span>: <span class="string">"Nicholas"</span> &#125;;</span><br><span class="line">alert(<span class="built_in">Object</span>.isExtensible(person)); <span class="comment">//true</span></span><br><span class="line">alert(<span class="built_in">Object</span>.isSealed(person)); <span class="comment">//false</span></span><br><span class="line">alert(<span class="built_in">Object</span>.isFrozen(person)); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">Object</span>.freeze(person);</span><br><span class="line">alert(<span class="built_in">Object</span>.isExtensible(person)); <span class="comment">//false</span></span><br><span class="line">alert(<span class="built_in">Object</span>.isSealed(person)); <span class="comment">//true</span></span><br><span class="line">alert(<span class="built_in">Object</span>.isFrozen(person)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2015/06/13/js-skill/" class="prev">上一篇：Javascript小技巧总结</a>
+    
+    
+    <a href="/2015/05/31/where-is-the-bug-of-Overflow-hidden/" class="next">下一篇：Overflow:hidden的bug是什么?</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2021 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      }
+    }
+
+    mod.load('lib-av', 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.0.1/dist/av-min.js', () => {
+      mod.load('lib-cmt', 'https://unpkg.com/valine@1.4.14/dist/Valine.min.js',()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>
