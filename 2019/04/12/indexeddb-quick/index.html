@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>【快速教程】Web离线存储之indexedDB | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="🐶">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="【快速教程】Web离线存储之indexedDB"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlly1giq5k8ty3tj306y0zkdix.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">🐶</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-04-12T08:23:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-04-12
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">【快速教程】Web离线存储之indexedDB</h1>
+  <p class="expired-tips">提醒：本文最后更新于 943 天前，文章内容可能因 技术时效性 或 重新修改，请谨慎使用。</p>
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例"><span class="toc-number">2.</span> <span class="toc-text">实例</span></a></li></ol>
+    </div>
+    
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&lt;Javascript高级程序设计&gt;第23章的时候是介绍过indexedDB的, 今天单独把它重新写一遍. 后续给出的代码, 基本能够满足大部分人开发使用了.</p>
+<p>为什么只写indexedDB? 我们可以打开chrome浏览器的控制台, 可以看到除了indexedDB实际上还有一种本地数据库方案 - Web SQL(它的语句和主流数据库操作语句没什么区别, 意味着前端还要另外学习sql语句), 但是Web SQL已经明确被放弃了, 所以indexedDB的存在是为了代替它.</p>
+<p>indexedDB的思想是创建一套API, 方便保存和读取<strong>JS对象</strong>, 同时支持查询搜索. 这样的API设计, 能让前端开发者以更前端的方式进行对接.</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>通常我们操作传统数据库的时候是这么做的:</p>
+<blockquote>
+<p>创建数据库 -&gt; 创建表 -&gt; 操作数据</p>
+</blockquote>
+<p>而indexedDB有一点不一样的地方, 它并不是创建表, 而是创建一个叫做对象存储空间的<strong>对象</strong>(当然你也可以按照传统方式那么理解, 并无大碍).</p>
+<p>看示例 , 你也可以点击<a href="https://test.thinkerchan.com/demo/indexeddb/index.html" target="_blank" rel="noopener">这里</a>运行下面的代码:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>indexedDB教程<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">    <span class="selector-tag">table</span>&#123;<span class="attribute">border-collapse</span>:collapse;&#125;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">th</span>,<span class="selector-tag">td</span>&#123;<span class="attribute">min-width</span>:<span class="number">150px</span>;<span class="attribute">text-align</span>:center;&#125;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.red</span>&#123;<span class="attribute">color</span>:<span class="number">#FFF</span>;<span class="attribute">background-color</span>:<span class="number">#F00</span>;&#125;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>indexedDB快速教程-实现增删查改<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://developer.mozilla.org/zh-CN/docs/Web/API/IndexedDB_API"</span>&gt;</span>MDN indexedDB API<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"Juser"</span> <span class="attr">placeholder</span>=<span class="string">"姓名"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"Jphone"</span> <span class="attr">placeholder</span>=<span class="string">"电话"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"Jadd"</span>&gt;</span>增加<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"Jdel"</span>&gt;</span>删除数据库<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"JsearchTxt"</span> <span class="attr">placeholder</span>=<span class="string">"查询"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"Jsearch"</span>&gt;</span>点击查询<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">"1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>姓名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>电话<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">th</span>&gt;</span>操作<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tbody</span> <span class="attr">id</span>=<span class="string">"Jtbd"</span>&gt;</span><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> index = &#123;</span></span><br><span class="line"><span class="undefined">      config:&#123;</span></span><br><span class="line"><span class="javascript">        dbName:<span class="string">'demo'</span>,</span></span><br><span class="line"><span class="javascript">        tbName:<span class="string">'tb'</span>,</span></span><br><span class="line"><span class="javascript">        dbVersion:<span class="number">1</span>,   <span class="comment">//只有在修改数据表的字段的时候才需要更新版本</span></span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="undefined">      init()&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> C = <span class="keyword">this</span>.config;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> _this = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 1.创建数据库</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> IDBRequest = <span class="built_in">window</span>.indexedDB.open(C.dbName,C.dbVersion);</span></span><br><span class="line"><span class="undefined">        /*</span></span><br><span class="line"><span class="undefined">          返回的IDBRequest对象有以下方法:</span></span><br><span class="line"><span class="undefined">          1.onblocked</span></span><br><span class="line"><span class="undefined">          2.onerror</span></span><br><span class="line"><span class="undefined">          3.onsuccess</span></span><br><span class="line"><span class="undefined">          4.onupgradeneeded: 优先级比 onsuccess 更高</span></span><br><span class="line"><span class="undefined">         */</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 2.创建对象存储空间 - 你可以理解成创建数据库的"表"</span></span></span><br><span class="line"><span class="javascript">        IDBRequest.onupgradeneeded = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">var</span> _db = e.target.result;</span></span><br><span class="line"><span class="javascript">          <span class="comment">// 如果不存在某个"表"就创建</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">if</span> (!_db.objectStoreNames.contains(C.tbName)) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> objectStore = _db.createObjectStore(C.tbName,&#123;</span></span><br><span class="line"><span class="javascript">              keyPath:<span class="string">'id'</span>,</span></span><br><span class="line"><span class="javascript">              autoIncrement: <span class="literal">true</span></span></span><br><span class="line"><span class="undefined">            &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            <span class="comment">// 创建可以被索引的字段</span></span></span><br><span class="line"><span class="javascript">            objectStore.createIndex(<span class="string">"user"</span>, <span class="string">"user"</span>, &#123; <span class="attr">unique</span>: <span class="literal">false</span> &#125;);</span></span><br><span class="line"><span class="javascript">            objectStore.createIndex(<span class="string">"phone"</span>, <span class="string">"phone"</span>, &#123; <span class="attr">unique</span>: <span class="literal">false</span> &#125;);</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        IDBRequest.onsuccess = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="comment">// e.target == IDBRequest; //true</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> db = e.target.result;</span></span><br><span class="line"><span class="undefined">          _this.db = db;</span></span><br><span class="line"><span class="javascript">          _this.renderAll(db); <span class="comment">//展示数据库存储的数据</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        IDBRequest.onerror = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="comment">// e.target == IDBRequest; //true</span></span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(e.target.errorCode);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="undefined">      tpl(obj)&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (!!<span class="built_in">Object</span>.keys(obj).length) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> tpl = <span class="string">`</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;<span class="name">tr</span> <span class="attr">id</span>=<span class="string">"Jtr$&#123;obj.id&#125;"</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-key</span>=<span class="string">"user"</span>&gt;</span>$&#123;obj.user&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;<span class="name">td</span> <span class="attr">data-key</span>=<span class="string">"phone"</span>&gt;</span>$&#123;obj.phone&#125;<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="javascript">              &lt;td <span class="class"><span class="keyword">class</span></span>=<span class="string">"btns"</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"del"</span> data-type=<span class="string">"del"</span> data-id=<span class="string">"$&#123;obj.id&#125;"</span> &gt;删除&lt;<span class="regexp">/button&gt;</span></span></span><br><span class="line"><span class="javascript">                &lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">"modify"</span> data-type=<span class="string">"modify"</span> data-id=<span class="string">"$&#123;obj.id&#125;"</span> data-open=<span class="string">"0"</span>&gt;修改&lt;<span class="regexp">/button&gt;</span></span></span><br><span class="line"><span class="xml">              <span class="tag">&lt;/<span class="name">td</span>&gt;</span></span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span></span><br><span class="line"><span class="undefined">          `</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> tpl;</span></span><br><span class="line"><span class="javascript">        &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> <span class="string">''</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="undefined">      renderOne(obj)&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> tpl = <span class="keyword">this</span>.tpl(obj);</span></span><br><span class="line"><span class="javascript">        Jtbd.insertAdjacentHTML(<span class="string">'beforeend'</span>, tpl);</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="undefined">      renderAll(db)&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> C = <span class="keyword">this</span>.config;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> _this = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (db.objectStoreNames.contains(C.tbName)) &#123;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">          <span class="comment">// 开始处理数据</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> transaction = db.transaction([C.tbName], <span class="string">"readwrite"</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">          <span class="comment">// transaction对象也有下面两个方法:</span></span></span><br><span class="line"><span class="javascript">          <span class="comment">// transaction.oncomplete = (e)=&gt;&#123;</span></span></span><br><span class="line"><span class="javascript">          <span class="comment">//   console.log('transaction.oncomplete')</span></span></span><br><span class="line"><span class="javascript">          <span class="comment">// &#125;</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">          <span class="comment">// transaction.onerror = (e)=&gt;&#123;</span></span></span><br><span class="line"><span class="javascript">          <span class="comment">//   console.log('transaction.onerror')</span></span></span><br><span class="line"><span class="javascript">          <span class="comment">// &#125;</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">          <span class="comment">// 获取"表"里的数据</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> objectStore = transaction.objectStore(C.tbName);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> html = <span class="string">''</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">          <span class="comment">// 遍历"表"里面的数据</span></span></span><br><span class="line"><span class="javascript">          objectStore.openCursor().onsuccess = <span class="function">(<span class="params">e</span>)=&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> cursor = e.target.result;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (cursor) &#123;</span></span><br><span class="line"><span class="undefined">              html = html + _this.tpl(cursor.value)</span></span><br><span class="line"><span class="undefined">              cursor.continue();</span></span><br><span class="line"><span class="javascript">            &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="undefined">              Jtbd.innerHTML = html;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> handler = &#123;</span></span><br><span class="line"><span class="javascript">      add(obj)&#123;  <span class="comment">//增</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> C = index.config;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 凡是要修改数据库, 都需要"告诉"数据库: 我要进行"transaction"(操作)了.</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> transaction = index.db.transaction([C.tbName], <span class="string">"readwrite"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> objectStore = transaction.objectStore(C.tbName);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> addRequest = objectStore.add(obj);  <span class="comment">//直接存储js对象就可以了</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        addRequest.onsuccess = <span class="function">(<span class="params">e</span>)=&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          <span class="comment">//存进去之后, 还要获取id用于标记html元素</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> id = e.target.result;</span></span><br><span class="line"><span class="undefined">          index.renderOne(&#123;</span></span><br><span class="line"><span class="undefined">            id:id,</span></span><br><span class="line"><span class="undefined">            user:Juser.value,</span></span><br><span class="line"><span class="undefined">            phone:Jphone.value</span></span><br><span class="line"><span class="undefined">          &#125;)</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="javascript">      del(id,cb)&#123; <span class="comment">// 删</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> C = index.config;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> transaction = index.db.transaction([C.tbName], <span class="string">"readwrite"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> objectStore = transaction.objectStore(C.tbName);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> _id = <span class="built_in">parseInt</span>(id);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> rmRequest = objectStore.delete(_id);</span></span><br><span class="line"><span class="javascript">        rmRequest.onsuccess = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">'删除完毕'</span>)</span></span><br><span class="line"><span class="undefined">          cb &amp;&amp; cb();</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        rmRequest.onerror = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">'删除失败'</span>)</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="javascript">      search(str)&#123;  <span class="comment">// 查</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> C = index.config;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> transaction = index.db.transaction([C.tbName], <span class="string">"readwrite"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> objectStore = transaction.objectStore(C.tbName);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// IDBKeyRange可以理解成一个生成查找范围的对象 有 only/bound/lowerBound/upperBound等几个方法</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> bound = IDBKeyRange.only(str);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> html = <span class="string">''</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="comment">// 前面创建了两个可以被索引的字段 user/phone, 这里我们查找user</span></span></span><br><span class="line"><span class="javascript">        objectStore.index(<span class="string">'user'</span>).openCursor(bound).onsuccess = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> cursor = e.target.result;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">if</span> (cursor) &#123;</span></span><br><span class="line"><span class="undefined">            html = html + index.tpl(cursor.value)</span></span><br><span class="line"><span class="undefined">            cursor.continue();</span></span><br><span class="line"><span class="javascript">          &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="undefined">            Jtbd.innerHTML = html;</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="javascript">      modify(id,obj)&#123;   <span class="comment">// 改</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> C = index.config;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> transaction = index.db.transaction([C.tbName], <span class="string">"readwrite"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> objectStore = transaction.objectStore(C.tbName);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> _id = <span class="built_in">parseInt</span>(id);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> modifyRequest = objectStore.get(_id);</span></span><br><span class="line"><span class="javascript">        modifyRequest.onsuccess = <span class="function">(<span class="params">e</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> res = e.target.result;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> obj) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (<span class="keyword">typeof</span> res[key] != <span class="string">'undefined'</span>) &#123;</span></span><br><span class="line"><span class="undefined">              res[key] = obj[key];</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">          objectStore.put(res);</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">    index.init();</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    Jadd.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> data = &#123;</span></span><br><span class="line"><span class="undefined">        user:Juser.value,</span></span><br><span class="line"><span class="undefined">        phone:Jphone.value</span></span><br><span class="line"><span class="undefined">      &#125;;</span></span><br><span class="line"><span class="undefined">      handler.add(data);</span></span><br><span class="line"><span class="javascript">    &#125;, <span class="literal">false</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    Jtbd.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> curEle =  e.target</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> id = curEle.dataset.id;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (!!id) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> type = curEle.dataset.type;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">switch</span> (type) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">case</span> <span class="string">'del'</span>:</span></span><br><span class="line"><span class="javascript">            handler.del(id,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">              <span class="keyword">let</span> rmNode = <span class="built_in">document</span>.getElementById(<span class="string">'Jtr'</span>+id);</span></span><br><span class="line"><span class="undefined">              Jtbd.removeChild(rmNode);</span></span><br><span class="line"><span class="undefined">            &#125;)</span></span><br><span class="line"><span class="javascript">            <span class="keyword">break</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">          <span class="keyword">case</span> <span class="string">'modify'</span>:</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> isOpen = curEle.dataset.open==<span class="string">'1'</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> tr = <span class="built_in">document</span>.getElementById(<span class="string">'Jtr'</span>+id);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> tds = [].slice.call(tr.children);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (isOpen) &#123;</span></span><br><span class="line"><span class="javascript">              <span class="comment">// 更新数据</span></span></span><br><span class="line"><span class="javascript">              curEle.innerHTML = <span class="string">'修改'</span></span></span><br><span class="line"><span class="javascript">              curEle.dataset.open = <span class="string">'0'</span>;</span></span><br><span class="line"><span class="javascript">              curEle.classList.remove(<span class="string">'red'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">              <span class="comment">// 声明一个变量存储修改后的数据</span></span></span><br><span class="line"><span class="javascript">              <span class="keyword">let</span> data = &#123;&#125;;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">              <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>,len = tds.length<span class="number">-1</span>; i &lt; len; i++) &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> td = tds[i];</span></span><br><span class="line"><span class="undefined">                data[td.dataset.key] = td.innerText;</span></span><br><span class="line"><span class="javascript">                td.removeAttribute(<span class="string">'contenteditable'</span>);</span></span><br><span class="line"><span class="undefined">              &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">              handler.modify(id,data);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">              <span class="comment">//  打开编辑状态</span></span></span><br><span class="line"><span class="javascript">              curEle.innerHTML = <span class="string">'保存'</span></span></span><br><span class="line"><span class="javascript">              curEle.dataset.open = <span class="string">'1'</span>;</span></span><br><span class="line"><span class="javascript">              curEle.classList.add(<span class="string">'red'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">              <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>,len = tds.length<span class="number">-1</span>; i &lt; len; i++) &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">let</span> td = tds[i];</span></span><br><span class="line"><span class="javascript">                td.setAttribute(<span class="string">'contenteditable'</span>, <span class="literal">true</span>)</span></span><br><span class="line"><span class="undefined">              &#125;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">            <span class="keyword">break</span>;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">          <span class="keyword">default</span>:</span></span><br><span class="line"><span class="javascript">            <span class="comment">// ...</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">break</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="javascript">    &#125;, <span class="literal">false</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    Jsearch.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> str = JsearchTxt.value.trim();</span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (!!str) &#123;</span></span><br><span class="line"><span class="javascript">        Jtbd.innerHTML = <span class="string">''</span>;</span></span><br><span class="line"><span class="undefined">        handler.search(str);</span></span><br><span class="line"><span class="javascript">      &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">'输入非空字符查找!'</span>);</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="javascript">    &#125;, <span class="literal">false</span>)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    Jdel.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      index.db.close(); <span class="comment">//记得要关闭数据库才能删除, 否侧下列事件不会被触发</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> destoryRequest = <span class="built_in">window</span>.indexedDB.deleteDatabase(index.config.dbName);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      destoryRequest.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"Error deleting database."</span>);</span></span><br><span class="line"><span class="undefined">      &#125;;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      destoryRequest.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">"Database deleted successfully"</span>);</span></span><br><span class="line"><span class="undefined">      &#125;;</span></span><br><span class="line"><span class="javascript">    &#125;,<span class="literal">false</span>)</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/04/28/minivue/" class="prev">上一篇：【快速教程】120行代码理解双向数据绑定</a>
+    
+    
+    <a href="/2019/04/09/JSbook25/" class="next">下一篇：JS红皮书读书笔记-25-新兴的API</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2021 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      }
+    }
+
+    mod.load('lib-av', 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.0.1/dist/av-min.js', () => {
+      mod.load('lib-cmt', 'https://unpkg.com/valine@1.4.14/dist/Valine.min.js',()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>

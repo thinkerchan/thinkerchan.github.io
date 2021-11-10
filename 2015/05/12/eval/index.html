@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>匿名函数, 闭包, eval劫持 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="🐶">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="匿名函数, 闭包, eval劫持"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlly1giq5k8ty3tj306y0zkdix.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          <p class="aboutme">🐶</p>
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2015-05-11T16:29:50.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2015-05-12
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">匿名函数, 闭包, eval劫持</h1>
+  <p class="expired-tips">提醒：本文最后更新于 2374 天前，文章内容可能因 技术时效性 或 重新修改，请谨慎使用。</p>
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#匿名函数"><span class="toc-number">1.</span> <span class="toc-text">匿名函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#普通写法"><span class="toc-number">1.1.</span> <span class="toc-text">普通写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#立即执行的匿名函数"><span class="toc-number">1.2.</span> <span class="toc-text">立即执行的匿名函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传参"><span class="toc-number">1.3.</span> <span class="toc-text">传参</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#劫持eavl"><span class="toc-number">2.</span> <span class="toc-text">劫持eavl()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实例验证"><span class="toc-number">2.1.</span> <span class="toc-text">实例验证</span></a></li></ol></li></ol>
+    </div>
+    
+    <h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><h3 id="普通写法"><a href="#普通写法" class="headerlink" title="普通写法"></a>普通写法</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这里的匿名函数加了一个括号 其实最外面那个括号加不加都一样</span></span><br><span class="line"><span class="keyword">var</span> a =(<span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;     <span class="comment">//a() --&gt; 执行了函数本身,于是console.log;</span></span><br><span class="line">    <span class="keyword">var</span> a1 = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"a外层函数执行"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;     <span class="comment">//a()() --&gt; 执行 &lt;到&gt; 内部的匿名函数 返回了a1</span></span><br><span class="line">    <span class="keyword">return</span> a1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="立即执行的匿名函数"><a href="#立即执行的匿名函数" class="headerlink" title="立即执行的匿名函数"></a>立即执行的匿名函数</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//这里的匿名函数加了一个括号</span></span><br><span class="line"><span class="keyword">var</span> b =(<span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a2 = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"b外层函数执行"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//如果再在浏览器输入b(),是不会出现"b外层函数执行" ,因为函数本身就立即运行一遍就销毁了.</span></span><br><span class="line">    <span class="keyword">return</span> a2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里在尾部加了一个小括号,但是不传参,然后就立即执行了这个函数，然后就销毁了这个变量<code>b</code>,但是<code>b</code>内部保留着一个闭包,所以在浏览器输入<code>b</code>,还会出现被引用的匿名函数</p>
+</blockquote>
+<h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> c = (<span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"c外层函数执行"</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(arg);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">d</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="number">333</span>)</span><br><span class="line"><span class="comment">//这里我们给小括号添加了一个参数,然后立马就传递进这个参数 之后也立即销毁</span></span><br></pre></td></tr></table></figure>
+<h2 id="劫持eavl"><a href="#劫持eavl" class="headerlink" title="劫持eavl()"></a>劫持eavl()</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">eval</span>=(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;      <span class="comment">//这一刻, eval函数被重写</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'e的值是:'</span>+e);     <span class="comment">//e的值是:function eval()&#123;&#125;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line">        e(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(<span class="built_in">eval</span>);</span><br><span class="line"><span class="comment">//并非把自己传递进去, 而是传进去原生的eval函数, 用window.eval可验证</span></span><br><span class="line"><span class="comment">// var temp = eval;</span></span><br><span class="line"><span class="comment">// console.log("eval的值:"+eval); //function (data)&#123;console.log(data);e(data);&#125;</span></span><br><span class="line"><span class="comment">// eval("alert(1)");  //直接进入这个闭包,然后解析"alert(1)";</span></span><br></pre></td></tr></table></figure>
+<h3 id="实例验证"><a href="#实例验证" class="headerlink" title="实例验证"></a>实例验证</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="string">"global"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a=<span class="string">"local"</span>;</span><br><span class="line">    <span class="built_in">eval</span>(<span class="string">"alert(a)"</span>);</span><br><span class="line">&#125;</span><br><span class="line">test();   <span class="comment">// global</span></span><br></pre></td></tr></table></figure>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2015/05/30/web-safe/" class="prev">上一篇：CORS跨域资源共享</a>
+    
+    
+    <a href="/2015/02/05/chapter-7/" class="next">下一篇：红皮书第七章学习心得</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2021 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      }
+    }
+
+    mod.load('lib-av', 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.0.1/dist/av-min.js', () => {
+      mod.load('lib-cmt', 'https://unpkg.com/valine@1.4.14/dist/Valine.min.js',()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  <script async defer src="https://s5.cnzz.com/z_stat.php?id=1276809529&web_id=1276809529"></script>
+  
+</body>
+</html>
