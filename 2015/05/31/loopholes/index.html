@@ -29,15 +29,17 @@
   <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
   <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
   
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
 </head>
 
 <body>
   <div class="container">
-    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmi6yapmj30dw0zk0wm.jpg')">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/007S8ZIlly1giq5k8ty3tj306y0zkdix.jpg')">
       <div class="intrude-less">
         <header id="header" class="inner">
           <a href="/">
-            <div class="profilepic"><img src='https://tva1.sinaimg.cn/large/007S8ZIlgy1ggdmr1k3k0j305k05k74j.jpg'></div>
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
           </a>
           <div class="author-name"><a href="/">测试狗</a></div>
           <p class="aboutme">🐶</p>
@@ -58,6 +60,18 @@
               
               <li>
                 
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
                   <a href="/search">搜索</a>
                 
               </li>
@@ -67,18 +81,16 @@
           <nav id="sub-nav">
             <div class="social">
               
-              <a class="twitter" href="https://twitter.com/" title="Twitter">Twitter</a>
+              <a class="twitter" href="https://twitter.com/thinkerchan" title="Twitter">Twitter</a>
               
               
               
-              <a class="github" href="https://github.com/" title="Github">Github</a>
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
               
               
-              <a class="yuque" href="https://yuque.com/" title="语雀">语雀</a>
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
               
 
-              
-              <a class="rss" href="/atom.xml" title="RSS">RSS</a>
               
             </div>
           </nav>
@@ -90,6 +102,7 @@
         <div id="content" class="inner">
           <article class="post">
 
+  <!-- 文章页结构 -->
   
     <div class="meta">
       
@@ -111,6 +124,11 @@
     </div>
   
   <h1 class="title" itemprop="name">100.com的一个漏洞(上)</h1>
+
+  
+  <p class="expired-tips">提醒：本文最后更新于 2355 天前，文章内容可能因 技术时效性 或 重新修改，请谨慎使用。</p>
+  
+
   <div class="entry-content" itemprop="articleBody">
     
     <p>昨晚无聊，就打开欢聚时代的<a href="http://huanju.cn/" target="_blank" rel="noopener">官网</a>，然后一路溜到<a href="http://www.100.com/" target="_blank" rel="noopener">教育100</a>这个旗下网站，顺带注册了一个账户，身为前端狗，看到那么多<code>input</code>，肯定会有冲动往里面写点什么, 然后就发现了个XSS漏洞。。。。</p>
@@ -135,6 +153,11 @@
         </div>
         
         
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
       </div>
       <footer id="footer" class="inner">
         © 2021 - 测试狗 -
@@ -143,6 +166,67 @@
       </footer>
     </div>
   </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      }
+    }
+
+    mod.load('lib-av', 'https://cdn.jsdelivr.net/npm/leancloud-storage@3.0.1/dist/av-min.js', () => {
+      mod.load('lib-cmt', 'https://unpkg.com/valine@1.4.14/dist/Valine.min.js',()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
   
   <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
