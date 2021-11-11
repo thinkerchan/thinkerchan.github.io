@@ -134,6 +134,7 @@ a {
   line-height: 1.2em;
 }
 .container .mid-col .mid-col-container #content article .meta {
+  position: static;
   color: #555;
   text-align: right;
   width: auto;
@@ -222,7 +223,6 @@ a {
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-  box-shadow: 0 0 10px 0px #666;
 }
 .container .left-col #header .author-name {
   text-align: center;

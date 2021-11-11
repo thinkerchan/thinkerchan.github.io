@@ -675,22 +675,13 @@ article .entry-content .video-container embed {
     margin-left: 0;
   }
 }
-.post .expired-tips {
-  padding: 5px 10px;
-  border: 1px solid #e2e2e2;
-  background-color: #ffffc0;
-  border-left: 5px solid #fff000;
-  color: #333;
-  overflow: hidden;
-}
 .post .meta {
+  position: absolute;
   top: 85px;
   line-height: 2;
   font-size: 0.9em;
   color: #999;
   width: 170px;
-  float: right;
-  padding-top: 10px;
 }
 @media screen and (max-width: 800px) {
   .post .meta {
@@ -1179,6 +1170,7 @@ a {
   line-height: 1.2em;
 }
 .container .mid-col .mid-col-container #content article .meta {
+  position: static;
   color: #555;
   text-align: right;
   width: auto;
@@ -1275,8 +1267,6 @@ a {
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-  -webkit-box-shadow: 0 0 10px 0px #666;
-  box-shadow: 0 0 10px 0px #666;
 }
 .container .left-col #header .author-name {
   text-align: center;
