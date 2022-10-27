@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>JS红皮书读书笔记-16-HTML5脚本编程 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="跨文档消息传递(XDM)跨文档消息传递(cross-document messaging)指的是在来自不同域的页面间传递消息。例如，www.wrox.com域中的页面与位于一个内嵌框架中的p2p.wrox.com域中的页面通信。 
+XDM的核心是postMessage()方法。对于XDM而言，就是将">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-16-HTML5脚本编程"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/008eGmZEgy1gocjgj4y3lj30dw0zkjzu.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-04-09T08:04:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-04-09
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-16-HTML5脚本编程</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 1296 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#跨文档消息传递-XDM"><span class="toc-number">1.</span> <span class="toc-text">跨文档消息传递(XDM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原生拖放"><span class="toc-number">2.</span> <span class="toc-text">原生拖放</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#拖放事件"><span class="toc-number">2.1.</span> <span class="toc-text">拖放事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义放置目标"><span class="toc-number">2.2.</span> <span class="toc-text">自定义放置目标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataTransfer对象"><span class="toc-number">2.3.</span> <span class="toc-text">dataTransfer对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dropEffect与effectAllowed"><span class="toc-number">2.4.</span> <span class="toc-text">dropEffect与effectAllowed</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可拖动"><span class="toc-number">2.5.</span> <span class="toc-text">可拖动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他成员"><span class="toc-number">2.6.</span> <span class="toc-text">其他成员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#媒体元素"><span class="toc-number">3.</span> <span class="toc-text">媒体元素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#属性"><span class="toc-number">3.1.</span> <span class="toc-text">属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件"><span class="toc-number">3.2.</span> <span class="toc-text">事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义媒体播放器"><span class="toc-number">3.3.</span> <span class="toc-text">自定义媒体播放器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检测编解码器的支持情况"><span class="toc-number">3.4.</span> <span class="toc-text">检测编解码器的支持情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Audio类型"><span class="toc-number">3.5.</span> <span class="toc-text">Audio类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#历史状态管理"><span class="toc-number">4.</span> <span class="toc-text">历史状态管理</span></a></li></ol>
+    </div>
+    
+    <h2 id="跨文档消息传递-XDM"><a href="#跨文档消息传递-XDM" class="headerlink" title="跨文档消息传递(XDM)"></a>跨文档消息传递(XDM)</h2><p>跨文档消息传递(cross-document messaging)指的是在来自不同域的页面间传递消息。例如，<a href="http://www.wrox.com域中的页面与位于一个内嵌框架中的p2p.wrox.com域中的页面通信。" target="_blank" rel="noopener">www.wrox.com域中的页面与位于一个内嵌框架中的p2p.wrox.com域中的页面通信。</a> </p>
+<p>XDM的核心是postMessage()方法。对于XDM而言，就是将信息发送至包含在当前页面中的iframe元素，或者由当前页面弹出的窗口。<br>这个方法接受两个参数，一个消息字符串和一个表示消息接受方来自哪个域的字符串。如果内嵌框架的来源不符合参数，则什么也不做，传递“＊”代表匹配所有文档。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> iframeWindow = <span class="built_in">document</span>.getElementById(<span class="string">"myframe"</span>).contentWindow; </span><br><span class="line">iframeWindow.postMessage(<span class="string">"A secret"</span>, <span class="string">"http://www.wrox.com"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="原生拖放"><a href="#原生拖放" class="headerlink" title="原生拖放"></a>原生拖放</h2><h3 id="拖放事件"><a href="#拖放事件" class="headerlink" title="拖放事件"></a>拖放事件</h3><p>通过拖放事件，可以控制拖放相关的各个方面，其中最关键的地方在于确定那里发生了拖放事件，有些事件是在被拖动的元素上产生的，有些是在放置目标上触发的。<br>拖动某元素时将依次在被拖动的元素上触发下列事件：</p>
+<ul>
+<li>dragstart：按下鼠标且鼠标移动开始时</li>
+<li>drag：在元素被拖动的过程中持续触发</li>
+<li>dragend：当拖动停止时，无论把元素放到有效的放置目标上还是无效的上，都会触发dragend事件。</li>
+</ul>
+<p>在拖动的过程中，被拖动的元素的外观是可以改变的，一般浏览器会默认创建一个半透明的副本，这个副本始终跟随光标移动。<br>当某个元素被放置到有效的放置目标的时候，下列事件会在放置目标会依次发生：</p>
+<ul>
+<li>dragenter：元素被拖动到放置目标上，就回触发一次dragenter</li>
+<li>dragover：元素在放置目标上继续被拖动时，会持续触发这个事件</li>
+<li>dragleave或drop：如果元素又被拖离了目标范围，触发dragleave，dragover事件不再触发，如果直接放置在了目标中，会触发drop事件。</li>
+</ul>
+<h3 id="自定义放置目标"><a href="#自定义放置目标" class="headerlink" title="自定义放置目标"></a>自定义放置目标</h3><p>所有元素都支持放置目标事件，但有些元素是默认不允许放置的，如果拖动元素经过不允许放置的的元素，是不会触发drop事件的，重写其dragenter和dragover事件可以使其变为可放置的：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">EventUtil.addHandler(dropDiv, <span class="string">"dragover"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    EventUtil.preventDefault(event);</span><br><span class="line">&#125;);</span><br><span class="line">EventUtil.addHandler(dropDiv, <span class="string">"dragenter"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    EventUtil.preventDefault(event);</span><br><span class="line">&#125;);</span><br><span class="line">EventUtil.addHandler(dropDiv, <span class="string">"drop"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">"droped"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="dataTransfer对象"><a href="#dataTransfer对象" class="headerlink" title="dataTransfer对象"></a>dataTransfer对象</h3><p>为了在拖放操作时实现数据的交换，引入了dataTransfer对象(25章也有这个示例)，这是事件对象的一个属性，这个对象有两个方法：getData()和 setData()。这两个方法都需要一个代表数据类型的参数，在HTML5中，这个是MIME类型，为了向后兼容，还可以是”text”和”URL”，只不过他们其实是被映射为MIME类型”text/plain”和”text/uri-list”。setData还需要一个对应的数据作为参数。在这个对象中，对不同的MIME可以同时存储多个值。<br>这个对象只在drop事件中读取。<br>setData在拖动开始时设置，拖动文本，链接或图像时，浏览器会自动调用这个方法保存文字或URL。我们自己也可以在dragstart事件中调用来保存我们自己的数据。<br>getData在drop事件中调用，获取相关数据。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">event.dataTransfer.setData(<span class="string">"URL"</span>, <span class="string">"http://www.wrox.com/"</span>);</span><br><span class="line"><span class="keyword">var</span> url = dataTransfer.getData(<span class="string">"url"</span>)||dataTransfer.getData(<span class="string">"text/uri-list"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="dropEffect与effectAllowed"><a href="#dropEffect与effectAllowed" class="headerlink" title="dropEffect与effectAllowed"></a>dropEffect与effectAllowed</h3><p>利用dataTransfer对象，不光能传送数据，还能确定被拖动元素以及作为放置目标的元素能够接收什么操作。<br>dropEffect属性可以知道被拖动元素能执行哪种放置行为：</p>
+<ul>
+<li>none</li>
+<li>move</li>
+<li>copy</li>
+<li>link<br>这个属性要在开始拖动ondragstart时设置 </li>
+</ul>
+<p>effectAllowed表示允许拖动元素的哪种dropEffect。</p>
+<ul>
+<li>uninitialized</li>
+<li>none</li>
+<li>copy</li>
+<li>link</li>
+<li>move</li>
+<li>copyLink</li>
+<li>copyMove</li>
+<li>linkMove</li>
+<li>all</li>
+</ul>
+<p>这个也要在ondragstart时设置</p>
+<h3 id="可拖动"><a href="#可拖动" class="headerlink" title="可拖动"></a>可拖动</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">draggable</span>=<span class="string">"true"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他成员"><a href="#其他成员" class="headerlink" title="其他成员"></a>其他成员</h3><p>HTML5规范规定dataTransfer对象还有下列方法和属性:</p>
+<ul>
+<li>addElement(element)</li>
+<li>clearData(format)</li>
+<li>setDragImage(element, x, y)</li>
+<li>types</li>
+</ul>
+<h2 id="媒体元素"><a href="#媒体元素" class="headerlink" title="媒体元素"></a>媒体元素</h2><p>新增audio /video标签</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>略</p>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>略</p>
+<h3 id="自定义媒体播放器"><a href="#自定义媒体播放器" class="headerlink" title="自定义媒体播放器"></a>自定义媒体播放器</h3><p>其实就是利用pause/play/currentTime等相关属性方法来封装一个播放器</p>
+<h3 id="检测编解码器的支持情况"><a href="#检测编解码器的支持情况" class="headerlink" title="检测编解码器的支持情况"></a>检测编解码器的支持情况</h3><p>利用canPlayType方法来检测是否支持某种MIME类型的媒体:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(audio.canPlayType(<span class="string">'audio/mpeg'</span>))&#123; <span class="comment">//返回'probably'/'maybe'、'' 三个值之一</span></span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Audio类型"><a href="#Audio类型" class="headerlink" title="Audio类型"></a>Audio类型</h3><p>audio类型有一个元素JS的构造函数Audio,可以在任何时候播放音频, 并且: <strong>通过 new Audio创建的实例不必插入到文档中就可以播放</strong>.</p>
+<h2 id="历史状态管理"><a href="#历史状态管理" class="headerlink" title="历史状态管理"></a>历史状态管理</h2><p>在现在的Web应用中，用户的每次操作并不一定会打开一个新的页面，前进和后退按钮在这里也就失去了作用。HTML5通过更新history对象为管理历史状态提供了方便。 </p>
+<p>hashchange事件可以知道URL的参数什么时候发生了变化，这时使用history.pushState()可以在不加载新页面的情况下改变浏览器的URL，该方法接收3个参数：状态对象，新状态的标题和可选的相对URL。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">name</span>:<span class="string">"Nicholas"</span>&#125;, <span class="string">"Nicholas' page"</span>, <span class="string">"nicholas.html"</span>);</span><br></pre></td></tr></table></figure>
+<p>这个方法执行后，新的状态会被加入历史状态栈，浏览器的地址栏也会变成新的相对URL。但其实并没有像服务器发送数据。其中的第一个参数是用来初始化这个页面的数据用的。 </p>
+<p>这时后退按钮就能使用了，这时点击后退按钮会触发window对象的popstate事件，这个事件有个属性叫state，就是pushState的第一个参数。回到上一个页面，读取上一个页面的state来初始化上一个页面。比如你回到的是nicholas.html，那你读到的state的name就是Nicholas。<br>浏览器加载的第一个页面木有状态，其state是null。<br>还有个方法是replaceState()这个方法接收pushState的前两个参数，重写当前状态，不在历史栈中创建新状态。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">history.replaceState(&#123;<span class="attr">name</span>:<span class="string">"Greg"</span>&#125;, <span class="string">"Greg's page"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>这时以后再返回这个页面读到的state.name就是Greg了。<br>要注意，push进去的每个状态服务器上都要有个真的页面，要不一刷新就404了。<br>按照逻辑这个pushState应该是在每个web页面刚加载时就push进去，把初始化这个页面的每个数据一起push进去。在当前页面如果有什么即时的修改在下次进入这个页面也该体现的，就使用replaceState。</p>
+<hr>
+<p>本章完</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/04/09/JSbook19/" class="prev">上一篇：JS红皮书读书笔记-19-E4X(略)</a>
+    
+    
+    <a href="/2019/04/09/JSbook17/" class="next">下一篇：JS红皮书读书笔记-17-错误处理与程序</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2022 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>【快速教程】120行代码理解双向数据绑定 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="劫持对象属性的get/set特性是双向数据绑定的实现方式. 数据改变的时候, set中触发视图更新函数. 这种思路也就是常见的观察者模式. 手写双向数据绑定, 非常适合作为一道面试题, 它考察了 原型链/变量作用域/闭包/Dom/正则/设计模式等等知识点.
+
+// minivue.jsfunctio">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="【快速教程】120行代码理解双向数据绑定"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/008eGmZEgy1gocjgj4y3lj30dw0zkjzu.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-04-28T12:21:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-04-28
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">【快速教程】120行代码理解双向数据绑定</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 1277 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <blockquote>
+<p>劫持对象属性的get/set特性是双向数据绑定的实现方式. 数据改变的时候, set中触发视图更新函数. 这种思路也就是常见的观察者模式. 手写双向数据绑定, 非常适合作为一道面试题, 它考察了 原型链/变量作用域/闭包/Dom/正则/设计模式等等知识点.</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// minivue.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">miniVue</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.$el = <span class="built_in">document</span>.querySelector(options.el);</span><br><span class="line">  <span class="keyword">this</span>.$data = options.data;</span><br><span class="line">  <span class="keyword">this</span>.$methods = options.methods;</span><br><span class="line">  <span class="keyword">this</span>.bindings = &#123;&#125;; <span class="comment">// data中的某个数据有可能作用到好几个地方, 所以需要存起来用于之后遍历执行更新</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.observer(<span class="keyword">this</span>.$data);</span><br><span class="line">  <span class="keyword">this</span>.compile(<span class="keyword">this</span>.$el);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">miniVue.prototype = &#123;</span><br><span class="line">  <span class="keyword">constructor</span>:miniVue,</span><br><span class="line">  observer:function(data) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> data) &#123;</span><br><span class="line">      <span class="keyword">this</span>.bindings[key] = [];</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 这个数组主要用途: 存储对应数据关联的dom节点信息</span></span><br><span class="line">      <span class="keyword">var</span> arr = <span class="keyword">this</span>.bindings[key];</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 抽离方法避免闭包问题</span></span><br><span class="line">      <span class="keyword">this</span>.defineReactive(data,key,data[key],arr)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  defineReactive:<span class="function"><span class="keyword">function</span>(<span class="params">data,key,value,arr</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// Object.defineProperty执行之后, configurable, enumerble为false</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(data, key, &#123;</span><br><span class="line">      get() &#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">      &#125;,</span><br><span class="line">      set(newVal) &#123;</span><br><span class="line">        <span class="keyword">if</span> (newVal !== value) &#123;</span><br><span class="line">          value = newVal;</span><br><span class="line">          <span class="comment">// 同步更新视图</span></span><br><span class="line">          arr.forEach(<span class="function">(<span class="params">item</span>)=&gt;</span> &#123;</span><br><span class="line">            item.updateView();</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  compile:<span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> nodes = ([]).slice.call(el.children);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; nodes.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> node = nodes[i];</span><br><span class="line">      <span class="comment">// if (node.children.length &gt; 0)&#123;</span></span><br><span class="line">      <span class="comment">//   this.compile(node)  //递归:防止目标元素有嵌套</span></span><br><span class="line">      <span class="comment">// &#125;;</span></span><br><span class="line">      <span class="keyword">if</span> (node.nodeType === <span class="number">1</span> &amp;&amp; !!node.childElementCount) &#123;  <span class="comment">// 换一种判断</span></span><br><span class="line">        <span class="keyword">this</span>.compile(node)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (node.nodeType === <span class="number">1</span> &amp;&amp; !node.childElementCount &amp;&amp; node.textContent.trim()) &#123;</span><br><span class="line">        <span class="keyword">var</span> v = <span class="keyword">this</span>.textToExp(node.textContent);</span><br><span class="line">        <span class="keyword">this</span>.recordRelativeDom(node,<span class="string">"innerText"</span>,v,<span class="keyword">this</span>)</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (node.hasAttribute(<span class="string">"v-model"</span>)) &#123;</span><br><span class="line">        <span class="keyword">var</span> attrVal = node.getAttribute(<span class="string">"v-model"</span>);</span><br><span class="line">        <span class="comment">// 方法1: 优化闭包</span></span><br><span class="line">        node.addEventListener(<span class="string">"input"</span>, (<span class="function">(<span class="params">i</span>) =&gt;</span> &#123; <span class="comment">// 因为闭包原因产生索引错乱,故用IIFE来优化</span></span><br><span class="line">          <span class="keyword">this</span>.recordRelativeDom(node,<span class="string">"value"</span>,attrVal,<span class="keyword">this</span>)</span><br><span class="line">          <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.$data[attrVal] = nodes[i].value;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)(i))</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 方法2: for循环的所有var改let</span></span><br><span class="line">        <span class="comment">// this.bindings[attrVal].push(new Notify(node, "value", this, attrVal));</span></span><br><span class="line">        <span class="comment">// node.addEventListener("input", () =&gt; &#123;</span></span><br><span class="line">        <span class="comment">//   this.$data[attrVal] = node.value;</span></span><br><span class="line">        <span class="comment">// &#125;)</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (node.hasAttribute(<span class="string">"v-html"</span>)) &#123;</span><br><span class="line">        <span class="keyword">var</span> attrVal = node.getAttribute(<span class="string">"v-html"</span>);</span><br><span class="line">        <span class="keyword">this</span>.recordRelativeDom(node,<span class="string">"innerHTML"</span>,attrVal,<span class="keyword">this</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (node.hasAttribute(<span class="string">"v-text"</span>)) &#123;</span><br><span class="line">        <span class="keyword">var</span> attrVal = node.getAttribute(<span class="string">"v-text"</span>);</span><br><span class="line">        <span class="keyword">this</span>.recordRelativeDom(node,<span class="string">"innerText"</span>,attrVal,<span class="keyword">this</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (node.hasAttribute(<span class="string">"v-on:click"</span>)) &#123;</span><br><span class="line">        <span class="keyword">var</span> attrVal = node.getAttribute(<span class="string">"v-on:click"</span>);</span><br><span class="line">        node.addEventListener(<span class="string">"click"</span>, <span class="keyword">this</span>.$methods[attrVal].bind(<span class="keyword">this</span>.$data));  <span class="comment">//bind用于修正this</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  recordRelativeDom:<span class="function"><span class="keyword">function</span>(<span class="params">node,attr,attrVal,vm</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> curData = <span class="keyword">this</span>.bindings[attrVal]</span><br><span class="line">    <span class="keyword">if</span>(curData)&#123;</span><br><span class="line">      curData.push(<span class="keyword">new</span> Notify(node, attr, attrVal, vm));</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'变量'</span>+attrVal+<span class="string">'没有被注册!'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  textToExp:<span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> tar,</span><br><span class="line">        pieces = text.trim().split(<span class="regexp">/(&#123;&#123;.+?&#125;&#125;)/g</span>);</span><br><span class="line">    pieces = pieces.map(<span class="function"><span class="params">piece</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!!piece) &#123;</span><br><span class="line">        tar = piece.replace(<span class="regexp">/^&#123;&#123;|&#125;&#125;$/g</span>, <span class="string">''</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> tar.trim();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Notify</span>(<span class="params">el, attr, val, vm</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.el = el;</span><br><span class="line">  <span class="keyword">this</span>.attr = attr;</span><br><span class="line">  <span class="keyword">this</span>.val = val;</span><br><span class="line">  <span class="keyword">this</span>.vm = vm;</span><br><span class="line">  <span class="keyword">this</span>.updateView();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Notify.prototype = &#123;</span><br><span class="line">  <span class="keyword">constructor</span>:Notify,</span><br><span class="line">  updateView:function() &#123;</span><br><span class="line">    <span class="keyword">this</span>.el[<span class="keyword">this</span>.attr] = <span class="keyword">this</span>.vm.$data[<span class="keyword">this</span>.val];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">// index.html</span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>120行代码理解双向绑定原理<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123; ok &#125;&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123; didi &#125;&#125; <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"msg"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"加个！"</span> <span class="attr">v-on:click</span>=<span class="string">"click"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"msg"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"minivue.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> vm = <span class="keyword">new</span> miniVue(&#123;</span></span><br><span class="line"><span class="javascript">      el: <span class="string">"#app"</span>,</span></span><br><span class="line"><span class="undefined">      data: &#123;</span></span><br><span class="line"><span class="xml">        msg: "<span class="tag">&lt;<span class="name">span</span>&gt;</span>hello miniVue<span class="tag">&lt;/<span class="name">span</span>&gt;</span>",</span></span><br><span class="line"><span class="javascript">        ok:<span class="string">'2333'</span>,</span></span><br><span class="line"><span class="javascript">        didi:<span class="string">"滴滴一下"</span></span></span><br><span class="line"><span class="undefined">      &#125;,</span></span><br><span class="line"><span class="undefined">      methods: &#123;</span></span><br><span class="line"><span class="undefined">        click() &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">this</span>.msg += <span class="string">"!"</span>;</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="undefined">        click1()&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">this</span>.ok+=<span class="string">"?"</span>;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2020/08/01/hexo-site-search-mod/" class="prev">上一篇：【快速教程】Hexo站内搜索的实现</a>
+    
+    
+    <a href="/2019/04/12/indexeddb-quick/" class="next">下一篇：【快速教程】Web离线存储之indexedDB</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2022 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>in操作符 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="数组里的invar a;a in [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;] // false
+解释：尽管数组里面有 a 这个项, 但是检查的确实数组本身的特征, 比如 length,constructor之类的属性var arr = [&#39;one&#39;,&#39;two&#39;,&#39;three&#39;,&#39;four&#39;];arr.five = ">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="in操作符"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/008eGmZEgy1gocjgj4y3lj30dw0zkjzu.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2015-05-30T14:59:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2015-05-30
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">in操作符</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 2706 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组里的in"><span class="toc-number">1.</span> <span class="toc-text">数组里的in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象里的in"><span class="toc-number">2.</span> <span class="toc-text">对象里的in</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">3.</span> <span class="toc-text">其他</span></a></li></ol>
+    </div>
+    
+    <h2 id="数组里的in"><a href="#数组里的in" class="headerlink" title="数组里的in"></a>数组里的in</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line">a <span class="keyword">in</span> [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>] <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>解释：尽管数组里面有 a 这个项, 但是检查的确实数组本身的<strong>特征</strong>, 比如 <code>length</code>,<code>constructor</code>之类的属性<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">'one'</span>,<span class="string">'two'</span>,<span class="string">'three'</span>,<span class="string">'four'</span>];</span><br><span class="line">arr.five = <span class="string">'5'</span>;          <span class="comment">//这里是按照 键值 的方式给数组自身添加属性</span></span><br><span class="line">arr.six = <span class="string">'6'</span>;          <span class="comment">//这里是按照 键值 的方式给数组自身添加属性</span></span><br><span class="line"><span class="comment">// arr.push('test');     //给数组内部添加元素</span></span><br><span class="line"><span class="number">4</span> <span class="keyword">in</span> arr;   <span class="comment">//false 原来的素组不存在第5个元素</span></span><br><span class="line"><span class="number">0</span> <span class="keyword">in</span> arr;   <span class="comment">//true 存在第1个元素</span></span><br><span class="line"><span class="string">'one'</span> <span class="keyword">in</span> arr;   <span class="comment">//false</span></span><br><span class="line"><span class="string">'five'</span> <span class="keyword">in</span> arr;  <span class="comment">//true, 通过 键值 添加进去的属性</span></span><br><span class="line"><span class="string">'length'</span> <span class="keyword">in</span> arr;<span class="comment">//true 这个是数组本身的特性</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="对象里的in"><a href="#对象里的in" class="headerlink" title="对象里的in"></a>对象里的in</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;<span class="string">"a"</span>:<span class="number">1</span>,<span class="string">"b"</span>:<span class="number">2</span>,<span class="string">"c"</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="string">'a'</span> <span class="keyword">in</span> obj ; <span class="comment">//true,键值属性</span></span><br><span class="line"><span class="string">'constructor'</span> <span class="keyword">in</span> obj; <span class="comment">//true,自身的特性(属性) 其实也是键值属性</span></span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">    (alert(<span class="number">123</span>))<span class="keyword">in</span>(alert(<span class="number">321</span>));</span><br><span class="line">(alert(<span class="number">123</span>))<span class="keyword">in</span><span class="string">""</span></span><br><span class="line"><span class="string">""</span><span class="keyword">in</span>(alert(<span class="number">321</span>))</span><br></pre></td></tr></table></figure>
+<p> 像这样的语句,都能执行, 是因为浏览器会先执行了in左右两边的语句,再做出对比.</p>
+<p> 也许在一些XSS漏洞中,这种书写会有帮助.</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2015/05/31/loopholes/" class="prev">上一篇：100.com的一个漏洞(上)</a>
+    
+    
+    <a href="/2015/05/30/web-safe/" class="next">下一篇：CORS跨域资源共享</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2022 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>

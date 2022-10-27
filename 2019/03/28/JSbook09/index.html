@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>JS红皮书读书笔记-09-客户端检测 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="存在客户端检测, 是因为浏览器大战, 各家浏览器一单不按照某个规范, 那么实现起某个功能就会有五花八门的差异.
+比如说早期在ajax和事件绑定上, 都要另外兼容IE , 此章的笔记并不多.
+主要告诉检测的几种思路:
+能力检测比如对区分PC端和移动端要求不高, 可以如下:var isMobile = ">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-09-客户端检测"/>
+  <meta property="og:site_name" content="测试狗"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch" />
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch" />
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch" />
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch" />
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://tva1.sinaimg.cn/large/008eGmZEgy1gocjgj4y3lj30dw0zkjzu.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://tva1.sinaimg.cn/large/007S8ZIlly1giq5t0agwnj30bf0b4jrk.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-03-27T17:42:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-03-28
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-09-客户端检测</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 1309 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#能力检测"><span class="toc-number">1.</span> <span class="toc-text">能力检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怪癖检测"><span class="toc-number">2.</span> <span class="toc-text">怪癖检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UA检测"><span class="toc-number">3.</span> <span class="toc-text">UA检测</span></a></li></ol>
+    </div>
+    
+    <p>存在客户端检测, 是因为浏览器大战, 各家浏览器一单不按照某个规范, 那么实现起某个功能就会有五花八门的差异.</p>
+<p>比如说早期在ajax和事件绑定上, 都要另外兼容IE , 此章的笔记并不多.</p>
+<p>主要告诉检测的几种思路:</p>
+<h2 id="能力检测"><a href="#能力检测" class="headerlink" title="能力检测"></a>能力检测</h2><p>比如对区分PC端和移动端要求不高, 可以如下:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> isMobile = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> !!<span class="built_in">document</span>.createEvent(<span class="string">"TouchEvent"</span>);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;();</span><br></pre></td></tr></table></figure></p>
+<h2 id="怪癖检测"><a href="#怪癖检测" class="headerlink" title="怪癖检测"></a>怪癖检测</h2><p>怪癖检测实际上就根据某版本的浏览器的bug来鉴定, 比如早期的safari浏览器</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isOldSafari</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> reg = <span class="regexp">/\d/</span>; </span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">typeof</span> reg == <span class="string">'function'</span>; <span class="comment">// 早期的safari会返回'function', 显然是bug</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="UA检测"><a href="#UA检测" class="headerlink" title="UA检测"></a>UA检测</h2><p>大部分情况下都是通过访问navigator的<code>userAgent</code>, <code>platform</code>等属性来判断是否属于某种设备. 当然, 对于后端接受来说, 这些字段都是可以伪造的, 不过在前端方面, 用于设备检查, 已经完全足够.</p>
+<hr>
+<p>本章完</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/03/28/JSbook10/" class="prev">上一篇：JS红皮书读书笔记-10-DOM</a>
+    
+    
+    <a href="/2019/03/27/JSbook08/" class="next">下一篇：JS红皮书读书笔记-08-BOM</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2022 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>
