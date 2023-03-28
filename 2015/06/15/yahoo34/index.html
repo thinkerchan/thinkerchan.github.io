@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>雅虎34条 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="参考1:官方传送门在此,请肆意点击.参考2:中文原文传送门在此,请肆意点击.参考3:中文原文传送门在此,请肆意点击.
+1.尽量减少HTTP请求次数什么是HTTP请求?每一次网页内容的获取,就是HTTP请求的具体展现.不同浏览器的请求并发数是有限的,知乎已经有大神解释这个问题了,拿去.常见的优化有:
+">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="雅虎34条">
+  <meta property="og:site_name" content="测试狗">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch">
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch">
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch">
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch">
+  
+</head>
+</html>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://p.ipic.vip/b2t3my.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://p.ipic.vip/67o2jq.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2015-06-15T11:11:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2015-06-15
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">雅虎34条</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 2842 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-尽量减少HTTP请求次数"><span class="toc-number">1.</span> <span class="toc-text">1.尽量减少HTTP请求次数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-减少DNS查找次数"><span class="toc-number">2.</span> <span class="toc-text">2.减少DNS查找次数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-避免跳转"><span class="toc-number">3.</span> <span class="toc-text">3.避免跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-使用Ajax缓存"><span class="toc-number">4.</span> <span class="toc-text">4.使用Ajax缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-推迟加载内容"><span class="toc-number">5.</span> <span class="toc-text">5.推迟加载内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-预加载"><span class="toc-number">6.</span> <span class="toc-text">6.预加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-减少DOM元素"><span class="toc-number">7.</span> <span class="toc-text">7.减少DOM元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-划分子域"><span class="toc-number">8.</span> <span class="toc-text">8.划分子域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-减少iframe数量"><span class="toc-number">9.</span> <span class="toc-text">9.减少iframe数量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-避免重定向"><span class="toc-number">10.</span> <span class="toc-text">10.避免重定向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-使用CDN"><span class="toc-number">11.</span> <span class="toc-text">11.使用CDN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-为文件头指定Expires或Cache-Control"><span class="toc-number">12.</span> <span class="toc-text">12.为文件头指定Expires或Cache-Control</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-开启Gzip压缩"><span class="toc-number">13.</span> <span class="toc-text">13.开启Gzip压缩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-配置Etag-实体标签"><span class="toc-number">14.</span> <span class="toc-text">14.配置Etag(实体标签)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-尽早刷新输出缓冲"><span class="toc-number">15.</span> <span class="toc-text">15.尽早刷新输出缓冲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-使用GET来完成AJAX请求"><span class="toc-number">16.</span> <span class="toc-text">16.使用GET来完成AJAX请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-把样式表置于顶部"><span class="toc-number">17.</span> <span class="toc-text">17.把样式表置于顶部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18-避免使用CSS表达式（Expression）"><span class="toc-number">18.</span> <span class="toc-text">18.避免使用CSS表达式（Expression）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#19-使用外部JavaScript和CSS"><span class="toc-number">19.</span> <span class="toc-text">19.使用外部JavaScript和CSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20-压缩合并JavaScript和CSS"><span class="toc-number">20.</span> <span class="toc-text">20.压缩合并JavaScript和CSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21-用代替-import"><span class="toc-number">21.</span> <span class="toc-text">21.用代替@import</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22-避免使用滤镜"><span class="toc-number">22.</span> <span class="toc-text">22.避免使用滤镜</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23-把脚本置于页面底部"><span class="toc-number">23.</span> <span class="toc-text">23.把脚本置于页面底部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24-剔除重复脚本"><span class="toc-number">24.</span> <span class="toc-text">24.剔除重复脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25-减少DOM访问"><span class="toc-number">25.</span> <span class="toc-text">25.减少DOM访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#26-开发智能事件处理程序"><span class="toc-number">26.</span> <span class="toc-text">26.开发智能事件处理程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#27-减小Cookie体积"><span class="toc-number">27.</span> <span class="toc-text">27.减小Cookie体积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#28-对于页面内容使用无coockie域名"><span class="toc-number">28.</span> <span class="toc-text">28.对于页面内容使用无coockie域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#29-优化图像"><span class="toc-number">29.</span> <span class="toc-text">29.优化图像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#30-优化CSS-Spirite"><span class="toc-number">30.</span> <span class="toc-text">30.优化CSS Spirite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#31-不要在HTML中缩放图像"><span class="toc-number">31.</span> <span class="toc-text">31.不要在HTML中缩放图像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32-favicon-ico要小而且可缓存"><span class="toc-number">32.</span> <span class="toc-text">32.favicon.ico要小而且可缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33-保持单个内容小于25K"><span class="toc-number">33.</span> <span class="toc-text">33.保持单个内容小于25K</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#34-打包组件成复合文本"><span class="toc-number">34.</span> <span class="toc-text">34.打包组件成复合文本</span></a></li></ol>
+    </div>
+    
+    <p>参考1:<a href="https://developer.yahoo.com/performance/rules.html" target="_blank" rel="noopener">官方传送门在此</a>,请肆意点击.<br>参考2:<a href="http://wangjunle23.blog.163.com/blog/static/117838171201310139372912/" target="_blank" rel="noopener">中文原文传送门在此</a>,请肆意点击.<br>参考3:<a href="http://www.cnblogs.com/developersupport/p/webpage-performance-best-practices.html" target="_blank" rel="noopener">中文原文传送门在此</a>,请肆意点击.</p>
+<h2 id="1-尽量减少HTTP请求次数"><a href="#1-尽量减少HTTP请求次数" class="headerlink" title="1.尽量减少HTTP请求次数"></a>1.尽量减少HTTP请求次数</h2><p>什么是HTTP请求?每一次网页内容的获取,就是HTTP请求的具体展现.<br>不同浏览器的请求并发数是有限的,<a href="http://www.zhihu.com/question/20474326" target="_blank" rel="noopener">知乎</a>已经有大神解释这个问题了,拿去.<br>常见的优化有:</p>
+<ul>
+<li>合并文件(典型案例:雪碧图)</li>
+<li>图片Base64编码</li>
+</ul>
+<h2 id="2-减少DNS查找次数"><a href="#2-减少DNS查找次数" class="headerlink" title="2.减少DNS查找次数"></a>2.减少DNS查找次数</h2><p>访问域名的时候,DNS解析服务器就会返回这个域名对应的IP地址。DNS解析的过程同样也是需要时间的。一般情况下返回给定域名对应的IP地址会花费20到120毫秒的时间。而且在这个过程中浏览器什么都不会做直到DNS查找完毕。</p>
+<p>缓存DNS查找可以改善页面性能。这种缓存需要一个特定的缓存服务器，这种服务器一般属于用户的ISP提供商或者本地局域网控制，但是它同样会在用户使用的计算机上产生缓存。DNS信息会保留在操作系统的DNS缓存中（微软Windows系统中DNS Client Service）。大多数浏览器有独立于操作系统以外的自己的缓存。由于浏览器有自己的缓存记录，因此在一次请求中它不会受到操作系统的影响。</p>
+<ul>
+<li>问题来了: 子域的数量和DNS查询效率?</li>
+</ul>
+<h2 id="3-避免跳转"><a href="#3-避免跳转" class="headerlink" title="3.避免跳转"></a>3.避免跳转</h2><ul>
+<li>对搜索引擎影响大</li>
+<li>请求数变多</li>
+<li>用户体验变差</li>
+</ul>
+<h2 id="4-使用Ajax缓存"><a href="#4-使用Ajax缓存" class="headerlink" title="4.使用Ajax缓存"></a>4.使用Ajax缓存</h2><ul>
+<li><a href="2015/06/15/post-get/">Get和Post请求</a>,Get是可以被缓存的,没有被修改就返回304.</li>
+<li>不是所有的Ajax请求都需要缓存,否则和静态资源没区别</li>
+</ul>
+<h2 id="5-推迟加载内容"><a href="#5-推迟加载内容" class="headerlink" title="5.推迟加载内容"></a>5.推迟加载内容</h2><ul>
+<li>按需加载/懒加载</li>
+</ul>
+<h2 id="6-预加载"><a href="#6-预加载" class="headerlink" title="6.预加载"></a>6.预加载</h2><ul>
+<li>提升用户体验</li>
+</ul>
+<h2 id="7-减少DOM元素"><a href="#7-减少DOM元素" class="headerlink" title="7.减少DOM元素"></a>7.减少DOM元素</h2><ul>
+<li>DOM越多,查询越慢</li>
+</ul>
+<h2 id="8-划分子域"><a href="#8-划分子域" class="headerlink" title="8.划分子域"></a>8.划分子域</h2><ul>
+<li>每个域的并发请求数量限制</li>
+</ul>
+<h2 id="9-减少iframe数量"><a href="#9-减少iframe数量" class="headerlink" title="9.减少iframe数量"></a>9.减少iframe数量</h2><ul>
+<li>这货是阻塞加载</li>
+</ul>
+<h2 id="10-避免重定向"><a href="#10-避免重定向" class="headerlink" title="10.避免重定向"></a>10.避免重定向</h2><ul>
+<li>301 永久重定向, 即: 假如我要请求a.com,但是却跳到了b.com,a.com会发请求到b.com,浪费时间. 但是搜索引擎可以智能跳过.</li>
+<li>302 临时重定向, 即:页面找到,但是不在原始位置,重新查找.搜索引擎依然机械这一过程.</li>
+<li>这两个状态码对搜索引擎差别非常大,这两个行为增加了服务器的访问次数.</li>
+</ul>
+<h2 id="11-使用CDN"><a href="#11-使用CDN" class="headerlink" title="11.使用CDN"></a>11.使用CDN</h2><p>内容分发网络.</p>
+<h2 id="12-为文件头指定Expires或Cache-Control"><a href="#12-为文件头指定Expires或Cache-Control" class="headerlink" title="12.为文件头指定Expires或Cache-Control"></a>12.为文件头指定Expires或Cache-Control</h2><ul>
+<li>如过Apache开启了expire模块,浏览器发送资源请求的时候,服务器返回资源的同时,返回一个expire的http头,这是一个时间值,表示资源在本地的过期时间.这个值会存在本地,如果再返回来的值不超过规定时间,那么就一直使用这个资源不再发送HTTP请求</li>
+<li>Cache-Control,HTTP协议中常用头部之一,负责页面缓存机制.有更多的选项,处理方式也更多.</li>
+</ul>
+<h2 id="13-开启Gzip压缩"><a href="#13-开启Gzip压缩" class="headerlink" title="13.开启Gzip压缩"></a>13.开启Gzip压缩</h2><ul>
+<li>略</li>
+</ul>
+<h2 id="14-配置Etag-实体标签"><a href="#14-配置Etag-实体标签" class="headerlink" title="14.配置Etag(实体标签)"></a>14.配置Etag(实体标签)</h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/HTTP_ETag" target="_blank" rel="noopener">Entity Tag</a>,属于HTTP协议,受Web服务支持,它使用特殊的字符串来标识某个请求的版本.如果浏览器和服务器的Etag一致,那么该资源就没有改变,服务器便会发送回一个极短的响应，包含HTTP “304 未修改”的状态,前端使用本地缓存.生成ETag常用的方法包括对资源内容使用抗碰撞散列函数，使用最近修改的时间戳的哈希值，甚至只是一个版本号。为了避免使用过时的缓存数据，用于生成ETag的方法应保证（同时尽可能的实用）每一个ETag都是唯一的。</li>
+<li>这里有一个<a href="http://blog.csdn.net/eroswang/article/details/8302191" target="_blank" rel="noopener">浏览器缓存详解:expires,cache-control,last-modified,etag详细说明</a></li>
+</ul>
+<h2 id="15-尽早刷新输出缓冲"><a href="#15-尽早刷新输出缓冲" class="headerlink" title="15.尽早刷新输出缓冲"></a>15.尽早刷新输出缓冲</h2><ul>
+<li>待补充</li>
+</ul>
+<h2 id="16-使用GET来完成AJAX请求"><a href="#16-使用GET来完成AJAX请求" class="headerlink" title="16.使用GET来完成AJAX请求"></a>16.使用GET来完成AJAX请求</h2><ul>
+<li>因为可缓存</li>
+</ul>
+<h2 id="17-把样式表置于顶部"><a href="#17-把样式表置于顶部" class="headerlink" title="17.把样式表置于顶部"></a>17.把样式表置于顶部</h2><ul>
+<li>避免页面闪烁和重绘</li>
+</ul>
+<h2 id="18-避免使用CSS表达式（Expression）"><a href="#18-避免使用CSS表达式（Expression）" class="headerlink" title="18.避免使用CSS表达式（Expression）"></a>18.避免使用CSS表达式（Expression）</h2><ul>
+<li>吃性能</li>
+</ul>
+<h2 id="19-使用外部JavaScript和CSS"><a href="#19-使用外部JavaScript和CSS" class="headerlink" title="19.使用外部JavaScript和CSS"></a>19.使用外部JavaScript和CSS</h2><ul>
+<li>可缓存</li>
+<li>重用率价值大</li>
+<li>外部压缩价值大</li>
+</ul>
+<h2 id="20-压缩合并JavaScript和CSS"><a href="#20-压缩合并JavaScript和CSS" class="headerlink" title="20.压缩合并JavaScript和CSS"></a>20.压缩合并JavaScript和CSS</h2><ul>
+<li>略</li>
+</ul>
+<h2 id="21-用代替-import"><a href="#21-用代替-import" class="headerlink" title="21.用代替@import"></a>21.用<link>代替@import</h2><p>先来看看这两个的区别:<br>link:</p>
+<ul>
+<li>link是XHTML标签，除了加载CSS外，还可以定义RSS等其他事务；@import属于CSS范畴，只能加载CSS。</li>
+<li>link引用CSS时，在页面载入时同时加载；@import需要页面网页完全载入以后加载。</li>
+<li>link是XHTML标签，无兼容问题；@import是在CSS2.1提出的，低版本的浏览器不支持。</li>
+<li>link支持使用Javascript控制DOM去改变样式.</li>
+</ul>
+<p>@import:</p>
+<ul>
+<li>语法:@import url(style.css)</li>
+<li>增加请求</li>
+<li>不支持DOM操作</li>
+</ul>
+<h2 id="22-避免使用滤镜"><a href="#22-避免使用滤镜" class="headerlink" title="22.避免使用滤镜"></a>22.避免使用滤镜</h2><ul>
+<li>IE的东西, 略</li>
+</ul>
+<h2 id="23-把脚本置于页面底部"><a href="#23-把脚本置于页面底部" class="headerlink" title="23.把脚本置于页面底部"></a>23.把脚本置于页面底部</h2><ul>
+<li>略</li>
+</ul>
+<h2 id="24-剔除重复脚本"><a href="#24-剔除重复脚本" class="headerlink" title="24.剔除重复脚本"></a>24.剔除重复脚本</h2><ul>
+<li>略</li>
+</ul>
+<h2 id="25-减少DOM访问"><a href="#25-减少DOM访问" class="headerlink" title="25.减少DOM访问"></a>25.减少DOM访问</h2><ul>
+<li>DOM的操作很慢</li>
+</ul>
+<h2 id="26-开发智能事件处理程序"><a href="#26-开发智能事件处理程序" class="headerlink" title="26.开发智能事件处理程序"></a>26.开发智能事件处理程序</h2><ul>
+<li>合理使用冒泡/捕获</li>
+</ul>
+<h2 id="27-减小Cookie体积"><a href="#27-减小Cookie体积" class="headerlink" title="27.减小Cookie体积"></a>27.减小Cookie体积</h2><ul>
+<li>去除没有必要的cookie，如果网页不需要cookie就完全禁掉</li>
+<li>将cookie的大小减到最小</li>
+<li>注意cookie设置的domain级别，没有必要情况下不要影响到sub-domain</li>
+<li>设置合适的过期时间，比较长的过期时间可以提高响应速度</li>
+</ul>
+<h2 id="28-对于页面内容使用无coockie域名"><a href="#28-对于页面内容使用无coockie域名" class="headerlink" title="28.对于页面内容使用无coockie域名"></a>28.对于页面内容使用无coockie域名</h2><ul>
+<li>待补充</li>
+</ul>
+<h2 id="29-优化图像"><a href="#29-优化图像" class="headerlink" title="29.优化图像"></a>29.优化图像</h2><ul>
+<li>这个不用说了吧…</li>
+</ul>
+<h2 id="30-优化CSS-Spirite"><a href="#30-优化CSS-Spirite" class="headerlink" title="30.优化CSS Spirite"></a>30.优化CSS Spirite</h2><ul>
+<li>Spirite中水平排列图片，垂直排列会增加文件大小；</li>
+<li>Spirite中把颜色较近的组合在一起可以降低颜色数，理想状况是低于256色以便适用PNG8格式；</li>
+<li>不要在Spirite的图像中间留有较大空隙。这虽然不大会增加文件大小,但对于用户代理来说它需要更少的内存来把图片解压为像素地图。100×100的图片为1万像素，1000×1000就是100万像素。</li>
+</ul>
+<h2 id="31-不要在HTML中缩放图像"><a href="#31-不要在HTML中缩放图像" class="headerlink" title="31.不要在HTML中缩放图像"></a>31.不要在HTML中缩放图像</h2><p>我们来看看<a href="http://www.w3school.com.cn/tags/att_img_height-width.asp" target="_blank" rel="noopener">W3school给出的解释</a></p>
+<blockquote>
+<p>您是否见过当文档加载时其内容会显示不规律的移动。之所以会这样，是因为浏览器为了能够显示每一个加载的图像，而不断地重新调整页面的布局。浏览器通过下载并解析出图像的宽度和高度来决定图像的大小，然后就会在显示窗口中留出一个相应的矩形空间。然后浏览器就会调整页面的显示布局，以便把图像插入到显示当中。这同时也告诉我们，图像是独立的文件，它与源文件都分别是独立加载的。</p>
+<p>但是这不是一种最有效的显示文档的方法，因为浏览器在显示相邻的以及后面的文档内容之前，必须要检查每一个图像文件，并计算它们的屏幕空间。这可能会给文档的显示带来非常大的延迟，从而打断用户的阅读。</p>
+<p>对于创作者来说，一种更为有效的方法是通过 <code>&lt;img&gt;</code> 标签的 height 和 width 属性来指定图像的尺寸。这样的话，浏览器在下载图像之前就为其预留出了位置，从而可以加速文档的显示，还可以避免文档内容的移动。这两个属性都要求是整数值，并以像素为单位来表示图像尺寸。这两个属性在 <code>&lt;img&gt;</code> 标签中出现的次序并不重要。</p>
+</blockquote>
+<p>说了那么多,其实就是避免重绘</p>
+<h2 id="32-favicon-ico要小而且可缓存"><a href="#32-favicon-ico要小而且可缓存" class="headerlink" title="32.favicon.ico要小而且可缓存"></a>32.favicon.ico要小而且可缓存</h2><ul>
+<li>网站图标文件favicon.ico，不管你服务器有还是没有，浏览器都会去尝试请求这个图标。所以必须存在,以避免404</li>
+<li>文件尽量小，最好小于1k</li>
+<li>设置一个长的过期时间</li>
+</ul>
+<h2 id="33-保持单个内容小于25K"><a href="#33-保持单个内容小于25K" class="headerlink" title="33.保持单个内容小于25K"></a>33.保持单个内容小于25K</h2><ul>
+<li>这限制是因为iphone，他只能缓存小于25K，注意这是解压后的大小。所以单纯gzip不一定够用，精简文件工具要用上了。</li>
+</ul>
+<h2 id="34-打包组件成复合文本"><a href="#34-打包组件成复合文本" class="headerlink" title="34.打包组件成复合文本"></a>34.打包组件成复合文本</h2><ul>
+<li>略</li>
+</ul>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2015/06/16/www-or-not/" class="prev">上一篇：WWW or not?</a>
+    
+    
+    <a href="/2015/06/15/post-get/" class="next">下一篇：再看GET和POST</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2023 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>

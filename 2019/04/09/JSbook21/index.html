@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>JS红皮书读书笔记-21-Ajax与Comet | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="Ajax，是对 Asynchronous JavaScript + XML 的简写。
+Ajax 技术的核心是 XMLHttpRequest 对象（简称 XHR），这是由微软首先引入的一个特性，其他浏览器提供商后来都提供了相同的实现。在 XHR 出现之前，Ajax 式的通信必须借助一些 hack 手段">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-21-Ajax与Comet">
+  <meta property="og:site_name" content="测试狗">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch">
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch">
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch">
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch">
+  
+</head>
+</html>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://p.ipic.vip/b2t3my.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://p.ipic.vip/67o2jq.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-04-09T08:07:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-04-09
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-21-Ajax与Comet</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 1448 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest对象"><span class="toc-number">1.</span> <span class="toc-text">XMLHttpRequest对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XHR的用法"><span class="toc-number">1.1.</span> <span class="toc-text">XHR的用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Http头部信息"><span class="toc-number">1.2.</span> <span class="toc-text">Http头部信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Get请求"><span class="toc-number">1.3.</span> <span class="toc-text">Get请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post请求"><span class="toc-number">1.4.</span> <span class="toc-text">Post请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XMLHttpRequest2级"><span class="toc-number">2.</span> <span class="toc-text">XMLHttpRequest2级</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FormData"><span class="toc-number">2.1.</span> <span class="toc-text">FormData</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#超时设定"><span class="toc-number">2.2.</span> <span class="toc-text">超时设定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#overrideMimeType方法"><span class="toc-number">2.3.</span> <span class="toc-text">overrideMimeType方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进度事件"><span class="toc-number">3.</span> <span class="toc-text">进度事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#load事件"><span class="toc-number">3.1.</span> <span class="toc-text">load事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#progress事件"><span class="toc-number">3.2.</span> <span class="toc-text">progress事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域资源共享CORS"><span class="toc-number">4.</span> <span class="toc-text">跨域资源共享CORS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IE对CORS的实现"><span class="toc-number">4.1.</span> <span class="toc-text">IE对CORS的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他浏览器对CORS的实现"><span class="toc-number">4.2.</span> <span class="toc-text">其他浏览器对CORS的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Preflighted-Request"><span class="toc-number">4.3.</span> <span class="toc-text">Preflighted Request</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#带凭据的请求"><span class="toc-number">4.4.</span> <span class="toc-text">带凭据的请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跨浏览器的CORS"><span class="toc-number">4.5.</span> <span class="toc-text">跨浏览器的CORS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他跨域技术"><span class="toc-number">5.</span> <span class="toc-text">其他跨域技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#图像ping"><span class="toc-number">5.1.</span> <span class="toc-text">图像ping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP"><span class="toc-number">5.2.</span> <span class="toc-text">JSONP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comet"><span class="toc-number">5.3.</span> <span class="toc-text">Comet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器发送事件"><span class="toc-number">5.4.</span> <span class="toc-text">服务器发送事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebSockets"><span class="toc-number">5.5.</span> <span class="toc-text">WebSockets</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSE-与WebSockets"><span class="toc-number">5.6.</span> <span class="toc-text">SSE 与WebSockets</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全"><span class="toc-number">6.</span> <span class="toc-text">安全</span></a></li></ol>
+    </div>
+    
+    <p>Ajax，是对 Asynchronous JavaScript + XML 的简写。</p>
+<p>Ajax 技术的核心是 XMLHttpRequest 对象（简称 XHR），这是由微软首先引入的一个特性，其他浏览器提供商后来都提供了相同的实现。在 XHR 出现之前，Ajax 式的通信必须借助一些 hack 手段来实现，大多数是使用隐藏的框架或内嵌框架。XHR 为向服务器发送请求和解析服务器响应提供了流畅的接口。能够以异步方式从服务器取得更多信息，意味若用户单击后，可以不必刷新页面也能取得新数据。也就是说，可以使用 XHR 对象取得新数据，然后再通过 DOM 将新数据插入到页面中。</p>
+<p>另外，虽然名字中包含 XML 的成分，但 Ajax 通信与数据格式无关；这种技术就是无须刷新页面即可从服务器取得数据，但不一定是 XML 数据。</p>
+<h2 id="XMLHttpRequest对象"><a href="#XMLHttpRequest对象" class="headerlink" title="XMLHttpRequest对象"></a>XMLHttpRequest对象</h2><p>IE5 是第一款引入 XHR 对象的浏览器。在 IE5 中，XHR 对象是通过 MSXML 库中的一个 ActiveX对象实现的。因此，在  IE 中可能会遇到三种不同版本的  XHR 对象，即  MSXML2.XMLHttp 、MSXML2.XMLHttp.3.0 和 MXSML2.XMLHttp.6.0。</p>
+<p>针对旧版IE:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//适用于 IE7 之前的版本</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">arguments</span>.callee.activeXString != <span class="string">"string"</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> versions = [</span><br><span class="line">    <span class="string">"MSXML2.XMLHttp.6.0"</span>, </span><br><span class="line">    <span class="string">"MSXML2.XMLHttp.3.0"</span>, </span><br><span class="line">    <span class="string">"MSXML2.XMLHttp"</span></span><br><span class="line">    ], i, len;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>,len=versions.length; i &lt; len; i++)&#123; </span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> ActiveXObject(versions[i]); </span><br><span class="line">        <span class="built_in">arguments</span>.callee.activeXString = versions[i]; </span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (ex)&#123;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="built_in">arguments</span>.callee.activeXString);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>主流浏览器:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br></pre></td></tr></table></figure></p>
+<p>创建好了这个xhr对象, 才能进行后续的操作.</p>
+<h3 id="XHR的用法"><a href="#XHR的用法" class="headerlink" title="XHR的用法"></a>XHR的用法</h3><p>在使用 XHR 对象时，要调用的第一个方法是 open()，它接受 3 个参数：要发送的请求的类型（”get”、”post”等）、请求的 URL 和表示是否异步发送请求的布尔值。下面就是调用这个方法的例子。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"example.php"</span>, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<p>这行代码会启动一个针对 example.php 的 GET 请求。有关这行代码，需要说明两点：一是 URL 相对于执行代码的当前页面（当然也可以使用绝对路径）；二是调用 open()方法并不会真正发送请求，而只是启动一个请求以备发送。</p>
+<hr>
+<p><strong>同步请求</strong></p>
+<p>要发送特定的请求，还必须像下面这样调用 send()方法：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"example.txt"</span>, <span class="literal">false</span>); <span class="comment">//主要这个是同步请求</span></span><br><span class="line">xhr.send(<span class="literal">null</span>);	<span class="comment">//如不需要发送数据则不用传参数, 但是有些浏览器会报错, 故统一传null做兼容</span></span><br></pre></td></tr></table></figure>
+<p>由于这次请求是同步的，JavaScript 代码会等到服务器响应之后再继续执行。在收到响应后，响应的数据会自动填充 XHR 对象的属性，相关的属性简介如下:</p>
+<ul>
+<li>responseText：作为响应主体被返回的文本。</li>
+<li>responseXML：如果响应的内容类型是”text/xml”或”application/xml”，这个属性中将保存包含若响应数据的 XML DOM 文档。</li>
+<li>status：响应的 HTTP 状态。</li>
+<li>statusText：HTTP 状态的说明。</li>
+</ul>
+<p>同步请求常规用法:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr  = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">"GET"</span>,<span class="string">"api.txt"</span>,<span class="literal">false</span>);	<span class="comment">// 同步请求</span></span><br><span class="line">    xhr.send(<span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">if</span> ( (xhr.status &gt;=<span class="number">200</span> &amp;&amp; xhr.status&lt;<span class="number">300</span>) || xhr.status == <span class="number">304</span>) &#123;	<span class="comment">// 注意文明常用 xhr.status做检测, 比较靠谱</span></span><br><span class="line">      <span class="built_in">console</span>.log(xhr.statusText)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(xhr.status)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'api.txt get'</span>)	<span class="comment">// 验证同步执行</span></span><br></pre></td></tr></table></figure></p>
+<p>除非你硬要这么做, 否则开发中是几乎用不到ajax的同步请求.</p>
+<hr>
+<p><strong>异步请求</strong></p>
+<p>多数情况下，我们还是要发送异步请求，才能让JavaScript 继续执行而不必等待响应。此时，可以检测 XHR 对象的 readyState 属性，该属性表示请求/响应过程的当前活动阶段。这个属性可取的值如下:</p>
+<ul>
+<li>0：未初始化。尚未调用 open()方法。</li>
+<li>1：启动。已经调用 open()方法，但尚未调用 send()方法。</li>
+<li>2：发送。已经调用 send()方法，但尚未接收到响应。</li>
+<li>3：接收。已经接收到部分响应数据。</li>
+<li>4：完成。已经接收到全部响应数据，而且已经可以在客户端使用了。</li>
+</ul>
+<p>只要 readyState 属性的值由一个值变成另一个值，都会触发一次 readystatechange 事件。可以利用这个事件来检测每次状态变化后 readyState 的值。通常，我们只对 readyState 值为 4 的阶段感兴趣，因为这时所有数据都已经就绪。</p>
+<blockquote>
+<p>不过，必须在调用 open()之前指定 onreadystatechange 事件处理程序才能确保跨浏览器兼容性。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asyncFn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">     <span class="comment">// xhr.onreadystatechange为异步方法, 原本放在前面或者后面影响不大, 但是因为浏览器兼容, 建议放xhr.open前面</span></span><br><span class="line">     xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;	<span class="comment">//注意这里采用的是DOM0的写法, 保证最大兼容性</span></span><br><span class="line">       <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>)&#123; <span class="comment">// 没有用this代替xhr对象是因为兼容浏览器</span></span><br><span class="line">         <span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">"Request was unsuccessful: "</span> + xhr.status);</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;;</span><br><span class="line"></span><br><span class="line">     xhr.open(<span class="string">"get"</span>, <span class="string">"api.txt"</span>, <span class="literal">true</span>);</span><br><span class="line">     xhr.send(<span class="literal">null</span>);</span><br><span class="line">	<span class="comment">//xhr.abort(); //如果有必要, 是可以再响应接受到之前取消这次异步请求.</span></span><br><span class="line">   &#125;</span><br><span class="line">   asyncFn();</span><br><span class="line"></span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'api.txt get'</span>)	<span class="comment">//证明它先输出,说明异步</span></span><br></pre></td></tr></table></figure>
+<h3 id="Http头部信息"><a href="#Http头部信息" class="headerlink" title="Http头部信息"></a>Http头部信息</h3><p>每个 HTTP 请求和响应都会带有相应的头部信息，其中有的对开发人员有用，有的也没有什么用。</p>
+<p>XHR 对象也提供了操作这两种头部（即请求头部和响应头部）信息的方法。默认情况下，在发送 XHR 请求的同时，还会发送下列头部信息。</p>
+<ul>
+<li>Accept：浏览器能够处理的内容类型。</li>
+<li>Accept-Charset：浏览器能够显示的字符集。</li>
+<li>Accept-Encoding：浏览器能够处理的压缩编码。</li>
+<li>Accept-Language：浏览器当前设置的语言。</li>
+<li>Connection：浏览器与服务器之间连接的类型。</li>
+<li>Cookie：当前页面设置的任何 Cookie。</li>
+<li>Host：发出请求的页面所在的域 。</li>
+<li>Referer：发出请求的页面的 URI。注意，HTTP 规范将这个头部字段拼写错了，而为保证与规范一致，也只能将错就错了。（这个英文单词的正确拼法应该是 referrer。）</li>
+<li>User-Agent：浏览器的用户代理字符串。</li>
+</ul>
+<p>虽然不同浏览器实际发送的头部信息会有所不同，但以上列出的基本上是所有浏览器都会发送的。使用 xhr.setRequestHeader()方法可以设置自定义的请求头部信息。这个方法接受两个参数：头部字段的名称和头部字段的值。并且这个方法要在xhr.open和xhr.send之间使用: </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>)&#123; <span class="comment">// 没有用this代替xhr对象是因为兼容浏览器</span></span><br><span class="line">    <span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(xhr.responseText);</span><br><span class="line">		<span class="comment">// 获取响应头</span></span><br><span class="line">      <span class="keyword">var</span> hd = xhr.getResponseHeader(<span class="string">'userName'</span>);</span><br><span class="line">      <span class="keyword">var</span> hds = xhr.getAllResponseHeaders();</span><br><span class="line">      <span class="built_in">console</span>.log(hds)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Request was unsuccessful: "</span> + xhr.status);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"api.txt"</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">'userName'</span>, <span class="string">'testdog'</span>);  <span class="comment">//注意必须在中间, 但是建议开发者不要使用已有的字段名称, 防止后端获取失败, 因为有些浏览器禁止这么做</span></span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Get请求"><a href="#Get请求" class="headerlink" title="Get请求"></a>Get请求</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// get请求要注意的就是URL后面参数的问题, 保险起见, 参数值和参数名最好要用encodeURIComponent编码再传参</span></span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"URL?v1=1&amp;v2=2"</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="Post请求"><a href="#Post请求" class="headerlink" title="Post请求"></a>Post请求</h3><p>与GET请求差异的是, POST请求更被期望于把数据作为请求的主体提交到后端.那么xhr.open的第一个参数自然就要改成”post”.</p>
+<p>它可以传送任何你想发送到服务器的字符串.</p>
+<p>默认情况下，服务器对 POST 请求和提交 Web 表单的请求并不会一视同仁。因此，服务器端必须有程序来读取发送过来的原始数据，并从中解析出有用的部分。不过，我们可以使用 XHR 来模仿表单提交：首先将 Content-Type 头部信息设置为 application/x-www-form-urlencoded，也就是表单提交时的内容类型，其次是以适当的格式创建一个字符串。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">xhr.open(<span class="string">"post"</span>,url,<span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>); </span><br><span class="line">xhr.send(formData);<span class="comment">// formData必须经过序列化</span></span><br></pre></td></tr></table></figure>
+<p>这样就实现了ajax模拟表单提交.</p>
+<h2 id="XMLHttpRequest2级"><a href="#XMLHttpRequest2级" class="headerlink" title="XMLHttpRequest2级"></a>XMLHttpRequest2级</h2><p>鉴于 XHR 已经得到广泛接受，成为了事实标准，W3C 也若手制定相应的标准以规范其行为。XMLHttpRequest 1 级只是把已有的 XHR 对象的实现细节描述了出来。而 XMLHttpRequest 2 级则进一步发展了 XHR。并非所有浏览器都完整地实现了 XMLHttpRequest 2 级规范，但所有浏览器都实现了它规定的部分内容。</p>
+<h3 id="FormData"><a href="#FormData" class="headerlink" title="FormData"></a>FormData</h3><p>现代 Web 应用中频繁使用的一项功能就是表单数据的序列化，XMLHttpRequest 2 级为此定义了FormData 类型。FormData 为序列化表单以及创建与表单格式相同的数据（用于通过 XHR 传输）提供了便利。下面的代码创建了一个 FormData 对象，并向其中添加了一些数据。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> FormData(); </span><br><span class="line">data.append(<span class="string">"name"</span>, <span class="string">"Nicholas"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//也可以参照下面方式传参:</span></span><br><span class="line"><span class="keyword">var</span> data2 = <span class="keyword">new</span> FormData(<span class="built_in">document</span>.forms[<span class="number">0</span>]);	<span class="comment">//这样就更方便传递给xhr.send了.</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="超时设定"><a href="#超时设定" class="headerlink" title="超时设定"></a>超时设定</h3><p>虽然我们可以用xhr.status来判断是否提示请求错误, 但请求时间一旦过程, 显然有一个超时设定更为合理:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>)&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123; alert(xhr.responseText);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        alert(<span class="string">"Request was unsuccessful: "</span> + xhr.status);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ex)&#123;</span><br><span class="line">    <span class="comment">//假设由 ontimeout 事件处理程序处理</span></span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"timeout.php"</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.timeout = <span class="number">1000</span>; <span class="comment">//将超时设置为 1 秒钟（仅适用于 IE8+）</span></span><br><span class="line">xhr.ontimeout = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Request did not return in a second."</span>);</span><br><span class="line">&#125;;</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="overrideMimeType方法"><a href="#overrideMimeType方法" class="headerlink" title="overrideMimeType方法"></a>overrideMimeType方法</h3><p>Firefox 最早引入了 overrideMimeType()方法，用于重写 XHR 响应的 MIME 类型。这个方法后来也被纳入了 XMLHttpRequest 2 级规范。因为返回响应的 MIME 类型决定了 XHR 对象如何处理它，所以提供一种方法能够重写服务器返回的 MIME 类型是很有用的。</p>
+<p>比如，服务器返回的 MIME 类型是 text/plain，但数据中实际包含的是 XML。根据 MIME 类型， 即使数据是 XML，responseXML 属性中仍然是 null。通过调用 overrideMimeType()方法，可以保证把响应当作 XML 而非纯文本来处理。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = createXHR(); </span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"text.php"</span>, <span class="literal">true</span>); </span><br><span class="line">xhr.overrideMimeType(<span class="string">"text/xml"</span>); <span class="comment">//必须在send()方法之前</span></span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure></p>
+<p>这个例子强迫 XHR 对象将响应当作 XML 而非纯文本来处理。</p>
+<h2 id="进度事件"><a href="#进度事件" class="headerlink" title="进度事件"></a>进度事件</h2><p>Progress Events 规范是 W3C 的一个工作草案，定义了与客户端服务器通信有关的事件。这些事件最早其实只针对 XHR 操作，但目前也被其他 API 借鉴。有以下 6 个进度事件。</p>
+<ul>
+<li>loadstart：在接收到响应数据的第一个字节时触发。</li>
+<li>progress：在接收响应期间持续不断地触发。</li>
+<li>error：在请求发生错误时触发。</li>
+<li>abort：在因为调用 abort()方法而终止连接时触发。</li>
+<li>load：在接收到完整的响应数据时触发。</li>
+<li>loadend：在通信完成或者触发 error、abort 或 load 事件后触发。</li>
+</ul>
+<p>事件触发顺序正如上面排序.</p>
+<h3 id="load事件"><a href="#load事件" class="headerlink" title="load事件"></a>load事件</h3><p>load事件显然是用来代替readystatechange事件的, 这就意味着不用检查xhr.readyState, 也会有性能上提升.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//只要浏览器接收到服务器的响应，不管其状态如何，都会触发 load 事件。</span></span><br><span class="line">  <span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123;</span><br><span class="line">    alert(xhr.responseText);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">"Request was unsuccessful: "</span> + xhr.status);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"altevents.php"</span>, <span class="literal">true</span>); </span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="progress事件"><a href="#progress事件" class="headerlink" title="progress事件"></a>progress事件</h3><p>Mozilla 对 XHR 的另一个革新是添加了 progress 事件，这个事件会在浏览器接收新数据期间周期性地触发。而 onprogress 事件处理程序会接收到一个 event 对象，其 target 属性是 XHR 对象，但包含若三个额外的属性：lengthComputable、position 和 totalSize。其中，lengthComputable 是一个表示进度信息是否可用的布尔值，position 表示已经接收的字节数，totalSize 表示根据Content-Length 响应头部确定的预期字节数。有了这些信息，我们就可以为用户创建一个进度指示器:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123;</span><br><span class="line">    alert(xhr.responseText);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alert(<span class="string">"Request was unsuccessful: "</span> + xhr.status);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 注意这个事件也要和onload事件一样写在xhr.open前面保证兼容</span></span><br><span class="line">xhr.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> divStatus = <span class="built_in">document</span>.getElementById(<span class="string">"status"</span>); </span><br><span class="line">  <span class="keyword">if</span> (event.lengthComputable)&#123;</span><br><span class="line">    divStatus.innerHTML = <span class="string">"Received "</span> + event.position + <span class="string">" of "</span> + event.totalSize +<span class="string">" bytes"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"altevents.php"</span>, <span class="literal">true</span>); </span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="跨域资源共享CORS"><a href="#跨域资源共享CORS" class="headerlink" title="跨域资源共享CORS"></a>跨域资源共享CORS</h2><p>通过 XHR 实现 Ajax 通信的一个主要限制，来源于跨域安全策略。默认情况下，XHR 对象只能访问与包含它的页面位于同一个域中的资源。</p>
+<p>CORS（Cross-Origin Resource Sharing，跨源资源共享）是 W3C 的一个工作草案，定义了在必须访问跨源资源时，浏览器与服务器应该如何沟通。CORS 背后的基本思想: <strong>就是使用自定义的 HTTP 头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功，还是应该失败</strong>。</p>
+<blockquote>
+<p><strong>现代浏览器</strong>下的CORS看起来和Ajax代码没什么区别(实际也没啥区别), 它的关键点在于后端的支持. </p>
+</blockquote>
+<p>比如一个简单的使用 GET 或 POST 发送的请求，它没有自定义的头部，而主体内容是 text/plain。在发送该请求时，需要给它附加一个额外的 Origin 头部，其中包含请求页面的源信息（协议、域名和端口），以便服务器根据这个头部信息来决定是否给予响应。下面是 Origin 头部的一个示例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Origin: http://www.nczonline.net</span><br></pre></td></tr></table></figure></p>
+<p>如果服务器认为这个请求可以接受，就在 Access-Control-Allow-Origin 头部中回发相同的源信息（如果是公共资源，可以回发”*”）。例如:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://www.nczonline.net</span><br><span class="line">Access-Control-Allow-Credentials: true;    // 是否接受用户凭据</span><br></pre></td></tr></table></figure>
+<p>如果没有这个头部，或者有这个头部但源信息不匹配，浏览器就会驳回请求。正常情况下，浏览器会处理请求。注意，请求和响应都不包含 cookie 信息。</p>
+<h3 id="IE对CORS的实现"><a href="#IE对CORS的实现" class="headerlink" title="IE对CORS的实现"></a>IE对CORS的实现</h3><p>以下是 XDR 与 XHR 的一些不同之处。</p>
+<ul>
+<li>cookie 不会随请求发送，也不会随响应返回。</li>
+<li><strong>只能</strong>设置请求头部信息中的 Content-Type 字段。</li>
+<li>不能访问响应头部信息。</li>
+<li>只支持 GET 和 POST 请求。<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xdr = <span class="keyword">new</span> XDomainRequest(); </span><br><span class="line">xdr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(xdr.responseText);</span><br><span class="line">&#125;;</span><br><span class="line">xdr.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  alert(<span class="string">"An error occurred."</span>);</span><br><span class="line">&#125;;</span><br><span class="line">xdr.timeout = <span class="number">1000</span>; </span><br><span class="line">xdr.ontimeout = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Request took too long."</span>);</span><br><span class="line">&#125;;</span><br><span class="line">xdr.open(<span class="string">"get"</span>, <span class="string">"http://www.somewhere-else.com/page/"</span>); </span><br><span class="line">xdr.contentType = <span class="string">"application/x-www-form-urlencoded"</span>;  <span class="comment">//只能在这里设置</span></span><br><span class="line">xdr.send(<span class="string">"name1=value1&amp;name2=value2"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="其他浏览器对CORS的实现"><a href="#其他浏览器对CORS的实现" class="headerlink" title="其他浏览器对CORS的实现"></a>其他浏览器对CORS的实现</h3><p>现代浏览器都通过 XMLHttpRequest 对象实现了对 CORS 的原生支持。在尝试打开不同来源的资源时，无需额外编写代码就可以触发这个行为。要请求位于另一个域中的资源，使用标准的 XHR 对象并在 open()方法中传入绝对 URL 即可，例如：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest(); </span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> ((xhr.status &gt;= <span class="number">200</span> &amp;&amp; xhr.status &lt; <span class="number">300</span>) || xhr.status == <span class="number">304</span>)&#123; </span><br><span class="line">      alert(xhr.responseText);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      alert(<span class="string">"Request was unsuccessful: "</span> + xhr.status);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;    <span class="comment">// 如果要带用户凭据则设置这个属性</span></span><br><span class="line">xhr.open(<span class="string">"get"</span>, <span class="string">"http://www.somewhere-else.com/page/"</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<p>与 IE 中的 XDR 对象不同，通过跨域 XHR 对象可以访问 status 和 statusText 属性，而且还支持同步请求。跨域 XHR 对象也有一些限制，但为了安全这些限制是必需的。以下就是这些限制。</p>
+<ul>
+<li><strong>不能</strong>使用 setRequestHeader()设置自定义头部。</li>
+<li><strong>默认情况不能</strong>发送和接收 cookie。</li>
+<li>调用 getAllResponseHeaders()方法总会返回空字符串。</li>
+<li>由于无论同源请求还是跨源请求都使用相同的接口，因此对于本地资源，最好使用相对 URL，在访问远程资源时再使用绝对 URL。这样做能消除歧义，避免出现限制访问头部或本地 cookie 信息等问题。</li>
+</ul>
+<h3 id="Preflighted-Request"><a href="#Preflighted-Request" class="headerlink" title="Preflighted Request"></a>Preflighted Request</h3><p>字面理解可以翻译成: 预检请求.  </p>
+<p>书中讲得不是很好, 我按照自己的意思解释下:<br>浏览器的同源策略浏览器会限制从脚本发起的跨域HTTP请求，像XMLHttpRequest和Fetch都遵循同源策略。</p>
+<p>浏览器限制跨域请求一般有两种方式：</p>
+<ol>
+<li>浏览器限制发起跨域请求</li>
+<li>跨域请求可以正常发起，但是返回的结果被浏览器拦截了</li>
+</ol>
+<p>一般浏览器都是第二种方式限制跨域请求，那就是说请求已到达服务器，并有可能对数据库里的数据进行了操作，但是返回的结果被浏览器拦截了，那么我们就获取不到返回结果，这是一次失败的请求，但是可能对数据库里的数据产生了影响。</p>
+<p>为了防止这种情况的发生，规范要求，对这种可能对服务器数据产生副作用的HTTP请求方法，浏览器必须先使用OPTIONS方法发起一个预检请求，从而获知服务器是否允许该跨域请求：如果允许，就发送带数据的真实请求；如果不允许，则阻止发送带数据的真实请求。</p>
+<p> 点击此处可以查阅预检请求的触发条件: <a href="https://my.oschina.net/ososchina/blog/672556" target="_blank" rel="noopener">https://my.oschina.net/ososchina/blog/672556</a> </p>
+<h3 id="带凭据的请求"><a href="#带凭据的请求" class="headerlink" title="带凭据的请求"></a>带凭据的请求</h3><p>参考上面的代码, 分别前后端加代码</p>
+<ul>
+<li>前端: xhr.withCredentials = true</li>
+<li>后端: Access-Control-Allow-Credentials: true</li>
+</ul>
+<h3 id="跨浏览器的CORS"><a href="#跨浏览器的CORS" class="headerlink" title="跨浏览器的CORS"></a>跨浏览器的CORS</h3><p>做兼容处理, 代码略</p>
+<h2 id="其他跨域技术"><a href="#其他跨域技术" class="headerlink" title="其他跨域技术"></a>其他跨域技术</h2><p>在 CORS 出现以前，要实现跨域 Ajax 通信颇费一些周折。开发人员想出了一些办法，利用 DOM 中能够执行跨域请求的功能，在不依赖 XHR 对象的情况下也能发送某种请求。虽然 CORS 技术已经无处不在，但开发人员自已发明的这些技术仍然被广泛使用，毕竟这样不需要修改服务器端代码</p>
+<h3 id="图像ping"><a href="#图像ping" class="headerlink" title="图像ping"></a>图像ping</h3><p>上述第一种跨域请求技术是使用<img>标签。我们知道，一个网页可以从任何网页中加载图像，不用担心跨域不跨域。这也是在线广告跟踪浏览量的主要方式。正如第 13 章讨论过的，也可以动态地创建图像，使用它们的 onload 和 onerror 事件处理程序来确定是否接收到了响应。</p>
+<p>动态创建图像经常用于图像 Ping。图像 Ping 是与服务器进行简单、单向的跨域通信的一种方式。请求的数据是通过查询字符串形式发送的，而响应可以是任意内容，但通常是像素图或 204 响应。通过图像 Ping，浏览器得不到任何具体的数据，但通过侦听 load 和 error 事件，它能知道响应是什么时候接收到的。来看下面的例子。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">img.onload = img.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; alert(<span class="string">"Done!"</span>);</span><br><span class="line">&#125;;</span><br><span class="line">img.src = <span class="string">"http://www.example.com/test?name=Nicholas"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>这里创建了一个 Image 的实例，然后将 onload 和 onerror 事件处理程序指定为同一个函数。这样无论是什么响应，只要请求完成，就能得到通知。请求从设置 src 属性那一刻开始，而这个例子在请求中发送了一个 name 参数。</p>
+<p>图像 Ping 最常用于跟踪用户点击页面或动态广告曝光次数。图像 Ping 有两个主要的缺点，一是只能发送 GET 请求，二是无法访问服务器的响应文本。因此，图像 Ping 只能用于浏览器与服务器间的单向通信。</p>
+<h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>JSONP全称JSON with padding, 是应用 JSON 的一种新方法， 在后来的 Web 服务中非常流行。JSONP 看起来与 JSON 差不多.<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">callback(&#123;<span class="string">"name"</span>:<span class="string">"testdog"</span>&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>原理实际上就是先在网站页面上定义好某个函数, 然后用动态创建script标签的方式把函数句给添加进来, 达到立即执行的效果.</p>
+<p>值得注意的是你用的JSONP是从其他域请求回来的JS代码, 所以要注意安全问题.</p>
+<h3 id="Comet"><a href="#Comet" class="headerlink" title="Comet"></a>Comet</h3><p>Comet是Dojo创始人Alex Russell提出的一种叫法, 指的是一种跟高级的Ajax技术(有人称之为服务器推送).</p>
+<p>Ajax 是一种从页面向服务器请求数据的技术，而 Comet 则是一种服务器向页面推送数据的技术。Comet 能够让信息近乎实时地被推送到页面上，非常适合处理体育比赛的分数和股票报价。</p>
+<p>有两种实现 Comet 的方式：</p>
+<ul>
+<li>长轮询: 长轮询和传统轮询(也称为短轮询: 用定时器和xhr就能实现)相反.</li>
+<li>Http流: 就是浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据。</li>
+</ul>
+<p>我们依次给到长短轮询的代码</p>
+<hr>
+<p><strong>短轮询示例</strong>:</p>
+<p>shortpolling.html<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>短轮询(传统轮询)<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">ajax</span><span class="params">(configObj)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> c = configObj;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="actionscript">      xhr.open(c.method,c.url,<span class="literal">true</span>);</span></span><br><span class="line"><span class="actionscript">      xhr.send(<span class="literal">null</span>)</span></span><br><span class="line"><span class="actionscript">      xhr.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="handlebars"><span class="xml">        if ((xhr.status &gt;=200 &amp;&amp; xhr.status <span class="tag">&lt;<span class="name">300)||xhr.status</span> ==<span class="string">304)</span> &#123;</span></span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">var</span> res = <span class="built_in">JSON</span>.parse(xhr.responseText)</span></span><br><span class="line">          c.sucess &amp;&amp; c.sucess(res);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line">      ajax(&#123;</span><br><span class="line"><span class="actionscript">        method:<span class="string">'get'</span>,</span></span><br><span class="line"><span class="actionscript">        url:<span class="string">'shortpolling.php'</span>,</span></span><br><span class="line"><span class="actionscript">        sucess:<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(<span class="string">'服务器响应时间:'</span>,data.res)</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,1000)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>shortpolling.php<br><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">  header(<span class="string">'Content-type: text/json'</span>);</span><br><span class="line">  $arr = [</span><br><span class="line">      <span class="string">'res'</span> =&gt; time()</span><br><span class="line">  ];</span><br><span class="line">  <span class="keyword">echo</span> json_encode($arr);</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>长轮询示例</strong>:<br>longpolling.html<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>长轮询<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 实现一个长轮询</span></span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">ajax</span><span class="params">(configObj)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> c = configObj;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="actionscript">      xhr.open(c.method,c.url,<span class="literal">true</span>);</span></span><br><span class="line"><span class="actionscript">      xhr.send(<span class="literal">null</span>)</span></span><br><span class="line"><span class="actionscript">      xhr.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="handlebars"><span class="xml">        if ((xhr.status &gt;=200 &amp;&amp; xhr.status <span class="tag">&lt;<span class="name">300)||xhr.status</span> ==<span class="string">304)</span> &#123;</span></span></span></span><br><span class="line"><span class="actionscript">          <span class="keyword">var</span> res = (xhr.responseText)</span></span><br><span class="line">          c.sucess &amp;&amp; c.sucess(res);</span><br><span class="line"><span class="actionscript">          xhr.onload = <span class="literal">null</span>; <span class="comment">// 性能优化</span></span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="actionscript">      xhr.onerror = <span class="function"><span class="keyword">function</span><span class="params">(e)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(e)</span></span><br><span class="line">        c.fail &amp;&amp; c.fail(xhr,xhr.responseText,e);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">longPolling</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> _fn = <span class="built_in">arguments</span>.callee;</span></span><br><span class="line">      ajax(&#123;</span><br><span class="line"><span class="actionscript">        method:<span class="string">'get'</span>,</span></span><br><span class="line"><span class="javascript">        url:<span class="string">'longpolling.php?time='</span>+<span class="built_in">Date</span>.parse(<span class="keyword">new</span> <span class="built_in">Date</span>())/<span class="number">1000</span>,</span></span><br><span class="line"><span class="actionscript">        sucess:<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(data)</span></span><br><span class="line">          _fn();</span><br><span class="line">        &#125;,</span><br><span class="line"><span class="actionscript">        fail:<span class="function"><span class="keyword">function</span><span class="params">(xhr,responseText,err)</span></span>&#123;</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    longPolling();</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>longpolling.php<br><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">header(<span class="string">'Content-type: application/json'</span>);</span><br><span class="line">set_time_limit(<span class="number">0</span>);<span class="comment">//无限请求超时时间</span></span><br><span class="line">$time = $_GET[<span class="string">'time'</span>];</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">  sleep(<span class="number">3</span>);</span><br><span class="line">  $i = rand(<span class="number">0</span>,<span class="number">100</span>);</span><br><span class="line">  <span class="keyword">if</span> ($i &gt; <span class="number">0</span> &amp;&amp; $i &lt; <span class="number">50</span>) &#123;</span><br><span class="line">    $responseTime = time();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">echo</span> json_encode(<span class="keyword">array</span>(<span class="string">"resultNum"</span>=&gt;$i,<span class="string">"responseTime"</span>=&gt;$responseTime-$time));</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123; <span class="comment">// 模拟没有数据变化，将休眠 hold住连接</span></span><br><span class="line">    sleep(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">echo</span> json_encode(<span class="keyword">array</span>(<span class="string">"noData"</span>=&gt;<span class="keyword">true</span>));</span><br><span class="line">    <span class="keyword">exit</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>长短轮询的差别可以通过浏览器控制点的请求面板看他们之间的差异. </p>
+<hr>
+<p><strong>HTTP流</strong> :<br>http流是Comet的另一种实现, 它的思路就是若不断从服务器接收数据，readyState 的值会周期性地变为 3。当 readyState 值变为 3 时，responseText 属性中就会保存接收到的所有数据。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>HTTP Streaming Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>This example must be run on a server to work properly and will not work in IE.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">createStreamingClient</span><span class="params">(url, progress, finished)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest(),</span></span><br><span class="line">        received = 0;</span><br><span class="line"><span class="actionscript">      xhr.open(<span class="string">"get"</span>, url, <span class="literal">true</span>);</span></span><br><span class="line"><span class="actionscript">      xhr.onreadystatechange = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> result;</span></span><br><span class="line">        if (xhr.readyState == 3)&#123;</span><br><span class="line"><span class="actionscript">          <span class="comment">//get only the new data and adjust counter</span></span></span><br><span class="line">          result = xhr.responseText.substring(received);</span><br><span class="line">          received += result.length;</span><br><span class="line"><span class="actionscript">          <span class="comment">//call the progress callback</span></span></span><br><span class="line">          progress(result);</span><br><span class="line"><span class="actionscript">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>)&#123;</span></span><br><span class="line">          finished(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line"><span class="actionscript">      xhr.send(<span class="literal">null</span>);</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> xhr;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> client = createStreamingClient(<span class="string">"streaming.php"</span>, <span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      alert(<span class="string">"Received: "</span> + data);</span></span><br><span class="line"><span class="actionscript">    &#125;, <span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      alert(<span class="string">"Done!"</span>);</span></span><br><span class="line">    &#125;);</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="服务器发送事件"><a href="#服务器发送事件" class="headerlink" title="服务器发送事件"></a>服务器发送事件</h3><p>SSE（Server-Sent Events，服务器发送事件）是围绕只读 Comet 交互推出的 API 或者模式。SSE API 用于创建到服务器的单向连接，服务器通过这个连接可以发送任意数量的数据。服务器响应的 MIME 类型必须是 text/event-stream，而且是浏览器中的 JavaScript API 能解析格式输出。SSE 支持短轮询、长轮询和 HTTP 流，而且能在断开连接时自动确定何时重新连接。</p>
+<p>比起之前comet的实现, 操作自然更加简便.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="keyword">new</span> EventSource(<span class="string">"api.php"</span>)</span><br><span class="line">    src.onmessage=<span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> data = evt.data;</span><br><span class="line">      <span class="built_in">console</span>.log(data)</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<p>注意，传入的 URL 必须与创建对象的页面同源（相同的 URL 模式、域及端口）。EventSource 的实例有一个 readyState 属性，值为 0 表示正连接到服务器，值为 1 表示打开了连接，值为 2 表示关闭了连接。</p>
+<p>相关API:</p>
+<ul>
+<li>open：在建立连接时触发。</li>
+<li>message：在从服务器接收到新事件时触发。</li>
+<li>error：在无法建立连接时触发。</li>
+</ul>
+<p>默认情况下，EventSource 对象会保持与服务器的活动连接。如果连接断开，还会重新连接。这就意味若 SSE 适合长轮询和 HTTP 流。如果想强制立即断开连接并且不再重新连接，可以调用 close() 方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">src.close();</span><br></pre></td></tr></table></figure>
+<h3 id="WebSockets"><a href="#WebSockets" class="headerlink" title="WebSockets"></a>WebSockets</h3><p>Web Sockets 的目标是在一个单独的持久连接上提供全双工、双向通信。在 JavaScript 中创建了 Web Socket 之后，会有一个 HTTP 请求发送到浏览器以发起连接。<strong>在取得服务器响应后</strong>，建立的连接会从 HTTP 协议交换为 Web Socket 协议。(<code>ws://</code> or <code>wss://</code>)</p>
+<p>也就是说，使用标准的 HTTP 服务器无法实现 Web Sockets，只有支持这种协议的专门服务器才能正常工作。</p>
+<p>使用上述协议而非HTTP协议的好处是，能够在客户端和服务器之间发送非常少量的数据，而不必担心 HTTP 那样字节级的开销。由于传递的数据包很小，因此 Web Sockets 非常适合移动应用。毕竟对移动应用而言，带宽和网络延迟都是关键问题。</p>
+<ol>
+<li>Web Sockets API<br>要创建 Web Socket，先实例一个 WebSocket 对象并传入要连接的 URL：<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">"ws://www.example.com/server.php"</span>);<span class="comment">//必须是绝对地址</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意，必须给 WebSocket 构造函数传入绝对 URL。同源策略对 Web Sockets 不适用，因此可以通过它打开到任何站点的连接。</p>
+<p>实例化了 WebSocket 对象后，浏览器就会马上尝试创建连接。与 XHR 类似，WebSocket 也有一个表示当前状态的 readyState 属性。不过，这个属性的值与 XHR 并不相同，而是如下所示:</p>
+<ul>
+<li>WebSocket.OPENING (0)：正在建立连接。</li>
+<li>WebSocket.OPEN (1)：已经建立连接。</li>
+<li>WebSocket.CLOSING (2)：正在关闭连接。</li>
+<li>WebSocket.CLOSE (3)：已经关闭连接。</li>
+</ul>
+<p>WebSocket 没有 readystatechange 事件；不过，它有其他事件，对应若不同的状态。readyState 的值永远从 0 开始。<br>要关闭 Web Socket 连接，可以在任何时候调用 close()方法。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">socket.close(); <span class="comment">//readyState 的值立即变为 2（正在关闭），而在关闭连接后就会变成 3。</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>发送和接收数据</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="string">"Hello world!"</span>;</span><br><span class="line"><span class="keyword">var</span> message = &#123;</span><br><span class="line">  time: <span class="keyword">new</span> <span class="built_in">Date</span>(), </span><br><span class="line">  text: <span class="string">"Hello world!"</span>,</span><br><span class="line">  clientId: <span class="string">"asdfp8734rew"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">"ws://www.example.com/server.php"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送数据</span></span><br><span class="line">socket.send(data);  <span class="comment">//只接受纯文本数据</span></span><br><span class="line"><span class="comment">// socket.send(JSON.stringify(message)); // 复杂数据必须经过序列化 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//接受数据</span></span><br><span class="line">socket.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123; </span><br><span class="line">  <span class="keyword">var</span> data = event.data;  <span class="comment">//返回的也是字符串</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其他API</span></span><br><span class="line">socket.onopen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"Connection established."</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">socket.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  alert(<span class="string">"Connection error."</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">socket.onclose = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  alert(<span class="string">"Connection closed."</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="SSE-与WebSockets"><a href="#SSE-与WebSockets" class="headerlink" title="SSE 与WebSockets"></a>SSE 与WebSockets</h3><p>面对某个具体的用例，在考虑是使用 SSE 还是使用 Web Sockets 时，可以考虑如下几个因素。首先， 你是否有自由度建立和维护 Web Sockets 服务器？因为 Web Socket 协议不同于 HTTP，所以现有服务器不能用于 Web Socket 通信。SSE 倒是通过常规 HTTP 通信，因此现有服务器就可以满足需求。</p>
+<p>第二个要考虑的问题是到底需不需要双向通信。如果用例只需读取服务器数据（如比赛成绩），那么 SSE 比较容易实现。如果用例必须双向通信（如聊天室），那么 Web  Sockets 显然更好。别忘了，在不能选择 Web Sockets 的情况下，组合 XHR 和 SSE 也是能实现双向通信的</p>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><p>为确保通过 XHR 访问的 URL 安全，通行的做法就是验证发送请求者是否有权限访问相应的资源。有下列几种方式可供选择。</p>
+<ul>
+<li>要求以 SSL 连接来访问可以通过 XHR 请求的资源。</li>
+<li>要求每一次请求都要附带经过相应算法计算得到的验证码。请注意，下列措施对防范 CSRF 攻击不起作用。</li>
+<li>要求发送 POST 而不是 GET 请求——很容易改变。</li>
+<li>检查来源 URL 以确定是否可信——来源记录很容易伪造。</li>
+<li>基于 cookie 信息进行验证——同样很容易伪造。<br>XHR 对象也提供了一些安全机制，虽然表面上看可以保证安全，但实际上却相当不可靠。实际上， 前面介绍的 open()方法还能再接收两个参数：要随请求一起发送的用户名和密码。带有这两个参数的请求可以通过 SSL 发送给服务器上的页面, 但是要禁止明文get请求发送账号密码.</li>
+</ul>
+<hr>
+<p>本文完, 以下有两篇文章可以查阅</p>
+<p> <a href="https://segmentfault.com/a/1190000011549088" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011549088</a><br> <a href="https://segmentfault.com/a/1190000000423616#articleHeader8" target="_blank" rel="noopener">https://segmentfault.com/a/1190000000423616#articleHeader8</a> </p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/04/09/JSbook23/" class="prev">上一篇：JS红皮书读书笔记-23-离线应用与客户端存储</a>
+    
+    
+    <a href="/2019/04/09/JSbook22/" class="next">下一篇：JS红皮书读书笔记-22-高级技巧</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2023 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>

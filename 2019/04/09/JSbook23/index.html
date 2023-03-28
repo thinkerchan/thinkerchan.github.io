@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>JS红皮书读书笔记-23-离线应用与客户端存储 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="保持离线 Web 应用开发是 HTML5 的另一个重点。所谓离线 Web 应用，就是在设备不能上网的情况下仍然可以运行的应用。
+开发离线 Web 应用需要几个步骤。首先是确保应用知道设备是否能上网，以便下一步执行正确的操作。然后，应用还必须能访问一定的资源（图像、JavaScript、CSS 等），">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-23-离线应用与客户端存储">
+  <meta property="og:site_name" content="测试狗">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch">
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch">
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch">
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch">
+  
+</head>
+</html>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://p.ipic.vip/b2t3my.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://p.ipic.vip/67o2jq.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-04-09T08:08:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-04-09
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-23-离线应用与客户端存储</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 1448 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#离线检测"><span class="toc-number">1.</span> <span class="toc-text">离线检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用缓存"><span class="toc-number">2.</span> <span class="toc-text">应用缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据存储"><span class="toc-number">3.</span> <span class="toc-text">数据存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie"><span class="toc-number">3.1.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IE用户数据"><span class="toc-number">3.2.</span> <span class="toc-text">IE用户数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web存储机制"><span class="toc-number">3.3.</span> <span class="toc-text">Web存储机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IndexDB-WebSQL"><span class="toc-number">3.4.</span> <span class="toc-text">IndexDB/WebSQL</span></a></li></ol></li></ol>
+    </div>
+    
+    <p>保持离线 Web 应用开发是 HTML5 的另一个重点。所谓离线 Web 应用，就是在设备不能上网的情况下仍然可以运行的应用。</p>
+<p>开发离线 Web 应用需要几个步骤。首先是确保应用知道设备是否能上网，以便下一步执行正确的操作。然后，应用还必须能访问一定的资源（图像、JavaScript、CSS 等），只有这样才能正常工作。最后，必须有一块本地空间用于保存数据，无论能否上网都不妨碍读写。HTML5 及其相关的 API 让开发离线应用成为现实。</p>
+<h2 id="离线检测"><a href="#离线检测" class="headerlink" title="离线检测"></a>离线检测</h2><p>HTML5提供了这个API检测设备是否离线:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> isOn = navigator.onLine;	<span class="comment">// true or false</span></span><br></pre></td></tr></table></figure>
+<p>除 navigator.onLine 属性之外，为了更好地确定网络是否可用，HTML5 还定义了两个事件：<code>online</code> 和 <code>offline</code>。当网络从离线变为在线或者从在线变为离线时，分别触发这两个事件。这两个事件在 window 对象上触发。<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 只有网络状况发生变化的时候才会触发以下事件</span></span><br><span class="line">windw.addEventListener(<span class="string">"online"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Online"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">windw.addEventListener(<span class="string">"offline"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Offline"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="应用缓存"><a href="#应用缓存" class="headerlink" title="应用缓存"></a>应用缓存</h2><p>看 <a href="http://www.w3school.com.cn/html5/html_5_app_cache.asp" target="_blank" rel="noopener">这篇文章</a>能够更清晰了解html5 appcache</p>
+<h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie最初是用来在客户端储存会话信息的。该标准要求服务器对任意HTTP请求发送Set-Cookie HTTP头作为相应的一部分，其中包含会话的信息。例如：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-type: text/html</span><br><span class="line">Set-Cookie: name=value</span><br><span class="line">Other-header: other-header-value</span><br></pre></td></tr></table></figure></p>
+<p>这里就设置了一个以name为名称，value为值的一个cookie。<br>浏览器会储存这样的会话信息。并在这之后通过为每一个请求添加Cookie HTTP头部将信息发送回服务器：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /index.html HTTP/1.1</span><br><span class="line">Cookie: name=value</span><br><span class="line">Other-header: other-header-value</span><br></pre></td></tr></table></figure></p>
+<p>这个信息对于服务器来说就可以唯一验证请求的身份</p>
+<p><strong>限制</strong><br>cookie在性质上是绑定在特定域名下的。当设定了一个cookie，再给创建它的域名发送请求时都会包含这个cookie，而发向其他域的请求中并不会包含这个cookie。这个限制保证了cookie只能让批准的接受者访问。<br>每个域的cookie总数是有限的，各浏览器不同，最小的规定一个域有30个cookie，大小一般不超过4095B。<br>cookie的构成<br>cookie由浏览器保存的一下几块信息构成：</p>
+<ul>
+<li>名称：一个唯一确定cookie的名称</li>
+<li>值：储存在cookie中的字符串值</li>
+<li>域：这个cookie对哪个域有效，如果这个域包含子域，那对子域同样有有效。如果设定是没有明确指定，这个值会被认为是设置cookie的那个域</li>
+<li>路径：用于指定向域中的哪个路径发送cookie，例如，你可以指定cookie只发送到<a href="http://www.baidu.com/img，那再访问www.baidu.com时就不会发送cookie。及时它们同域" target="_blank" rel="noopener">www.baidu.com/img，那再访问www.baidu.com时就不会发送cookie。及时它们同域</a></li>
+<li>失效时间：cookie应该被删除的时间戳，默认浏览器会话结束就删除</li>
+<li>安全标志：指定后，cookie只有在使用SSL连接时才会发送到服务器</li>
+</ul>
+<p>看例子:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Content-type: text/html</span><br><span class="line">Set-Cookie: name=value; expires=Mon, 22-Jan-07 07:10:24 GMT; domain=.wrox.com path=/; secure</span><br><span class="line">Other-header: other-header-value</span><br></pre></td></tr></table></figure></p>
+<p><strong>JS中的cookie</strong><br>可以通过document.cookie返回如下格式的字符串:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">document.cookie;	//name1=value1;name2=value2;name3=value3</span><br></pre></td></tr></table></figure></p>
+<p>js中设置删除cookie不是很好操作, 我给出一个封装好的demo:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> CookieUtil = &#123;</span><br><span class="line">  <span class="keyword">get</span>: function (name)&#123;</span><br><span class="line">    <span class="keyword">var</span> cookieName = <span class="built_in">encodeURIComponent</span>(name) + <span class="string">"="</span>,</span><br><span class="line">      cookieStart = <span class="built_in">document</span>.cookie.indexOf(cookieName),</span><br><span class="line">      cookieValue = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (cookieStart &gt; <span class="number">-1</span>)&#123;</span><br><span class="line">      <span class="keyword">var</span> cookieEnd = <span class="built_in">document</span>.cookie.indexOf(<span class="string">";"</span>, cookieStart);</span><br><span class="line">      <span class="keyword">if</span> (cookieEnd == <span class="number">-1</span>)&#123;</span><br><span class="line">        cookieEnd = <span class="built_in">document</span>.cookie.length;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      cookieValue = <span class="built_in">decodeURIComponent</span>(<span class="built_in">document</span>.cookie.substring(cookieStart + cookieName.length, cookieEnd));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cookieValue;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>: function (name, value, expires, path, domain, secure) &#123;</span><br><span class="line">    <span class="keyword">var</span> cookieText = <span class="built_in">encodeURIComponent</span>(name) + <span class="string">"="</span> +</span><br><span class="line">      <span class="built_in">encodeURIComponent</span>(value);</span><br><span class="line">    <span class="keyword">if</span> (expires <span class="keyword">instanceof</span> <span class="built_in">Date</span>) &#123;</span><br><span class="line">      cookieText += <span class="string">"; expires="</span> + expires.toGMTString();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (path) &#123;</span><br><span class="line">      cookieText += <span class="string">"; path="</span> + path;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (domain) &#123;</span><br><span class="line">      cookieText += <span class="string">"; domain="</span> + domain;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (secure) &#123;</span><br><span class="line">      cookieText += <span class="string">"; secure"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">document</span>.cookie = cookieText;</span><br><span class="line">  &#125;,</span><br><span class="line">  unset: <span class="function"><span class="keyword">function</span> (<span class="params">name, path, domain, secure</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.set(name, <span class="string">""</span>, <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">0</span>), path, domain, secure);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">CookieUtil.set(<span class="string">"book"</span>, <span class="string">"Professional JavaScript"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(CookieUtil.get(<span class="string">"book"</span>));</span><br><span class="line">CookieUtil.unset(<span class="string">"book"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(CookieUtil.get(<span class="string">"book"</span>));</span><br></pre></td></tr></table></figure></p>
+<p><strong>子Cookie</strong><br>子Cookie方案的提出实际上是为了避免单域名对cookie个数的限制, 它的思想就是在单个cookie中存更多的名值对, 不过写这个笔记的时候, 市场上的主流是现代浏览器(谷歌内核), 没有单域名cookie个数限制, 这里不再讲解.</p>
+<p><strong>关于Cookie的一些说明</strong></p>
+<ul>
+<li>cookie存储的数据不宜过多: 信息越多, 后端响应越慢</li>
+<li>不要存敏感信息, 否则XSS泄露麻烦</li>
+</ul>
+<h3 id="IE用户数据"><a href="#IE用户数据" class="headerlink" title="IE用户数据"></a>IE用户数据</h3><p>略, 不要用</p>
+<h3 id="Web存储机制"><a href="#Web存储机制" class="headerlink" title="Web存储机制"></a>Web存储机制</h3><p>目前来说主要是localStorage和sessionStorage. 书中有些内容以及不适合现在, 看 <a href="http://www.w3school.com.cn/html5/html_5_webstorage.asp" target="_blank" rel="noopener">这个例子</a>更简洁 </p>
+<h3 id="IndexDB-WebSQL"><a href="#IndexDB-WebSQL" class="headerlink" title="IndexDB/WebSQL"></a>IndexDB/WebSQL</h3><p>书上只介绍了indexDB , 我们看 <a href="https://sdk.cn/news/7107" target="_blank" rel="noopener">这篇文章</a> , 更加直观介绍两种方案.</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/04/09/JSbook24/" class="prev">上一篇：JS红皮书读书笔记-24-最佳实践</a>
+    
+    
+    <a href="/2019/04/09/JSbook21/" class="next">下一篇：JS红皮书读书笔记-21-Ajax与Comet</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2023 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>

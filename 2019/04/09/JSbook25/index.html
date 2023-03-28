@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>JS红皮书读书笔记-25-新兴的API | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="requestAnimationFrame早期动画循环JS的动画很长时间以来都是使用计时器setInterval来达成的。就像这样：(function()&amp;#123;    function updateAnimations()&amp;#123;        doAnimation1();       ">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="JS红皮书读书笔记-25-新兴的API">
+  <meta property="og:site_name" content="测试狗">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch">
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch">
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch">
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch">
+  
+</head>
+</html>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://p.ipic.vip/b2t3my.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://p.ipic.vip/67o2jq.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2019-04-09T08:10:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2019-04-09
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">JS红皮书读书笔记-25-新兴的API</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 1448 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#requestAnimationFrame"><span class="toc-number">1.</span> <span class="toc-text">requestAnimationFrame</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#早期动画循环"><span class="toc-number">1.1.</span> <span class="toc-text">早期动画循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环间隔的问题"><span class="toc-number">1.2.</span> <span class="toc-text">循环间隔的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Page-Visibility-API"><span class="toc-number">2.</span> <span class="toc-text">Page Visibility API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Geolocation-API"><span class="toc-number">3.</span> <span class="toc-text">Geolocation API</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#File-API"><span class="toc-number">4.</span> <span class="toc-text">File API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FileReader类型"><span class="toc-number">4.1.</span> <span class="toc-text">FileReader类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取部分内容"><span class="toc-number">4.2.</span> <span class="toc-text">读取部分内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象URL"><span class="toc-number">4.3.</span> <span class="toc-text">对象URL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取拖放的文件"><span class="toc-number">4.4.</span> <span class="toc-text">读取拖放的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用XHR上传文件"><span class="toc-number">4.5.</span> <span class="toc-text">使用XHR上传文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web计时"><span class="toc-number">5.</span> <span class="toc-text">Web计时</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WebWorkers"><span class="toc-number">6.</span> <span class="toc-text">WebWorkers</span></a></li></ol>
+    </div>
+    
+    <h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h2><h3 id="早期动画循环"><a href="#早期动画循环" class="headerlink" title="早期动画循环"></a>早期动画循环</h3><p>JS的动画很长时间以来都是使用计时器setInterval来达成的。就像这样：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">updateAnimations</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        doAnimation1();</span><br><span class="line">        doAnimation2();</span><br><span class="line">    &#125;</span><br><span class="line">    setInterval(updateAnimations, <span class="number">100</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure></p>
+<h3 id="循环间隔的问题"><a href="#循环间隔的问题" class="headerlink" title="循环间隔的问题"></a>循环间隔的问题</h3><p>但是这样使用是有问题的，最大的问题就是时间间隔的问题。不能太长，否则看起来就会卡卡的，也不能太短，更新速度超过了屏幕的刷新速度会造成丢帧。</p>
+<p>而且浏览器的计时器其实精度是有限的，精度最高的chrome为4ms。且在页面没有显示在屏幕上的时候，大多数浏览器会对计时器的运行频率做出限制。<br>这样的动画绘制机制就造成了绘制下一帧动画的时机我们并不能准确掌握。最好的结果应该是正好在屏幕刷新的那一刻绘制下一帧，也就是动画绘制的速度与电脑屏幕刷新速度一致。</p>
+<p>于是Mozilla就带头提出了requestAnimationFrame这个API, 如今这个API已经被标准化:<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateProgress</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">"status"</span>);</span><br><span class="line">    div.style.width = (<span class="built_in">parseInt</span>(div.style.width, <span class="number">10</span>) + <span class="number">5</span>) + <span class="string">"%"</span>;</span><br><span class="line">    <span class="keyword">if</span> (div.style.width != <span class="string">"100%"</span>)&#123;</span><br><span class="line">        requestAnimationFrame(updateProgress);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">requestAnimationFrame(updateProgress);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Page-Visibility-API"><a href="#Page-Visibility-API" class="headerlink" title="Page Visibility API"></a>Page Visibility API</h2><p>用户是否真的正在与页面交互是我们需要知道的。如果页面最小化了或隐藏起来了，那么有些功能是可以停下来的。API由3部分组成：</p>
+<ul>
+<li>document.hidden：表示页面是否隐藏的布尔值</li>
+<li>document.visibilityState：页面在后台，页面在前台，页面隐藏但正在被预览，页面在屏幕外执行预渲染处理</li>
+<li>visibilitychange：在可见和不可见转换时触发的事件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleVisibilityChange</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> output = <span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>),</span><br><span class="line">        msg;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.hidden || <span class="built_in">document</span>.msHidden || <span class="built_in">document</span>.webkitHidden)&#123;</span><br><span class="line">        msg = <span class="string">"Page is now hidden. "</span> + (<span class="keyword">new</span> <span class="built_in">Date</span>()) + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        msg = <span class="string">"Page is now visible. "</span> + (<span class="keyword">new</span> <span class="built_in">Date</span>()) + <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    output.innerHTML += msg;</span><br><span class="line">&#125;</span><br><span class="line">EventUtil.addHandler(<span class="built_in">document</span>, <span class="string">"msvisibilitychange"</span>, handleVisibilityChange);</span><br><span class="line">EventUtil.addHandler(<span class="built_in">document</span>, <span class="string">"webkitvisibilitychange"</span>, handleVisibilityChange);</span><br></pre></td></tr></table></figure>
+<p>可以看到<a href="https://www.duowan.com/" target="_blank" rel="noopener">多玩官网</a> 就使用了上面相应的api, 页面没有显示的时候, title会改变.</p>
+<h2 id="Geolocation-API"><a href="#Geolocation-API" class="headerlink" title="Geolocation API"></a>Geolocation API</h2><p>这个API让JS可以通过浏览器来获取用户的地理位置。当然，这是需要获得用户同意的。这个API在浏览器中的实现是navigator.geolocation。这个对象有3个方法：</p>
+<ul>
+<li>getCurrentPosition(successFn,failFn,configObj): 通常用这个API获取经纬度</li>
+<li>watchPosition: getCurrentPosition的定时版本</li>
+<li>clearWatch: 取消监控</li>
+</ul>
+<h2 id="File-API"><a href="#File-API" class="headerlink" title="File API"></a>File API</h2><p>不能直接访问用户计算机中的文件，一直都是 Web 应用开发中的一大障碍。2000 年以前，处理文件的唯一方式就是在表单中加入<input type="file">字段，仅此而已。File API（文件 API）的宗旨是为 Web 开发人员提供一种安全的方式，以便在客户端访问用户计算机中的文件，并更好地对这些文件执行操作。</p>
+<p>File API 在表单中的文件输入字段的基础上，又添加了一些直接访问文件信息的接口。HTML5 在DOM 中为文件输入元素添加了一个 files 集合。在通过文件输入字段选择了一或多个文件时，files 集合中将包含一组 File 对象，每个 File 对象对应若一个文件。每个 File 对象都有下列只读属性。</p>
+<ul>
+<li>name：本地文件系统中的文件名。</li>
+<li>size：文件的字节大小。</li>
+<li>type：字符串，文件的 MIME 类型。</li>
+<li>lastModifiedDate：字符串，文件上一次被修改的时间（只有 Chrome 实现了这个属性）。</li>
+</ul>
+<p>举个例子，通过侦听 change 事件并读取 files 集合就可以知道选择的每个文件的信息：<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> filesList = <span class="built_in">document</span>.getElementById(<span class="string">"files-list"</span>);</span><br><span class="line">    EventUtil.addHandler(filesList, <span class="string">"change"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> info = <span class="string">""</span>,</span><br><span class="line">            output = <span class="built_in">document</span>.getElementById(<span class="string">"output"</span>),</span><br><span class="line">            files = EventUtil.getTarget(event).files,</span><br><span class="line">            i = <span class="number">0</span>,</span><br><span class="line">            len = files.length;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i &lt; len)&#123;</span><br><span class="line">            info += files[i].name + <span class="string">" ("</span> + files[i].type + <span class="string">", "</span> + files[i].size + <span class="string">" bytes)&lt;br&gt;"</span>;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        output.innerHTML = info;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>上面的例子只是简单读取了文件的信息, 但是File API还能做得更多, FileReader能读取文件中的数据.</p>
+<h3 id="FileReader类型"><a href="#FileReader类型" class="headerlink" title="FileReader类型"></a>FileReader类型</h3><p>FileReader 类型实现的是一种<strong>异步文件读取机制</strong>。可以把FileReader 想象成XMLHttpRequest， 区别只是它读取的是文件系统，而不是远程服务器。为了读取文件中的数据，FileReader 提供了如下几个方法。</p>
+<ul>
+<li>readAsText(file,encoding)：以纯文本形式读取文件，将读取到的文本保存在 result 属性中。第二个参数用于指定编码类型，是可选的。</li>
+<li>readAsDataURL(file)：读取文件并将文件以数据 URI 的形式保存在 result 属性中。</li>
+<li>readAsBinaryString(file)：读取文件并将一个字符串保存在 result 属性中，字符串中的每个字符表示一字节。</li>
+<li>readAsArrayBuffer(file) ：读取文件并将一个包含文件内容的 ArrayBuffer 保存在result 属性中。</li>
+</ul>
+<p>我们来看这个例子:<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>File API Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"EventUtil.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>This page is a demonstration of the File API. This works in the latest versions of all major browsers, but you may need to place this file on a web server to get it to work.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Select a file below.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"files-list"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> filesList = <span class="built_in">document</span>.getElementById(<span class="string">"files-list"</span>);</span></span><br><span class="line"><span class="actionscript">      EventUtil.addHandler(filesList, <span class="string">"change"</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> info = <span class="string">""</span>,</span></span><br><span class="line"><span class="javascript">        output = <span class="built_in">document</span>.getElementById(<span class="string">"output"</span>),</span></span><br><span class="line"><span class="javascript">        progress = <span class="built_in">document</span>.getElementById(<span class="string">"progress"</span>),</span></span><br><span class="line">        files = EventUtil.getTarget(event).files,</span><br><span class="line"><span class="actionscript">        type = <span class="string">"default"</span>,</span></span><br><span class="line"><span class="actionscript">        reader = <span class="keyword">new</span> FileReader();</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (<span class="regexp">/image/</span>.test(files[<span class="number">0</span>].type))&#123;</span></span><br><span class="line">          reader.readAsDataURL(files[0]);</span><br><span class="line"><span class="actionscript">          type = <span class="string">"image"</span>;</span></span><br><span class="line"><span class="actionscript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">          reader.readAsText(files[0]);</span><br><span class="line"><span class="actionscript">          type = <span class="string">"text"</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">        reader.onerror = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">          output.innerHTML = <span class="string">"Could not read file, error code is "</span> + reader.error.code;</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">        reader.onprogress = <span class="function"><span class="keyword">function</span><span class="params">(event)</span></span>&#123;</span></span><br><span class="line">          if (event.lengthComputable)&#123;</span><br><span class="line"><span class="actionscript">            progress.innerHTML = event.loaded + <span class="string">"/"</span> + event.total;</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">        reader.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">          <span class="keyword">var</span> html = <span class="string">""</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">          <span class="keyword">switch</span>(type)&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">case</span> <span class="string">"image"</span>:</span></span><br><span class="line"><span class="actionscript">            html = <span class="string">"&lt;img src=\""</span> + reader.result + <span class="string">"\"&gt;"</span>;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">break</span>;</span></span><br><span class="line"><span class="actionscript">            <span class="keyword">case</span> <span class="string">"text"</span>:</span></span><br><span class="line">            html = reader.result;</span><br><span class="line"><span class="actionscript">            <span class="keyword">break</span>;</span></span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">          output.innerHTML = html;</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"progress"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">pre</span> <span class="attr">id</span>=<span class="string">"output"</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="读取部分内容"><a href="#读取部分内容" class="headerlink" title="读取部分内容"></a>读取部分内容</h3><p>略, 使用场景比较少.</p>
+<h3 id="对象URL"><a href="#对象URL" class="headerlink" title="对象URL"></a>对象URL</h3><p>对象 URL 也被称为 blob URL，指的是引用保存在 File 或 Blob 中数据的 URL。使用对象 URL 的好处是可以不必把文件内容读取到 JavaScript 中而直接使用文件内容。为此，只要在需要文件内容的地方提供对象 URL 即可。</p>
+<p>使用方法:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.URL.createObjectURL(blob);		<span class="comment">//传入file对象或者blob</span></span><br></pre></td></tr></table></figure>
+<p>当我们用第三方域名的图片(绝对地址)再canvas.toDataURL导出base64的时候, 浏览器会提示canvas被污染. 虽然我们可以对图片设置<code>crossOrigin</code>属性, 但还是存在兼容问题.</p>
+<p>此时利用window.URL.createObjectURL就能解决上述问题:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> imgsrc = <span class="string">'https://thinkerchan.com/images/avatar.jpg'</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">getBase64</span><span class="params">(img)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> can = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span></span><br><span class="line">      can.width = 200;</span><br><span class="line">      can.height = 200;</span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> ctx= can.getContext(<span class="string">'2d'</span>);</span></span><br><span class="line">      ctx.drawImage(img,0,0,200,200);</span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> base64 = can.toDataURL(<span class="string">"image/jpeg"</span>,<span class="number">0.6</span>);</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(base64)</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> base64;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">normalImg</span><span class="params">(src)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span></span><br><span class="line">      img.src =src;</span><br><span class="line"><span class="actionscript">      img.crossOrigin = <span class="string">''</span>;</span></span><br><span class="line"><span class="actionscript">      img.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line">        demo.src = getBase64(img);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    normalImg(imgsrc); <span class="comment">// safari报错</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">getImageBlob</span><span class="params">(url, cb)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> xhr          = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="actionscript">      xhr.open(<span class="string">"get"</span>, url, <span class="literal">true</span>);</span></span><br><span class="line"><span class="actionscript">      xhr.responseType = <span class="string">"blob"</span>;</span></span><br><span class="line"><span class="actionscript">      xhr.onload       = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line">        if (xhr.status == 200) &#123;</span><br><span class="line">          cb &amp;&amp;cb(xhr.response);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      xhr.send();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    getImageBlob(imgsrc, <span class="function"><span class="keyword">function</span><span class="params">(res)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> src = <span class="built_in">window</span>.URL.createObjectURL(res);  <span class="comment">//利用这个能完美解决报错</span></span></span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span></span><br><span class="line">      img.src =src</span><br><span class="line"><span class="actionscript">      img.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line">        demo.src = getBase64(img);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="读取拖放的文件"><a href="#读取拖放的文件" class="headerlink" title="读取拖放的文件"></a>读取拖放的文件</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>File API Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"EventUtil.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>This page is a demonstration of the File API with Drag and Drop. This works in the latest versions of all major browsers, but you may need to place this file on a web server to get it to work.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"droptarget"</span> <span class="attr">style</span>=<span class="string">"width: 500px; height: 200px; background: silver"</span>&gt;</span></span><br><span class="line">    Drop some files here</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">var</span> droptarget = <span class="built_in">document</span>.getElementById(<span class="string">"droptarget"</span>);</span></span><br><span class="line"><span class="actionscript">      <span class="function"><span class="keyword">function</span> <span class="title">handleEvent</span><span class="params">(event)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> info = <span class="string">""</span>,</span></span><br><span class="line"><span class="javascript">          output = <span class="built_in">document</span>.getElementById(<span class="string">"output"</span>),</span></span><br><span class="line">          files, i, len;</span><br><span class="line">        EventUtil.preventDefault(event);</span><br><span class="line"><span class="actionscript">        <span class="keyword">if</span> (event.type == <span class="string">"drop"</span>)&#123;</span></span><br><span class="line">          files = event.dataTransfer.files;</span><br><span class="line">          i = 0;</span><br><span class="line">          len = files.length;</span><br><span class="line"><span class="actionscript">          <span class="keyword">while</span> (i &lt; len)&#123;</span></span><br><span class="line"><span class="actionscript">            info += files[i].name + <span class="string">" ("</span> + files[i].type + <span class="string">", "</span> + files[i].size + <span class="string">" bytes)&lt;br&gt;"</span>;</span></span><br><span class="line">            i++;</span><br><span class="line">          &#125;</span><br><span class="line">          output.innerHTML = info;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"><span class="actionscript">      EventUtil.addHandler(droptarget, <span class="string">"dragenter"</span>, handleEvent);</span></span><br><span class="line"><span class="actionscript">      EventUtil.addHandler(droptarget, <span class="string">"dragover"</span>, handleEvent);</span></span><br><span class="line"><span class="actionscript">      EventUtil.addHandler(droptarget, <span class="string">"drop"</span>, handleEvent);</span></span><br><span class="line">    &#125;;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">pre</span> <span class="attr">id</span>=<span class="string">"output"</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用XHR上传文件"><a href="#使用XHR上传文件" class="headerlink" title="使用XHR上传文件"></a>使用XHR上传文件</h3><p>通过 File API 能够访问到文件内容，利用这一点就可以通过 XHR 直接把文件上传到服务器。当然啦，把文件内容放到 send()方法中，再通过 POST 请求，的确很容易就能实现上传。但这样做传递的是文件内容，因而服务器端必须收集提交的内容，然后再把它们保存到另一个文件中。</p>
+<p>其实，更好的做法是以表单提交的方式来上传文件。这样使用 FormData 类型就很容易做到了（第 21 章介绍过 FormData）。首先，要创建一个 FormData对象，通过它调用 append()方法并传入相应的 File 对象作为参数。然后，再把 FormData 对象传递给 XHR 的 send()方法，结果与通过表单上传一模一样:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (event.type == <span class="string">"drop"</span>)&#123;</span><br><span class="line">  data = <span class="keyword">new</span> FormData();</span><br><span class="line">    files = event.dataTransfer.files;</span><br><span class="line">    i = <span class="number">0</span>;</span><br><span class="line">    len = files.length;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; len)&#123;</span><br><span class="line">        data.append(<span class="string">"file"</span> + i, files[i]);</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    xhr.open(<span class="string">"post"</span>, <span class="string">"server.php"</span>, <span class="literal">true</span>);</span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (xhr.readyState == <span class="number">4</span>)&#123;</span><br><span class="line">            alert(xhr.responseText);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.send(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Web计时"><a href="#Web计时" class="headerlink" title="Web计时"></a>Web计时</h2><p>略, 性能优化的时候 再讲这个</p>
+<h2 id="WebWorkers"><a href="#WebWorkers" class="headerlink" title="WebWorkers"></a>WebWorkers</h2><p>略, 另开一篇文章讲解</p>
+<hr>
+<p>本章完</p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/04/12/indexeddb-quick/" class="prev">上一篇：【快速教程】Web离线存储之indexedDB</a>
+    
+    
+    <a href="/2019/04/09/JSbook24/" class="next">下一篇：JS红皮书读书笔记-24-最佳实践</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2023 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>
