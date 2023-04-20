@@ -1,0 +1,272 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://thinkerchan.com">
+  
+  <title>常用CURL命令 | 测试狗</title>
+  <meta name="author" content="测试狗">
+  
+  <meta name="description" content="常用curl命令读取网页
+$ curl https://baidu.com
+
+保存文件
+$ curl https://baidu.com &amp;gt; baidu.html
+
+  或者
+
+$ curl https://baidu.com -o baidu.html
+
+代理模式
+$ curl -x 123">
+  
+  
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+  <meta property="og:title" content="常用CURL命令">
+  <meta property="og:site_name" content="测试狗">
+
+  
+    <meta property="og:image" content>
+  
+
+  <link rel="alternate" href="/atom.xml" title="测试狗" type="application/atom+xml">
+
+  <link rel="preload" as="style" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://github.githubassets.com/favicons/favicon.svg">
+  <link href="https://unpkg.com" rel="dns-prefetch">
+  <link href="https://busuanzi.ibruce.info" rel="dns-prefetch">
+  <link href="https://cdn1.lncld.net" rel="dns-prefetch">
+  
+  <link href="https://xpjzs0ff.api.lncld.net" rel="dns-prefetch">
+  
+</head>
+</html>
+<body>
+  <div class="container">
+    <div class="left-col" style="background-image:url('https://p.ipic.vip/b2t3my.jpg')">
+      <div class="intrude-less">
+        <header id="header" class="inner">
+          <a href="/">
+            <div class="profilepic"><img class="avatar" src='https://p.ipic.vip/67o2jq.jpg'></div>
+          </a>
+          <div class="author-name"><a href="/">测试狗</a></div>
+          
+          <nav id="main-nav">
+            <ul class="main">
+              
+              <li>
+                
+                  <a href="/archives">归档</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/categories">专题</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/friendlinks">友链</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/life">关于</a>
+                
+              </li>
+              
+              <li>
+                
+                  <a href="/search">搜索</a>
+                
+              </li>
+              
+            </ul>
+          </nav>
+          <nav id="sub-nav">
+            <div class="social">
+              
+              
+              
+              <a class="github" href="https://github.com/thinkerchan" title="Github">Github</a>
+              
+              
+              <a class="yuque" href="https://yuque.com/testdog" title="语雀">语雀</a>
+              
+
+              
+            </div>
+          </nav>
+        </header>
+      </div>
+    </div>
+    <div class="mid-col">
+      <div class="mid-col-container">
+        <div id="content" class="inner">
+          <article class="post">
+
+  <!-- 文章页结构 -->
+  
+    <div class="meta">
+      
+<div class="date">
+
+<time datetime="2018-11-13T09:51:00.000Z"
+      
+      data-updated="true"
+       itemprop="datePublished">
+  2018-11-13
+</time>
+
+
+
+
+
+</div>
+
+    </div>
+  
+  <h1 class="title" itemprop="name">常用CURL命令</h1>
+
+  
+  <p class="expired-tips">提醒：本文发布于 1619 天前，文章内容可能 因技术时效性过期 或 被重新修改，请谨慎参考。</p>
+  
+
+  <div class="entry-content" itemprop="articleBody">
+    
+    <div class="post-toc">
+      <div class="toc-title">TOC</div>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常用curl命令"><span class="toc-number">1.</span> <span class="toc-text">常用curl命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#读取网页"><span class="toc-number">1.1.</span> <span class="toc-text">读取网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存文件"><span class="toc-number">1.2.</span> <span class="toc-text">保存文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代理模式"><span class="toc-number">1.3.</span> <span class="toc-text">代理模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储cookie"><span class="toc-number">1.4.</span> <span class="toc-text">存储cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用cookie"><span class="toc-number">1.5.</span> <span class="toc-text">使用cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加UserAgent"><span class="toc-number">1.6.</span> <span class="toc-text">添加UserAgent</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#添加referer"><span class="toc-number">1.7.</span> <span class="toc-text">添加referer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.8.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+    </div>
+    
+    <h1 id="常用curl命令"><a href="#常用curl命令" class="headerlink" title="常用curl命令"></a>常用curl命令</h1><h2 id="读取网页"><a href="#读取网页" class="headerlink" title="读取网页"></a>读取网页</h2><blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a></p>
+</blockquote>
+<h2 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h2><blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> &gt; baidu.html</p>
+</blockquote>
+<p>  或者</p>
+<blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> -o baidu.html</p>
+</blockquote>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><blockquote>
+<p>$ curl -x 123.45.67.89:1080  <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> &gt; baidu.html</p>
+</blockquote>
+<h2 id="存储cookie"><a href="#存储cookie" class="headerlink" title="存储cookie"></a>存储cookie</h2><blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> &gt; baidu.html -D cookie.txt</p>
+</blockquote>
+<h2 id="使用cookie"><a href="#使用cookie" class="headerlink" title="使用cookie"></a>使用cookie</h2><blockquote>
+<p>$ curl <a href="https://baidu.com" target="_blank" rel="noopener">https://baidu.com</a> &gt; baidu.html -D cookie.txt -b readcookie.txt</p>
+</blockquote>
+<h2 id="添加UserAgent"><a href="#添加UserAgent" class="headerlink" title="添加UserAgent"></a>添加UserAgent</h2><blockquote>
+<p>$ curl -A “Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)”  <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a></p>
+</blockquote>
+<h2 id="添加referer"><a href="#添加referer" class="headerlink" title="添加referer"></a>添加referer</h2><blockquote>
+<p>$ curl -A “Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)” -e “index.baidu.com”  <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a></p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.jianshu.com/p/ba57fe1703da" target="_blank" rel="noopener">参考来源</a></p>
+
+  </div>
+
+</article>
+
+
+  <nav id="pagenavi">
+    
+    <a href="/2019/01/19/JSbook1/" class="prev">上一篇：JS红皮书读书笔记-01-简介</a>
+    
+    
+    <a href="/2018/09/30/编写一个JS评论组件/" class="next">下一篇：【快速教程】编写一个JS评论组件</a>
+    
+  </nav>
+
+        </div>
+        
+        
+          <div class="post-comments" id="Jcmt">
+            <h1 class="post-comments-title">访客评论</h1>
+            <div id="Jcomment"></div>
+          </div>
+        
+      </div>
+      <footer id="footer" class="inner">
+        © 2023 - 测试狗 -
+        <span id="busuanzi_container_site_pv">PV <span id="busuanzi_value_site_pv"></span></span>
+        <p>Powered by <a href="https://hexo.io/">Hexo</a> & <a href="https://github.com/thinkerchan/hexo-theme-greyshade">GreyShade</a></p>
+      </footer>
+    </div>
+  </div>
+  
+  <script>
+    let mod ={
+      timePrefix:'t-',
+      expire:1000*60*60,
+      load:function(libName,libUrl,cb){
+        let aval = (new Date).getTime() - localStorage.getItem(this.timePrefix+libName) < this.expire;
+        let libStr = localStorage.getItem(libName)
+        if (aval && libStr) {
+          this.parseAndInsert(libStr)
+          cb && cb(libStr);
+        }else{
+          this.ajax(libUrl,(str)=>{
+            localStorage.setItem(libName, str)
+            localStorage.setItem(this.timePrefix+libName, (new Date).getTime())
+            this.parseAndInsert(str)
+            cb && cb(str);
+          })
+        }
+      },
+      parseAndInsert(rawStr) {
+        let script = document.createElement('script')
+        script.innerHTML = rawStr
+        document.body.appendChild(script)
+      },
+      ajax:function(url,cb){
+        let xhr = new XMLHttpRequest;
+        xhr.open('get', url, true)
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            cb && cb(xhr.responseText)
+          }else{
+            // console.log(xhr.readyState,xhr.status);
+          }
+        }
+      },
+      genCmt(){
+        window.Valine && new Valine({
+          el: '#Jcomment',
+          appId: 'XPJzs0FfufkFfuBjbJraqhbo-gzGzoHsz',
+          appKey: 'QoS0zL4Y2xTDviitGOPkvCGv',
+          notify: true,
+          verify: false,
+          avatar: 'mm',
+          pageSize: '10',
+          placeholder: 'Valine+Leancloud提供评论'
+        })
+      },
+      lcSDK:'https://cdn.jsdelivr.net/npm/leancloud-storage@4.13.2/dist/av.min.js',
+      valineSDK:'https://unpkg.com/valine@1.5.1/dist/Valine.min.js',
+    }
+
+    mod.load('lib-av', mod.lcSDK, () => {
+      mod.load('lib-cmt',mod.valineSDK ,()=>{
+        let t = setTimeout(() => {
+          mod.genCmt()
+          clearTimeout(t)
+          t = null;
+        }, 100);
+      })
+    })
+  </script>
+  
+  <script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</body>
+</html>
